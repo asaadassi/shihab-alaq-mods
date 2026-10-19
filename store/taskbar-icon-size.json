@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "حجم شريط المهام وأيقوناته",
+    "en": "Taskbar height and icon size"
+  },
+  "description": {
+    "ar": "تحكّم في ارتفاع شريط المهام وحجم أيقوناته، مع أيقونات أوضح (ويندوز 11 فقط).",
+    "en": "Control the taskbar height and icon size, with sharper icons (Windows 11 only)."
+  },
+  "basedOn": "Windhawk mods: taskbar-icon-size (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-icon-size.wh.cpp"
+}

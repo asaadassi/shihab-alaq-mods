@@ -1,0 +1,3 @@
+dist/
+.store/
+__pycache__/

@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "التحكم في الصوت من شريط المهام",
+    "en": "Taskbar volume control"
+  },
+  "description": {
+    "ar": "ارفع الصوت أو اخفضه بتحريك عجلة الماوس فوق شريط المهام، أو في أي مكان مع مفتاح تختاره.",
+    "en": "Turn the volume up or down by scrolling over the taskbar, or anywhere with a key you choose."
+  },
+  "basedOn": "Windhawk mods: taskbar-volume-control (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-volume-control.wh.cpp"
+}

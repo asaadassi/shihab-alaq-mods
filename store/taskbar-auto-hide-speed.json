@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "سرعة الإخفاء التلقائي لشريط المهام",
+    "en": "Taskbar auto-hide speed"
+  },
+  "description": {
+    "ar": "اجعل ظهور شريط المهام المخفي واختفاءه أسرع وأنعم.",
+    "en": "Make the auto-hidden taskbar show and hide faster and smoother."
+  },
+  "basedOn": "Windhawk mods: taskbar-auto-hide-speed (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-auto-hide-speed.wh.cpp"
+}

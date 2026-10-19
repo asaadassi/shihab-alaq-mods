@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "إغلاق البرنامج بالزر الأوسط",
+    "en": "Middle click to close"
+  },
+  "description": {
+    "ar": "اضغط بزر الماوس الأوسط على زر البرنامج في شريط المهام لإغلاقه، بدل فتح نسخة جديدة منه.",
+    "en": "Middle-click a program on the taskbar to close it, instead of opening a new copy."
+  },
+  "basedOn": "Windhawk mods: taskbar-button-click (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-button-click.wh.cpp"
+}

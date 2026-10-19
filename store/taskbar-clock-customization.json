@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "تخصيص ساعة شريط المهام",
+    "en": "Taskbar clock customization"
+  },
+  "description": {
+    "ar": "شكل التاريخ والوقت كما تريد، مع إمكانية عرض الطقس والأخبار وسرعة الإنترنت والمعالج والذاكرة والبطارية وما يُشغَّل الآن، بخطوط وألوان من اختيارك.",
+    "en": "Your own date and time format, with optional weather, news, internet speed, CPU, memory, battery and now playing, in the fonts and colours you choose."
+  },
+  "basedOn": "Windhawk mods: taskbar-clock-customization (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-clock-customization.wh.cpp"
+}

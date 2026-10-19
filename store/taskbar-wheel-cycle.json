@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "التنقل بين البرامج بعجلة الماوس",
+    "en": "Cycle taskbar buttons with the wheel"
+  },
+  "description": {
+    "ar": "حرّك عجلة الماوس فوق شريط المهام، أو استخدم اختصاراً، للتنقل بين البرامج المفتوحة.",
+    "en": "Turn the mouse wheel over the taskbar, or use a shortcut, to move between open programs."
+  },
+  "basedOn": "Windhawk mods: taskbar-wheel-cycle (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-wheel-cycle.wh.cpp"
+}

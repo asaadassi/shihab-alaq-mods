@@ -1,0 +1,15 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "أسماء البرامج على شريط المهام",
+    "en": "Taskbar labels"
+  },
+  "description": {
+    "ar": "اعرض أسماء البرامج المفتوحة بجانب أيقوناتها على شريط المهام، وتحكّم في دمج الأزرار (ويندوز 11 فقط).",
+    "en": "Show the names of open programs next to their taskbar icons, and control how buttons combine (Windows 11 only)."
+  },
+  "basedOn": "Windhawk mods: taskbar-labels (m417z)",
+  "author": "m417z",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-labels.wh.cpp"
+}

@@ -1,0 +1,82 @@
+# Builds every mod against the Shihab Styler engine and publishes the store to the "store" branch
+# (catalog.json, sources, DLLs). The catalog is then signed on the publisher's computer
+# (scripts/Sign-Catalog.ps1); until then the app keeps using the last signed catalog.
+name: build-store
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  # The compiler: the LLVM-MinGW toolchain with the mod API headers, taken from the Windhawk installer (portable
+  # extract, used here only to build). Pinned with its SHA-256.
+  TOOLCHAIN_URL: https://github.com/ramensoftware/windhawk/releases/download/v1.7.3/windhawk_setup.exe
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Cache the toolchain
+        id: cache-toolchain
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/toolchain
+          key: toolchain-${{ env.TOOLCHAIN_URL }}
+
+      - name: Get the toolchain
+        if: steps.cache-toolchain.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          curl -fL "$TOOLCHAIN_URL" -o "$RUNNER_TEMP/setup.exe"
+          MSYS_NO_PATHCONV=1 "$RUNNER_TEMP/setup.exe" /S /PORTABLE "/D=$RUNNER_TEMP\\toolchain"
+          test -f "$RUNNER_TEMP/toolchain/Compiler/bin/clang++.exe"
+
+      - name: Get the engine
+        shell: pwsh
+        run: |
+          $v = (Get-Content ENGINE_VERSION -Raw).Trim()
+          $base = "https://github.com/asaadassi/shihab-styler-engine/releases/download/v$v"
+          $zip = "$env:RUNNER_TEMP\engine.zip"
+          Invoke-WebRequest "$base/ShihabStylerEngine-$v.zip" -OutFile $zip
+          $sums = (Invoke-WebRequest "$base/SHA256SUMS.txt").Content
+          $expected = ($sums -split "`n" | Where-Object { $_ -match "ShihabStylerEngine-$v.zip" } | ForEach-Object { ($_ -split '\s+')[0] }) | Select-Object -First 1
+          $actual = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($expected -ne $actual) { throw "Engine SHA-256 mismatch: $actual" }
+          Expand-Archive $zip "$env:RUNNER_TEMP\engine"
+          "ENGINE_VERSION=$v" >> $env:GITHUB_ENV
+
+      - name: Build the store
+        shell: pwsh
+        run: python -u scripts/build_store.py --compiler "$env:RUNNER_TEMP\toolchain\Compiler" --engine "$env:RUNNER_TEMP\engine" --engine-version $env:ENGINE_VERSION --out dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: store
+          path: dist
+
+      - name: Publish to the store branch
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          cd dist
+          cp ../README.md ../LICENSE ../NOTICE.md .
+          git init -q -b store
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # The signature of the previous catalog no longer matches: the app keeps its saved copy until it's signed again
+          git add -A
+          git commit -qm "Store built from ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" store
