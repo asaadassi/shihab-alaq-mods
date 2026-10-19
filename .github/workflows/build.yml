@@ -51,7 +51,9 @@ jobs:
           $base = "https://github.com/asaadassi/shihab-styler-engine/releases/download/v$v"
           $zip = "$env:RUNNER_TEMP\engine.zip"
           Invoke-WebRequest "$base/ShihabStylerEngine-$v.zip" -OutFile $zip
-          $sums = (Invoke-WebRequest "$base/SHA256SUMS.txt").Content
+          # Release files come as application/octet-stream: read the sums from a file, not .Content (bytes)
+          Invoke-WebRequest "$base/SHA256SUMS.txt" -OutFile "$env:RUNNER_TEMP\SHA256SUMS.txt"
+          $sums = Get-Content "$env:RUNNER_TEMP\SHA256SUMS.txt" -Raw
           $expected = ($sums -split "`n" | Where-Object { $_ -match "ShihabStylerEngine-$v.zip" } | ForEach-Object { ($_ -split '\s+')[0] }) | Select-Object -First 1
           $actual = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
           if ($expected -ne $actual) { throw "Engine SHA-256 mismatch: $actual" }
