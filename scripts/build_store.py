@@ -124,6 +124,8 @@ def main() -> int:
     parser.add_argument('--engine-version', required=True)
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
+    # The compiler runs in its own folder: every path it gets is absolute
+    args.out, args.compiler, args.engine = args.out.resolve(), args.compiler.resolve(), args.engine.resolve()
 
     if args.out.exists():
         shutil.rmtree(args.out)
