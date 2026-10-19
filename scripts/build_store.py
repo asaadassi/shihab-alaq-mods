@@ -101,7 +101,20 @@ def compile_mod(compiler: Path, engine: Path, meta: dict, source: Path, arch: st
         *options,
     ]
     print(f'  {arch}: {TARGETS[arch]}', flush=True)
-    return subprocess.call(args, cwd=compiler) == 0
+    result = subprocess.run(args, cwd=compiler, capture_output=True, text=True, errors='replace')
+    output = (result.stdout + result.stderr).strip()
+    if output:
+        print(output, flush=True)
+    if result.returncode != 0:
+        # A GitHub annotation, so the reason shows on the run's page without opening the log
+        lines = [l for l in output.splitlines() if 'error' in l.lower()] or output.splitlines()
+        annotate(f'{meta["id"]} ({arch})', '\n'.join(lines[:15]) or f'exit code {result.returncode}')
+    return result.returncode == 0
+
+
+def annotate(title: str, message: str) -> None:
+    message = message.replace('%', '%25').replace('\r', '').replace('\n', '%0A')
+    print(f'::error title={title}::{message}', flush=True)
 
 
 def main() -> int:
@@ -116,6 +129,9 @@ def main() -> int:
         shutil.rmtree(args.out)
     entries = []
     failed = []
+    if not (args.compiler / 'bin' / 'clang++.exe').exists():
+        annotate('toolchain', f'no clang++.exe under {args.compiler}')
+        return 1
     for source in sorted((ROOT / 'mods').glob('*.wh.cpp')):
         mod_id = source.name[:-len('.wh.cpp')]
         info_path = ROOT / 'store' / f'{mod_id}.json'
@@ -124,7 +140,12 @@ def main() -> int:
             continue
         info = json.loads(info_path.read_text(encoding='utf-8'))
         text = source.read_text(encoding='utf-8')
-        meta = read_metadata(text)
+        try:
+            meta = read_metadata(text)
+        except ValueError as e:
+            annotate(mod_id, str(e))
+            failed.append(mod_id)
+            continue
         if meta['id'] != mod_id:
             raise SystemExit(f'{source.name}: @id is {meta["id"]}')
         if info.get('category') not in CATEGORIES:
