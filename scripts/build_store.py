@@ -97,6 +97,8 @@ def compile_mod(compiler: Path, engine: Path, meta: dict, source: Path, arch: st
         '-include', 'windhawk_api.h',
         '-target', TARGETS[arch],
         '-Wl,--export-all-symbols',
+        # Same source, same bytes: no build time in the DLL, so a rebuild doesn't change a published file's SHA-256
+        '-Wl,--no-insert-timestamp',
         '-o', str(out),
         *options,
     ]
