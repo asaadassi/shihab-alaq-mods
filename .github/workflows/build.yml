@@ -21,6 +21,9 @@ jobs:
   build:
     runs-on: windows-2022
     steps:
+      # The catalog holds each source's SHA-256 as served from the store branch: no CRLF conversion on Windows
+      - run: git config --global core.autocrlf false
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
