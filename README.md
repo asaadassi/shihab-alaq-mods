@@ -1,6 +1,6 @@
 # Shihab Alaq Mods
 
-متجر إضافات [Shihab Alaq](https://shihab.app/). كل إضافة ملف C++ واحد في `mods/<id>.wh.cpp` بصيغة إضافات Windhawk،
+متجر إضافات [شهاب ألق](https://shihab.app/). كل إضافة ملف C++ واحد في `mods/<id>.wh.cpp` بصيغة إضافات Windhawk،
 ومعها بيانات المتجر بالعربية والإنجليزية في `store/<id>.json`.
 
 The store of [Shihab Alaq](https://shihab.app/) mods. Each mod is one C++ file, `mods/<id>.wh.cpp`, in the Windhawk
