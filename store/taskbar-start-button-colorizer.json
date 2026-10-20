@@ -1,0 +1,17 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "تلوين زر ابدأ",
+    "en": "Start button colorizer"
+  },
+  "description": {
+    "ar": "غيّر لون أيقونة زر ابدأ وحجمها بلون جاهز أو بضبط الصبغة والإشباع والسطوع (ويندوز 11 فقط).",
+    "en": "Change the colour and size of the Start button icon, with a preset or with hue, saturation and brightness (Windows 11 only)."
+  },
+  "basedOn": "Windhawk mods: taskbar-start-button-colorizer (m417z)",
+  "author": "m417z",
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-start-button-colorizer.wh.cpp",
+  "group": "taskbar-look",
+  "order": 2
+}

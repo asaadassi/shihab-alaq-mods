@@ -10,6 +10,8 @@
   },
   "basedOn": "Windhawk mods: taskbar-clock-customization (m417z)",
   "author": "m417z",
-  "license": "MIT",
-  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-clock-customization.wh.cpp"
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-clock-customization.wh.cpp",
+  "group": "clock-island",
+  "order": 0
 }

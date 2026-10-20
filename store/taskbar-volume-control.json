@@ -10,6 +10,8 @@
   },
   "basedOn": "Windhawk mods: taskbar-volume-control (m417z)",
   "author": "m417z",
-  "license": "MIT",
-  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-volume-control.wh.cpp"
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-volume-control.wh.cpp",
+  "group": "taskbar-use",
+  "order": 2
 }

@@ -1,0 +1,17 @@
+{
+  "category": "windows",
+  "name": {
+    "ar": "نافذة اختيار مجلد حديثة",
+    "en": "Modern folder picker"
+  },
+  "description": {
+    "ar": "يستبدل نافذة «استعراض بحثاً عن مجلد» القديمة بنافذة الاختيار الحديثة.",
+    "en": "Replaces the old Browse For Folder dialog with the modern picker."
+  },
+  "basedOn": "Windhawk mods: modernize-folder-picker-dialog (aubymori)",
+  "author": "aubymori",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/modernize-folder-picker-dialog.wh.cpp",
+  "group": "explorer",
+  "order": 2
+}

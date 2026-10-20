@@ -2,7 +2,7 @@
 // @id              taskbar-clock-customization
 // @name            Taskbar Clock Customization
 // @description     Custom date/time format, news feed, weather, performance metrics (upload/download speed, CPU, RAM, GPU, battery), media player info, custom fonts and colors, and more
-// @version         1.8.1
+// @version         1.8.1-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -19,6 +19,20 @@
 //
 // For pull requests, development takes place here:
 // https://github.com/m417z/my-windhawk-mods
+
+// Adapted for Shihab Alaq (1.8.1-shihab.1). Changes:
+// - Web requests are HTTPS only: an http:// URL is upgraded to https://, other
+//   schemes are refused, and a response that ends up on a non-HTTPS URL after
+//   redirects is dropped.
+// - A response is read up to 8 MB; anything past that is ignored, so a hostile
+//   or broken server can't grow Explorer's memory without bound.
+// - Extracted web text is capped before the user's regex search/replace runs,
+//   to keep the recursive regex engine from exhausting the thread's stack.
+// - An exception escaping the web content thread no longer ends Explorer.
+// - The web content events are closed if the thread can't be created.
+// - The DXGI adapter loop stops on any EnumAdapters failure, not only on
+//   DXGI_ERROR_NOT_FOUND, instead of using a null adapter.
+// - The tooltip update no longer reallocates a null, static or shared string.
 
 // ==WindhawkModReadme==
 /*
@@ -937,8 +951,31 @@ struct UrlRequestScope {
     }
 };
 
-std::optional<std::wstring> GetUrlContent(PCWSTR lpUrl,
+// Responses past this size are cut, so that a hostile or broken server can't
+// grow Explorer's memory without bound.
+constexpr DWORD kUrlContentMaxBytes = 8 * 1024 * 1024;
+
+bool IsHttpsUrl(PCWSTR url) {
+    return _wcsnicmp(url, L"https://", 8) == 0;
+}
+
+std::optional<std::wstring> GetUrlContent(PCWSTR lpUrlSetting,
                                           bool failIfNot200 = true) {
+    // HTTPS only. A plain HTTP URL is upgraded, other schemes are refused.
+    std::wstring secureUrl;
+    if (IsHttpsUrl(lpUrlSetting)) {
+        secureUrl = lpUrlSetting;
+    } else if (_wcsnicmp(lpUrlSetting, L"http://", 7) == 0) {
+        secureUrl = L"https://";
+        secureUrl += lpUrlSetting + 7;
+        Wh_Log(L"Using HTTPS instead of HTTP: %s", secureUrl.c_str());
+    } else {
+        Wh_Log(L"Refusing a non-HTTPS URL: %s", lpUrlSetting);
+        return std::nullopt;
+    }
+
+    PCWSTR lpUrl = secureUrl.c_str();
+
     UrlRequestScope requestScope;
 
     HINTERNET hOpenHandle = InternetOpen(
@@ -973,6 +1010,20 @@ std::optional<std::wstring> GetUrlContent(PCWSTR lpUrl,
         return std::nullopt;
     }
 
+    // Redirects are followed, so check where the response came from.
+    DWORD finalUrlSize = 0;
+    InternetQueryOption(hUrlHandle, INTERNET_OPTION_URL, nullptr,
+                        &finalUrlSize);
+    std::vector<WCHAR> finalUrl(finalUrlSize / sizeof(WCHAR) + 1, L'\0');
+    finalUrlSize = static_cast<DWORD>(finalUrl.size() * sizeof(WCHAR));
+    bool gotFinalUrl = InternetQueryOption(hUrlHandle, INTERNET_OPTION_URL,
+                                           finalUrl.data(), &finalUrlSize);
+    finalUrl.back() = L'\0';
+    if (!gotFinalUrl || !IsHttpsUrl(finalUrl.data())) {
+        Wh_Log(L"The response didn't come over HTTPS");
+        return std::nullopt;
+    }
+
     if (failIfNot200) {
         DWORD dwStatusCode = 0;
         DWORD dwStatusCodeSize = sizeof(dwStatusCode);
@@ -999,6 +1050,13 @@ std::optional<std::wstring> GetUrlContent(PCWSTR lpUrl,
     DWORD dwLength = dwNumberOfBytesRead;
 
     while (dwNumberOfBytesRead) {
+        if (dwLength >= kUrlContentMaxBytes) {
+            Wh_Log(L"Response too large, using the first %u bytes",
+                   kUrlContentMaxBytes);
+            dwLength = kUrlContentMaxBytes;
+            break;
+        }
+
         LPBYTE pNewUrlContent = (LPBYTE)HeapReAlloc(
             GetProcessHeap(), 0, pUrlContent, dwLength + 0x400);
         if (!pNewUrlContent) {
@@ -1019,9 +1077,24 @@ std::optional<std::wstring> GetUrlContent(PCWSTR lpUrl,
     // Assume UTF-8.
     int charsNeeded = MultiByteToWideChar(CP_UTF8, 0, (PCSTR)pUrlContent,
                                           dwLength, nullptr, 0);
-    std::wstring unicodeContent(charsNeeded, L'\0');
-    MultiByteToWideChar(CP_UTF8, 0, (PCSTR)pUrlContent, dwLength,
-                        unicodeContent.data(), unicodeContent.size());
+    if (charsNeeded <= 0) {
+        HeapFree(GetProcessHeap(), 0, pUrlContent);
+        return std::wstring();
+    }
+
+    std::wstring unicodeContent;
+    try {
+        unicodeContent.resize(charsNeeded);
+    } catch (const std::bad_alloc&) {
+        Wh_Log(L"Out of memory for the response");
+        HeapFree(GetProcessHeap(), 0, pUrlContent);
+        return std::nullopt;
+    }
+
+    int charsWritten = MultiByteToWideChar(CP_UTF8, 0, (PCSTR)pUrlContent,
+                                           dwLength, unicodeContent.data(),
+                                           charsNeeded);
+    unicodeContent.resize(std::max(charsWritten, 0));
 
     HeapFree(GetProcessHeap(), 0, pUrlContent);
 
@@ -1488,6 +1561,15 @@ void UpdateWebContent() {
             extracted = buffer;
         }
 
+        // The regex engine recurses per character for some patterns, so a long
+        // remote text could exhaust the thread's stack. A clock line never
+        // needs this much text.
+        constexpr size_t kSearchReplaceMaxLength = 16 * 1024;
+        if (!item.searchReplace.empty() &&
+            extracted.length() > kSearchReplaceMaxLength) {
+            extracted.resize(kSearchReplaceMaxLength);
+        }
+
         for (const auto& [s, r] : item.searchReplace) {
             try {
                 extracted = std::regex_replace(extracted, s, r);
@@ -1536,7 +1618,13 @@ DWORD WINAPI WebContentUpdateThread(LPVOID lpThreadParameter) {
     };
 
     while (true) {
-        UpdateWebContent();
+        // An exception leaving this thread would end Explorer.
+        try {
+            UpdateWebContent();
+        } catch (...) {
+            HRESULT hr = winrt::to_hresult();
+            Wh_Log(L"UpdateWebContent error %08X", hr);
+        }
 
         DWORD seconds = std::max(g_settings.webContentsUpdateInterval, 1) * 60;
         if (!g_webContentLoaded && seconds > kSecondsForQuickRetry) {
@@ -1575,6 +1663,17 @@ void WebContentUpdateThreadInit() {
             CreateEvent(nullptr, TRUE, FALSE, nullptr);
         g_webContentUpdateThread = CreateThread(
             nullptr, 0, WebContentUpdateThread, nullptr, 0, nullptr);
+        if (!g_webContentUpdateThread) {
+            Wh_Log(L"CreateThread failed: %u", GetLastError());
+            if (g_webContentUpdateRefreshEvent) {
+                CloseHandle(g_webContentUpdateRefreshEvent);
+                g_webContentUpdateRefreshEvent = nullptr;
+            }
+            if (g_webContentUpdateStopEvent) {
+                CloseHandle(g_webContentUpdateStopEvent);
+                g_webContentUpdateStopEvent = nullptr;
+            }
+        }
     }
 }
 
@@ -2271,7 +2370,7 @@ std::optional<DxgiAdapterInfo> GetDxgiAdapterInfo(PCWSTR gpu_name, bool quiet) {
 
     for (UINT i = 0;; i++) {
         winrt::com_ptr<IDXGIAdapter> adapter;
-        if (factory->EnumAdapters(i, adapter.put()) == DXGI_ERROR_NOT_FOUND) {
+        if (FAILED(factory->EnumAdapters(i, adapter.put())) || !adapter) {
             break;
         }
 
@@ -4535,8 +4634,39 @@ void UpdateToolTipString(LPVOID tooltipPtrPtr) {
         wchar_t buffer[1];
     };
 
+    if (!tooltipPtrPtr) {
+        return;
+    }
+
     shared_hstring_header* tooltipHeader =
         *(shared_hstring_header**)tooltipPtrPtr;
+
+    // An empty hstring is a null pointer. Start a new heap string the way
+    // C++/WinRT does, which frees it with HeapFree.
+    if (!tooltipHeader) {
+        tooltipHeader = (shared_hstring_header*)HeapAlloc(
+            GetProcessHeap(), 0, sizeof(shared_hstring_header));
+        if (!tooltipHeader) {
+            return;
+        }
+
+        tooltipHeader->flags = 0;
+        tooltipHeader->length = 0;
+        tooltipHeader->padding1 = 0;
+        tooltipHeader->padding2 = 0;
+        tooltipHeader->ptr = tooltipHeader->buffer;
+        tooltipHeader->count = 1;
+        tooltipHeader->buffer[0] = L'\0';
+        *(shared_hstring_header**)tooltipPtrPtr = tooltipHeader;
+    }
+
+    // Only a heap string owned by this reference alone can be reallocated. A
+    // reference (static) string or one shared with others is left as is.
+    constexpr uint32_t kHstringReferenceFlag = 1;
+    if ((tooltipHeader->flags & kHstringReferenceFlag) ||
+        tooltipHeader->count != 1) {
+        return;
+    }
 
     uint64_t bytesRequired = sizeof(shared_hstring_header);
     if (g_settings.tooltipLineMode == TooltipLineMode::replace) {

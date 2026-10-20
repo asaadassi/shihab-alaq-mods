@@ -1,0 +1,17 @@
+{
+  "category": "taskbar",
+  "name": {
+    "ar": "حركة أيقونات شريط المهام",
+    "en": "Taskbar dock animation"
+  },
+  "description": {
+    "ar": "تكبر أيقونات شريط المهام حين يمر عليها المؤشر، كما في ماك (ويندوز 11 فقط).",
+    "en": "Taskbar icons grow as the cursor passes over them, as on macOS (Windows 11 only)."
+  },
+  "basedOn": "Windhawk mods: taskbar-dock-animation (Ph0en1x-dev)",
+  "author": "Ph0en1x-dev",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-dock-animation.wh.cpp",
+  "group": "taskbar-look",
+  "order": 4
+}

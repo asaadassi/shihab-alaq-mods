@@ -2,7 +2,7 @@
 // @id              taskbar-icon-size
 // @name            Taskbar height and icon size
 // @description     Control the taskbar height and icon size, improve icon quality (Windows 11 only)
-// @version         1.3.10
+// @version         1.3.10-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -11,6 +11,13 @@
 // @architecture    x86-64
 // @compilerOptions -lole32 -loleaut32 -lruntimeobject -lshcore -lversion
 // ==/WindhawkMod==
+
+// Adapted for Shihab Alaq (1.3.10-shihab.1), safety changes only:
+// - Taskbar height, icon sizes and button widths from the settings are clamped
+//   to sane ranges, so a typo or an extreme value (0, negative, huge) can no
+//   longer collapse the taskbar, make it cover the screen, ask for huge icon
+//   bitmaps or give Explorer a zero button extent to lay out.
+// - The LoadLibraryExW hook is only set when its address was found.
 
 // Source code is published under The GNU General Public License v3.0.
 //
@@ -2361,13 +2368,25 @@ LRESULT WINAPI SendMessageTimeoutW_Hook(HWND hWnd,
     return ret;
 }
 
+int GetClampedIntSetting(PCWSTR name, int minValue, int maxValue) {
+    int value = Wh_GetIntSetting(name);
+    if (value < minValue || value > maxValue) {
+        int clamped = value < minValue ? minValue : maxValue;
+        Wh_Log(L"%s=%d is out of range, using %d", name, value, clamped);
+        value = clamped;
+    }
+
+    return value;
+}
+
 void LoadSettings() {
-    g_settings.taskbarHeight = Wh_GetIntSetting(L"TaskbarHeight");
-    g_settings.iconSize = Wh_GetIntSetting(L"IconSize");
-    g_settings.taskbarButtonWidth = Wh_GetIntSetting(L"TaskbarButtonWidth");
-    g_settings.iconSizeSmall = Wh_GetIntSetting(L"IconSizeSmall");
+    g_settings.taskbarHeight = GetClampedIntSetting(L"TaskbarHeight", 16, 200);
+    g_settings.iconSize = GetClampedIntSetting(L"IconSize", 8, 128);
+    g_settings.taskbarButtonWidth =
+        GetClampedIntSetting(L"TaskbarButtonWidth", 16, 300);
+    g_settings.iconSizeSmall = GetClampedIntSetting(L"IconSizeSmall", 8, 128);
     g_settings.taskbarButtonWidthSmall =
-        Wh_GetIntSetting(L"TaskbarButtonWidthSmall");
+        GetClampedIntSetting(L"TaskbarButtonWidthSmall", 16, 300);
 }
 
 HWND FindCurrentProcessTaskbarWnd() {
@@ -3185,9 +3204,13 @@ BOOL Wh_ModInit() {
         auto pKernelBaseLoadLibraryExW =
             (decltype(&LoadLibraryExW))GetProcAddress(kernelBaseModule,
                                                       "LoadLibraryExW");
-        WindhawkUtils::SetFunctionHook(pKernelBaseLoadLibraryExW,
-                                       LoadLibraryExW_Hook,
-                                       &LoadLibraryExW_Original);
+        if (pKernelBaseLoadLibraryExW) {
+            WindhawkUtils::SetFunctionHook(pKernelBaseLoadLibraryExW,
+                                           LoadLibraryExW_Hook,
+                                           &LoadLibraryExW_Original);
+        } else {
+            Wh_Log(L"Error: LoadLibraryExW not found in kernelbase.dll");
+        }
     }
 
     WindhawkUtils::SetFunctionHook(SHAppBarMessage, SHAppBarMessage_Hook,

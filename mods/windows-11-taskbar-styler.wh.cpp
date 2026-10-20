@@ -2,7 +2,7 @@
 // @id              windows-11-taskbar-styler
 // @name            Windows 11 Taskbar Styler
 // @description     Customize the taskbar with themes contributed by others or create your own
-// @version         1.10
+// @version         1.10-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -11,6 +11,23 @@
 // @architecture    x86-64
 // @compilerOptions -lcomctl32 -lgdi32 -lole32 -loleaut32 -lruntimeobject -lshlwapi
 // ==/WindhawkMod==
+
+// Adapted for Shihab Alaq (based on windows-11-taskbar-styler 1.10 by m417z).
+// Changes:
+// - Removed the daily usage stats request, which sent the chosen theme name to
+//   a third-party server.
+// - Style variable expressions have a nesting limit, so a deeply nested value
+//   can't overflow the stack of the taskbar thread.
+// - WindhawkBlur rejects NaN and infinite numbers, and BlurAmount is kept in
+//   the 0 to 250 range of the Direct2D blur.
+// - A value expanded from style constants is capped at 256K characters, so
+//   constants built from each other can't exhaust Explorer's memory.
+// - Errors while reading the styles from the settings are caught instead of
+//   escaping from the hooked window creation calls.
+// - Remote images are cached over HTTPS only, and a download larger than 16 MB
+//   isn't kept.
+// - Unloading no longer waits for the user to answer a restart prompt which was
+//   just being opened.
 
 // Source code is published under The GNU General Public License v3.0.
 //
@@ -12281,6 +12298,9 @@ constexpr ULONGLONG kImageCacheRefreshIntervalMs = 7ULL * 24 * 60 * 60 * 1000;
 // A file which nothing stamps ages until it's swept. Long enough for a theme
 // which is switched away from and back to keep its images.
 constexpr ULONGLONG kImageCacheMaxUnusedMs = 30ULL * 24 * 60 * 60 * 1000;
+// A larger download isn't kept, so that a wrong or hostile address can't fill
+// the cache with something XAML would then try to decode on the taskbar thread.
+constexpr uintmax_t kImageCacheMaxFileSize = 16 * 1024 * 1024;
 
 // Guards the globals below it.
 std::mutex g_imageDownloadMutex;
@@ -14024,6 +14044,12 @@ const std::filesystem::path& GetImageCacheDir() {
 // there's no cache folder. The extension of the URL is kept so that the folder
 // can be looked through.
 std::filesystem::path ImageCachePath(std::wstring_view url) {
+    // Only cached over HTTPS; an http:// image is left for XAML to load
+    // itself, as when there's no cache folder.
+    if (url.size() < 8 || _wcsnicmp(url.data(), L"https://", 8) != 0) {
+        return std::filesystem::path();
+    }
+
     const auto& cacheDir = GetImageCacheDir();
     if (cacheDir.empty()) {
         return std::filesystem::path();
@@ -14176,6 +14202,10 @@ void DownloadImage(const std::wstring& url) {
         auto size = std::filesystem::file_size(tempPath, ec);
         if (ec || size == 0) {
             Wh_Log(L"No downloaded file to move into place");
+            succeeded = false;
+        } else if (size > kImageCacheMaxFileSize) {
+            Wh_Log(L"Downloaded image is too large (%llu bytes)",
+                   (unsigned long long)size);
             succeeded = false;
         }
     }
@@ -15370,6 +15400,10 @@ std::optional<PropertyOverrideValue> ParseNonXamlPropertyOverrideValue(
                 std::size(kTintOpacityPrefix),
                 propSubstr.size() - std::size(kTintOpacityPrefix) - 1);
             tintOpacity = std::stof(std::wstring(valStr));
+            if (std::isnan(tintOpacity)) {
+                throw std::runtime_error(
+                    "WindhawkBlur: Bad number value");
+            }
             continue;
         }
 
@@ -15380,6 +15414,10 @@ std::optional<PropertyOverrideValue> ParseNonXamlPropertyOverrideValue(
                 propSubstr.size() - std::size(kTintLuminosityOpacityPrefix) -
                     1);
             tintLuminosityOpacity = std::stof(std::wstring(valStr));
+            if (std::isnan(tintLuminosityOpacity)) {
+                throw std::runtime_error(
+                    "WindhawkBlur: Bad number value");
+            }
             continue;
         }
 
@@ -15389,6 +15427,10 @@ std::optional<PropertyOverrideValue> ParseNonXamlPropertyOverrideValue(
                 std::size(kTintSaturationPrefix),
                 propSubstr.size() - std::size(kTintSaturationPrefix) - 1);
             tintSaturation = std::stof(std::wstring(valStr));
+            if (std::isnan(tintSaturation)) {
+                throw std::runtime_error(
+                    "WindhawkBlur: Bad number value");
+            }
             continue;
         }
 
@@ -15398,6 +15440,10 @@ std::optional<PropertyOverrideValue> ParseNonXamlPropertyOverrideValue(
                 std::size(kNoiseOpacityPrefix),
                 propSubstr.size() - std::size(kNoiseOpacityPrefix) - 1);
             noiseOpacity = std::stof(std::wstring(valStr));
+            if (std::isnan(noiseOpacity)) {
+                throw std::runtime_error(
+                    "WindhawkBlur: Bad number value");
+            }
             continue;
         }
 
@@ -15407,6 +15453,10 @@ std::optional<PropertyOverrideValue> ParseNonXamlPropertyOverrideValue(
                 std::size(kNoiseDensityPrefix),
                 propSubstr.size() - std::size(kNoiseDensityPrefix) - 1);
             noiseDensity = std::stof(std::wstring(valStr));
+            if (std::isnan(noiseDensity)) {
+                throw std::runtime_error(
+                    "WindhawkBlur: Bad number value");
+            }
             continue;
         }
 
@@ -15431,6 +15481,21 @@ std::optional<PropertyOverrideValue> ParseNonXamlPropertyOverrideValue(
         throw std::runtime_error(
             "WindhawkBlur: Unterminated FallbackColor theme resource");
     }
+
+    // stof accepts "nan" and "inf", which would reach the effect graph and the
+    // noise generator as is. An attribute which isn't set stays NaN, so only
+    // infinity is checked for those.
+    for (float v : {tintOpacity, tintLuminosityOpacity, tintSaturation,
+                    noiseOpacity, noiseDensity}) {
+        if (std::isinf(v)) {
+            throw std::runtime_error("WindhawkBlur: Value out of range");
+        }
+    }
+    if (!std::isfinite(blurAmount)) {
+        throw std::runtime_error("WindhawkBlur: Bad BlurAmount value");
+    }
+    // The range of the Direct2D Gaussian blur's standard deviation.
+    blurAmount = std::clamp(blurAmount, 0.0f, 250.0f);
 
     if (!std::isnan(tintOpacity)) {
         if (tintOpacity < 0.0f) {
@@ -16411,7 +16476,25 @@ class StyleVariableExpressionEvaluator {
     // cleared, which suppresses value-level errors (division by zero, a
     // non-numeric / undefined variable, an unknown function), skip(), and
     // dependency capture for that branch.
+    // Every recursion of the grammar passes through ParseTernary or
+    // ParseFactor, so guarding those two bounds the stack an expression such
+    // as "((((...))))" or "----...1" can use.
+    static constexpr int kMaxDepth = 64;
+
+    struct DepthGuard {
+        explicit DepthGuard(int& depth) : m_depth(depth) {
+            if (++m_depth > kMaxDepth) {
+                --m_depth;
+                throw std::runtime_error(
+                    "Style variable expression is nested too deeply");
+            }
+        }
+        ~DepthGuard() { --m_depth; }
+        int& m_depth;
+    };
+
     StyleExpressionValue ParseTernary() {
+        DepthGuard depthGuard(m_depth);
         StyleExpressionValue cond = ParseEquality();
         if (!ConsumeChar(L'?')) {
             return cond;
@@ -16527,6 +16610,7 @@ class StyleVariableExpressionEvaluator {
     }
 
     StyleExpressionValue ParseFactor() {
+        DepthGuard depthGuard(m_depth);
         SkipWhitespace();
         if (ConsumeChar(L'+')) {
             return StyleExpressionValue::Number(RequireNumber(ParseFactor()));
@@ -16736,6 +16820,7 @@ class StyleVariableExpressionEvaluator {
     // When false, we're parsing (but discarding) the untaken branch of a
     // ternary; value-level errors and dependency capture are suppressed.
     bool m_live = true;
+    int m_depth = 0;
 };
 
 // Evaluate a single expression body (the text between `{{` and `}}`). If the
@@ -18881,6 +18966,10 @@ void CleanupCustomizations(ElementId elementId) {
 using StyleConstant = std::pair<std::wstring, std::wstring>;
 using StyleConstants = std::vector<StyleConstant>;
 
+// Constants can be built from earlier constants, so a few lines of settings can
+// double a value again and again until Explorer runs out of memory.
+constexpr size_t kMaxStyleValueLength = 256 * 1024;
+
 std::wstring ApplyStyleConstants(std::wstring_view style,
                                  const StyleConstants& styleConstants) {
     std::wstring result;
@@ -18889,6 +18978,11 @@ std::wstring ApplyStyleConstants(std::wstring_view style,
     size_t findPos;
 
     while ((findPos = style.find('$', lastPos)) != style.npos) {
+        if (result.size() > kMaxStyleValueLength) {
+            Wh_Log(L"Style value too long after applying constants, skipping");
+            return std::wstring();
+        }
+
         result.append(style, lastPos, findPos - lastPos);
 
         const StyleConstant* constant = nullptr;
@@ -18910,6 +19004,11 @@ std::wstring ApplyStyleConstants(std::wstring_view style,
 
     // Care for the rest after last occurrence.
     result += style.substr(lastPos);
+
+    if (result.size() > kMaxStyleValueLength) {
+        Wh_Log(L"Style value too long after applying constants, skipping");
+        return std::wstring();
+    }
 
     return result;
 }
@@ -20012,7 +20111,15 @@ void InitializeForCurrentThread() {
 
     EnsureTaskbarSurfaceSubclasses();
 
-    ProcessAllStylesFromSettings();
+    // Runs from inside hooked window creation calls, where an exception would
+    // take Explorer down; a failure leaves whatever rules were parsed.
+    try {
+        ProcessAllStylesFromSettings();
+    } catch (winrt::hresult_error const& ex) {
+        Wh_Log(L"Error %08X: %s", ex.code(), ex.message().c_str());
+    } catch (std::exception const& ex) {
+        Wh_Log(L"Error: %S", ex.what());
+    }
 
     g_initializedForThread = true;
 }
@@ -20467,134 +20574,6 @@ HWND GetTaskbarUiWnd() {
                         nullptr);
 }
 
-PTP_TIMER g_statsTimer;
-
-bool StartStatsTimer() {
-    static constexpr WCHAR kStatsBaseUrl[] =
-        L"https://github.com/ramensoftware/"
-        L"windows-11-taskbar-styling-guide/"
-        L"releases/download/stats-v6/";
-
-    ULONGLONG lastStatsTime = 0;
-    Wh_GetBinaryValue(L"statsTimerLastTime", &lastStatsTime,
-                      sizeof(lastStatsTime));
-
-    // -1 can be set for disabling the stats timer.
-    if (lastStatsTime == 0xFFFFFFFF'FFFFFFFF) {
-        return false;
-    }
-
-    FILETIME currentTimeFt;
-    GetSystemTimeAsFileTime(&currentTimeFt);
-
-    ULONGLONG currentTime = ((ULONGLONG)currentTimeFt.dwHighDateTime << 32) |
-                            currentTimeFt.dwLowDateTime;
-
-    constexpr ULONGLONG k10Minutes = 10 * 60 * 10000000LL;
-    constexpr ULONGLONG k24Hours = 24 * 60 * 60 * 10000000LL;
-
-    ULONGLONG minDueTime = currentTime + k10Minutes;
-    ULONGLONG maxDueTime = currentTime + k24Hours;
-
-    ULONGLONG dueTime = lastStatsTime + k24Hours;
-    if (dueTime < minDueTime) {
-        dueTime = minDueTime;
-    } else if (dueTime > maxDueTime) {
-        dueTime = maxDueTime;
-    }
-
-    g_statsTimer = CreateThreadpoolTimer(
-        [](PTP_CALLBACK_INSTANCE, PVOID, PTP_TIMER) {
-            Wh_Log(L">");
-
-            string_setting_unique_ptr themeName(Wh_GetStringSetting(L"theme"));
-            if (!*themeName.get()) {
-                return;
-            }
-
-            HANDLE mutex =
-                CreateMutex(nullptr, FALSE, L"WindhawkStats_" WH_MOD_ID);
-            if (mutex) {
-                WaitForSingleObject(mutex, INFINITE);
-            }
-
-            ULONGLONG lastStatsTime = 0;
-            Wh_GetBinaryValue(L"statsTimerLastTime", &lastStatsTime,
-                              sizeof(lastStatsTime));
-
-            FILETIME currentTimeFt;
-            GetSystemTimeAsFileTime(&currentTimeFt);
-            ULONGLONG currentTime =
-                ((ULONGLONG)currentTimeFt.dwHighDateTime << 32) |
-                currentTimeFt.dwLowDateTime;
-
-            const WH_URL_CONTENT* content = nullptr;
-            if (currentTime - lastStatsTime >= k10Minutes) {
-                Wh_SetBinaryValue(L"statsTimerLastTime", &currentTime,
-                                  sizeof(currentTime));
-
-                std::wstring themeNameEscaped = themeName.get();
-                std::replace(themeNameEscaped.begin(), themeNameEscaped.end(),
-                             L' ', L'_');
-                std::replace(themeNameEscaped.begin(), themeNameEscaped.end(),
-                             L'&', L'_');
-                std::replace(themeNameEscaped.begin(), themeNameEscaped.end(),
-                             L'.', L'_');
-
-                std::wstring statsUrl = kStatsBaseUrl;
-                statsUrl += themeNameEscaped;
-                statsUrl += L".txt";
-
-                Wh_Log(L"Submitting stats to %s", statsUrl.c_str());
-
-                content = Wh_GetUrlContent(statsUrl.c_str(), nullptr);
-            } else {
-                Wh_Log(L"Skipping, last submission %llu seconds ago",
-                       (currentTime - lastStatsTime) / 10000000LL);
-            }
-
-            if (mutex) {
-                ReleaseMutex(mutex);
-                CloseHandle(mutex);
-            }
-
-            if (!content) {
-                Wh_Log(L"Failed to get stats content");
-                return;
-            }
-
-            if (content->statusCode != 200) {
-                Wh_Log(L"Stats content status code: %d", content->statusCode);
-            }
-
-            Wh_FreeUrlContent(content);
-            Wh_Log(L"Stats content submitted");
-        },
-        nullptr, nullptr);
-    if (!g_statsTimer) {
-        Wh_Log(L"Failed to create stats timer");
-        return false;
-    }
-
-    constexpr DWORD k24HoursInMs = 24 * 60 * 60 * 1000;
-    constexpr ULONGLONG k10MinutesInMs = 10 * 60 * 1000;
-
-    FILETIME dueTimeFt;
-    dueTimeFt.dwLowDateTime = (DWORD)(dueTime & 0xFFFFFFFF);
-    dueTimeFt.dwHighDateTime = (DWORD)(dueTime >> 32);
-    SetThreadpoolTimer(g_statsTimer, &dueTimeFt, k24HoursInMs, k10MinutesInMs);
-    return true;
-}
-
-void StopStatsTimer() {
-    if (g_statsTimer) {
-        SetThreadpoolTimer(g_statsTimer, nullptr, 0, 0);
-        WaitForThreadpoolTimerCallbacks(g_statsTimer, TRUE);
-        CloseThreadpoolTimer(g_statsTimer);
-        g_statsTimer = nullptr;
-    }
-}
-
 void LoadSettings() {
     g_settings.clickThroughTaskbar = Wh_GetIntSetting(L"clickThroughTaskbar");
 
@@ -20658,8 +20637,6 @@ BOOL Wh_ModInit() {
     // Hook immediately if DLL is already loaded.
     HookInitializeXamlDiagnosticsExIfNeeded();
 
-    StartStatsTimer();
-
     return TRUE;
 }
 
@@ -20692,18 +20669,20 @@ void Wh_ModAfterInit() {
 void Wh_ModUninit() {
     Wh_Log(L">");
 
-    HWND restartExplorerPromptWindow = g_restartExplorerPromptWindow;
-    if (restartExplorerPromptWindow) {
-        PostMessage(restartExplorerPromptWindow, WM_CLOSE, 0, 0);
-    }
-
     if (g_restartExplorerPromptThread) {
-        WaitForSingleObject(g_restartExplorerPromptThread, INFINITE);
+        // The dialog may not exist yet when the prompt thread has just
+        // started, so keep asking it to close until the thread is done,
+        // rather than waiting for the user to answer it.
+        while (WaitForSingleObject(g_restartExplorerPromptThread, 100) ==
+               WAIT_TIMEOUT) {
+            HWND restartExplorerPromptWindow = g_restartExplorerPromptWindow;
+            if (restartExplorerPromptWindow) {
+                PostMessage(restartExplorerPromptWindow, WM_CLOSE, 0, 0);
+            }
+        }
         CloseHandle(g_restartExplorerPromptThread);
         g_restartExplorerPromptThread = nullptr;
     }
-
-    StopStatsTimer();
 
     StopImageDownloads();
 

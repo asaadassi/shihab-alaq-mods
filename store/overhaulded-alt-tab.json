@@ -1,0 +1,17 @@
+{
+  "category": "windows",
+  "name": {
+    "ar": "مبدّل نوافذ حديث",
+    "en": "Modern Alt+Tab"
+  },
+  "description": {
+    "ar": "يستبدل Alt+Tab بمبدّل نوافذ حديث، بمعاينات حية وتجميع حسب البرنامج.",
+    "en": "Replaces Alt+Tab with a modern window switcher, with live previews and grouping by program."
+  },
+  "basedOn": "Windhawk mods: overhaulded-alt-tab (IMiloDev)",
+  "author": "IMiloDev",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/overhaulded-alt-tab.wh.cpp",
+  "group": "window-switcher",
+  "order": 0
+}

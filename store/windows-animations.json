@@ -1,0 +1,17 @@
+{
+  "category": "windows",
+  "name": {
+    "ar": "حركات النوافذ",
+    "en": "Window animations"
+  },
+  "description": {
+    "ar": "حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل.",
+    "en": "Smooth animations for windows when they minimize, restore, close and switch."
+  },
+  "basedOn": "Windhawk mods: windows-animations (ReDrag)",
+  "author": "ReDrag",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/windows-animations.wh.cpp",
+  "group": "window-motion",
+  "order": 0
+}

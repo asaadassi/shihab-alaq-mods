@@ -3,7 +3,8 @@
 For every mods/<id>.wh.cpp with its store/<id>.json, the mod is compiled for each architecture it runs on, against
 the Shihab Alaq engine's import library, and the store is written to the output folder:
 
-    catalog.json                      the list the app reads (format 1, see the app's Core/Store/Catalog.cs)
+    catalog.json                      the list the app reads (format 1, see the app's Core/Store/Catalog.cs), with
+                                      the groups of store/groups.json the app shows mods in
     mods/<id>/<version>.wh.cpp        the source, as built
     mods/<id>/<version>_<arch>.dll    one DLL per architecture folder (32, 64, arm64)
 
@@ -71,6 +72,21 @@ def arch_folders(architectures: list) -> list:
     return list(dict.fromkeys(need))
 
 
+def read_groups() -> list:
+    """store/groups.json: the features the app shows, each holding the mods whose store entry names it."""
+    groups = json.loads((ROOT / 'store' / 'groups.json').read_text(encoding='utf-8'))
+    seen = set()
+    for g in groups:
+        if not re.fullmatch(r'[a-z0-9-]+', g.get('id', '')) or g['id'] in seen:
+            raise SystemExit(f'groups.json: bad or repeated id {g.get("id")}')
+        if g.get('category') not in CATEGORIES:
+            raise SystemExit(f'groups.json: {g["id"]}: unknown category {g.get("category")}')
+        if not g.get('name', {}).get('ar') or not g.get('name', {}).get('en'):
+            raise SystemExit(f'groups.json: {g["id"]}: needs an Arabic and an English name')
+        seen.add(g['id'])
+    return groups
+
+
 def last_change(path: Path) -> str:
     """When the mod's source last changed in git (the checkout's file times are all the same)."""
     out = subprocess.run(['git', 'log', '-1', '--format=%cI', '--', str(path)], cwd=ROOT, capture_output=True, text=True)
@@ -131,6 +147,8 @@ def main() -> int:
 
     if args.out.exists():
         shutil.rmtree(args.out)
+    groups = read_groups()
+    group_ids = {g['id'] for g in groups}
     entries = []
     failed = []
     if not (args.compiler / 'bin' / 'clang++.exe').exists():
@@ -154,6 +172,8 @@ def main() -> int:
             raise SystemExit(f'{source.name}: @id is {meta["id"]}')
         if info.get('category') not in CATEGORIES:
             raise SystemExit(f'{info_path.name}: unknown category {info.get("category")}')
+        if info.get('group') not in group_ids:
+            raise SystemExit(f'{info_path.name}: unknown group {info.get("group")} (store/groups.json)')
         version = meta['version']
         if not re.fullmatch(r'[0-9A-Za-z.+-]+', version):
             raise SystemExit(f'{source.name}: bad version {version}')
@@ -181,6 +201,10 @@ def main() -> int:
             'preview': info.get('preview'),
             'basedOn': info.get('basedOn'),
             'license': info.get('license', meta.get('license')),
+            # Mods that change the same thing; the app warns before both run together
+            'conflicts': list(info.get('conflicts', [])),
+            'group': info['group'],
+            'order': int(info.get('order', 0)),
             'source': {'path': built_source.relative_to(args.out).as_posix(), 'sha256': sha256(built_source),
                        'size': built_source.stat().st_size},
             'binaries': binaries,
@@ -188,12 +212,25 @@ def main() -> int:
             'updated': last_change(source),
         })
 
+    # The mods of an exclusive group are choices of one feature: each conflicts with the others
+    for g in groups:
+        if g.get('exclusive'):
+            members = [e for e in entries if e['group'] == g['id']]
+            for e in members:
+                e['conflicts'] += [o['id'] for o in members if o is not e and o['id'] not in e['conflicts']]
+    ids = {e['id'] for e in entries}
+    for e in entries:
+        unknown = [c for c in e['conflicts'] if c not in ids or c == e['id']]
+        if unknown:
+            raise SystemExit(f'store/{e["id"]}.json: bad conflicts {unknown}')
+
     if failed:
         print('Failed to compile: ' + ', '.join(failed))
         return 1
     catalog = {
         'format': 1,
         'updated': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'groups': [g for g in groups if any(e['group'] == g['id'] for e in entries)],
         'mods': entries,
     }
     (args.out / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')

@@ -1,0 +1,17 @@
+{
+  "category": "explorer",
+  "name": {
+    "ar": "أحجام ملفات أوضح في المستكشف",
+    "en": "Better file sizes in Explorer"
+  },
+  "description": {
+    "ar": "يعرض أحجام المجلدات في عرض التفاصيل، وبوحدات مقروءة مثل MB وGB.",
+    "en": "Shows folder sizes in the details view, in readable units such as MB and GB."
+  },
+  "basedOn": "Windhawk mods: explorer-details-better-file-sizes (m417z)",
+  "author": "m417z",
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/explorer-details-better-file-sizes.wh.cpp",
+  "group": "explorer",
+  "order": 0
+}

@@ -20,7 +20,13 @@ mod format, with its store entry (Arabic and English texts, section, credits) in
 
 - `mods/<id>.wh.cpp` — the source (`@id` = the file name; raise `@version` for every change).
 - `store/<id>.json` — `category` (`taskbar`, `start`, `explorer`, `desktop`, `windows`, `other`), `name` and
-  `description` (`ar`, `en`), `author`, `license`, `basedOn` (the original, for an adapted mod), optional `preview`.
+  `description` (`ar`, `en`), `author`, `license`, `basedOn` (the original, for an adapted mod), optional `preview`,
+  optional `conflicts` (the ids of mods that change the same thing; the app warns before both run together).
+  `group` (one of `store/groups.json`) and `order` (its place in the group).
+- `store/groups.json` — the features the app shows: each group has `id`, `category`, `name` and `description` (`ar`,
+  `en`), and `exclusive: true` when only one of its mods may run at a time (its mods then conflict with each other).
+  The mods stay separate files: a crash turns off only the part that crashed, and each mod is injected only where it
+  needs to be.
 
 ## Licence
 

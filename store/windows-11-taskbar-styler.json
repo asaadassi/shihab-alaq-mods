@@ -10,6 +10,8 @@
   },
   "basedOn": "Windhawk mods: windows-11-taskbar-styler (m417z)",
   "author": "m417z",
-  "license": "MIT",
-  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/windows-11-taskbar-styler.wh.cpp"
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/windows-11-taskbar-styler.wh.cpp",
+  "group": "taskbar-look",
+  "order": 0
 }

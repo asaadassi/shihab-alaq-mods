@@ -1,0 +1,17 @@
+{
+  "category": "windows",
+  "name": {
+    "ar": "Alt+Tab لكل شاشة",
+    "en": "Alt+Tab per monitor"
+  },
+  "description": {
+    "ar": "يعرض Alt+Tab نوافذ الشاشة التي عليها المؤشر فقط، بدل كل النوافذ على الشاشة الرئيسية.",
+    "en": "Alt+Tab shows only the windows on the monitor where the cursor is, instead of all windows on the primary display."
+  },
+  "basedOn": "Windhawk mods: alt-tab-per-monitor (L3r0y)",
+  "author": "L3r0y",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/alt-tab-per-monitor.wh.cpp",
+  "group": "window-switcher",
+  "order": 1
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "id": "taskbar-look",
+    "category": "taskbar",
+    "name": {
+      "ar": "شكل شريط المهام",
+      "en": "Taskbar look"
+    },
+    "description": {
+      "ar": "الثيمات والألوان، وحجم الشريط والأيقونات، وزر ابدأ، وأسماء البرامج، وحركة الأيقونات.",
+      "en": "Themes and colours, taskbar and icon size, the Start button, program names and icon motion."
+    }
+  },
+  {
+    "id": "taskbar-use",
+    "category": "taskbar",
+    "name": {
+      "ar": "استخدام شريط المهام",
+      "en": "Taskbar use"
+    },
+    "description": {
+      "ar": "اختصارات الماوس على الشريط: الإغلاق بالزر الأوسط، والتنقل والصوت بالعجلة، وسرعة الإخفاء.",
+      "en": "Mouse shortcuts on the taskbar: middle click to close, the wheel to switch and for volume, and auto-hide speed."
+    }
+  },
+  {
+    "id": "clock-island",
+    "category": "taskbar",
+    "name": {
+      "ar": "الساعة والجزيرة",
+      "en": "Clock and island"
+    },
+    "description": {
+      "ar": "ساعة شريط المهام بالشكل الذي تريد، والجزيرة التفاعلية أعلى الشاشة.",
+      "en": "The taskbar clock as you want it, and the live island at the top of the screen."
+    }
+  },
+  {
+    "id": "window-switcher",
+    "category": "windows",
+    "name": {
+      "ar": "التبديل بين النوافذ",
+      "en": "Window switcher"
+    },
+    "description": {
+      "ar": "شكل Alt+Tab: مبدّل حديث بمعاينات، أو نوافذ الشاشة التي عليها المؤشر فقط. يعمل خيار واحد في كل مرة.",
+      "en": "How Alt+Tab looks: a modern switcher with previews, or only the windows of the monitor under the cursor. One at a time."
+    },
+    "exclusive": true
+  },
+  {
+    "id": "window-motion",
+    "category": "windows",
+    "name": {
+      "ar": "حركة النوافذ وشكلها",
+      "en": "Window motion and shape"
+    },
+    "description": {
+      "ar": "حركات فتح النوافذ وإغلاقها وتصغيرها، وتحريكها بانسيابية، وزواياها.",
+      "en": "Animations when windows open, close and minimize, smooth moving, and their corners."
+    }
+  },
+  {
+    "id": "desktop",
+    "category": "desktop",
+    "name": {
+      "ar": "سطح المكتب",
+      "en": "Desktop"
+    },
+    "description": {
+      "ar": "Win+D لكل شاشة على حدة، وتلاشي مستطيل التحديد.",
+      "en": "Win+D for each monitor on its own, and a fading selection rectangle."
+    }
+  },
+  {
+    "id": "explorer",
+    "category": "explorer",
+    "name": {
+      "ar": "المستكشف",
+      "en": "Explorer"
+    },
+    "description": {
+      "ar": "أحجام المجلدات، ونافذة النسخ والنقل، ونافذة اختيار المجلد الحديثة.",
+      "en": "Folder sizes, the copy and move window, and the modern folder picker."
+    }
+  }
+]

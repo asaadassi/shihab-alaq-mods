@@ -1,0 +1,17 @@
+{
+  "category": "desktop",
+  "name": {
+    "ar": "Win+D لكل شاشة",
+    "en": "Win+D per monitor"
+  },
+  "description": {
+    "ar": "يُخفي Win+D نوافذ الشاشة التي عليها المؤشر فقط، وتبقى الشاشات الأخرى كما هي.",
+    "en": "Win+D hides only the windows on the monitor where the cursor is; the other monitors stay as they are."
+  },
+  "basedOn": "Windhawk mods: win-d-per-monitor (easyatm)",
+  "author": "easyatm",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/win-d-per-monitor.wh.cpp",
+  "group": "desktop",
+  "order": 0
+}

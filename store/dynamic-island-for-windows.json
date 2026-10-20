@@ -1,0 +1,17 @@
+{
+  "category": "other",
+  "name": {
+    "ar": "الجزيرة التفاعلية",
+    "en": "Dynamic Island"
+  },
+  "description": {
+    "ar": "شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.",
+    "en": "A small live bar at the top of the screen that shows now playing, downloads, the clipboard, the battery and more."
+  },
+  "basedOn": "Windhawk mods: dynamic-island-for-windows (Himanshu)",
+  "author": "Himanshu",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/dynamic-island-for-windows.wh.cpp",
+  "group": "clock-island",
+  "order": 1
+}

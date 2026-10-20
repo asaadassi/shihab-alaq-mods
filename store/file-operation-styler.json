@@ -1,0 +1,17 @@
+{
+  "category": "explorer",
+  "name": {
+    "ar": "تنسيق نافذة النسخ والنقل",
+    "en": "File operation styler"
+  },
+  "description": {
+    "ar": "شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف.",
+    "en": "A newer, clearer look for the copy, move and delete progress window in Explorer."
+  },
+  "basedOn": "Windhawk mods: file-operation-styler (digART)",
+  "author": "digART",
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/file-operation-styler.wh.cpp",
+  "group": "explorer",
+  "order": 1
+}

@@ -10,6 +10,8 @@
   },
   "basedOn": "Windhawk mods: taskbar-labels (m417z)",
   "author": "m417z",
-  "license": "MIT",
-  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-labels.wh.cpp"
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-labels.wh.cpp",
+  "group": "taskbar-look",
+  "order": 3
 }

@@ -1,0 +1,17 @@
+{
+  "category": "windows",
+  "name": {
+    "ar": "ترتيب النوافذ بانسيابية",
+    "en": "Slick window arrangement"
+  },
+  "description": {
+    "ar": "تنزلق النوافذ بنعومة حين تحرّكها، وتلتصق بحواف الشاشة والنوافذ الأخرى.",
+    "en": "Windows slide smoothly when you move them, and snap to the screen edges and to other windows."
+  },
+  "basedOn": "Windhawk mods: slick-window-arrangement (m417z)",
+  "author": "m417z",
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/slick-window-arrangement.wh.cpp",
+  "group": "window-motion",
+  "order": 1
+}

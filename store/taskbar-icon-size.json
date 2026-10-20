@@ -10,6 +10,8 @@
   },
   "basedOn": "Windhawk mods: taskbar-icon-size (m417z)",
   "author": "m417z",
-  "license": "MIT",
-  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-icon-size.wh.cpp"
+  "license": "GPL-3.0",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-icon-size.wh.cpp",
+  "group": "taskbar-look",
+  "order": 1
 }

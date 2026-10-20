@@ -1,0 +1,17 @@
+{
+  "category": "desktop",
+  "name": {
+    "ar": "تلاشي مستطيل التحديد",
+    "en": "Desktop selection fade"
+  },
+  "description": {
+    "ar": "يختفي مستطيل التحديد على سطح المكتب بتلاشٍ ناعم حين تترك زر الماوس.",
+    "en": "The selection rectangle on the desktop fades out smoothly when you release the mouse button."
+  },
+  "basedOn": "Windhawk mods: desktop-marquee-fade (angel_lov)",
+  "author": "angel_lov",
+  "license": "MIT",
+  "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/desktop-marquee-fade.wh.cpp",
+  "group": "desktop",
+  "order": 1
+}
