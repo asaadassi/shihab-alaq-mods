@@ -1,7 +1,7 @@
-"""Builds the Shihab Styler store from this repository (runs on Windows, in CI).
+"""Builds the Shihab Alaq store from this repository (runs on Windows, in CI).
 
 For every mods/<id>.wh.cpp with its store/<id>.json, the mod is compiled for each architecture it runs on, against
-the Shihab Styler engine's import library, and the store is written to the output folder:
+the Shihab Alaq engine's import library, and the store is written to the output folder:
 
     catalog.json                      the list the app reads (format 1, see the app's Core/Store/Catalog.cs)
     mods/<id>/<version>.wh.cpp        the source, as built
@@ -82,7 +82,7 @@ def sha256(path: Path) -> str:
 
 
 def compile_mod(compiler: Path, engine: Path, meta: dict, source: Path, arch: str, out: Path) -> bool:
-    lib = engine / 'engine' / arch / 'shihab-styler-engine.lib'
+    lib = engine / 'engine' / arch / 'shihab-alaq-engine.lib'
     options = shlex.split(meta.get('compilerOptions', ''))
     # Same flags as the engine's own tools use for a Windows 10+ mod (see the engine repository's README)
     args = [

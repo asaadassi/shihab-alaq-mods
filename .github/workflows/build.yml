@@ -1,4 +1,4 @@
-# Builds every mod against the Shihab Styler engine and publishes the store to the "store" branch
+# Builds every mod against the Shihab Alaq engine and publishes the store to the "store" branch
 # (catalog.json, sources, DLLs). The catalog is then signed on the publisher's computer
 # (scripts/Sign-Catalog.ps1); until then the app keeps using the last signed catalog.
 name: build-store
@@ -51,13 +51,13 @@ jobs:
         shell: pwsh
         run: |
           $v = (Get-Content ENGINE_VERSION -Raw).Trim()
-          $base = "https://github.com/asaadassi/shihab-styler-engine/releases/download/v$v"
+          $base = "https://github.com/asaadassi/shihab-alaq-engine/releases/download/v$v"
           $zip = "$env:RUNNER_TEMP\engine.zip"
-          Invoke-WebRequest "$base/ShihabStylerEngine-$v.zip" -OutFile $zip
+          Invoke-WebRequest "$base/ShihabAlaqEngine-$v.zip" -OutFile $zip
           # Release files come as application/octet-stream: read the sums from a file, not .Content (bytes)
           Invoke-WebRequest "$base/SHA256SUMS.txt" -OutFile "$env:RUNNER_TEMP\SHA256SUMS.txt"
           $sums = Get-Content "$env:RUNNER_TEMP\SHA256SUMS.txt" -Raw
-          $expected = ($sums -split "`n" | Where-Object { $_ -match "ShihabStylerEngine-$v.zip" } | ForEach-Object { ($_ -split '\s+')[0] }) | Select-Object -First 1
+          $expected = ($sums -split "`n" | Where-Object { $_ -match "ShihabAlaqEngine-$v.zip" } | ForEach-Object { ($_ -split '\s+')[0] }) | Select-Object -First 1
           $actual = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
           if ($expected -ne $actual) { throw "Engine SHA-256 mismatch: $actual" }
           Expand-Archive $zip "$env:RUNNER_TEMP\engine"

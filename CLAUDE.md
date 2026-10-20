@@ -1,6 +1,6 @@
-# Shihab Styler Mods — project rules
+# Shihab Alaq Mods — project rules
 
-The public store of Shihab Styler: mod sources in `mods/<id>.wh.cpp` (Windhawk mod format) and their store entries
+The public store of Shihab Alaq: mod sources in `mods/<id>.wh.cpp` (Windhawk mod format) and their store entries
 in `store/<id>.json` (Arabic and English). Read README.md first.
 
 - CI (`.github/workflows/build.yml`, Windows) builds every mod against the engine in `ENGINE_VERSION` and force-pushes
