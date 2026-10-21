@@ -4,7 +4,7 @@
 // @name:ar         حجم شريط المهام وأيقوناته
 // @description     Control the taskbar height and icon size, improve icon quality (Windows 11 only)
 // @description:ar  تحكّم في ارتفاع شريط المهام وحجم أيقوناته، مع أيقونات أوضح (ويندوز 11 فقط)
-// @version         1.3.10-shihab.2
+// @version         1.3.10-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

@@ -4,7 +4,7 @@
 // @name:ar         نافذة اختيار مجلد حديثة
 // @description     Replaces the classic "Browse For Folder" dialog
 // @description:ar  يستبدل نافذة «استعراض بحثاً عن مجلد» القديمة بنافذة الاختيار الحديثة
-// @version         1.0.0-shihab.2
+// @version         1.0.0-shihab.3
 // @author          aubymori
 // @github          https://github.com/aubymori
 // @include         *

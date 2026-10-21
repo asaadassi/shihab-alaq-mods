@@ -4,7 +4,7 @@
 // @name:ar         مبدّل نوافذ حديث
 // @description     Replaces the boring Windows Alt+Tab with a modern and elegant window switcher.
 // @description:ar  يستبدل قائمة Alt+Tab بمبدّل نوافذ حديث وأنيق فيه معاينة لكل نافذة.
-// @version         1.3.0-shihab.2
+// @version         1.3.0-shihab.3
 // @author          IMiloDev
 // @github          https://github.com/IMiloDev
 // @homepage        https://github.com/IMiloDev/OverhauldedWin

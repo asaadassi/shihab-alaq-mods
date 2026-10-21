@@ -4,7 +4,7 @@
 // @description     Customize the taskbar auto-hide animation speed and frame rate to make it feel less sluggish and janky
 // @name:ar         سرعة الإخفاء التلقائي لشريط المهام
 // @description:ar  اجعل ظهور شريط المهام المخفي واختفاءه أسرع وأنعم
-// @version         1.1-shihab.1
+// @version         1.1-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

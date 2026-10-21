@@ -4,7 +4,7 @@
 // @name:ar         حركات النوافذ
 // @description     Smooth minimize, restore, close, switch animations for windows.
 // @description:ar  حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل بينها.
-// @version         1.3.7-shihab.2
+// @version         1.3.7-shihab.3
 // @author          ReDrag
 // @github          https://github.com/redrag2105
 // @donateUrl       https://ko-fi.com/redrag2105

@@ -4,7 +4,7 @@
 // @name:ar         ترتيب النوافذ بانسيابية
 // @description     Make window arrangement more slick and pleasant with a sliding animation and snapping
 // @description:ar  تنزلق النوافذ بنعومة حين تحرّكها، وتلتصق بحواف الشاشة وبالنوافذ الأخرى.
-// @version         1.0.2-shihab.2
+// @version         1.0.2-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

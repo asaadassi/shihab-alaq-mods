@@ -4,7 +4,7 @@
 // @description     Control the system volume by scrolling over the taskbar or anywhere with modifier keys
 // @name:ar         التحكم في الصوت من شريط المهام
 // @description:ar  ارفع الصوت أو اخفضه بتحريك عجلة الماوس فوق شريط المهام، أو في أي مكان مع مفتاح تختاره
-// @version         1.3.1-shihab.1
+// @version         1.3.1-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

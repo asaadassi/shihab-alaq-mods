@@ -15,7 +15,7 @@
 // @description:it-IT Anima le icone della barra delle applicazioni al passaggio del mouse, come su macOS
 // @name:ar           حركة أيقونات شريط المهام
 // @description:ar    تكبر أيقونات شريط المهام حين يمر عليها المؤشر، كما في ماك
-// @version           1.9.2-shihab.2
+// @version           1.9.2-shihab.3
 // @author            Ph0en1x-dev
 // @github            https://github.com/Ph0en1x-dev
 // @include           explorer.exe

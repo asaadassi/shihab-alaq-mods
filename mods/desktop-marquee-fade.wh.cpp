@@ -4,7 +4,7 @@
 // @name:ar         تلاشي مستطيل التحديد
 // @description     Adds a smooth fade-out animation to the desktop selection rectangle when you release the mouse button.
 // @description:ar  يختفي مستطيل التحديد على سطح المكتب بتلاشٍ ناعم حين تترك زر الماوس.
-// @version         1.0.0-shihab.2
+// @version         1.0.0-shihab.3
 // @author          angel_lov
 // @github          https://github.com/Twilight0Sparkle
 // @include         explorer.exe

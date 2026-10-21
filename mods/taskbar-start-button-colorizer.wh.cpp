@@ -4,7 +4,7 @@
 // @name:ar         تلوين زر ابدأ
 // @description     Recolor the Start button icon on the taskbar with a color preset or with hue, saturation, brightness and opacity effects, and change its size (Windows 11 only)
 // @description:ar  غيّر لون أيقونة زر ابدأ بلون جاهز أو بضبط درجة اللون والتشبع والسطوع والشفافية، وغيّر حجمها (ويندوز 11 فقط)
-// @version         1.1-shihab.2
+// @version         1.1-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

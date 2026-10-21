@@ -4,7 +4,7 @@
 // @name:ar         Alt+Tab لكل شاشة
 // @description     Pressing Alt+Tab shows all open windows on the primary display. This mod shows only the windows on the monitor where the cursor is.
 // @description:ar  يعرض Alt+Tab نوافذ الشاشة التي عليها المؤشر فقط، بدل كل النوافذ على الشاشة الرئيسية.
-// @version         1.2-shihab.2
+// @version         1.2-shihab.3
 // @author          L3r0y
 // @github          https://github.com/L3r0yThingz
 // @include         explorer.exe

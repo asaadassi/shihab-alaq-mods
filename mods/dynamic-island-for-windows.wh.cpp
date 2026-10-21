@@ -4,7 +4,7 @@
 // @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
 // @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
-// @version         1.3.1-shihab.2
+// @version         1.3.1-shihab.3
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe

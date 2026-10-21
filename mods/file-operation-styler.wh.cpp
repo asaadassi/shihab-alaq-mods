@@ -4,7 +4,7 @@
 // @name:ar         تنسيق نافذة النسخ والنقل
 // @description     Portable custom presentation for native Explorer file operations with a skin-safe unified presentation.
 // @description:ar  شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف، مع سمات وألوان تختارها.
-// @version         1.2.0-shihab.2
+// @version         1.2.0-shihab.3
 // @author          digART
 // @github          https://github.com/digart11
 // @license         GPL-3.0

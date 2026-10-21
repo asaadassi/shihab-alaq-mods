@@ -4,7 +4,7 @@
 // @description     Custom date/time format, news feed, weather, performance metrics (upload/download speed, CPU, RAM, GPU, battery), media player info, custom fonts and colors, and more
 // @name:ar         تخصيص ساعة شريط المهام
 // @description:ar  شكل التاريخ والوقت كما تريد، مع الطقس والأخبار وسرعة الإنترنت وأداء الجهاز والبطارية وما يُشغَّل الآن، بخطوط وألوان من اختيارك
-// @version         1.8.1-shihab.2
+// @version         1.8.1-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

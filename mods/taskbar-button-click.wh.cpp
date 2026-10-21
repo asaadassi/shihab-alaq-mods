@@ -4,7 +4,7 @@
 // @description     Close programs with a middle click on the taskbar instead of creating a new instance
 // @name:ar         إغلاق البرنامج بالزر الأوسط
 // @description:ar  اضغط بزر الماوس الأوسط على زر البرنامج في شريط المهام لإغلاقه، بدل فتح نسخة جديدة منه
-// @version         1.0.9-shihab.1
+// @version         1.0.9-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

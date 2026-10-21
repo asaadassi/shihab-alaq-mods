@@ -4,7 +4,7 @@
 // @description     Use the mouse wheel and/or keyboard shortcuts to cycle between taskbar buttons
 // @name:ar         التنقل بين البرامج بعجلة الماوس
 // @description:ar  حرّك عجلة الماوس فوق شريط المهام، أو استخدم اختصاراً من لوحة المفاتيح، للتنقل بين البرامج المفتوحة
-// @version         1.1.11-shihab.1
+// @version         1.1.11-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

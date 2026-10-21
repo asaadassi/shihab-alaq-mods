@@ -4,7 +4,7 @@
 // @name:ar         ثيمات شريط المهام
 // @description     Customize the taskbar with themes contributed by others or create your own
 // @description:ar  غيّر شكل شريط المهام بثيمات جاهزة صمّمها آخرون أو بتصميمك الخاص
-// @version         1.10-shihab.2
+// @version         1.10-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

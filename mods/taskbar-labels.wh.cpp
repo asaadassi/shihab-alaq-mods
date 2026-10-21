@@ -4,7 +4,7 @@
 // @name:ar         أسماء البرامج على شريط المهام
 // @description     Customize text labels and combining for running programs on the taskbar (Windows 11 only)
 // @description:ar  اعرض أسماء البرامج المفتوحة بجانب أيقوناتها على شريط المهام، وتحكّم في دمج أزرارها (ويندوز 11 فقط)
-// @version         1.5.1-shihab.1
+// @version         1.5.1-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

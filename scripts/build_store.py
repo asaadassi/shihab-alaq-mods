@@ -20,9 +20,11 @@ import argparse
 import datetime
 import hashlib
 import json
+import os
 import re
 import shlex
 import shutil
+import struct
 import subprocess
 import sys
 from pathlib import Path
@@ -107,6 +109,9 @@ def compile_mod(compiler: Path, engine: Path, meta: dict, source: Path, arch: st
     args = [
         str(compiler / 'bin' / 'clang++.exe'),
         '-std=c++23', '-O2', '-shared', '-s',
+        # The C++ runtime inside each DLL: the engine ships no libc++.dll or libunwind.dll next to the mods, and
+        # Windows refuses to load a mod that needs them (error 126)
+        '-static-libstdc++', '-static',
         '-DUNICODE', '-D_UNICODE',
         '-DWINVER=0x0A00', '-D_WIN32_WINNT=0x0A00', '-D_WIN32_IE=0x0A00', '-DNTDDI_VERSION=0x0A000008',
         '-D__USE_MINGW_ANSI_STDIO=0',
@@ -130,7 +135,53 @@ def compile_mod(compiler: Path, engine: Path, meta: dict, source: Path, arch: st
         # A GitHub annotation, so the reason shows on the run's page without opening the log
         lines = [l for l in output.splitlines() if 'error' in l.lower()] or output.splitlines()
         annotate(f'{meta["id"]} ({arch})', '\n'.join(lines[:15]) or f'exit code {result.returncode}')
-    return result.returncode == 0
+        return False
+    # A mod that needs a DLL the computer doesn't have never loads: refuse it here instead
+    if missing := foreign_imports(out):
+        annotate(f'{meta["id"]} ({arch})', 'imports DLLs that are not part of Windows: ' + ', '.join(missing))
+        return False
+    return True
+
+
+# DLLs a mod may import besides Windows' own
+ALLOWED_NON_SYSTEM = {'shihab-alaq-engine.dll'}
+
+
+def dll_imports(path: Path) -> list:
+    """The DLL names a PE file imports, read from its import directory."""
+    data = path.read_bytes()
+    pe = struct.unpack_from('<I', data, 0x3C)[0]
+    sections = struct.unpack_from('<H', data, pe + 6)[0]
+    optional = pe + 24
+    pe32plus = struct.unpack_from('<H', data, optional)[0] == 0x20B
+    import_rva = struct.unpack_from('<I', data, optional + (112 if pe32plus else 96) + 8)[0]
+    table = optional + struct.unpack_from('<H', data, pe + 20)[0]
+
+    def offset(rva: int) -> int:
+        for i in range(sections):
+            size, va, _, raw = struct.unpack_from('<IIII', data, table + i * 40 + 8)
+            if va <= rva < va + size:
+                return rva - va + raw
+        raise ValueError(f'{path.name}: RVA {rva:#x} is outside its sections')
+
+    names = []
+    at = offset(import_rva) if import_rva else None
+    while at is not None:
+        name_rva = struct.unpack_from('<I', data, at + 12)[0]
+        if not name_rva:
+            break
+        start = offset(name_rva)
+        names.append(data[start:data.index(b'\0', start)].decode('ascii'))
+        at += 20
+    return names
+
+
+def foreign_imports(dll: Path) -> list:
+    """Imports Windows can't find for a mod: anything not in System32, not an API set and not the engine."""
+    system32 = Path(os.environ.get('SystemRoot', r'C:\Windows')) / 'System32'
+    return [n for n in dll_imports(dll)
+            if n.lower() not in ALLOWED_NON_SYSTEM and not n.lower().startswith(('api-ms-', 'ext-ms-'))
+            and not (system32 / n).exists()]
 
 
 def annotate(title: str, message: str) -> None:
