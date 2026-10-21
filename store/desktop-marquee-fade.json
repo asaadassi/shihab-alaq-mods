@@ -8,6 +8,22 @@
     "ar": "يختفي مستطيل التحديد على سطح المكتب بتلاشٍ ناعم حين تترك زر الماوس.",
     "en": "The selection rectangle on the desktop fades out smoothly when you release the mouse button."
   },
+  "summary": {
+    "ar": "تلاشٍ ناعم لمستطيل التحديد",
+    "en": "A soft fade for the selection box"
+  },
+  "highlights": {
+    "ar": [
+      "مستطيل التحديد يختفي بهدوء بعد ترك الماوس",
+      "تختار سرعة التلاشي ومدته",
+      "تختار لون التعبئة ولون الإطار"
+    ],
+    "en": [
+      "The selection box fades away after you release the mouse",
+      "Choose how fast and how long it fades",
+      "Choose its fill and border colours"
+    ]
+  },
   "basedOn": "Windhawk mods: desktop-marquee-fade (angel_lov)",
   "author": "angel_lov",
   "license": "MIT",

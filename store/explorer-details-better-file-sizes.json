@@ -13,5 +13,23 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/explorer-details-better-file-sizes.wh.cpp",
   "group": "explorer",
-  "order": 0
+  "order": 0,
+  "summary": {
+    "ar": "أحجام المجلدات ووحدات مقروءة في المستكشف",
+    "en": "Folder sizes and readable units in Explorer"
+  },
+  "highlights": {
+    "ar": [
+      "يعرض حجم كل مجلد في عرض التفاصيل",
+      "يعرض أحجام الملفات بوحدات MB وGB بدل KB",
+      "تختار طريقة حساب أحجام المجلدات أو تفعيلها بمفتاح Shift",
+      "يمكن ترتيب الملفات والمجلدات معاً حسب الحجم"
+    ],
+    "en": [
+      "Shows the size of each folder in the details view",
+      "Shows file sizes in MB and GB instead of KB",
+      "Choose how folder sizes are counted, or only with Shift",
+      "Sort files and folders together by size"
+    ]
+  }
 }

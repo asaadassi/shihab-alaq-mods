@@ -13,5 +13,23 @@
   "license": "MIT",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/overhaulded-alt-tab.wh.cpp",
   "group": "window-switcher",
-  "order": 0
+  "order": 0,
+  "summary": {
+    "ar": "مبدّل نوافذ حديث بمعاينة حية لكل نافذة",
+    "en": "A modern window switcher with live previews"
+  },
+  "highlights": {
+    "ar": [
+      "يستبدل قائمة Alt+Tab بشريط بطاقات أنيق",
+      "معاينة حية لكل نافذة مفتوحة",
+      "اختر الحجم وعدد البطاقات الظاهرة",
+      "اختر حركة الظهور والخلفية خلف البطاقات"
+    ],
+    "en": [
+      "Replaces Alt+Tab with a sleek row of cards",
+      "A live preview of every open window",
+      "Choose the size and how many cards show",
+      "Choose the open animation and the background"
+    ]
+  }
 }

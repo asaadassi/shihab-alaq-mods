@@ -13,5 +13,23 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-volume-control.wh.cpp",
   "group": "taskbar-use",
-  "order": 2
+  "order": 2,
+  "summary": {
+    "ar": "غيّر الصوت بعجلة الماوس فوق الشريط",
+    "en": "Change the volume with the wheel"
+  },
+  "highlights": {
+    "ar": [
+      "حرّك العجلة فوق شريط المهام لرفع الصوت أو خفضه",
+      "اكتم الصوت بالزر الأوسط على أيقونة الصوت",
+      "غيّر الصوت من أي مكان مع مفتاح تختاره",
+      "اختر شكل مؤشر الصوت ومقدار التغيير"
+    ],
+    "en": [
+      "Scroll over the taskbar to turn the volume up or down",
+      "Middle-click the volume icon to mute",
+      "Change the volume anywhere while holding a key you choose",
+      "Choose the volume indicator style and step"
+    ]
+  }
 }

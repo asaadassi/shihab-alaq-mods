@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              taskbar-labels
 // @name            Taskbar Labels for Windows 11
+// @name:ar         أسماء البرامج على شريط المهام
 // @description     Customize text labels and combining for running programs on the taskbar (Windows 11 only)
-// @version         1.5.1
+// @description:ar  اعرض أسماء البرامج المفتوحة بجانب أيقوناتها على شريط المهام، وتحكّم في دمج أزرارها (ويندوز 11 فقط)
+// @version         1.5.1-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -82,11 +84,23 @@ Labels can also be shown or hidden per-program in the settings.
   - noLabelsWithCombining: Hide labels, combine taskbar buttons
   - labelsWithCombining: Show labels, combine taskbar buttons
   - noLabelsWithoutCombining: Hide labels, don't combine taskbar buttons
+  $name:ar: طريقة العرض
+  $description:ar: >-
+    ملاحظة: عند الانتقال إلى آخر خيارين أو منهما قد تحتاج إلى إعادة تشغيل
+    مستكشف الملفات ليظهر التغيير كاملاً
+  $options:ar:
+  - labelsWithoutCombining: إظهار الأسماء دون دمج الأزرار
+  - noLabelsWithCombining: إخفاء الأسماء مع دمج الأزرار
+  - labelsWithCombining: إظهار الأسماء مع دمج الأزرار
+  - noLabelsWithoutCombining: إخفاء الأسماء دون دمج الأزرار
 - taskbarItemWidth: 160
   $name: Taskbar item width
   $description: >-
     The width to use when labels are shown, set to 0 to use the Windows adaptive
     width
+  $name:ar: عرض الزر
+  $description:ar: >-
+    عرض الزر حين تظهر الأسماء، واكتب 0 ليختار ويندوز العرض المناسب تلقائياً
 - runningIndicatorStyle: centerFixed
   $name: Running indicator style
   $options:
@@ -94,12 +108,24 @@ Labels can also be shown or hidden per-program in the settings.
   - centerDynamic: Centered, dynamic size
   - left: On the left (below the icon)
   - fullWidth: Full width
+  $name:ar: شكل علامة البرنامج المفتوح
+  $options:ar:
+  - centerFixed: في الوسط بحجم ثابت
+  - centerDynamic: في الوسط بحجم متغير
+  - left: على اليسار (تحت الأيقونة)
+  - fullWidth: بعرض الزر كاملاً
 - progressIndicatorStyle: sameAsRunningIndicatorStyle
   $name: Progress indicator style
   $options:
   - sameAsRunningIndicatorStyle: Same as running indicator style
   - centerDynamic: Centered, dynamic size
   - fullWidth: Full width
+  $name:ar: شكل شريط التقدم
+  $options:ar:
+  - sameAsRunningIndicatorStyle: مثل علامة البرنامج المفتوح
+  - centerDynamic: في الوسط بحجم متغير
+  - fullWidth: بعرض الزر كاملاً
+  $_advanced: true
 - excludedPrograms: [""]
   $name: Excluded programs
   $description: >-
@@ -116,6 +142,20 @@ Labels can also be shown or hidden per-program in the settings.
     C:\Windows\System32\notepad.exe
 
     Microsoft.WindowsCalculator_8wekyb3d8bbwe!App
+  $name:ar: برامج مستثناة
+  $description:ar: >-
+    في أوضاع "إظهار الأسماء" لن تظهر أسماء هذه البرامج
+
+    وفي أوضاع "إخفاء الأسماء" ستظهر أسماء هذه البرامج وحدها
+
+    اكتب اسم ملف البرنامج أو مساره أو معرّف التطبيق، مثل:
+
+    mspaint.exe
+
+    C:\Windows\System32\notepad.exe
+
+    Microsoft.WindowsCalculator_8wekyb3d8bbwe!App
+  $_advanced: true
 - minimumTaskbarItemWidth: 50
   $name: Minimum taskbar item width
   $description: >-
@@ -123,17 +163,34 @@ Labels can also be shown or hidden per-program in the settings.
 
     Values larger than the Windows minimum width are unsupported and have no
     effect
+  $name:ar: أقل عرض للزر
+  $description:ar: >-
+    أقل عرض للزر قبل أن تزدحم الأزرار ويظهر زر المزيد
+
+    القيم الأكبر من الحد الأدنى في ويندوز غير مدعومة ولا أثر لها
+  $_advanced: true
 - maximumTaskbarItemWidth: 176
   $name: Maximum taskbar item width
   $description: >-
     The maximum width, only used for the Windows adaptive width
+  $name:ar: أكبر عرض للزر
+  $description:ar: >-
+    أكبر عرض للزر، ويُستخدم فقط حين يختار ويندوز العرض تلقائياً
+  $_advanced: true
 - fontSize: 12
   $name: Font size
+  $name:ar: حجم الخط
 - fontFamily: ""
   $name: Font family
   $description: >-
     For a list of fonts that are shipped with Windows 11, refer to the following
     page:
+
+    https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
+  $name:ar: نوع الخط
+  $description:ar: >-
+    اكتب اسم الخط كما هو، واتركه فارغاً لخط ويندوز المعتاد. قائمة الخطوط التي
+    تأتي مع ويندوز 11 في هذه الصفحة:
 
     https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
 - textTrimming: characterEllipsis
@@ -142,22 +199,43 @@ Labels can also be shown or hidden per-program in the settings.
   - characterEllipsis: Trim at character with ellipsis (...)
   - wordEllipsis: Trim at word with ellipsis (...)
   - clip: Clip at a pixel level (Windows 11 default)
+  $name:ar: قص الاسم الطويل
+  $options:ar:
+  - characterEllipsis: عند آخر حرف مع ثلاث نقاط (...)
+  - wordEllipsis: عند آخر كلمة مع ثلاث نقاط (...)
+  - clip: قص مباشر دون نقاط (الافتراضي في ويندوز 11)
+  $_advanced: true
 - leftAndRightPaddingSize: 8
   $name: Left and right padding size
+  $name:ar: المسافة على الجانبين
+  $_advanced: true
 - spaceBetweenIconAndLabel: 8
   $name: Space between icon and label
+  $name:ar: المسافة بين الأيقونة والاسم
+  $_advanced: true
 - runningIndicatorHeight: 0
   $name: Running indicator height
   $description: >-
     Set to zero for the default height, set to -1 to hide it
+  $name:ar: سُمك علامة البرنامج المفتوح
+  $description:ar: >-
+    اكتب 0 للسُمك المعتاد، أو -1 لإخفاء العلامة
+  $_advanced: true
 - runningIndicatorVerticalOffset: 0
   $name: Running indicator vertical offset
+  $name:ar: إزاحة علامة البرنامج المفتوح للأعلى أو الأسفل
+  $_advanced: true
 - alwaysShowThumbnailLabels: false
   $name: Always show thumbnail labels
   $description: >-
     By default, thumbnail labels are shown on hover only if taskbar labels are
     hidden, but that might not be applied for all customizations that this mod
     offers
+  $name:ar: إظهار الأسماء دائماً في المعاينات المصغرة
+  $description:ar: >-
+    تظهر الأسماء في المعاينات المصغرة عند المرور بالمؤشر فقط حين تكون الأسماء
+    مخفية على الشريط، وقد لا ينطبق ذلك على كل ما تقدمه هذه الإضافة من خيارات
+  $_advanced: true
 - labelForSingleItem: "%name%"
   $name: Label for a single item
   $description: >-
@@ -165,11 +243,21 @@ Labels can also be shown or hidden per-program in the settings.
 
     Ignored in newer Windows versions with the built-in taskbar labels
     implementation
+  $name:ar: نص الاسم لنافذة واحدة
+  $description:ar: >-
+    يمكنك استخدام: %name% للاسم، و%amount% لعدد النوافذ
+
+    لا أثر له في إصدارات ويندوز الأحدث التي تعرض الأسماء بنفسها
+  $_advanced: true
 - labelForMultipleItems: "[%amount%] %name%"
   $name: Label for multiple items
   $description: >-
     Ignored in newer Windows versions with the built-in taskbar labels
     implementation
+  $name:ar: نص الاسم لعدة نوافذ
+  $description:ar: >-
+    لا أثر له في إصدارات ويندوز الأحدث التي تعرض الأسماء بنفسها
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

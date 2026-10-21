@@ -2,7 +2,9 @@
 // @id              taskbar-volume-control
 // @name            Taskbar Volume Control
 // @description     Control the system volume by scrolling over the taskbar or anywhere with modifier keys
-// @version         1.3.1
+// @name:ar         التحكم في الصوت من شريط المهام
+// @description:ar  ارفع الصوت أو اخفضه بتحريك عجلة الماوس فوق شريط المهام، أو في أي مكان مع مفتاح تختاره
+// @version         1.3.1-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -68,6 +70,12 @@ issue](https://tweaker.userecho.com/topics/826-scroll-on-trackpadtouchpad-doesnt
   - modern: Windows 10
   - classic: Windows 7
   - none: None
+  $name:ar: شكل مؤشر الصوت
+  $options:ar:
+  - win11: ويندوز 11
+  - modern: ويندوز 10
+  - classic: ويندوز 7
+  - none: بلا مؤشر
 - scrollArea: taskbar
   $name: Scroll area
   $options:
@@ -75,33 +83,60 @@ issue](https://tweaker.userecho.com/topics/826-scroll-on-trackpadtouchpad-doesnt
   - notification_area: The tray area
   - taskbarWithoutNotificationArea: The taskbar without the tray area
   - none: None (only additional scroll regions)
+  $name:ar: مكان تحريك العجلة
+  $options:ar:
+  - taskbar: شريط المهام كله
+  - notification_area: منطقة الأيقونات بجانب الساعة
+  - taskbarWithoutNotificationArea: شريط المهام دون منطقة الأيقونات
+  - none: لا مكان (الأجزاء الإضافية فقط)
 - additionalScrollRegions: ""
   $name: Additional scroll regions
   $description: >-
     A comma-separated list of additional regions along the taskbar where
     scrolling will control the system volume. Each region is a range like
     "100-200" (pixels) or "20%-50%" (percentage of taskbar length).
+  $name:ar: أجزاء إضافية من الشريط
+  $description:ar: >-
+    أجزاء أخرى من شريط المهام تغيّر فيها العجلة الصوت، مفصولة بفواصل. كل جزء
+    مدى مثل "100-200" بالنقاط أو "20%-50%" من طول الشريط
+  $_advanced: true
 - middleClickToMute: true
   $name: Middle click to mute
   $description: >-
     With this option enabled, middle clicking the volume tray icon will
     mute/unmute the system volume (Windows 11 version 22H2 or newer).
+  $name:ar: كتم الصوت بالزر الأوسط
+  $description:ar: >-
+    الضغط بالزر الأوسط على أيقونة الصوت يكتم الصوت أو يعيده (ويندوز 11 إصدار
+    22H2 أو أحدث)
 - ctrlScrollVolumeChange: false
   $name: Ctrl + Scroll to change volume
   $description: >-
     When enabled, scrolling the mouse wheel will only change the volume when
     the Ctrl key is held down.
+  $name:ar: تغيير الصوت مع Ctrl فقط
+  $description:ar: >-
+    لا تغيّر العجلة الصوت إلا وأنت تضغط مفتاح Ctrl
 - scrollAnywhereKeys:
   - shift: false
+    $name:ar: مفتاح Shift
   - ctrl: false
+    $name:ar: مفتاح Ctrl
   - alt: false
+    $name:ar: مفتاح Alt
   - win: false
+    $name:ar: مفتاح Win
   $name: Scroll anywhere modifier keys
   $description: >-
     A combination of modifier keys that, when held, allow controlling the system
     volume by scrolling the mouse wheel anywhere on the screen. Note that
     scrolling won't work when the foreground window is of an elevated process
     (such as Windhawk or Task Manager).
+  $name:ar: مفاتيح التحكم من أي مكان
+  $description:ar: >-
+    اضغط هذه المفاتيح وحرّك العجلة في أي مكان من الشاشة لتغيير الصوت. لا يعمل
+    هذا حين تكون النافذة الظاهرة لبرنامج يعمل بصلاحيات المسؤول (مثل برنامج
+    التخصيص أو إدارة المهام)
 - fullScreenScrolling: disabled
   $name: Full screen scrolling
   $description: >-
@@ -111,6 +146,14 @@ issue](https://tweaker.userecho.com/topics/826-scroll-on-trackpadtouchpad-doesnt
   - disabled: Disabled
   - withIndicator: Enabled with indicator
   - withoutIndicator: Enabled without indicator
+  $name:ar: التحكم أثناء ملء الشاشة
+  $description:ar: >-
+    حرّك العجلة في مكان شريط المهام لتغيير الصوت حتى لو غطّته نافذة بملء
+    الشاشة
+  $options:ar:
+  - disabled: معطّل
+  - withIndicator: مفعّل مع المؤشر
+  - withoutIndicator: مفعّل دون المؤشر
 - noAutomaticMuteToggle: false
   $name: No automatic mute toggle
   $description: >-
@@ -119,17 +162,31 @@ issue](https://tweaker.userecho.com/topics/826-scroll-on-trackpadtouchpad-doesnt
     default, the output device is muted once the volume reaches zero, and is
     unmuted on any change to a non-zero volume. Enabling this option turns off
     this functionality, such that the device mute status is not changed.
+  $name:ar: بلا كتم تلقائي
+  $description:ar: >-
+    مع مؤشر ويندوز 11: لا تغيّر العجلة الصوت وهو مكتوم. مع المؤشرات الأخرى:
+    يُكتم الصوت عادة حين يصل إلى صفر ويعود عند رفعه، وهذا الخيار يوقف ذلك
+  $_advanced: true
 - volumeChangeStep: 2
   $name: Volume change step
   $description: >-
     Allows to configure the volume change that will occur with each notch of
     mouse wheel movement. For the Windows 11 indicator, must be a multiple of
     2.
+  $name:ar: مقدار التغيير في كل حركة
+  $description:ar: >-
+    كم يتغيّر الصوت مع كل حركة للعجلة. مع مؤشر ويندوز 11 يجب أن يكون رقماً
+    زوجياً
 - oldTaskbarOnWin11: false
   $name: Customize the old taskbar on Windows 11
   $description: >-
     Enable this option to customize the old taskbar on Windows 11 (if using
     ExplorerPatcher or a similar tool).
+  $name:ar: الشريط القديم في ويندوز 11
+  $description:ar: >-
+    فعّله فقط إن كنت تستخدم شريط المهام القديم على ويندوز 11 عبر برنامج آخر
+    مثل ExplorerPatcher
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

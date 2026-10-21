@@ -13,5 +13,21 @@
   "license": "MIT",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/modernize-folder-picker-dialog.wh.cpp",
   "group": "explorer",
-  "order": 2
+  "order": 2,
+  "summary": {
+    "ar": "نافذة حديثة لاختيار المجلدات",
+    "en": "A modern window for choosing folders"
+  },
+  "highlights": {
+    "ar": [
+      "يستبدل نافذة اختيار المجلد القديمة في البرامج",
+      "تعرض النافذة الحديثة شريط المسار والبحث والتنقل",
+      "يعمل في كل البرامج التي تستخدم النافذة القديمة"
+    ],
+    "en": [
+      "Replaces the old folder picker in your programs",
+      "The modern window has an address bar, search and navigation",
+      "Works in every program that uses the old window"
+    ]
+  }
 }

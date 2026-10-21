@@ -8,6 +8,26 @@
     "ar": "شكل التاريخ والوقت كما تريد، مع إمكانية عرض الطقس والأخبار وسرعة الإنترنت والمعالج والذاكرة والبطارية وما يُشغَّل الآن، بخطوط وألوان من اختيارك.",
     "en": "Your own date and time format, with optional weather, news, internet speed, CPU, memory, battery and now playing, in the fonts and colours you choose."
   },
+  "summary": {
+    "ar": "ساعة شريط المهام بالشكل الذي تحبه",
+    "en": "The taskbar clock, the way you like it"
+  },
+  "highlights": {
+    "ar": [
+      "إظهار الثواني في الساعة",
+      "اختيار حجم الخط ولونه لكل سطر",
+      "إخفاء السطر الثاني أو كتابة ما تريد فيه",
+      "عرض الطقس والأخبار وسرعة الإنترنت وأداء الجهاز",
+      "عرض اسم الأغنية أو المقطع الذي يُشغَّل الآن"
+    ],
+    "en": [
+      "Show seconds on the clock",
+      "Choose the font size and colour of each line",
+      "Hide the second line or write what you want in it",
+      "Show weather, news, internet speed and computer performance",
+      "Show the song or video playing now"
+    ]
+  },
   "basedOn": "Windhawk mods: taskbar-clock-customization (m417z)",
   "author": "m417z",
   "license": "GPL-3.0",

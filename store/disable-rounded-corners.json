@@ -13,5 +13,19 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/disable-rounded-corners.wh.cpp",
   "group": "window-motion",
-  "order": 2
+  "order": 2,
+  "summary": {
+    "ar": "زوايا حادة للنوافذ كما في ويندوز 10",
+    "en": "Square window corners as in Windows 10"
+  },
+  "highlights": {
+    "ar": [
+      "يلغي الزوايا الدائرية في ويندوز 11",
+      "يعمل على كل النوافذ دون إعدادات"
+    ],
+    "en": [
+      "Turns off the rounded corners of Windows 11",
+      "Works on every window, no settings needed"
+    ]
+  }
 }

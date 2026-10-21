@@ -13,5 +13,21 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-start-button-colorizer.wh.cpp",
   "group": "taskbar-look",
-  "order": 2
+  "order": 2,
+  "summary": {
+    "ar": "لون وحجم جديدان لزر ابدأ",
+    "en": "A new colour and size for Start"
+  },
+  "highlights": {
+    "ar": [
+      "اختر لوناً جاهزاً لزر ابدأ أو لون النظام",
+      "اضبط التشبع والسطوع والشفافية",
+      "كبّر زر ابدأ أو صغّره"
+    ],
+    "en": [
+      "Pick a ready colour or the system colour for Start",
+      "Adjust saturation, brightness and transparency",
+      "Make the Start button bigger or smaller"
+    ]
+  }
 }

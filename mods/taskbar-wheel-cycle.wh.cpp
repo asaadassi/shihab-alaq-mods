@@ -2,7 +2,9 @@
 // @id              taskbar-wheel-cycle
 // @name            Cycle taskbar buttons with mouse wheel
 // @description     Use the mouse wheel and/or keyboard shortcuts to cycle between taskbar buttons
-// @version         1.1.11
+// @name:ar         التنقل بين البرامج بعجلة الماوس
+// @description:ar  حرّك عجلة الماوس فوق شريط المهام، أو استخدم اختصاراً من لوحة المفاتيح، للتنقل بين البرامج المفتوحة
+// @version         1.1.11-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -41,14 +43,20 @@ check out [7+ Taskbar Tweaker](https://tweaker.ramensoftware.com/).
 /*
 - skipMinimizedWindows: true
   $name: Skip minimized windows
+  $name:ar: تخطي النوافذ المصغّرة
 - wrapAround: true
   $name: Wrap around
+  $name:ar: العودة إلى البداية بعد آخر برنامج
 - reverseScrollingDirection: false
   $name: Reverse scrolling direction
+  $name:ar: عكس اتجاه العجلة
 - enableMouseWheelCycling: true
   $name: Enable mouse wheel cycling
   $description: >-
     Disable to only use keyboard shortcuts for cycling between taskbar buttons.
+  $name:ar: التنقل بعجلة الماوس
+  $description:ar: >-
+    أوقفه إن أردت التنقل باختصارات لوحة المفاتيح فقط
 - customScrollRegions: ""
   $name: Custom scroll regions
   $description: >-
@@ -56,6 +64,11 @@ check out [7+ Taskbar Tweaker](https://tweaker.ramensoftware.com/).
     will cycle between taskbar buttons. If set, it will override the default
     behavior of using the task list area for scrolling. Each region is a range
     like "100-200" (pixels) or "20%-50%" (percentage of taskbar length).
+  $name:ar: أجزاء مخصصة من الشريط
+  $description:ar: >-
+    الأجزاء من شريط المهام التي تعمل فيها العجلة، مفصولة بفواصل، بدل منطقة
+    أزرار البرامج. كل جزء مدى مثل "100-200" بالنقاط أو "20%-50%" من طول الشريط
+  $_advanced: true
 - cycleLeftKeyboardShortcut: Alt+VK_OEM_4
   $name: Cycle left keyboard shortcut
   $description: >-
@@ -64,13 +77,28 @@ check out [7+ Taskbar Tweaker](https://tweaker.ramensoftware.com/).
     https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 
     Set to an empty string to disable.
+  $name:ar: اختصار التنقل إلى اليسار
+  $description:ar: >-
+    المفاتيح المساعدة الممكنة: Alt و Ctrl و Shift و Win. لأسماء المفاتيح
+    الأخرى راجع هذه الصفحة:
+    https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+
+    اتركه فارغاً لإيقافه
+  $_advanced: true
 - cycleRightKeyboardShortcut: Alt+VK_OEM_6
   $name: Cycle right keyboard shortcut
+  $name:ar: اختصار التنقل إلى اليمين
+  $_advanced: true
 - oldTaskbarOnWin11: false
   $name: Customize the old taskbar on Windows 11
   $description: >-
     Enable this option to customize the old taskbar on Windows 11 (if using
     ExplorerPatcher or a similar tool).
+  $name:ar: الشريط القديم في ويندوز 11
+  $description:ar: >-
+    فعّله فقط إن كنت تستخدم شريط المهام القديم على ويندوز 11 عبر برنامج آخر
+    مثل ExplorerPatcher
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

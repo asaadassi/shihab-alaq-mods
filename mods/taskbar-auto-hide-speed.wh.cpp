@@ -2,7 +2,9 @@
 // @id              taskbar-auto-hide-speed
 // @name            Taskbar auto-hide speed
 // @description     Customize the taskbar auto-hide animation speed and frame rate to make it feel less sluggish and janky
-// @version         1.1
+// @name:ar         سرعة الإخفاء التلقائي لشريط المهام
+// @description:ar  اجعل ظهور شريط المهام المخفي واختفاءه أسرع وأنعم
+// @version         1.1-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -36,19 +38,33 @@ less sluggish and janky.
 - showSpeedup: 250
   $name: Show animation speedup
   $description: In percentage of the original speed.
+  $name:ar: سرعة الظهور
+  $description:ar: نسبة مئوية من السرعة الأصلية
 - hideSpeedup: 250
   $name: Hide animation speedup
   $description: In percentage of the original speed.
+  $name:ar: سرعة الاختفاء
+  $description:ar: نسبة مئوية من السرعة الأصلية
 - frameRate: 90
   $name: Animation frame rate
   $description: >-
     Frames per second. Higher frame rate will use more CPU. Has no effect on the
     new Windows 11 auto-hide animation.
+  $name:ar: نعومة الحركة
+  $description:ar: >-
+    عدد الإطارات في الثانية. الرقم الأعلى أنعم لكنه يستهلك المعالج أكثر، ولا
+    أثر له على حركة الإخفاء الجديدة في ويندوز 11
+  $_advanced: true
 - oldTaskbarOnWin11: false
   $name: Customize the old taskbar on Windows 11
   $description: >-
     Enable this option to customize the old taskbar on Windows 11 (if using
     ExplorerPatcher or a similar tool).
+  $name:ar: الشريط القديم في ويندوز 11
+  $description:ar: >-
+    فعّله فقط إن كنت تستخدم شريط المهام القديم على ويندوز 11 عبر برنامج آخر
+    مثل ExplorerPatcher
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

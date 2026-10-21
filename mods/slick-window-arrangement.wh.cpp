@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              slick-window-arrangement
 // @name            Slick Window Arrangement
+// @name:ar         ترتيب النوافذ بانسيابية
 // @description     Make window arrangement more slick and pleasant with a sliding animation and snapping
-// @version         1.0.2-shihab.1
+// @description:ar  تنزلق النوافذ بنعومة حين تحرّكها، وتلتصق بحواف الشاشة وبالنوافذ الأخرى.
+// @version         1.0.2-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -49,22 +51,40 @@ sliding animation and window snapping.
 /*
 - SnapWindowsWhenDragging: true
   $name: Snap windows when dragging
+  $name:ar: التصاق النوافذ أثناء السحب
 - SnapWindowsDistance: 25
   $name: Snap windows distance
+  $name:ar: مسافة الالتصاق
+  $description:ar: كم تقترب النافذة من نافذة أخرى أو من الحافة حتى تلتصق بها.
+  $_advanced: true
   $description: Set the required distance for windows to snap to other windows
 - KeysToDisableSnapping:
   - Ctrl: false
+    $name: Ctrl
+    $name:ar: مفتاح Ctrl
   - Alt: true
+    $name: Alt
+    $name:ar: مفتاح Alt
   - Shift: false
+    $name: Shift
+    $name:ar: مفتاح Shift
   $name: Keys to temporarily disable snapping
+  $name:ar: مفاتيح لإيقاف الالتصاق مؤقتاً
+  $description:ar: اضغط هذه المفاتيح أثناء السحب كي لا تلتصق النافذة.
+  $_advanced: true
   $description: A combination of keys that can be used to temporarily disable snapping
 - SlidingAnimation: true
   $name: Sliding animation
+  $name:ar: حركة الانزلاق
+  $description:ar: تكمل النافذة انزلاقها قليلاً بعد أن تفلتها.
   $description: Keep sliding the window after it's being moved
 - SnapWindowsWhenSliding: true
   $name: Snap windows when sliding
+  $name:ar: التصاق النوافذ أثناء الانزلاق
 - SlidingAnimationSlowdown: 15
   $name: Sliding animation slowdown
+  $name:ar: سرعة توقف الانزلاق
+  $description:ar: قيمة أصغر تجعل الانزلاق يدوم أطول (من 1 إلى 99).
   $description: Set a smaller value for a sliding animation that lasts longer (between 1 and 99)
 */
 // ==/WindhawkModSettings==

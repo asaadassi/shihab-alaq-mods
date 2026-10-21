@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              explorer-details-better-file-sizes
 // @name            Better file sizes in Explorer details
+// @name:ar         أحجام ملفات أوضح في المستكشف
 // @description     Enhances file size display in Explorer details with folder sizes, human-readable units (MB/GB), and optional IEC notation (KiB/MiB)
-// @version         1.6-shihab.1
+// @description:ar  يعرض أحجام المجلدات في عرض التفاصيل، وبوحدات مقروءة مثل MB وGB، مع خيار وحدات مثل KiB وMiB
+// @version         1.6-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -130,6 +132,7 @@ KiB?](https://devblogs.microsoft.com/oldnewthing/20090611-00/?p=17933).
 /*
 - calculateFolderSizes: disabled
   $name: Show folder sizes
+  $name:ar: عرض أحجام المجلدات
   $description: >-
     The recommended option to enable folder sizes is via "Everything"
     integration. Refer to the mod description for the steps of installing and
@@ -141,28 +144,56 @@ KiB?](https://devblogs.microsoft.com/oldnewthing/20090611-00/?p=17933).
     the list is loaded or refreshed. For example, select a folder, hold Shift
     and press Enter to navigate to it. Another example: hold Shift and click
     refresh, back or forward.
+  $description:ar: >-
+    الطريقة المستحسنة هي الربط مع برنامج «Everything»، وتجد خطوات تثبيته
+    وضبطه في شرح الإضافة.
+
+    والبديل أن تُحسب الأحجام مباشرة، وقد يكون ذلك بطيئاً، ويمكن تفعيله فقط
+    أثناء الضغط على مفتاح Shift. عندها تظهر أحجام المجلدات إذا كان Shift
+    مضغوطاً عند فتح القائمة أو تحديثها، مثلاً حدّد مجلداً واضغط Enter مع
+    Shift، أو اضغط زر التحديث أو الرجوع أو التقدّم مع Shift.
   $options:
   - disabled: Disabled
   - everything: Enabled via "Everything" integration
   - always: Enabled, calculated manually (can be slow)
   - withShiftKey: Enabled, calculated manually while holding the Shift key
+  $options:ar:
+  - disabled: معطّل
+  - everything: مفعّل عبر برنامج «Everything»
+  - always: مفعّل، بحساب مباشر (قد يكون بطيئاً)
+  - withShiftKey: مفعّل، بحساب مباشر أثناء الضغط على Shift
 - sortSizesMixFolders: true
   $name: Mix files and folders when sorting by size
+  $name:ar: دمج الملفات والمجلدات عند الترتيب حسب الحجم
   $description: >-
     By default, folders are kept separately from files when sorting
+  $description:ar: >-
+    عادةً تبقى المجلدات منفصلة عن الملفات عند الترتيب
 - disableKbOnlySizes: "1"
   $name: File size units
+  $name:ar: وحدات حجم الملفات
   $description: >-
     Older Windows versions always show sizes in KBs, newer Windows 11 versions
     use MB/GB for large files
+  $description:ar: >-
+    إصدارات ويندوز القديمة تعرض الأحجام دائماً بـ KB، وإصدارات ويندوز 11
+    الأحدث تستخدم MB وGB للملفات الكبيرة
   $options:
   - 0: Windows default
   - 1: MB/GB for large files
   - alwaysKb: Always KB
+  $options:ar:
+  - 0: كما في ويندوز
+  - 1: MB وGB للملفات الكبيرة
+  - alwaysKb: KB دائماً
 - useIecTerms: false
   $name: Use IEC terms
+  $name:ar: استخدام وحدات IEC
+  $_advanced: true
   $description: >-
     Use the International Electronic Commission terms, such as KiB instead of KB
+  $description:ar: >-
+    استخدام تسميات اللجنة الكهروتقنية الدولية، مثل KiB بدل KB
 */
 // ==/WindhawkModSettings==
 

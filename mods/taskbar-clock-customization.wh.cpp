@@ -2,7 +2,9 @@
 // @id              taskbar-clock-customization
 // @name            Taskbar Clock Customization
 // @description     Custom date/time format, news feed, weather, performance metrics (upload/download speed, CPU, RAM, GPU, battery), media player info, custom fonts and colors, and more
-// @version         1.8.1-shihab.1
+// @name:ar         تخصيص ساعة شريط المهام
+// @description:ar  شكل التاريخ والوقت كما تريد، مع الطقس والأخبار وسرعة الإنترنت وأداء الجهاز والبطارية وما يُشغَّل الآن، بخطوط وألوان من اختيارك
+// @version         1.8.1-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -156,24 +158,40 @@ styles, such as the font color and size.
 /*
 - ShowSeconds: true
   $name: Show seconds
+  $name:ar: إظهار الثواني
 - TimeFormat: >-
     hh':'mm':'ss tt
   $name: Time format
+  $name:ar: شكل الوقت
   $description: >-
     The format for the %time% pattern. Leave empty for the default format. For
     the syntax, refer to the following page:
 
     https://docs.microsoft.com/en-us/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatex#remarks
+  $description:ar: >-
+    شكل الوقت الذي يظهر مكان %time%. اتركه فارغاً للشكل المعتاد. لطريقة كتابته
+    راجع الصفحة التالية:
+
+    https://docs.microsoft.com/en-us/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatex#remarks
+  $_advanced: true
 - DateFormat: >-
     ddd',' MMM dd yyyy
   $name: Date format
+  $name:ar: شكل التاريخ
   $description: >-
     The format for the %date% pattern. Leave empty for the default format. For
     the syntax, refer to the following page:
 
     https://docs.microsoft.com/en-us/windows/win32/intl/day--month--year--and-era-format-pictures
+  $description:ar: >-
+    شكل التاريخ الذي يظهر مكان %date%. اتركه فارغاً للشكل المعتاد. لطريقة كتابته
+    راجع الصفحة التالية:
+
+    https://docs.microsoft.com/en-us/windows/win32/intl/day--month--year--and-era-format-pictures
+  $_advanced: true
 - DateLocale: ""
   $name: Date locale
+  $name:ar: لغة التاريخ
   $description: >-
     The locale used for formatting the date and the week day. Leave empty for
     the default locale. Use ";" to set a locale per date format, e.g.
@@ -182,55 +200,109 @@ styles, such as the font color and size.
     refer to the following page:
 
     https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
+  $description:ar: >-
+    اللغة المستعملة في كتابة التاريخ واسم اليوم. اتركها فارغة للغة الجهاز.
+    استعمل ";" لتحديد لغة لكل شكل تاريخ، مثل "en-US;fr-FR" لتاريخ إنجليزي في
+    %date% وفرنسي في %date2%. الخانة الفارغة تأخذ لغة الجهاز. لأسماء اللغات
+    (عمود Language tag) راجع الصفحة التالية:
+
+    https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
+  $_advanced: true
 - WeekdayFormat: dddd
   $name: Week day format
+  $name:ar: شكل اسم اليوم
   $description: The format for the %weekday% pattern.
+  $description:ar: شكل اسم اليوم الذي يظهر مكان %weekday%.
   $options:
   - dddd: Full day of the week
   - ddd: Abbreviated day of the week
   - custom: Custom, specified below
+  $options:ar:
+  - dddd: اسم اليوم كاملاً
+  - ddd: اسم اليوم مختصراً
+  - custom: أسماء من اختيارك في الخانة التالية
+  $_advanced: true
 - WeekdayFormatCustom: Sun, Mon, Tue, Wed, Thu, Fri, Sat
   $name: Custom week day format
+  $name:ar: أسماء الأيام من اختيارك
   $description: >-
     A comma-separated list of custom week days, Sunday through Saturday. Used if
     the week day format is set to custom.
+  $description:ar: >-
+    أسماء الأيام مفصولة بفواصل، من الأحد إلى السبت. تُستعمل حين يكون شكل اسم
+    اليوم «أسماء من اختيارك».
+  $_advanced: true
 - TopLine: '%date% | %time%'
   $name: Top line
+  $name:ar: السطر الأول
   $description: >-
     Text to be shown on the first line. Set to "-" for the default value. Refer
     to the mod details for the list of patterns that can be used.
+  $description:ar: >-
+    النص الذي يظهر في السطر الأول. اكتب "-" للنص المعتاد. قائمة الرموز التي
+    يمكن استعمالها في تفاصيل الإضافة.
+  $_advanced: true
 - BottomLine: '%web1%'
   $name: Bottom line
+  $name:ar: السطر الثاني
   $description: >-
     Only shown if the taskbar is large enough. Set to "-" for the default value.
+  $description:ar: >-
+    يظهر فقط إن كان شريط المهام كبيراً بما يكفي. اكتب "-" للنص المعتاد.
+  $_advanced: true
 - MiddleLine: '%weekday%'
   $name: Middle line (Windows 10 only)
+  $name:ar: السطر الأوسط (ويندوز 10 فقط)
   $description: >-
     Only shown if the taskbar is large enough. Set to "-" for the default value.
+  $description:ar: >-
+    يظهر فقط إن كان شريط المهام كبيراً بما يكفي. اكتب "-" للنص المعتاد.
+  $_advanced: true
 - TooltipLine: '%web1_full%'
   $name: Tooltip extra line
+  $name:ar: سطر إضافي عند الوقوف على الساعة
+  $_advanced: true
 - TooltipLineMode: append
   $name: Tooltip line mode
+  $name:ar: طريقة إضافة هذا السطر
   $options:
   - append: Append to default tooltip
   - replace: Replace default tooltip
+  $options:ar:
+  - append: إضافته إلى النص المعتاد
+  - replace: وضعه مكان النص المعتاد
+  $_advanced: true
 - Width: 180
   $name: Clock width (Windows 10 only)
+  $name:ar: عرض الساعة (ويندوز 10 فقط)
+  $_advanced: true
 - Height: 60
   $name: Clock height (Windows 10 only)
+  $name:ar: ارتفاع الساعة (ويندوز 10 فقط)
+  $_advanced: true
 - MaxWidth: 0
   $name: Clock max width (Windows 11 only)
+  $name:ar: أقصى عرض للساعة (ويندوز 11 فقط)
   $description: Set to zero for no limit.
+  $description:ar: اكتب 0 لعرض بلا حد.
+  $_advanced: true
 - TextSpacing: 0
   $name: Line spacing
+  $name:ar: المسافة بين السطور
   $description: >-
     Set to zero for the default system value. A negative value can be used for
     negative spacing.
+  $description:ar: >-
+    اكتب 0 للمسافة المعتادة. الرقم السالب يقرّب السطور من بعضها أكثر.
+  $_advanced: true
 - DataCollection:
   - NetworkMetricsFormat: mbs
     $name: Network metrics format
+    $name:ar: شكل سرعة الإنترنت
     $description: >-
       The format to use for displaying the upload/download transfer rate.
+    $description:ar: >-
+      الوحدة المستعملة لعرض سرعة الرفع والتنزيل.
     $options:
     - mbs: MB/s
     - mbsNumberOnly: MB/s, number only
@@ -238,15 +310,29 @@ styles, such as the font color and size.
     - mbits: MBit/s
     - mbitsNumberOnly: MBit/s, number only
     - mbitsDynamic: MBit/s or KBit/s (dynamic)
+    $options:ar:
+    - mbs: ميغابايت في الثانية (MB/s)
+    - mbsNumberOnly: ميغابايت في الثانية، الرقم فقط
+    - mbsDynamic: ميغابايت أو كيلوبايت في الثانية حسب السرعة
+    - mbits: ميغابت في الثانية (MBit/s)
+    - mbitsNumberOnly: ميغابت في الثانية، الرقم فقط
+    - mbitsDynamic: ميغابت أو كيلوبت في الثانية حسب السرعة
   - NetworkMetricsFixedDecimals: -1
     $name: Network metrics fixed decimal places
+    $name:ar: عدد الخانات العشرية لسرعة الإنترنت
     $description: >-
       Always use this number of decimal places for the upload/download transfer
       rate (-1 means auto/same width).
+    $description:ar: >-
+      عدد الخانات بعد الفاصلة في سرعة الرفع والتنزيل دائماً (-1 يعني تلقائياً
+      بعرض ثابت).
   - DiskMetricsFormat: sameAsNetwork
     $name: Disk metrics format
+    $name:ar: شكل سرعة القرص
     $description: >-
       The format to use for displaying the disk read/write speed.
+    $description:ar: >-
+      الوحدة المستعملة لعرض سرعة القراءة والكتابة على القرص.
     $options:
     - sameAsNetwork: Same as network metrics format
     - mbs: MB/s
@@ -255,17 +341,32 @@ styles, such as the font color and size.
     - mbits: MBit/s
     - mbitsNumberOnly: MBit/s, number only
     - mbitsDynamic: MBit/s or KBit/s (dynamic)
+    $options:ar:
+    - sameAsNetwork: مثل شكل سرعة الإنترنت
+    - mbs: ميغابايت في الثانية (MB/s)
+    - mbsNumberOnly: ميغابايت في الثانية، الرقم فقط
+    - mbsDynamic: ميغابايت أو كيلوبايت في الثانية حسب السرعة
+    - mbits: ميغابت في الثانية (MBit/s)
+    - mbitsNumberOnly: ميغابت في الثانية، الرقم فقط
+    - mbitsDynamic: ميغابت أو كيلوبت في الثانية حسب السرعة
   - DiskMetricsFixedDecimals: -1
     $name: Disk metrics fixed decimal places
+    $name:ar: عدد الخانات العشرية لسرعة القرص
     $description: >-
       Always use this number of decimal places for the disk read/write speed
       (-1 means auto/same width). Ignored when the disk metrics format is set to
       "Same as network metrics format".
+    $description:ar: >-
+      عدد الخانات بعد الفاصلة في سرعة القرص دائماً (-1 يعني تلقائياً بعرض
+      ثابت). لا يُعمل به حين يكون شكل سرعة القرص «مثل شكل سرعة الإنترنت».
   - PercentageFormat: spacePaddingAndSymbol
     $name: Percentage format
+    $name:ar: شكل النسب المئوية
     $description: >-
       The format to use for displaying percentage values (CPU, RAM, GPU,
       battery).
+    $description:ar: >-
+      طريقة عرض النسب المئوية (المعالج والذاكرة وبطاقة الرسوم والبطارية).
     $options:
     - spacePaddingAndSymbol: Pad with spaces, add percent sign
     - spacePadding: Pad with spaces, number only
@@ -273,149 +374,278 @@ styles, such as the font color and size.
         Pad with a single space, number only (for monospaced fonts)
     - zeroPadding: Pad with zeros, number only
     - noPadding: No padding, number only
+    $options:ar:
+    - spacePaddingAndSymbol: محاذاة بمسافات مع علامة النسبة
+    - spacePadding: محاذاة بمسافات، الرقم فقط
+    - singleSpacePadding: >-
+        مسافة واحدة، الرقم فقط (للخطوط متساوية عرض الحروف)
+    - zeroPadding: محاذاة بأصفار، الرقم فقط
+    - noPadding: بلا محاذاة، الرقم فقط
   - UpdateInterval: 1
     $name: Update interval
+    $name:ar: مدة التحديث
     $description: >-
       The update interval, in seconds, of the system performance metrics.
+    $description:ar: >-
+      كل كم ثانية تتحدّث قياسات أداء الجهاز.
   - NetworkAdapterName: ""
     $name: Network adapter name
+    $name:ar: اسم محوّل الشبكة
     $description: >-
       The network adapter to use for upload/download metrics. Leave empty to
       sum all adapters. Partial match is supported. To list adapters, run:
 
       typeperf -qx "Network Interface"
+    $description:ar: >-
+      محوّل الشبكة الذي تُقاس منه سرعة الرفع والتنزيل. اتركه فارغاً لجمع كل
+      المحوّلات. يكفي جزء من الاسم. لعرض المحوّلات شغّل الأمر:
+
+      typeperf -qx "Network Interface"
   - GpuAdapterName: ""
     $name: GPU adapter name
+    $name:ar: اسم بطاقة الرسوم
     $description: >-
       The GPU adapter to use for GPU usage, VRAM, and temperature metrics. Leave
       empty to auto-detect (uses the adapter with the most dedicated VRAM).
       Partial match is supported. To list adapters, run:
 
       wmic path win32_videocontroller get Name
+    $description:ar: >-
+      بطاقة الرسوم التي يُقاس منها استهلاكها وذاكرتها وحرارتها. اتركه فارغاً
+      لاختيارها تلقائياً (البطاقة ذات الذاكرة الأكبر). يكفي جزء من الاسم. لعرض
+      البطاقات شغّل الأمر:
+
+      wmic path win32_videocontroller get Name
   $name: System performance metrics
+  $name:ar: قياسات أداء الجهاز
+  $_advanced: true
 - MediaPlayer:
   - IgnoredPlayers: [""]
     $name: Ignored media players
+    $name:ar: مشغّلات لا تُعرض
     $description: >-
       List of media player names to ignore (case-insensitive, partial match).
       Examples: "Spotify", "VLC". Leave empty to disable.
+    $description:ar: >-
+      أسماء المشغّلات التي لا تُعرض معلوماتها (لا فرق بين الأحرف الكبيرة
+      والصغيرة، ويكفي جزء من الاسم). مثل "Spotify" و"VLC". اتركها فارغة لعرض
+      الجميع.
   - MaxLength: 28
     $name: Maximum info length
+    $name:ar: أقصى طول للمعلومات
     $description: >-
       The maximum number of characters for %media_info%. Longer text is
       truncated with an ellipsis. Set to 0 for no limit.
+    $description:ar: >-
+      أقصى عدد من الأحرف في %media_info%. النص الأطول يُختصر بثلاث نقاط. اكتب 0
+      لطول بلا حد.
   - MediaInfoFormat: "%media_artist% - %media_title%"
     $name: Format when media is playing
+    $name:ar: الشكل أثناء التشغيل
     $description: >-
       The format of %media_info% while media is playing. Can contain any
       patterns, such as %media_artist%, %media_title%, %media_album%, and
       %media_status%.
+    $description:ar: >-
+      شكل %media_info% أثناء تشغيل مقطع. يمكن أن يحوي أي رموز، مثل
+      %media_artist% و%media_title% و%media_album% و%media_status%.
   - NoMediaText: No media
     $name: Format when media is not playing
+    $name:ar: النص حين لا يُشغَّل شيء
     $description: >-
       The text shown for %media_info% when no media is playing. Can contain any
       patterns, such as %date% or %time%.
+    $description:ar: >-
+      النص الذي يظهر مكان %media_info% حين لا يُشغَّل شيء. يمكن أن يحوي أي رموز،
+      مثل %date% أو %time%.
   - RemoveBrackets: false
     $name: Remove brackets from info
+    $name:ar: حذف ما بين الأقواس
     $description: >-
       Remove text in brackets from media info. E.g., "Song (feat. Artist)"
       becomes "Song".
+    $description:ar: >-
+      يحذف النص الموجود بين قوسين من المعلومات، فمثلاً "Song (feat. Artist)"
+      تصير "Song".
   $name: Media player info
+  $name:ar: معلومات ما يُشغَّل الآن
+  $_advanced: true
 - WebContentWeatherLocation: ""
   $name: Weather location
+  $name:ar: موقع الطقس
   $description: >-
     Get weather information for a specific location. Leave empty to use the
     current location. For details, refer to the documentation of wttr.in.
-- WebContentWeatherFormat: "%c \U0001F321\uFE0F%t \U0001F32C\uFE0F%w"
+  $description:ar: >-
+    المدينة أو المكان الذي يُعرض طقسه. اتركه فارغاً لاستعمال موقعك الحالي.
+    للتفاصيل راجع توثيق wttr.in.
+  $_advanced: true
+- WebContentWeatherFormat: "%c \U0001F321️%t \U0001F32C️%w"
   $name: Weather format
+  $name:ar: شكل الطقس
   $description: >-
     The weather information format. For details, refer to the documentation of
     wttr.in.
+  $description:ar: >-
+    شكل معلومات الطقس. للتفاصيل راجع توثيق wttr.in.
+  $_advanced: true
 - WebContentWeatherUnits: autoDetect
   $name: Weather units
+  $name:ar: وحدات الطقس
   $description: >-
     The weather units. For details, refer to the documentation of wttr.in.
+  $description:ar: >-
+    وحدات قياس الطقس. للتفاصيل راجع توثيق wttr.in.
   $options:
   - autoDetect: Auto (default)
   - uscs: USCS (used by default in the US)
   - metric: Metric (SI) (used by default everywhere except the US)
   - metricMsWind: Metric (SI), but show wind speed in m/s
+  $options:ar:
+  - autoDetect: تلقائي (المعتاد)
+  - uscs: الوحدات الأمريكية (فهرنهايت وميل)
+  - metric: الوحدات المترية (مئوية وكيلومتر)
+  - metricMsWind: الوحدات المترية مع سرعة الرياح بالمتر في الثانية
+  $_advanced: true
 - WebContentsItems:
   - - Url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
       $name: Web content URL
+      $name:ar: رابط المحتوى
     - BlockStart: '<item>'
       $name: Web content block start
+      $name:ar: بداية الجزء
       $description: The string in the webpage to start from.
+      $description:ar: النص في الصفحة الذي يبدأ البحث منه.
     - Start: '<title>'
       $name: Web content start
+      $name:ar: بداية المحتوى
       $description: The string just before the content.
+      $description:ar: النص الذي يأتي قبل المحتوى مباشرة.
     - End: '</title>'
       $name: Web content end
+      $name:ar: نهاية المحتوى
       $description: The string just after the content.
+      $description:ar: النص الذي يأتي بعد المحتوى مباشرة.
     - ContentMode: xmlHtml
       $name: Content mode
+      $name:ar: طريقة قراءة المحتوى
       $description: >-
         The plain text mode leaves the content unchanged. Tags or entities such
         as "&amp;" can be stripped/decoded with the respective modes. The XML
         mode requires the content to be well-formed XML. The XML+HTML mode can
         be useful for RSS feeds.
+      $description:ar: >-
+        النص العادي يترك المحتوى كما هو. الطرق الأخرى تحذف الوسوم وتفك الرموز
+        مثل "&amp;". طريقة XML تتطلب محتوى XML سليماً، وطريقة XML+HTML مفيدة
+        لخلاصات الأخبار (RSS).
       $options:
       - "": Plain text
       - html: HTML
       - xml: XML
       - xmlHtml: XML+HTML
+      $options:ar:
+      - "": نص عادي
+      - html: صيغة HTML
+      - xml: صيغة XML
+      - xmlHtml: صيغة XML مع HTML
     - SearchReplace:
       - - Search: ""
+          $name:ar: ابحث عن
         - Replace: ""
+          $name:ar: استبدل بـ
       $name: Content search/replace
+      $name:ar: بحث واستبدال في المحتوى
       $description: >-
         Regular expression-based search and replace operations applied to the
         extracted content.
+      $description:ar: >-
+        عمليات بحث واستبدال بالتعابير النمطية (regex) تُطبَّق على المحتوى
+        المستخرج.
     - MaxLength: 28
       $name: Web content maximum length
+      $name:ar: أقصى طول للمحتوى
       $description: Longer text is truncated with an ellipsis.
+      $description:ar: النص الأطول يُختصر بثلاث نقاط.
   $name: Web content items
+  $name:ar: محتوى من الإنترنت
   $description: >-
     Used to fetch the data displayed in place of the %web<n>% and %web<n>_full%
     patterns, where <n> is the web content item number.
+  $description:ar: >-
+    يُستعمل لجلب ما يظهر مكان %web<n>% و%web<n>_full%، حيث <n> رقم العنصر.
+  $_advanced: true
 - WebContentsUpdateInterval: 10
   $name: Web content update interval
+  $name:ar: مدة تحديث محتوى الإنترنت
   $description: >-
     The update interval, in minutes, of the weather and the web content items.
+  $description:ar: >-
+    كل كم دقيقة يتحدّث الطقس ومحتوى الإنترنت.
+  $_advanced: true
 - TimeZones: ["Eastern Standard Time"]
   $name: Time zones
+  $name:ar: المناطق الزمنية
   $description: >-
     The list of time zones for patterns such as %time_tz1%. For a full list of
     supported time zones, run the following PowerShell command:
 
     Get-TimeZone -ListAvailable
+  $description:ar: >-
+    قائمة المناطق الزمنية المستعملة في رموز مثل %time_tz1%. لعرض كل المناطق
+    المدعومة شغّل أمر PowerShell التالي:
+
+    Get-TimeZone -ListAvailable
+  $_advanced: true
 - TimeStyle:
   - Hidden: false
+    $name:ar: إخفاء السطر
+    $_advanced: true
   - TextColor: ""
     $name: Text color
+    $name:ar: لون النص
     $description: >-
       Can be a color name (Red, Black, ...) or an RGB/ARGB color code (like
       #00FF00, #CC00FF00, ...).
+    $description:ar: >-
+      اسم لون بالإنجليزية (Red أو Black...) أو رمز لون مثل #00FF00 أو
+      #CC00FF00.
   - TextAlignment: ""
     $name: Text alignment
+    $name:ar: محاذاة النص
     $options:
     - "": Default
     - Right: Right
     - Center: Center
     - Left: Left
     - Justify: Justified
+    $options:ar:
+    - "": المعتادة
+    - Right: يمين
+    - Center: وسط
+    - Left: يسار
+    - Justify: ضبط من الطرفين
+    $_advanced: true
   - FontSize: 0
     $name: Font size
+    $name:ar: حجم الخط
     $description: Set to zero for the default size.
+    $description:ar: اكتب 0 للحجم المعتاد.
   - FontFamily: ""
     $name: Font family
+    $name:ar: نوع الخط
     $description: >-
       For a list of fonts that are shipped with Windows 11, refer to the
       following page:
 
       https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
+    $description:ar: >-
+      لقائمة الخطوط التي تأتي مع ويندوز 11 راجع الصفحة التالية:
+
+      https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
+    $_advanced: true
   - FontWeight: ""
     $name: Font weight
+    $name:ar: سماكة الخط
     $options:
     - "": Default
     - Thin: Thin
@@ -429,16 +659,39 @@ styles, such as the font color and size.
     - ExtraBold: Extra bold
     - Black: Black
     - ExtraBlack: Extra black
+    $options:ar:
+    - "": المعتادة
+    - Thin: رفيع جداً
+    - ExtraLight: رفيع
+    - Light: خفيف
+    - SemiLight: خفيف قليلاً
+    - Normal: عادي
+    - Medium: متوسط
+    - SemiBold: عريض قليلاً
+    - Bold: عريض
+    - ExtraBold: عريض جداً
+    - Black: ثقيل
+    - ExtraBlack: ثقيل جداً
+    $_advanced: true
   - FontStyle: ""
     $name: Font style
+    $name:ar: ميلان الخط
     $options:
     - "": Default
     - Normal: Normal
     - Oblique: Oblique
     - Italic: Italic
+    $options:ar:
+    - "": المعتاد
+    - Normal: بلا ميلان
+    - Oblique: منحرف
+    - Italic: مائل
+    $_advanced: true
   - FontStretch: ""
     $name: Font stretch
+    $name:ar: عرض الحروف
     $description: Only supported by some fonts.
+    $description:ar: تدعمه بعض الخطوط فقط.
     $options:
     - "": Default
     - Undefined: Undefined
@@ -451,42 +704,86 @@ styles, such as the font color and size.
     - Expanded: Expanded
     - ExtraExpanded: Extra expanded
     - UltraExpanded: Ultra expanded
+    $options:ar:
+    - "": المعتاد
+    - Undefined: غير محدد
+    - UltraCondensed: ضيق إلى أقصى حد
+    - ExtraCondensed: ضيق جداً
+    - Condensed: ضيق
+    - SemiCondensed: ضيق قليلاً
+    - Normal: عادي
+    - SemiExpanded: واسع قليلاً
+    - Expanded: واسع
+    - ExtraExpanded: واسع جداً
+    - UltraExpanded: واسع إلى أقصى حد
+    $_advanced: true
   - CharacterSpacing: 0
     $name: Character spacing
+    $name:ar: المسافة بين الحروف
     $description: Can be a positive or a negative number.
+    $description:ar: يمكن أن يكون رقماً موجباً أو سالباً.
+    $_advanced: true
   - LineHeight: 0
     $name: Line height
+    $name:ar: ارتفاع السطر
     $description: >-
       The line height in pixels, useful when the line contains multiple lines of
       text (using the %newline% pattern). Set to zero for the default value.
+    $description:ar: >-
+      ارتفاع السطر بالبكسل، مفيد حين يحوي السطر عدة أسطر (باستعمال %newline%).
+      اكتب 0 للقيمة المعتادة.
+    $_advanced: true
   $name: Top line style (Windows 11 version 22H2 and newer)
+  $name:ar: شكل السطر الأول (ويندوز 11 إصدار 22H2 وما بعده)
 - DateStyle:
   - Hidden: false
+    $name:ar: إخفاء السطر
   - TextColor: ""
     $name: Text color
+    $name:ar: لون النص
     $description: >-
       Can be a color name (Red, Black, ...) or an RGB/ARGB color code (like
       #00FF00, #CC00FF00, ...).
+    $description:ar: >-
+      اسم لون بالإنجليزية (Red أو Black...) أو رمز لون مثل #00FF00 أو
+      #CC00FF00.
   - TextAlignment: ""
     $name: Text alignment
+    $name:ar: محاذاة النص
     $options:
     - "": Default
     - Right: Right
     - Center: Center
     - Left: Left
     - Justify: Justified
+    $options:ar:
+    - "": المعتادة
+    - Right: يمين
+    - Center: وسط
+    - Left: يسار
+    - Justify: ضبط من الطرفين
+    $_advanced: true
   - FontSize: 0
     $name: Font size
+    $name:ar: حجم الخط
     $description: Set to zero for the default size.
+    $description:ar: اكتب 0 للحجم المعتاد.
   - FontFamily: ""
     $name: Font family
+    $name:ar: نوع الخط
     $description: >-
       For a list of fonts that are shipped with Windows 11, refer to the
       following page:
 
       https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
+    $description:ar: >-
+      لقائمة الخطوط التي تأتي مع ويندوز 11 راجع الصفحة التالية:
+
+      https://learn.microsoft.com/en-us/typography/fonts/windows_11_font_list
+    $_advanced: true
   - FontWeight: ""
     $name: Font weight
+    $name:ar: سماكة الخط
     $options:
     - "": Default
     - Thin: Thin
@@ -500,16 +797,39 @@ styles, such as the font color and size.
     - ExtraBold: Extra bold
     - Black: Black
     - ExtraBlack: Extra black
+    $options:ar:
+    - "": المعتادة
+    - Thin: رفيع جداً
+    - ExtraLight: رفيع
+    - Light: خفيف
+    - SemiLight: خفيف قليلاً
+    - Normal: عادي
+    - Medium: متوسط
+    - SemiBold: عريض قليلاً
+    - Bold: عريض
+    - ExtraBold: عريض جداً
+    - Black: ثقيل
+    - ExtraBlack: ثقيل جداً
+    $_advanced: true
   - FontStyle: ""
     $name: Font style
+    $name:ar: ميلان الخط
     $options:
     - "": Default
     - Normal: Normal
     - Oblique: Oblique
     - Italic: Italic
+    $options:ar:
+    - "": المعتاد
+    - Normal: بلا ميلان
+    - Oblique: منحرف
+    - Italic: مائل
+    $_advanced: true
   - FontStretch: ""
     $name: Font stretch
+    $name:ar: عرض الحروف
     $description: Only supported by some fonts.
+    $description:ar: تدعمه بعض الخطوط فقط.
     $options:
     - "": Default
     - Undefined: Undefined
@@ -522,20 +842,47 @@ styles, such as the font color and size.
     - Expanded: Expanded
     - ExtraExpanded: Extra expanded
     - UltraExpanded: Ultra expanded
+    $options:ar:
+    - "": المعتاد
+    - Undefined: غير محدد
+    - UltraCondensed: ضيق إلى أقصى حد
+    - ExtraCondensed: ضيق جداً
+    - Condensed: ضيق
+    - SemiCondensed: ضيق قليلاً
+    - Normal: عادي
+    - SemiExpanded: واسع قليلاً
+    - Expanded: واسع
+    - ExtraExpanded: واسع جداً
+    - UltraExpanded: واسع إلى أقصى حد
+    $_advanced: true
   - CharacterSpacing: 0
     $name: Character spacing
+    $name:ar: المسافة بين الحروف
     $description: Can be a positive or a negative number.
+    $description:ar: يمكن أن يكون رقماً موجباً أو سالباً.
+    $_advanced: true
   - LineHeight: 0
     $name: Line height
+    $name:ar: ارتفاع السطر
     $description: >-
       The line height in pixels, useful when the line contains multiple lines of
       text (using the %newline% pattern). Set to zero for the default value.
+    $description:ar: >-
+      ارتفاع السطر بالبكسل، مفيد حين يحوي السطر عدة أسطر (باستعمال %newline%).
+      اكتب 0 للقيمة المعتادة.
+    $_advanced: true
   $name: Bottom line style (Windows 11 version 22H2 and newer)
+  $name:ar: شكل السطر الثاني (ويندوز 11 إصدار 22H2 وما بعده)
 - oldTaskbarOnWin11: false
   $name: Customize the old taskbar on Windows 11
+  $name:ar: تخصيص شريط المهام القديم في ويندوز 11
   $description: >-
     Enable this option to customize the old taskbar on Windows 11 (if using
     ExplorerPatcher or a similar tool).
+  $description:ar: >-
+    فعّل هذا الخيار لتخصيص شريط المهام القديم في ويندوز 11 (إن كنت تستعمل
+    ExplorerPatcher أو أداة مشابهة).
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

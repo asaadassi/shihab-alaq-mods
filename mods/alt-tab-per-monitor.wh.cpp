@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              alt-tab-per-monitor
 // @name            Alt+Tab per monitor
+// @name:ar         Alt+Tab لكل شاشة
 // @description     Pressing Alt+Tab shows all open windows on the primary display. This mod shows only the windows on the monitor where the cursor is.
-// @version         1.2-shihab.1
+// @description:ar  يعرض Alt+Tab نوافذ الشاشة التي عليها المؤشر فقط، بدل كل النوافذ على الشاشة الرئيسية.
+// @version         1.2-shihab.2
 // @author          L3r0y
 // @github          https://github.com/L3r0yThingz
 // @include         explorer.exe
@@ -43,33 +45,56 @@ Both Alt+Tab and Win+Alt+Tab can be independently configured with:
 /*
 - altTabLocation: cursor
   $name: "Alt+Tab: Display location"
+  $name:ar: الشاشة التي يظهر عليها Alt+Tab
   $description: Choose which monitor the Alt+Tab switcher appears on
+  $description:ar: اختر الشاشة التي تظهر عليها قائمة النوافذ عند ضغط Alt+Tab.
   $options:
   - cursor: Monitor where cursor is located
   - primary: Primary monitor
+  $options:ar:
+  - cursor: الشاشة التي عليها المؤشر
+  - primary: الشاشة الرئيسية
 - altTabWindows: cursorMonitor
   $name: "Alt+Tab: Windows to show"
+  $name:ar: النوافذ التي يعرضها Alt+Tab
   $description: Choose which windows to show when using Alt+Tab
+  $description:ar: اختر أي النوافذ تظهر عند ضغط Alt+Tab.
   $options:
   - cursorMonitor: Windows from the monitor where cursor is located
   - allMonitors: Windows from all monitors
   - cursorMonitorExceptPrimary: >-
       Windows from cursor's monitor, but all windows when on primary
+  $options:ar:
+  - cursorMonitor: نوافذ الشاشة التي عليها المؤشر
+  - allMonitors: نوافذ كل الشاشات
+  - cursorMonitorExceptPrimary: نوافذ شاشة المؤشر، وكل النوافذ على الشاشة الرئيسية
 - winAltTabLocation: primary
   $name: "Win+Alt+Tab: Display location"
+  $name:ar: الشاشة التي يظهر عليها Win+Alt+Tab
   $description: >-
     Choose which monitor the Alt+Tab switcher appears on when using Win+Alt+Tab
+  $description:ar: اختر الشاشة التي تظهر عليها قائمة النوافذ عند ضغط Win+Alt+Tab.
   $options:
   - primary: Primary monitor
   - cursor: Monitor where cursor is located
+  $options:ar:
+  - primary: الشاشة الرئيسية
+  - cursor: الشاشة التي عليها المؤشر
+  $_advanced: true
 - winAltTabWindows: allMonitors
   $name: "Win+Alt+Tab: Windows to show"
+  $name:ar: النوافذ التي يعرضها Win+Alt+Tab
   $description: Choose which windows to show when using Win+Alt+Tab
+  $description:ar: اختر أي النوافذ تظهر عند ضغط Win+Alt+Tab.
   $options:
   - allMonitors: Windows from all monitors
   - cursorMonitor: Windows from the monitor where cursor is located
   - cursorMonitorExceptPrimary: >-
       Windows from cursor's monitor, but all windows when on primary
+  $options:ar:
+  - allMonitors: نوافذ كل الشاشات
+  - cursorMonitor: نوافذ الشاشة التي عليها المؤشر
+  - cursorMonitorExceptPrimary: نوافذ شاشة المؤشر، وكل النوافذ على الشاشة الرئيسية
 */
 // ==/WindhawkModSettings==
 

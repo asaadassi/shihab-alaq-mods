@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              dynamic-island-for-windows
 // @name            Dynamic Island for Windows
+// @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
-// @version         1.3.1-shihab.1
+// @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
+// @version         1.3.1-shihab.2
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe
@@ -118,6 +120,15 @@ We love community contributions! To ensure high-quality updates, please follow t
       - bottom-center: Bottom Center
       - bottom-left: Bottom Left
       - bottom-right: Bottom Right
+    $name:ar: الموضع
+    $description:ar: مكان ظهور الجزيرة على الشاشة.
+    $options:ar:
+      - top-center: أعلى الوسط
+      - top-left: أعلى اليسار
+      - top-right: أعلى اليمين
+      - bottom-center: أسفل الوسط
+      - bottom-left: أسفل اليسار
+      - bottom-right: أسفل اليمين
   - TargetMonitor: primary
     $name: Target Monitor
     $description: Select the screen to display the island. If a display isn't found, it safely falls back to the Primary Monitor.(Extra Displays are given even if they don't exist because windhawk settings are static)
@@ -129,21 +140,47 @@ We love community contributions! To ensure high-quality updates, please follow t
       - '4': Display 4
       - '5': Display 5
       - 'follow': Follow Mouse (Active Monitor)
+    $_advanced: true
+    $name:ar: الشاشة
+    $description:ar: الشاشة التي تظهر عليها الجزيرة. إن لم توجد الشاشة المختارة تظهر على الشاشة الرئيسية. تظهر شاشات إضافية في القائمة حتى لو لم تكن موصولة، لأن خيارات البرنامج ثابتة.
+    $options:ar:
+      - 'primary': الشاشة الرئيسية
+      - '1': الشاشة 1
+      - '2': الشاشة 2
+      - '3': الشاشة 3
+      - '4': الشاشة 4
+      - '5': الشاشة 5
+      - 'follow': تتبع الفأرة (الشاشة النشطة)
   - OffsetX: 0
     $name: Offset X
     $description: Adjust the horizontal position (in pixels). Positive values move it right, negative values move it left.
+    $_advanced: true
+    $name:ar: الإزاحة الأفقية
+    $description:ar: تحريك الجزيرة أفقياً بالبكسل. القيم الموجبة تحرّكها يميناً والسالبة يساراً.
   - OffsetY: 0
     $name: Offset Y
     $description: Adjust the vertical position (in pixels). Positive values move it down, negative values move it up. Applies to every state unless the separate expanded offset below is turned on, in which case this becomes the collapsed/idle offset.
+    $_advanced: true
+    $name:ar: الإزاحة العمودية
+    $description:ar: تحريك الجزيرة عمودياً بالبكسل. القيم الموجبة تحرّكها للأسفل والسالبة للأعلى. تنطبق على كل الحالات، إلا إذا فعّلت الإزاحة المنفصلة عند التوسيع، فتصبح عندها إزاحة الحالة المصغّرة.
   - SeparateExpandedOffsetY: false
     $name: Use a separate Offset Y when expanded
     $description: Lets the island sit at one height while collapsed and a different one while expanded. Useful for tucking the idle pill up near the screen edge while keeping the expanded dashboard somewhere comfortable to interact with.
+    $_advanced: true
+    $name:ar: إزاحة عمودية مختلفة عند التوسيع
+    $description:ar: تجعل الجزيرة على ارتفاع وهي مصغّرة وعلى ارتفاع آخر وهي موسّعة، فتبقى صغيرة قرب حافة الشاشة وتظهر اللوحة الموسّعة في مكان مريح للاستعمال.
   - OffsetYExpanded: 0
     $name: Offset Y (expanded)
     $description: Vertical position in pixels while the island is expanded. Only used when the separate expanded offset above is on. The island eases between this and Offset Y as it expands and collapses, so the two never snap.
+    $_advanced: true
+    $name:ar: الإزاحة العمودية عند التوسيع
+    $description:ar: موضع الجزيرة العمودي بالبكسل وهي موسّعة. يُستعمل فقط عند تفعيل الإزاحة المنفصلة أعلاه، وتنتقل الجزيرة بين الموضعين بسلاسة.
   - BorderMergedMode: false
     $name: Border-Merged Mode
     $description: Attach the island flush to the top edge of the monitor without a floating gap.
+    $_advanced: true
+    $name:ar: الالتصاق بحافة الشاشة
+    $description:ar: تلصق الجزيرة بالحافة العليا للشاشة بلا فراغ.
   - ShapeStyle: default
     $name: Island Shape Style
     $description: Change the overall shape of the island (Pill, Windows 11, or macOS Notch).
@@ -151,6 +188,12 @@ We love community contributions! To ensure high-quality updates, please follow t
       - default: Default (Apple Pill)
       - w11: Windows 11 (Rounded Box)
       - notch: macOS Notch (Top Edge Flush)
+    $name:ar: شكل الجزيرة
+    $description:ar: الشكل العام للجزيرة (حبة دائرية، أو مربع ويندوز 11، أو نتوء ماك).
+    $options:ar:
+      - default: افتراضي (حبة دائرية)
+      - w11: ويندوز 11 (مربع بزوايا مستديرة)
+      - notch: نتوء ماك (ملتصق بالحافة العليا)
   - SizeScale: '1.0'
     $name: Size scale
     $description: Makes the entire island and its contents larger or smaller.
@@ -162,17 +205,36 @@ We love community contributions! To ensure high-quality updates, please follow t
       - '1.8': 1.8x
       - '2.0': 2.0x
       - '2.5': 2.5x
+    $name:ar: الحجم
+    $description:ar: تكبير الجزيرة وكل ما فيها أو تصغيرها.
+    $options:ar:
+      - '0.8': أصغر (0.8)
+      - '1.0': عادي (1.0)
+      - '1.2': أكبر قليلاً (1.2)
+      - '1.5': كبير (1.5)
+      - '1.8': كبير جداً (1.8)
+      - '2.0': ضعف الحجم (2.0)
+      - '2.5': أكبر حجم (2.5)
   - AutoDpiScale: true
     $name: Auto DPI scaling
     $description: Automatically scales the island to match your monitor's DPI. Recommended for 4K screens.
+    $_advanced: true
+    $name:ar: الملاءمة التلقائية لدقة الشاشة
+    $description:ar: تكبّر الجزيرة تلقائياً لتناسب دقة الشاشة. يُنصح به لشاشات 4K.
   $name: Appearance & Position
+  $name:ar: المظهر والموضع
 - Behavior:
   - AlwaysOnTop: true
     $name: Always on top
     $description: Keeps the island above all other windows. Turn this off if it blocks other apps.
+    $_advanced: true
+    $name:ar: فوق كل النوافذ
+    $description:ar: تبقي الجزيرة فوق كل النوافذ. أطفئه إن كانت تغطي برامج أخرى.
   - ExpandOnHover: true
     $name: Expand on hover
     $description: Expand the island automatically when hovered. If disabled, click to expand.
+    $name:ar: التوسيع عند مرور الفأرة
+    $description:ar: تتوسّع الجزيرة تلقائياً حين تمر الفأرة فوقها. إن أطفأته فانقر عليها لتوسيعها.
   - AutoHideIdleSeconds: '0'
     $name: Auto-hide island (all states)
     $description: Hide the island (including idle, media, and other states) after this many seconds of inactivity. 0 to disable.
@@ -183,13 +245,29 @@ We love community contributions! To ensure high-quality updates, please follow t
       - '10': Hide after 10 seconds
       - '30': Hide after 30 seconds
       - '60': Hide after 60 seconds
+    $_advanced: true
+    $name:ar: الإخفاء التلقائي للجزيرة
+    $description:ar: تخفي الجزيرة في كل حالاتها بعد هذا العدد من الثواني بلا نشاط. 0 لعدم الإخفاء.
+    $options:ar:
+      - '-1': إخفاء فوري
+      - '0': بلا إخفاء (افتراضي)
+      - '5': بعد 5 ثوانٍ
+      - '10': بعد 10 ثوانٍ
+      - '30': بعد 30 ثانية
+      - '60': بعد 60 ثانية
   - AutoHideFullscreen: true
     $name: Hide on full screen
     $description: Automatically hide the island when playing a video or app in full screen mode.
+    $name:ar: الإخفاء في ملء الشاشة
+    $description:ar: تختفي الجزيرة تلقائياً عند تشغيل فيديو أو برنامج بملء الشاشة.
   - UnhideOnHover: true
     $name: Unhide on hover
     $description: Allow the hidden island to reappear when you hover your mouse over it.
+    $_advanced: true
+    $name:ar: الظهور عند مرور الفأرة
+    $description:ar: تعود الجزيرة المخفية للظهور حين تمر الفأرة فوق مكانها.
   $name: Behavior & Visibility
+  $name:ar: السلوك والظهور
 - Animations:
   - TargetFPS: auto
     $name: Refresh rate / FPS
@@ -204,6 +282,19 @@ We love community contributions! To ensure high-quality updates, please follow t
       - '240': 240 FPS
       - '360': 360 FPS (Ultra Smooth)
       - '500': 500 FPS (Maximum / Uncapped)
+    $_advanced: true
+    $name:ar: سلاسة الحركة (إطار في الثانية)
+    $description:ar: عدد إطارات الحركة في الثانية. اختر «تلقائي» ليوافق سرعة تحديث الشاشة، أو اختر رقماً ثابتاً.
+    $options:ar:
+      - auto: تلقائي (حسب الشاشة)
+      - '60': 60 (موفّر)
+      - '90': 90
+      - '120': 120
+      - '144': 144
+      - '165': 165
+      - '240': 240
+      - '360': 360 (سلس جداً)
+      - '500': 500 (أقصى حد)
   - AnimationStyle: default
     $name: Animation bounciness / style
     $description: Control the spring physics and feel of the animation.
@@ -212,6 +303,14 @@ We love community contributions! To ensure high-quality updates, please follow t
       - default: Default (Balanced Apple-like spring)
       - bouncy: Bouncy (Dynamic elastic spring)
       - snappy: Snappy (High stiffness, quick settle)
+    $_advanced: true
+    $name:ar: أسلوب الحركة
+    $description:ar: طريقة حركة الجزيرة عند التوسيع والتصغير، ومقدار ارتدادها.
+    $options:ar:
+      - smooth: ناعم (بلا ارتداد)
+      - default: افتراضي (ارتداد خفيف)
+      - bouncy: مرن (ارتداد واضح)
+      - snappy: سريع الاستقرار
   - AnimationSpeed: normal
     $name: Animation speed
     $description: How fast the island expands and collapses.
@@ -222,7 +321,18 @@ We love community contributions! To ensure high-quality updates, please follow t
       - fast: Fast (1.35x)
       - very-fast: Very Fast (1.65x)
       - ultra-fast: Ultra Fast (2.0x)
+    $_advanced: true
+    $name:ar: سرعة الحركة
+    $description:ar: سرعة توسّع الجزيرة وتصغيرها.
+    $options:ar:
+      - very-slow: بطيئة جداً (0.5x)
+      - slow: بطيئة (0.75x)
+      - normal: عادية (1.0x)
+      - fast: سريعة (1.35x)
+      - very-fast: سريعة جداً (1.65x)
+      - ultra-fast: الأسرع (2.0x)
   $name: Animations & Performance
+  $name:ar: الحركة والأداء
 - Themes:
   - ThemePreset: obsidian
     $name: Theme preset
@@ -237,12 +347,30 @@ We love community contributions! To ensure high-quality updates, please follow t
       - plum: Plum - muted mauve
       - porcelain: Porcelain - light theme
       - custom: Custom Colors (Use Hex Below)
+    $name:ar: نمط الألوان
+    $description:ar: اختر مجموعة ألوان جاهزة، أو «ألوان مخصصة» لاستعمال ألوانك في الخيارات الإضافية.
+    $options:ar:
+      - obsidian: أسود داكن (افتراضي)
+      - graphite: رمادي داكن
+      - slate: رمادي مزرق
+      - nord: أزرق ثلجي
+      - evergreen: أخضر داكن
+      - espresso: بني دافئ
+      - plum: بنفسجي هادئ
+      - porcelain: فاتح
+      - custom: ألوان مخصصة
   - PillOpacity: 96
     $name: Pill transparency
     $description: 35 to 100. Lower values make the island more see-through.
+    $_advanced: true
+    $name:ar: عتامة الجزيرة
+    $description:ar: من 35 إلى 100. القيم الأقل تجعل الجزيرة أكثر شفافية.
   - TintIntensity: 72
     $name: Background tint intensity
     $description: 0 to 100. Controls how dark the background tint behind the island is.
+    $_advanced: true
+    $name:ar: قتامة الخلفية
+    $description:ar: من 0 إلى 100. مقدار قتامة اللون خلف الجزيرة.
   - BackdropMaterial: none
     $name: Backdrop material (real Windows blur)
     $description: Paints genuine Windows blur or acrylic behind the island so your desktop and windows show through it. Acrylic adds the frosted noise texture Windows uses for its own surfaces. Requires Windows 10 1803 or newer; on unsupported builds the island simply stays opaque. When this is on, use Backdrop fill opacity below to control how much of the blur comes through.
@@ -250,24 +378,49 @@ We love community contributions! To ensure high-quality updates, please follow t
       - none: Off (solid background)
       - blur: Blur
       - acrylic: Acrylic (frosted)
+    $_advanced: true
+    $name:ar: تمويه الخلفية
+    $description:ar: يظهر ما خلف الجزيرة مموّهاً، و«الزجاج المصنفر» يضيف ملمساً كالذي يستعمله ويندوز. يحتاج ويندوز 10 إصدار 1803 أو أحدث، وإلا تبقى الخلفية مصمتة. عند تفعيله تتحكم «عتامة الخلفية فوق التمويه» بمقدار ما يظهر منه.
+    $options:ar:
+      - none: بلا تمويه (خلفية مصمتة)
+      - blur: تمويه
+      - acrylic: زجاج مصنفر
   - BackdropFillOpacity: 45
     $name: Backdrop fill opacity
     $description: 0 to 100. Only used when a Backdrop material is enabled. How opaque the island's own background stays on top of the blur - lower values let more of the blurred desktop through. Has no effect when the backdrop is Off.
+    $_advanced: true
+    $name:ar: عتامة الخلفية فوق التمويه
+    $description:ar: من 0 إلى 100. يعمل فقط مع تمويه الخلفية. القيم الأقل تُظهر أكثر مما خلف الجزيرة.
   - BackdropTint: 55
     $name: Acrylic tint strength
     $description: 0 to 100. Only used by the Acrylic backdrop. How strongly your background colour tints the frosted layer.
+    $_advanced: true
+    $name:ar: قوة لون الزجاج المصنفر
+    $description:ar: من 0 إلى 100. يعمل فقط مع الزجاج المصنفر. مقدار تلوين الطبقة المصنفرة بلون الخلفية.
   - MaterialDepth: true
     $name: Depth shading
     $description: Adds soft downward shading and the accent wash so the island has depth instead of looking like one flat fill. No edge highlights or rim lighting are involved. Turn off for a completely flat look.
+    $_advanced: true
+    $name:ar: تظليل العمق
+    $description:ar: يضيف ظلاً ناعماً ولمسة لونية تعطي الجزيرة عمقاً بدل أن تبدو مسطحة. أطفئه لمظهر مسطح تماماً.
   - DropShadow: true
     $name: Soft drop shadow
     $description: Casts a soft shadow beneath the island to lift it off the desktop.
+    $_advanced: true
+    $name:ar: ظل ناعم
+    $description:ar: يضع ظلاً ناعماً تحت الجزيرة فتبدو مرفوعة عن سطح المكتب.
   - AccentBloom: 100
     $name: Accent bloom intensity
     $description: 0 to 200. Strength of the soft accent-coloured wash bleeding in from the top of the island. Driven by album art when the accent mode is Auto. Set to 0 to remove it.
+    $_advanced: true
+    $name:ar: قوة التوهّج اللوني
+    $description:ar: من 0 إلى 200. قوة التوهج اللوني الناعم من أعلى الجزيرة. يأخذ لونه من غلاف الأغنية حين يكون لون التمييز تلقائياً. 0 لإزالته.
   - TextScale: 100
     $name: Text size
     $description: 70 to 160. Scales all island text independently of the overall Size scale, so you can keep the island compact while making the clock and labels easier to read.
+    $_advanced: true
+    $name:ar: حجم النص
+    $description:ar: من 70 إلى 160. يكبّر نصوص الجزيرة وحدها دون تغيير حجمها، فتبقى صغيرة مع ساعة ونصوص أسهل قراءة.
   - AccentColorMode: auto
     $name: Accent color mode
     $description: How the glowing accent color is chosen. Auto extracts it from album art.
@@ -275,21 +428,43 @@ We love community contributions! To ensure high-quality updates, please follow t
       - auto: Auto, from album art
       - system: System (Device Accent)
       - custom: Custom hex
+    $_advanced: true
+    $name:ar: لون التمييز
+    $description:ar: طريقة اختيار لون التوهج. «تلقائي» يأخذه من غلاف الأغنية.
+    $options:ar:
+      - auto: تلقائي (من غلاف الأغنية)
+      - system: لون النظام
+      - custom: لون مخصص
   - CustomAccentHex: "#4cc9f0"
     $name: Custom accent hex
     $description: The hex color to use when the accent mode is set to Custom.
+    $_advanced: true
+    $name:ar: لون التمييز المخصص
+    $description:ar: رمز اللون المستعمل حين يكون لون التمييز مخصصاً.
   - CalendarAccent: red
     $name: Calendar accent color
     $description: Accent color used in the calendar view for month name, weekends, and today's date highlight.
     $options:
       - red: Default Red
       - system: System (Device Accent)
+    $_advanced: true
+    $name:ar: لون التقويم
+    $description:ar: اللون المستعمل في التقويم لاسم الشهر وأيام العطلة وتمييز اليوم.
+    $options:ar:
+      - red: أحمر (افتراضي)
+      - system: لون النظام
   - ClockAccentGlow: true
     $name: Show clock background circle/glow
     $description: Display the soft accent circle/glow behind the time in the expanded clock view. Turn off for a clean, minimal clock without background glow.
+    $_advanced: true
+    $name:ar: دائرة متوهجة خلف الساعة
+    $description:ar: يُظهر دائرة متوهجة ناعمة خلف الوقت في عرض الساعة الموسّع. أطفئه لساعة بسيطة بلا توهج.
   - FontFamily: ""
     $name: Font family
     $description: Custom font family for island text (e.g. Segoe UI, Arial, Aptos, Consolas). Leave empty for system default.
+    $_advanced: true
+    $name:ar: الخط
+    $description:ar: اسم خط لنصوص الجزيرة (مثل Segoe UI أو Arial). اتركه فارغاً لخط النظام.
   - ContourBorderMode: default
     $name: Contour border
     $description: Choose the island's border style. Default uses the theme's matching border, Auto extracts the border color from album art, and Borderless removes all outer border outlines.
@@ -297,94 +472,186 @@ We love community contributions! To ensure high-quality updates, please follow t
       - default: Default
       - auto: Auto (From album art)
       - borderless: Borderless
+    $_advanced: true
+    $name:ar: الإطار
+    $description:ar: شكل إطار الجزيرة. «افتراضي» يأخذ إطار نمط الألوان، و«تلقائي» يأخذ لونه من غلاف الأغنية، و«بلا إطار» يزيله.
+    $options:ar:
+      - default: افتراضي
+      - auto: تلقائي (من غلاف الأغنية)
+      - borderless: بلا إطار
   - ContourBorderHex: "#1E1E22"
     $name: Contour border hex color
     $description: 'Hex color for the island contour stroke. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $_advanced: true
+    $name:ar: لون الإطار
+    $description:ar: رمز لون إطار الجزيرة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   - PillBgColor: "#08080A"
     $name: Pill background color
     $description: 'Hex color for the island background. Accepts 3, 4, 6 or 8 hex digits, so use the 8-digit RRGGBBAA form for a translucent background (for example 0D0D0FB0) while keeping the text and icons opaque. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $_advanced: true
+    $name:ar: لون خلفية الجزيرة
+    $description:ar: رمز لون خلفية الجزيرة من 3 أو 4 أو 6 أو 8 خانات. الصيغة ذات 8 خانات تجعل الخلفية شفافة جزئياً مع بقاء النص والأيقونات واضحة (مثل 0D0D0FB0). تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   - TextPrimaryColor: "#FFFFFF"
     $name: Primary text color
     $description: 'Accessible hex color for titles and main text. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $_advanced: true
+    $name:ar: لون النص الرئيسي
+    $description:ar: رمز لون العناوين والنص الرئيسي. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   - TextSecondaryColor: "#9B9BA5"
     $name: Secondary text color
     $description: 'Accessible hex color for artist names and muted labels. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $_advanced: true
+    $name:ar: لون النص الثانوي
+    $description:ar: رمز لون أسماء الفنانين والنصوص الخافتة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   $name: Colors & Theming
+  $name:ar: الألوان والمظهر
 - Indicators:
   - PrivacyDots: true
     $name: Show privacy indicators (Mic & Camera)
     $description: Master toggle to display the iOS-style privacy dots when microphone or camera is in use.
+    $_advanced: true
+    $name:ar: مؤشرات الخصوصية (الميكروفون والكاميرا)
+    $description:ar: يُظهر نقاطاً صغيرة حين يكون الميكروفون أو الكاميرا قيد الاستعمال.
   - PrivacyDotsMic: true
     $name: Show microphone indicator (Orange dot)
     $description: Show the orange dot when microphone is in use. Turn off if background apps (like Discord/OBS) keep it permanently active.
+    $_advanced: true
+    $name:ar: مؤشر الميكروفون (نقطة برتقالية)
+    $description:ar: نقطة برتقالية حين يكون الميكروفون قيد الاستعمال. أطفئه إن كانت برامج في الخلفية (مثل Discord أو OBS) تبقيه مفتوحاً دائماً.
   - PrivacyDotsMicHex: "#FF9500"
     $name: Microphone dot color
     $description: Custom hex color for microphone privacy indicator.
+    $_advanced: true
+    $name:ar: لون نقطة الميكروفون
+    $description:ar: رمز لون مؤشر الميكروفون.
   - PrivacyDotsCam: true
     $name: Show camera indicator (Green dot)
     $description: Show the green dot when webcam is in use.
+    $_advanced: true
+    $name:ar: مؤشر الكاميرا (نقطة خضراء)
+    $description:ar: نقطة خضراء حين تكون الكاميرا قيد الاستعمال.
   - PrivacyDotsCamHex: "#34C759"
     $name: Camera dot color
     $description: Custom hex color for camera privacy indicator.
+    $_advanced: true
+    $name:ar: لون نقطة الكاميرا
+    $description:ar: رمز لون مؤشر الكاميرا.
   $name: Privacy Indicators
+  $name:ar: مؤشرات الخصوصية
 - Modules:
   - Media: true
     $name: Media module
     $description: Shows album art, song info, and playback controls when music is playing.
+    $_advanced: true
+    $name:ar: الموسيقى والفيديو
+    $description:ar: يعرض غلاف الأغنية واسمها وأزرار التشغيل حين تعمل الموسيقى.
   - MediaAutoExpand: false
     $name: Auto-expand on track change
     $description: Automatically expand the island when a new song or video starts playing. If disabled, album art updates smoothly in the collapsed pill without unprompted expansion.
+    $_advanced: true
+    $name:ar: التوسيع عند تغيّر الأغنية
+    $description:ar: تتوسّع الجزيرة تلقائياً حين تبدأ أغنية أو فيديو جديد. إن أطفأته يتحدّث الغلاف بهدوء في الجزيرة المصغّرة.
   - Volume: true
     $name: Volume slider flyout
     $description: Shows a volume slider banner on the island when adjusting system volume. Disable if you prefer the default Windows volume flyout.
+    $_advanced: true
+    $name:ar: شريط مستوى الصوت
+    $description:ar: يُظهر شريط الصوت على الجزيرة عند تغيير مستوى الصوت. أطفئه إن كنت تفضّل شريط ويندوز المعتاد.
   - CapsLock: true
     $name: Caps Lock module
     $description: Shows an indicator when Caps Lock or Num Lock state changes.
+    $_advanced: true
+    $name:ar: الأحرف الكبيرة والأرقام
+    $description:ar: يُظهر تنبيهاً عند تشغيل أو إطفاء Caps Lock أو Num Lock.
   - Battery: true
     $name: Battery module
     $description: Shows an alert when your laptop battery is running low.
+    $_advanced: true
+    $name:ar: البطارية
+    $description:ar: يُظهر تنبيهاً حين تقترب بطارية الحاسوب المحمول من النفاد.
   - BluetoothIndicator: true
     $name: Bluetooth connect/disconnect indicator
     $description: Shows a card with the device name, category icon, and battery level (if available) when a Bluetooth device connects or disconnects.
+    $_advanced: true
+    $name:ar: اتصال أجهزة بلوتوث
+    $description:ar: يُظهر بطاقة باسم الجهاز ونوعه وشحن بطاريته (إن توفّر) عند اتصال جهاز بلوتوث أو انفصاله.
   - BluetoothShowBattery: true
     $name: Show Bluetooth battery level
     $description: Reads battery level over BLE GATT when the device supports it. Not all classic Bluetooth devices report battery this way — when unavailable, only a Connected/Disconnected label is shown.
+    $_advanced: true
+    $name:ar: شحن بطارية أجهزة بلوتوث
+    $description:ar: يُظهر شحن بطارية الجهاز إن كان يدعم ذلك. بعض الأجهزة لا تذكره، فيظهر عندها «متصل» أو «غير متصل» فقط.
   - Progress: true
     $name: Progress module
     $description: Shows a progress ring around the island for downloads or file copies.
+    $_advanced: true
+    $name:ar: تقدّم التنزيل والنسخ
+    $description:ar: يُظهر حلقة تقدّم حول الجزيرة أثناء التنزيلات أو نسخ الملفات.
   - TimerModule: true
     $name: Focus Timer module
     $description: Enables a Pomodoro-style focus/break timer, startable from the island's right-click menu.
+    $_advanced: true
+    $name:ar: مؤقّت التركيز
+    $description:ar: مؤقّت للتركيز والاستراحة، يُشغَّل من قائمة النقر بالزر الأيمن على الجزيرة.
   - Clipboard: true
     $name: Clipboard module
     $description: Shows a quick preview of the text or images you just copied.
+    $_advanced: true
+    $name:ar: الحافظة
+    $description:ar: يُظهر لمحة سريعة عن النص أو الصورة التي نسختها للتو.
   - StatusCountdownProgress: false
     $name: Status countdown progress bar
     $description: Shows a subtle countdown progress bar at the bottom of temporary status alert cards (such as Clipboard, Notifications, and Device alerts). Disabled by default.
+    $_advanced: true
+    $name:ar: شريط العد التنازلي للتنبيهات
+    $description:ar: يُظهر شريطاً خفيفاً أسفل بطاقات التنبيه المؤقتة (كالحافظة والإشعارات والأجهزة) يبيّن متى تختفي. مطفأ افتراضياً.
   - DoNotDisturbIndicator: true
     $name: Do Not Disturb status alert
     $description: Shows a status alert card when Do Not Disturb is toggled in the Windows notification panel.
+    $_advanced: true
+    $name:ar: تنبيه «عدم الإزعاج»
+    $description:ar: يُظهر بطاقة تنبيه عند تشغيل «عدم الإزعاج» أو إطفائه من لوحة إشعارات ويندوز.
   - NotificationRespectDnD: true
     $name: Notifications respect Do Not Disturb
     $description: Suppresses Dynamic Island notification alerts when Windows Do Not Disturb is active.
+    $_advanced: true
+    $name:ar: احترام «عدم الإزعاج» في الإشعارات
+    $description:ar: لا تُظهر الجزيرة تنبيهات الإشعارات حين يكون «عدم الإزعاج» مفعّلاً في ويندوز.
   - HardwareMonitorModule: true
     $name: Include Hardware Monitor in scroll loop
     $description: Add CPU, GPU, RAM, FPS and Network stats card to mouse-wheel scroll loop.
+    $_advanced: true
+    $name:ar: بطاقة أداء الجهاز
+    $description:ar: يضيف بطاقة المعالج وكرت الشاشة والذاكرة والإطارات والشبكة إلى البطاقات التي تتنقل بينها بعجلة الفأرة.
   - GameOverlay: false
     $name: Enable game overlay mode
     $description: Replaces the clock with live stats like FPS, CPU, and RAM usage.
+    $_advanced: true
+    $name:ar: وضع الألعاب
+    $description:ar: يعرض بدل الساعة أرقاماً حية مثل الإطارات في الثانية واستهلاك المعالج والذاكرة.
   - ShowMetricText: false
     $name: Show labels in metric chips
     $description: Adds text labels (like "CPU") inside the game overlay bars.
+    $_advanced: true
+    $name:ar: أسماء المقاييس في وضع الألعاب
+    $description:ar: يضيف أسماء قصيرة (مثل CPU) داخل أشرطة وضع الألعاب.
   - Weather: true
     $name: Weather module
     $description: Shows the weather on the right side of the pill. Turn off to only show the clock.
+    $name:ar: الطقس
+    $description:ar: يعرض الطقس في الجهة اليمنى من الجزيرة. أطفئه لعرض الساعة وحدها.
   - WeatherCity: ""
     $name: Weather City (Optional)
     $description: Enter your city (e.g. London). Leave blank to use auto IP geolocation.
+    $_advanced: true
+    $name:ar: مدينة الطقس (اختياري)
+    $description:ar: اكتب اسم مدينتك (مثل London). اتركه فارغاً لتحديد الموقع تلقائياً.
   - WeatherFahrenheit: false
     $name: Use Fahrenheit
     $description: Display weather temperature and wind speed in imperial units.
+    $_advanced: true
+    $name:ar: الفهرنهايت
+    $description:ar: يعرض الحرارة وسرعة الرياح بالوحدات الأمريكية.
   - Language: auto
     $name: Language
     $description: Language for the island's own text labels. Auto follows your Windows display language.
@@ -402,6 +669,23 @@ We love community contributions! To ensure high-quality updates, please follow t
       - zh: 简体中文 (Simplified Chinese)
       - ja: 日本語 (Japanese)
       - ko: 한국어 (Korean)
+    $_advanced: true
+    $name:ar: اللغة
+    $description:ar: لغة نصوص الجزيرة. «تلقائي» يتبع لغة ويندوز.
+    $options:ar:
+      - auto: تلقائي (حسب ويندوز)
+      - en: English (الإنجليزية)
+      - fr: Français (الفرنسية)
+      - es: Español (الإسبانية)
+      - de: Deutsch (الألمانية)
+      - pt: Português (البرتغالية)
+      - it: Italiano (الإيطالية)
+      - ru: Русский (الروسية)
+      - tr: Türkçe (التركية)
+      - hi: हिन्दी (الهندية)
+      - zh: 简体中文 (الصينية المبسطة)
+      - ja: 日本語 (اليابانية)
+      - ko: 한국어 (الكورية)
   - ClockFormat: system
     $name: Clock format
     $description: Choose 12-hour or 24-hour time, or follow your Windows locale setting.
@@ -409,47 +693,94 @@ We love community contributions! To ensure high-quality updates, please follow t
       - system: Follow Windows locale
       - 12h: 12-hour (3:07 PM)
       - 24h: 24-hour (15:07)
+    $_advanced: true
+    $name:ar: نظام الساعة
+    $description:ar: نظام 12 ساعة أو 24 ساعة، أو حسب إعدادات ويندوز.
+    $options:ar:
+      - system: حسب إعدادات ويندوز
+      - 12h: 12 ساعة (3:07 م)
+      - 24h: 24 ساعة (15:07)
   - ShowSeconds: false
     $name: Show seconds on the clock
     $description: Include seconds in the expanded clock. Costs a little more CPU because the clock then redraws every second.
+    $_advanced: true
+    $name:ar: إظهار الثواني
+    $description:ar: يُظهر الثواني في الساعة الموسّعة. يستهلك جهداً إضافياً قليلاً لأن الساعة تُرسم كل ثانية.
   - DateFormat: ""
     $name: Custom date format
     $description: 'Custom date pattern for the idle dashboard. Leave empty to follow your Windows locale. Supports yyyy (year), MM / M (month), dd / d (day), MMM (short month name), MMMM (full month name), ddd / dddd (weekday). Any other characters are printed as-is, so CJK formats like yyyy年MM月dd日 work.'
+    $_advanced: true
+    $name:ar: صيغة التاريخ
+    $description:ar: صيغة مخصصة للتاريخ في لوحة الجزيرة. اتركها فارغة لاتباع إعدادات ويندوز. الرموز yyyy للسنة، وMM أو M للشهر، وdd أو d لليوم، وMMM وMMMM لاسم الشهر، وddd وdddd لاسم اليوم، وأي حرف آخر يُكتب كما هو.
   - DateFirst: false
     $name: Show date above the time
     $description: Swap the idle dashboard so the date is the headline and the time sits beneath it.
+    $_advanced: true
+    $name:ar: التاريخ فوق الوقت
+    $description:ar: يجعل التاريخ هو الأبرز في لوحة الجزيرة والوقت تحته.
   - FileTrayModule: false
     $name: File Tray (drag & drop shelf)
     $description: Adds a File Tray card to the scroll loop. Drag files onto the island to park them there, then click to open one, or use the right-click menu to clear the shelf. Files are only referenced, never copied or moved.
+    $_advanced: true
+    $name:ar: رف الملفات (السحب والإفلات)
+    $description:ar: يضيف بطاقة رف للملفات. اسحب الملفات إلى الجزيرة لتبقى فيه، ثم انقر لفتح أحدها، أو أفرغ الرف من قائمة النقر بالزر الأيمن. لا تُنسخ الملفات ولا تُنقل.
   - FileTrayMaxItems: 10
     $name: File Tray capacity
     $description: 1 to 25. How many files the shelf keeps before the oldest one drops off.
+    $_advanced: true
+    $name:ar: سعة رف الملفات
+    $description:ar: من 1 إلى 25. عدد الملفات التي يحفظها الرف قبل أن يُزال أقدمها.
   - MediaExpandBlocklist: ""
     $name: Never auto-expand for these apps
     $description: 'Comma-separated list of app or site names that should never make the island expand on a track change, while still updating quietly in the collapsed pill. Matched loosely against the media source and title, for example: chrome, tiktok, youtube.'
+    $_advanced: true
+    $name:ar: برامج لا تُوسِّع الجزيرة
+    $description:ar: أسماء برامج أو مواقع مفصولة بفواصل لا تتوسّع الجزيرة عند تغيّر ما تشغّله، ويبقى الغلاف يتحدّث بهدوء، مثل chrome, tiktok, youtube.
   - GameOverlayShowFps: true
     $name: Game overlay - show FPS
     $description: Include the frame rate in the game overlay strip.
+    $_advanced: true
+    $name:ar: وضع الألعاب - الإطارات في الثانية
+    $description:ar: يعرض عدد الإطارات في الثانية في شريط وضع الألعاب.
   - GameOverlayShowCpu: true
     $name: Game overlay - show CPU
     $description: Include CPU utilization in the game overlay strip.
+    $_advanced: true
+    $name:ar: وضع الألعاب - المعالج
+    $description:ar: يعرض استهلاك المعالج في شريط وضع الألعاب.
   - GameOverlayShowGpu: true
     $name: Game overlay - show GPU
     $description: Include GPU utilization in the game overlay strip.
+    $_advanced: true
+    $name:ar: وضع الألعاب - كرت الشاشة
+    $description:ar: يعرض استهلاك كرت الشاشة في شريط وضع الألعاب.
   - GameOverlayShowRam: true
     $name: Game overlay - show RAM
     $description: Include memory usage in the game overlay strip.
+    $_advanced: true
+    $name:ar: وضع الألعاب - الذاكرة
+    $description:ar: يعرض استهلاك الذاكرة في شريط وضع الألعاب.
   - GameOverlayShowDisk: true
     $name: Game overlay - show disk
     $description: Include disk usage in the game overlay strip.
+    $_advanced: true
+    $name:ar: وضع الألعاب - القرص
+    $description:ar: يعرض استهلاك القرص في شريط وضع الألعاب.
   - GameOverlayCompact: false
     $name: Game overlay - compact size
     $description: Shrink the game overlay to a narrow strip that fits neatly inside the taskbar area.
+    $_advanced: true
+    $name:ar: وضع الألعاب - حجم مصغّر
+    $description:ar: يصغّر شريط وضع الألعاب ليتسع داخل منطقة شريط المهام.
   $name: Modules & Features
+  $name:ar: ما تعرضه الجزيرة
 - Shortcuts:
   - HideShowHotkeyEnabled: true
     $name: Enable hide/show hotkey
     $description: Toggle the island's visibility instantly with a keyboard shortcut. The hotkey is the only way to bring a hidden island back, so leave this on unless you're comfortable re-enabling it from Windhawk settings.
+    $_advanced: true
+    $name:ar: اختصار الإخفاء والإظهار
+    $description:ar: يخفي الجزيرة أو يظهرها فوراً باختصار من لوحة المفاتيح. الاختصار هو الطريقة الوحيدة لإعادة الجزيرة المخفية، فأبقه مفعّلاً إلا إن كنت تعرف كيف تعيده من إعدادات البرنامج.
   - HideShowModifiers: ctrl_alt
     $name: Hotkey modifiers
     $description: Modifier keys combined with the letter/number key below.
@@ -459,10 +790,23 @@ We love community contributions! To ensure high-quality updates, please follow t
       - alt_shift: Alt + Shift
       - win_alt: Win + Alt
       - ctrl_alt_shift: Ctrl + Alt + Shift
+    $_advanced: true
+    $name:ar: مفاتيح الاختصار
+    $description:ar: المفاتيح التي تُضغط مع الحرف أو الرقم أدناه.
+    $options:ar:
+      - ctrl_alt: Ctrl مع Alt
+      - ctrl_shift: Ctrl مع Shift
+      - alt_shift: Alt مع Shift
+      - win_alt: Win مع Alt
+      - ctrl_alt_shift: Ctrl مع Alt مع Shift
   - HideShowKey: "D"
     $name: Hotkey letter/number key
     $description: A single A-Z or 0-9 key combined with the modifiers above. Falls back to "D" if left blank or invalid.
+    $_advanced: true
+    $name:ar: حرف أو رقم الاختصار
+    $description:ar: حرف واحد من A إلى Z أو رقم من 0 إلى 9 يُضغط مع المفاتيح أعلاه. إن تُرك فارغاً أو كان غير صالح يُستعمل D.
   $name: Shortcuts & Hotkeys
+  $name:ar: الاختصارات
 */
 // ==/WindhawkModSettings==
 

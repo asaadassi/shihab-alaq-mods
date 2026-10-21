@@ -2,7 +2,7 @@
   "category": "explorer",
   "name": {
     "ar": "تنسيق نافذة النسخ والنقل",
-    "en": "File operation styler"
+    "en": "A modern copy and move window"
   },
   "description": {
     "ar": "شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف.",
@@ -13,5 +13,23 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/file-operation-styler.wh.cpp",
   "group": "explorer",
-  "order": 1
+  "order": 1,
+  "summary": {
+    "ar": "نافذة نسخ ونقل أوضح وأجمل",
+    "en": "A clearer, nicer copy and move window"
+  },
+  "highlights": {
+    "ar": [
+      "يعرض تقدّم النسخ والنقل والحذف بدائرة وأرقام واضحة",
+      "يعرض تقدّم الملف الحالي بشريط خاص",
+      "تختار سمة ألوان داكنة أو فاتحة أو زجاجية",
+      "تختار الخط وأحجام النص والألوان كما تحب"
+    ],
+    "en": [
+      "Shows copy, move and delete progress with a clear circle",
+      "Shows the current file progress in its own bar",
+      "Choose a dark, light or frosted glass theme",
+      "Choose the font, text sizes and colours you like"
+    ]
+  }
 }

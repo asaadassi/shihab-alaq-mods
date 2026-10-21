@@ -81,8 +81,11 @@ def read_groups() -> list:
             raise SystemExit(f'groups.json: bad or repeated id {g.get("id")}')
         if g.get('category') not in CATEGORIES:
             raise SystemExit(f'groups.json: {g["id"]}: unknown category {g.get("category")}')
-        if not g.get('name', {}).get('ar') or not g.get('name', {}).get('en'):
-            raise SystemExit(f'groups.json: {g["id"]}: needs an Arabic and an English name')
+        for field in ('name', 'tagline'):
+            if not g.get(field, {}).get('ar') or not g.get(field, {}).get('en'):
+                raise SystemExit(f'groups.json: {g["id"]}: needs an Arabic and an English {field}')
+        if not re.fullmatch(r'[0-9A-F]{4}', g.get('icon', '')):
+            raise SystemExit(f'groups.json: {g["id"]}: icon must be a Segoe Fluent Icons code point such as E790')
         seen.add(g['id'])
     return groups
 
@@ -196,6 +199,9 @@ def main() -> int:
             'version': version,
             'name': info['name'],
             'description': info['description'],
+            # Plain words for the feature page: one line, and what it does and lets you choose
+            'summary': info.get('summary'),
+            'highlights': info.get('highlights'),
             'author': info.get('author', meta.get('author', '')),
             'category': info['category'],
             'preview': info.get('preview'),

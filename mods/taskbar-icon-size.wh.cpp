@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              taskbar-icon-size
 // @name            Taskbar height and icon size
+// @name:ar         حجم شريط المهام وأيقوناته
 // @description     Control the taskbar height and icon size, improve icon quality (Windows 11 only)
-// @version         1.3.10-shihab.1
+// @description:ar  تحكّم في ارتفاع شريط المهام وحجم أيقوناته، مع أيقونات أوضح (ويندوز 11 فقط)
+// @version         1.3.10-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -63,18 +65,33 @@ Also check out the **Taskbar tray icon spacing and grid** mod.
 /*
 - TaskbarHeight: 52
   $name: Taskbar height
+  $name:ar: ارتفاع شريط المهام
+  $description:ar: >-
+    ارتفاع شريط المهام بالبكسل (الافتراضي في ويندوز 11: 48)
   $description: >-
     The height, in pixels, of the taskbar (Windows 11 default: 48)
 - IconSize: 32
   $name: Icon size
+  $name:ar: حجم الأيقونات
+  $description:ar: >-
+    حجم الأيقونات على شريط المهام بالبكسل (الافتراضي في ويندوز 11: 24)
   $description: >-
     The size, in pixels, of icons on the taskbar (Windows 11 default: 24)
 - TaskbarButtonWidth: 44
   $name: Taskbar button width
+  $name:ar: عرض الأزرار
+  $description:ar: >-
+    عرض أزرار شريط المهام بالبكسل (الافتراضي في ويندوز 11: 44)
   $description: >-
     The width, in pixels, of the taskbar buttons (Windows 11 default: 44)
 - IconSizeSmall: 16
   $name: Small icon size
+  $name:ar: حجم الأيقونات الصغيرة
+  $description:ar: >-
+    حجم الأيقونات الصغيرة على شريط المهام بالبكسل (الافتراضي في ويندوز 11: 16)
+
+    يعمل في إصدارات ويندوز 11 الأحدث التي تدعم الأيقونات الصغيرة (منذ تموز 2025 تقريباً)
+  $_advanced: true
   $description: >-
     The size, in pixels, of small icons on the taskbar (Windows 11 default: 16)
 
@@ -82,6 +99,12 @@ Also check out the **Taskbar tray icon spacing and grid** mod.
     July 2025)
 - TaskbarButtonWidthSmall: 32
   $name: Small taskbar button width
+  $name:ar: عرض الأزرار الصغيرة
+  $description:ar: >-
+    عرض أزرار شريط المهام الصغيرة بالبكسل (الافتراضي في ويندوز 11: 32)
+
+    يعمل في إصدارات ويندوز 11 الأحدث التي تدعم الأيقونات الصغيرة (منذ تموز 2025 تقريباً)
+  $_advanced: true
   $description: >-
     The width, in pixels, of the small taskbar buttons (Windows 11 default: 32)
 

@@ -13,7 +13,9 @@
 // @description:ko-KR macOS처럼 마우스를 올리면 작업 표시줄 아이콘이 애니메이션됩니다
 // @description:pt-BR Anima os ícones da barra de tarefas ao passar o mouse, como no macOS
 // @description:it-IT Anima le icone della barra delle applicazioni al passaggio del mouse, come su macOS
-// @version           1.9.2-shihab.1
+// @name:ar           حركة أيقونات شريط المهام
+// @description:ar    تكبر أيقونات شريط المهام حين يمر عليها المؤشر، كما في ماك
+// @version           1.9.2-shihab.2
 // @author            Ph0en1x-dev
 // @github            https://github.com/Ph0en1x-dev
 // @include           explorer.exe
@@ -86,6 +88,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 확대/축소 애니메이션 느낌 선택 (0=코사인(부드러움), 1=선형, 2=지수(빠릿함))
   $description:pt-BR: Escolha o tipo de escala (0 = Cosseno (suave), 1 = Linear, 2 = Exponencial (rápido))
   $description:it-IT: Scegli il tipo di scala (0 = Coseno (fluida), 1 = Lineare, 2 = Esponenziale (reattiva))
+  $name:ar: شكل الحركة
+  $description:ar: "اختر طريقة التكبير (0 = ناعمة، 1 = منتظمة، 2 = سريعة)"
 - MaxScale: 130
   $name: Maximum scale (%)
   $name:uk-UA: Максимальний розмір (%)
@@ -101,6 +105,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: "아이콘이 커질 수 있는 최대 크기 (예: 160 = +60%)"
   $description:pt-BR: "Até quanto o ícone pode aumentar (ex.: 160 = +60%)"
   $description:it-IT: "Quanto può ingrandirsi un’icona (es.: 160 = +60%)"
+  $name:ar: أقصى تكبير (%)
+  $description:ar: "أقصى ما تكبر إليه الأيقونة (مثلاً 160 تعني أكبر بنسبة 60%)"
 - EffectRadius: 100
   $name: Effect radius (px)
   $name:uk-UA: Радіус ефекту (пкс)
@@ -116,6 +122,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 커서로부터 애니메이션이 적용되는 거리
   $description:pt-BR: Distância do cursor em que a animação é aplicada
   $description:it-IT: Distanza dal cursore entro cui si applica l’animazione
+  $name:ar: مدى التأثير (بكسل)
+  $description:ar: المسافة حول المؤشر التي تكبر فيها الأيقونات
 - SpacingFactor: 50
   $name: Spacing sensitivity (%)
   $name:uk-UA: Чутливість до проміжку (%)
@@ -131,6 +139,9 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 애니메이션 중 인접 아이콘이 벌어지는 정도(기본 50%)
   $description:pt-BR: Quanto os ícones vizinhos se afastam durante a animação (padrão 50%)
   $description:it-IT: Quanto si allontanano le icone vicine durante l’animazione (predef. 50%)
+  $name:ar: تباعد الأيقونات المجاورة (%)
+  $description:ar: "مقدار ابتعاد الأيقونات المجاورة أثناء الحركة (المعتاد 50%)"
+  $_advanced: true
 - BounceDelay: 500
   $name: Bounce start delay (ms)
   $name:uk-UA: Затримка початку "дихання" (мс)
@@ -146,6 +157,9 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 커서가 멈춘 뒤 ‘호흡’ 애니메이션을 시작하기까지 대기 시간(기본 100ms)
   $description:pt-BR: Quanto esperar após o cursor parar antes de iniciar a animação “respirar” (padrão 100ms)
   $description:it-IT: Quanto attendere dopo che il cursore si ferma prima di avviare l’animazione “respiro” (predef. 100ms)
+  $name:ar: مهلة بدء الاهتزاز الخفيف (ملي ثانية)
+  $description:ar: المدة التي تنتظرها الأيقونة بعد توقف المؤشر قبل أن تبدأ حركة الاهتزاز الخفيف
+  $_advanced: true
 - FocusDuration: 150
   $name: Focus animation duration (ms)
   $name:uk-UA: Тривалість анімації фокусу (мс)
@@ -161,6 +175,9 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 페이드 인/아웃 애니메이션 지속 시간(기본 150ms)
   $description:pt-BR: Duração do fade-in e fade-out (padrão 150ms)
   $description:it-IT: Durata della dissolvenza in entrata/uscita (predef. 150ms)
+  $name:ar: مدة الظهور والاختفاء (ملي ثانية)
+  $description:ar: مدة تكبير الأيقونة وعودتها بنعومة (المعتاد 150)
+  $_advanced: true
 - MirrorForTopTaskbar: false
   $name: Mirror animation for top taskbar
   $name:uk-UA: Дзеркальна анімація для верхньої панелі
@@ -176,6 +193,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 작업 표시줄이 화면 상단에 있을 때 아이콘이 아래로 움직이도록 합니다.
   $description:pt-BR: Ative se a barra de tarefas estiver no topo para animar os ícones para baixo.
   $description:it-IT: Attiva se la barra è in alto per animare le icone verso il basso.
+  $name:ar: عكس الحركة لشريط المهام العلوي
+  $description:ar: فعّله إن كان شريط المهام أعلى الشاشة لتتحرك الأيقونات إلى الأسفل
 - DisableVerticalBounce: false
   $name: Disable vertical "bounce" animation
   $name:uk-UA: Вимкнути вертикальне "дихання"
@@ -191,6 +210,9 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 위/아래 ‘호흡’ 애니메이션을 비활성화합니다. 세로 작업 표시줄에 유용합니다.
   $description:pt-BR: Desativa a animação de “respirar” para cima/baixo. Útil para barras verticais.
   $description:it-IT: Disattiva l’animazione “respiro” su/giù. Utile per barre verticali.
+  $name:ar: إيقاف الاهتزاز للأعلى والأسفل
+  $description:ar: يوقف حركة الاهتزاز الخفيف للأعلى والأسفل، ويفيد حين يكون شريط المهام عمودياً
+  $_advanced: true
 - TaskbarLabelsMode: false
   $name: Taskbar Labels Compatibility
   $name:uk-UA: Сумісність із підписами (Labels)
@@ -206,6 +228,9 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 작업 표시줄에 창 제목(직사각형 버튼)이 표시될 때 애니메이션 중앙 정렬을 수정합니다.
   $description:pt-BR: Ative se a barra mostrar títulos de janelas (ícones retangulares) para corrigir o alinhamento.
   $description:it-IT: Abilita se la barra mostra i titoli delle finestre (pulsanti rettangolari) per correggere la centratura.
+  $name:ar: التوافق مع أسماء البرامج
+  $description:ar: فعّله إن كان شريط المهام يعرض أسماء النوافذ (أزرار مستطيلة) لتبقى الحركة في الوسط
+  $_advanced: true
 - ExcludeSystemButtonsMode: 0
   $name: Exclude system buttons
   $name:uk-UA: Ігнорувати системні кнопки
@@ -221,6 +246,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 0=전체, 1=시작 제외, 2=시작/검색/작업 보기/위젯 제외, 3=앱만
   $description:pt-BR: 0=Animar tudo, 1=Excluir Iniciar, 2=Excluir Iniciar/Pesquisa/Visão de tarefas/Widgets, 3=Somente apps
   $description:it-IT: 0=Anima tutto, 1=Escludi Start, 2=Escludi Start/Ricerca/Task View/Widget, 3=Solo app
+  $name:ar: استثناء أزرار النظام
+  $description:ar: "0 = تحريك الكل، 1 = دون زر ابدأ، 2 = دون ابدأ والبحث وعرض المهام والأدوات، 3 = البرامج فقط"
 - LerpSpeed: 60
   $name: Smoothing (Lerp speed)
   $name:uk-UA: Плавність (швидкість Lerp)
@@ -236,6 +263,9 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 높을수록 빠릿함, 낮을수록 부드러움. 0=비활성화(직접)
   $description:pt-BR: Maior = mais rápido, menor = mais suave. 0 = desativado (direto)
   $description:it-IT: Più alto = più reattivo, più basso = più fluido. 0 = disattivato (diretto)
+  $name:ar: سرعة الاستجابة
+  $description:ar: القيمة الأعلى أسرع والأقل أنعم، و0 تلغي التنعيم
+  $_advanced: true
 - DisableBounce: false
   $name: Disable bounce effect
   $name:uk-UA: Вимкнути bounce ефект
@@ -251,6 +281,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:ko-KR: 대기 상태 ‘호흡’ 바운스를 완전히 비활성화합니다
   $description:pt-BR: Desativa totalmente o bounce ocioso (“respirar”)
   $description:it-IT: Disattiva completamente il bounce inattivo (“respiro”)
+  $name:ar: إيقاف الاهتزاز الخفيف
+  $description:ar: يوقف تماماً حركة الاهتزاز الخفيف حين يتوقف المؤشر فوق الأيقونات
 */
 // ==/WindhawkModSettings==
 

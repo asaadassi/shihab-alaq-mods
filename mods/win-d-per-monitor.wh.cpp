@@ -1,9 +1,11 @@
 // ==WindhawkMod==
 // @id              win-d-per-monitor
 // @name            Win+D per monitor(show desktop)
+// @name:ar         Win+D لكل شاشة
 // @description     Press Win+D to only manage the windows on the monitor where the mouse is located.
 // @description:zh-CN   按下Win+D时 只最小化/还原鼠标所在显示器的窗口
-// @version         1.5.260416-shihab.1
+// @description:ar  عند الضغط على Win+D تُخفى نوافذ الشاشة التي عليها المؤشر فقط ثم تُعاد، وتبقى الشاشات الأخرى كما هي.
+// @version         1.5.260416-shihab.2
 // @author          easyatm
 // @github          https://github.com/easyatm
 // @include         explorer.exe
@@ -16,22 +18,34 @@
   $name: Ignore topmost tool windows without title bar
   $description: Ignore the topmost tool windows without title bar (always on top tool windows)
   $description:zh-CN: 忽略最顶部且无标题栏的工具窗口（始终在顶部的工具窗口）
+  $name:ar: تجاهل الأدوات العائمة بلا شريط عنوان
+  $description:ar: لا تُخفى النوافذ الصغيرة التي تبقى دائماً في المقدمة وليس لها شريط عنوان
 - minWindowSize: 100
   $name: Minimum window size
   $description: Minimum width or height for windows to be processed (pixels)
   $description:zh-CN: 处理窗口的最小宽度或高度（像素）
+  $name:ar: أصغر حجم للنافذة
+  $description:ar: النوافذ التي عرضها أو ارتفاعها أقل من هذا الرقم (بالبكسل) لا تُخفى
+  $_advanced: true
 - ignoreRules:
   - - title: ""
       $name: Window title
       $description: Window title to ignore
       $description:zh-CN: 要忽略的窗口标题
+      $name:ar: عنوان النافذة
+      $description:ar: عنوان النافذة التي لا تُخفى
     - className: ""
       $name: Window class name
       $description: Window class name to ignore
       $description:zh-CN: 要忽略的窗口类名
+      $name:ar: اسم صنف النافذة
+      $description:ar: الاسم البرمجي لصنف النافذة التي لا تُخفى
   $name: Custom ignored windows
   $description: Custom list of windows to ignore. Fill at least one field per entry; an empty field matches anything.
   $description:zh-CN: 自定义忽略的窗口列表，每条规则至少填一项，留空的项匹配任意值
+  $name:ar: نوافذ لا تُخفى
+  $description:ar: قائمة بنوافذ تبقى ظاهرة عند الضغط على Win+D. املأ حقلاً واحداً على الأقل في كل سطر، والحقل الفارغ يطابق أي نافذة.
+  $_advanced: true
 
 */
 // ==/WindhawkModSettings==

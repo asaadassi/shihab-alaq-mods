@@ -13,5 +13,23 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-icon-size.wh.cpp",
   "group": "taskbar-look",
-  "order": 1
+  "order": 1,
+  "summary": {
+    "ar": "شريط مهام أطول وأيقونات أكبر",
+    "en": "A taller taskbar with bigger icons"
+  },
+  "highlights": {
+    "ar": [
+      "اختر ارتفاع شريط المهام كما تحب",
+      "كبّر الأيقونات أو صغّرها بالحجم الذي تريده",
+      "غيّر عرض أزرار البرامج",
+      "أيقونات أوضح وأنعم عند تكبيرها"
+    ],
+    "en": [
+      "Choose the taskbar height you like",
+      "Make icons bigger or smaller",
+      "Change the width of program buttons",
+      "Sharper icons when they are enlarged"
+    ]
+  }
 }

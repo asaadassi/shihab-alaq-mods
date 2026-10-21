@@ -23,10 +23,19 @@ mod format, with its store entry (Arabic and English texts, section, credits) in
   `description` (`ar`, `en`), `author`, `license`, `basedOn` (the original, for an adapted mod), optional `preview`,
   optional `conflicts` (the ids of mods that change the same thing; the app warns before both run together).
   `group` (one of `store/groups.json`) and `order` (its place in the group).
-- `store/groups.json` — the features the app shows: each group has `id`, `category`, `name` and `description` (`ar`,
-  `en`), and `exclusive: true` when only one of its mods may run at a time (its mods then conflict with each other).
+  For the feature page, in plain words a home user understands (no versions, licences or technical terms):
+  `summary` (`ar`, `en`: one short line) and `highlights` (`ar`, `en`: 2 to 5 short points on what it does and
+  what you can choose).
+- `store/groups.json` — the features the app shows: each group has `id`, `category`, `icon` (a Segoe Fluent Icons
+  code point), `name`, `tagline` (a few words for its card) and `description` (`ar`, `en`), and `exclusive: true` when only one of its mods may run at a time (its mods then conflict with each other).
   The mods stay separate files: a crash turns off only the part that crashed, and each mod is injected only where it
   needs to be.
+
+## Settings / الإعدادات
+
+Every setting a mod shows has Arabic texts next to the English ones: `$name:ar`, `$description:ar`, and
+`$options:ar` with the same values as `$options`. A setting a home user doesn't need carries `$_advanced: true`;
+the app shows it under "More options". Changing a mod's settings block raises its `@version`.
 
 ## Licence
 

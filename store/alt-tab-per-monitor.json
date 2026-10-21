@@ -13,5 +13,23 @@
   "license": "MIT",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/alt-tab-per-monitor.wh.cpp",
   "group": "window-switcher",
-  "order": 1
+  "order": 1,
+  "summary": {
+    "ar": "Alt+Tab يعرض نوافذ الشاشة التي تعمل عليها",
+    "en": "Alt+Tab shows the windows of your monitor"
+  },
+  "highlights": {
+    "ar": [
+      "يعرض نوافذ الشاشة التي عليها المؤشر فقط",
+      "يظهر Alt+Tab على الشاشة التي تعمل عليها",
+      "مفيد لمن يستعمل أكثر من شاشة",
+      "يبقي شكل Alt+Tab المعتاد في ويندوز"
+    ],
+    "en": [
+      "Shows only the windows of the monitor under the cursor",
+      "Alt+Tab appears on the monitor you work on",
+      "Useful with more than one monitor",
+      "Keeps the usual Windows Alt+Tab look"
+    ]
+  }
 }

@@ -13,5 +13,21 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/slick-window-arrangement.wh.cpp",
   "group": "window-motion",
-  "order": 1
+  "order": 1,
+  "summary": {
+    "ar": "نوافذ تنزلق وتلتصق بالحواف",
+    "en": "Windows that slide and snap to edges"
+  },
+  "highlights": {
+    "ar": [
+      "تكمل النافذة انزلاقها بعد إفلاتها",
+      "تلتصق النوافذ بحواف الشاشة وببعضها",
+      "اختر مدة الانزلاق ومسافة الالتصاق"
+    ],
+    "en": [
+      "A window keeps sliding after you let go",
+      "Windows snap to screen edges and each other",
+      "Choose the slide length and snap distance"
+    ]
+  }
 }

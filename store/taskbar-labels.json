@@ -13,5 +13,23 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-labels.wh.cpp",
   "group": "taskbar-look",
-  "order": 3
+  "order": 3,
+  "summary": {
+    "ar": "أسماء البرامج بجانب أيقوناتها",
+    "en": "Program names next to their icons"
+  },
+  "highlights": {
+    "ar": [
+      "اعرض أسماء البرامج المفتوحة أو أخفها",
+      "اختر دمج نوافذ البرنامج الواحد في زر واحد أو فصلها",
+      "حدد عرض الأزرار وحجم الخط ونوعه",
+      "غيّر شكل العلامة تحت البرنامج المفتوح"
+    ],
+    "en": [
+      "Show or hide the names of open programs",
+      "Combine a program's windows in one button or keep them apart",
+      "Set the button width, font size and font",
+      "Change the mark under an open program"
+    ]
+  }
 }

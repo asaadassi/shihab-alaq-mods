@@ -13,5 +13,21 @@
   "license": "GPL-3.0",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-wheel-cycle.wh.cpp",
   "group": "taskbar-use",
-  "order": 1
+  "order": 1,
+  "summary": {
+    "ar": "تنقّل بين البرامج بعجلة الماوس",
+    "en": "Move between programs with the wheel"
+  },
+  "highlights": {
+    "ar": [
+      "حرّك العجلة فوق شريط المهام لتنتقل بين البرامج",
+      "أو استخدم اختصاراً من لوحة المفاتيح",
+      "اختر تخطي النوافذ المصغّرة أو عكس الاتجاه"
+    ],
+    "en": [
+      "Turn the wheel over the taskbar to switch programs",
+      "Or use a keyboard shortcut instead",
+      "Choose to skip minimized windows or reverse the direction"
+    ]
+  }
 }

@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              overhaulded-alt-tab
 // @name            OverhauldedWin Alt+Tab
+// @name:ar         مبدّل نوافذ حديث
 // @description     Replaces the boring Windows Alt+Tab with a modern and elegant window switcher.
-// @version         1.3.0-shihab.1
+// @description:ar  يستبدل قائمة Alt+Tab بمبدّل نوافذ حديث وأنيق فيه معاينة لكل نافذة.
+// @version         1.3.0-shihab.2
 // @author          IMiloDev
 // @github          https://github.com/IMiloDev
 // @homepage        https://github.com/IMiloDev/OverhauldedWin
@@ -167,8 +169,17 @@ Some applications may behave differently than standard desktop windows, especial
 - Appearance:
     - Scale: "100"
       $name: Scale
+      $name:ar: الحجم
       $description: Overall task switcher scale.
+      $description:ar: حجم المبدّل كله على الشاشة.
       $options:
+      - "50": 50%
+      - "75": 75%
+      - "90": 90%
+      - "100": 100%
+      - "110": 110%
+      - "125": 125%
+      $options:ar:
       - "50": 50%
       - "75": 75%
       - "90": 90%
@@ -177,97 +188,185 @@ Some applications may behave differently than standard desktop windows, especial
       - "125": 125%
     - PerformanceMode: "smooth"
       $name: Performance mode
+      $name:ar: سلاسة الحركة
       $description: Controls the animation update frequency.
+      $description:ar: الأنعم يرسم الحركة بإطارات أكثر، والمتوازن يخفف الحمل على الجهاز.
       $options:
       - "smooth": Smooth
       - "balanced": Balanced
+      $options:ar:
+      - "smooth": أنعم
+      - "balanced": متوازن
+      $_advanced: true
     - AnimationSpeed: "100"
       $name: Animation speed
+      $name:ar: سرعة الحركة
       $description: Relative speed of the task switcher animations.
+      $description:ar: سرعة حركات المبدّل مقارنة بالسرعة العادية.
       $options:
       - "75": 75%
       - "100": 100%
       - "125": 125%
       - "150": 150%
+      $options:ar:
+      - "75": 75%
+      - "100": 100%
+      - "125": 125%
+      - "150": 150%
+      $_advanced: true
     - AnimationStyle: "Linear"
       $name: Animation style
+      $name:ar: حركة الظهور والإخفاء
       $description: Open and close animation. Linear is standard, Bouncy adds a pronounced bounce, and RCT is a CRT-style collapse and expansion.
+      $description:ar: كيف يظهر المبدّل ويختفي. العادية حركة هادئة، والنابضة فيها ارتداد واضح، والتلفاز القديم ينطوي وينفتح كشاشة تلفاز قديم.
       $options:
       - "Linear": Linear
       - "Bouncy": Bouncy
       - "RCT": RCT
+      $options:ar:
+      - "Linear": عادية
+      - "Bouncy": نابضة
+      - "RCT": التلفاز القديم
     - Cards:
         - VisibleCards: "5"
           $name: Visible cards
+          $name:ar: عدد البطاقات الظاهرة
           $description: Number of cards shown in the carousel.
+          $description:ar: كم نافذة تظهر في الشريط في الوقت نفسه.
           $options:
           - "3": 3 cards
           - "5": 5 cards
+          $options:ar:
+          - "3": 3 بطاقات
+          - "5": 5 بطاقات
         - NormalColor: "#050507"
           $name: Cards color
+          $name:ar: لون البطاقات
           $description: Base color of the cards that are not selected. Default Hex - #050507. An empty or invalid value uses the default.
+          $description:ar: لون البطاقات غير المختارة. اللون الافتراضي #050507، وإن تُرك فارغاً أو كان غير صحيح يُستعمل الافتراضي.
+          $_advanced: true
         - SelectedColor: "#090A0B"
           $name: Selected card color
+          $name:ar: لون البطاقة المختارة
           $description: Base color of the selected card. Default Hex - #090A0B. An empty or invalid value uses the default.
+          $description:ar: لون البطاقة المختارة. اللون الافتراضي #090A0B، وإن تُرك فارغاً أو كان غير صحيح يُستعمل الافتراضي.
+          $_advanced: true
         - ExpandSelectedWindow: true
           $name: Expand selected window
+          $name:ar: تكبير النافذة المختارة
           $description: Animates the selected card toward the selected window when confirmed.
+          $description:ar: عند اختيار نافذة تكبر بطاقتها بحركة حتى تصير النافذة نفسها.
       $name: Cards
+      $name:ar: البطاقات
   $name: Appearance
+  $name:ar: الشكل
 - Background: "dwm"
   $name: Background
+  $name:ar: الخلفية
   $description: Background layer behind the cards.
+  $description:ar: ما يظهر خلف البطاقات.
   $options:
   - "none": None
   - "dwm": Transparent - DWM
+  $options:ar:
+  - "none": بلا خلفية
+  - "dwm": شفافة
 - Dwm:
     - BackgroundColor: "#141A22"
       $name: Background color
+      $name:ar: لون الخلفية
       $description: Color of the transparent DWM background behind the cards. Default Hex - #141A22. An empty or invalid value uses the default.
+      $description:ar: لون الخلفية الشفافة خلف البطاقات. اللون الافتراضي #141A22، وإن تُرك فارغاً أو كان غير صحيح يُستعمل الافتراضي.
+      $_advanced: true
     - Opacity: 20
       $name: Opacity
+      $name:ar: درجة التعتيم
       $description: DWM background opacity (0-100). Default - 20.
+      $description:ar: مدى تعتيم الخلفية الشفافة من 0 إلى 100. الافتراضي 20.
+      $_advanced: true
   $name: DWM background
+  $name:ar: الخلفية الشفافة
+  $_advanced: true
 - ExperimentalSettings:
     - GeneralBackground: "none"
       $name: General Background
+      $name:ar: خلفية متحركة
       $description: Experimental features may require additional GPU, CPU and RAM resources and may affect performance. Pattern Waves requires a background other than None.
+      $description:ar: ميزة تجريبية قد تستهلك من قدرة الجهاز وذاكرته وتبطئه. الأمواج المنقطة تحتاج خلفية غير «بلا خلفية».
       $options:
       - "none": None
       - "pattern": Pattern Waves
+      $options:ar:
+      - "none": بلا
+      - "pattern": أمواج منقطة
+      $_advanced: true
     - PatternWaves:
         - Shape: "dots"
           $name: Shape
+          $name:ar: الشكل
           $description: Pattern shape.
+          $description:ar: شكل نقاط النقش.
           $options:
           - "dots": Dots
           - "squares": Squares
+          $options:ar:
+          - "dots": نقاط
+          - "squares": مربعات
+          $_advanced: true
         - Speed: 100
           $name: Speed
+          $name:ar: السرعة
           $description: Procedural wave speed (0-200).
+          $description:ar: سرعة الأمواج من 0 إلى 200.
+          $_advanced: true
         - WaveStrength: 65
           $name: Wave strength
+          $name:ar: قوة الموج
           $description: Surface deformation intensity (0-200).
+          $description:ar: ارتفاع الأمواج من 0 إلى 200.
+          $_advanced: true
         - Density: 24
           $name: Density
+          $name:ar: التباعد
           $description: Dot spacing (8-48).
+          $description:ar: المسافة بين النقاط من 8 إلى 48.
+          $_advanced: true
         - Light: 120
           $name: Light
+          $name:ar: الإضاءة
           $description: Apparent depth and illumination (0-200).
+          $description:ar: العمق والإضاءة الظاهران من 0 إلى 200.
+          $_advanced: true
         - Contrast: 100
           $name: Contrast
+          $name:ar: التباين
           $description: Dot contrast (0-200).
+          $description:ar: وضوح النقاط من 0 إلى 200.
+          $_advanced: true
         - Opacity: 100
           $name: Opacity
+          $name:ar: الظهور
           $description: Pattern opacity (0-100).
+          $description:ar: مدى ظهور النقش من 0 إلى 100.
+          $_advanced: true
         - CursorInteraction: true
           $name: Cursor interaction
+          $name:ar: التفاعل مع المؤشر
           $description: Enable cursor-driven ripples.
+          $description:ar: تتموج النقاط حين يمر عليها المؤشر.
+          $_advanced: true
         - CursorStrength: 100
           $name: Cursor strength
+          $name:ar: قوة تموج المؤشر
           $description: Cursor ripple intensity (0-200).
+          $description:ar: قوة التموج حول المؤشر من 0 إلى 200.
+          $_advanced: true
       $name: Pattern Waves
+      $name:ar: الأمواج المنقطة
+      $_advanced: true
   $name: Experimental
+  $name:ar: تجريبي
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

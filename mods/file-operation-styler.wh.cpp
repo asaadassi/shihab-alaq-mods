@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              file-operation-styler
 // @name            File Operation Styler
+// @name:ar         تنسيق نافذة النسخ والنقل
 // @description     Portable custom presentation for native Explorer file operations with a skin-safe unified presentation.
-// @version         1.2.0-shihab.1
+// @description:ar  شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف، مع سمات وألوان تختارها.
+// @version         1.2.0-shihab.2
 // @author          digART
 // @github          https://github.com/digart11
 // @license         GPL-3.0
@@ -93,23 +95,33 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
 - showCurrentFileProgressBar: true
   $name: Show current-file progress bar
   $description: Show progress for the file currently being copied or moved.
+  $name:ar: عرض شريط تقدّم الملف الحالي
+  $description:ar: يعرض تقدّم الملف الذي يُنسخ أو يُنقل الآن.
 
 - hideSmallControlButtons: false
   $name: Hide small control buttons
   $description: Hide the small Pause / Resume and Cancel controls in the upper-right corner. The progress circle and bottom Cancel button remain available.
+  $name:ar: إخفاء أزرار التحكم الصغيرة
+  $description:ar: يخفي زرّي الإيقاف المؤقت والإلغاء الصغيرين في الزاوية العليا. تبقى دائرة التقدّم وزر الإلغاء في الأسفل متاحين.
 
 - hideTitleBarPercentage: false
   $name: Hide title-bar percentage
   $description: Hide the normal progress percentage from the visible window title bar.
+  $name:ar: إخفاء النسبة من شريط العنوان
+  $description:ar: يخفي نسبة التقدّم من شريط عنوان النافذة.
 
 
 - customization:
   - enabled: false
     $name: Enable customization
     $description: Turn on themes and custom style settings.
+    $name:ar: تفعيل التخصيص
+    $description:ar: يفعّل السمات وإعدادات الشكل المخصّصة.
   - preset: blueDark
     $name: Theme
     $description: Change color theme.
+    $name:ar: السمة
+    $description:ar: اختر ألوان النافذة.
     $options:
     - blueDark: Blue Dark
     - graphite: Graphite
@@ -118,36 +130,65 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     - light: Light
     - system: Windows / System
     - glass: Frosted Glass
+    $options:ar:
+    - blueDark: أزرق داكن
+    - graphite: رمادي فحمي
+    - midnight: كحلي ليلي
+    - warmDark: داكن دافئ
+    - light: فاتح
+    - system: ألوان ويندوز
+    - glass: زجاج مغبّش
 
   - glassEffect: acrylic
     $name: Frosted Glass style
     $description: Choose the glass effect used by the Frosted Glass theme.
+    $name:ar: نوع الزجاج المغبّش
+    $description:ar: اختر تأثير الزجاج في سمة الزجاج المغبّش.
+    $_advanced: true
     $options:
     - acrylic: Windows Acrylic
     - blur: Custom Blur
+    $options:ar:
+    - acrylic: أكريليك ويندوز
+    - blur: تمويه مخصّص
     #! $showIf: {preset: glass}
 
   - glassTint: "#000000"
     $name: Blur tint
     $description: Tint color used by Custom Blur.
+    $name:ar: لون التمويه
+    $description:ar: اللون الذي يُصبغ به التمويه المخصّص.
+    $_advanced: true
     #! $format: colorRgb
     #! $showIf: {preset: glass, glassEffect: blur}
 
   - glassTintStrength: 0
     $name: Glass opacity
     $description: Higher values make Custom Blur less transparent while preserving the selected tint color.
+    $name:ar: عتامة الزجاج
+    $description:ar: كلما زادت القيمة قلّت شفافية التمويه المخصّص مع بقاء اللون المختار.
+    $_advanced: true
     #! $showIf: {preset: glass, glassEffect: blur}
 
   - footerStyle: glass
     $name: Footer
     $description: Frosted Glass footer is available only when the Frosted Glass theme is selected.
+    $name:ar: الشريط السفلي
+    $description:ar: الشريط السفلي الزجاجي متاح فقط مع سمة الزجاج المغبّش.
+    $_advanced: true
     $options:
     - glass: Frosted Glass
     - solid: Solid
+    $options:ar:
+    - glass: زجاج مغبّش
+    - solid: لون ثابت
     #! $showIf: {preset: glass}
   - footerColorPreset: theme
     $name: Solid footer color preset
     $description: Used when Frosted Glass is selected with a Solid footer.
+    $name:ar: لون الشريط السفلي الثابت
+    $description:ar: يُستخدم مع سمة الزجاج المغبّش حين يكون الشريط السفلي بلون ثابت.
+    $_advanced: true
     $options:
     - theme: Theme default
     - blueDark: Blue Dark
@@ -157,44 +198,82 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     - light: Light
     - system: Windows / System
     - custom: Custom
+    $options:ar:
+    - theme: لون السمة
+    - blueDark: أزرق داكن
+    - graphite: رمادي فحمي
+    - midnight: كحلي ليلي
+    - warmDark: داكن دافئ
+    - light: فاتح
+    - system: ألوان ويندوز
+    - custom: مخصّص
     #! $showIf: {preset: glass, footerStyle: solid}
   - footerColor: ""
     $name: Solid footer custom color
     $description: Used only when Solid footer color preset is Custom. Enter a hex color such as #1C3346.
+    $name:ar: لون مخصّص للشريط السفلي
+    $description:ar: "يُستخدم فقط حين يكون لون الشريط السفلي «مخصّص». أدخل رمز لون مثل #1C3346."
+    $_advanced: true
     #! $format: colorRgb
     #! $showIf: {preset: glass, footerStyle: solid, footerColorPreset: custom}
   - colors:
     - backgroundOverride: ""
       $name: Background
+      $name:ar: الخلفية
+      $_advanced: true
       #! $format: colorRgb
     - accentOverride: ""
       $name: Accent
       #! $format: colorRgb
       $description: Circle, progress bar, graph, and links.
+      $name:ar: اللون المميّز
+      $description:ar: الدائرة وشريط التقدّم والرسم البياني والروابط.
+      $_advanced: true
     - primaryTextOverride: ""
       $name: Main text
       #! $format: colorRgb
       $description: Large numbers and values.
+      $name:ar: النص الرئيسي
+      $description:ar: الأرقام والقيم الكبيرة.
+      $_advanced: true
     - secondaryTextOverride: ""
       $name: Secondary text
       #! $format: colorRgb
       $description: Labels and smaller text.
+      $name:ar: النص الثانوي
+      $description:ar: التسميات والنصوص الأصغر.
+      $_advanced: true
     - inactiveOverride: ""
       $name: Track / inactive
       #! $format: colorRgb
       $description: Circle track and progress track.
+      $name:ar: المسار غير النشط
+      $description:ar: مسار الدائرة ومسار شريط التقدّم.
+      $_advanced: true
     $name: Colors
     $description: "Leave blank to use the theme color. Enter a hex color such as #2D8BE0."
+    $name:ar: الألوان
+    $description:ar: "اتركه فارغاً لاستخدام لون السمة. أدخل رمز لون مثل #2D8BE0."
+    $_advanced: true
   - style:
     - circleThickness: 7
       $name: Circle thickness
+      $name:ar: سُمك الدائرة
+      $_advanced: true
     - progressThickness: 8
       $name: Progress bar thickness
+      $name:ar: سُمك شريط التقدّم
+      $_advanced: true
     $name: Progress style
+    $name:ar: شكل التقدّم
+    $_advanced: true
   - text:
     - fontPreset: default
       $name: Font
       $description: Choose one font for the whole window.
+      $name:ar: الخط
+      $description:ar: اختر خطاً واحداً للنافذة كلها.
+      $_advanced: true
       $options:
       - default: Windows default
       - segoeUI: Segoe UI
@@ -207,20 +286,47 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
       - georgia: Georgia
       - timesNewRoman: Times New Roman
       - consolas: Consolas
+      $options:ar:
+      - default: خط ويندوز الافتراضي
+      - segoeUI: خط Segoe UI
+      - segoeUIVariable: خط Segoe UI Variable
+      - arial: خط Arial
+      - calibri: خط Calibri
+      - tahoma: خط Tahoma
+      - verdana: خط Verdana
+      - trebuchetMS: خط Trebuchet MS
+      - georgia: خط Georgia
+      - timesNewRoman: خط Times New Roman
+      - consolas: خط Consolas
     - customFont: ""
       $name: Custom font
       $description: Optional. Enter an installed font name here to use it instead of the selection above.
+      $name:ar: خط مخصّص
+      $description:ar: اختياري. اكتب اسم خط مثبّت على الجهاز لاستخدامه بدل الخط المختار أعلاه.
+      $_advanced: true
     - bodySize: 11
       $name: Details text size
       $description: Source and destination, items, speed, time, Complete, and footer text.
+      $name:ar: حجم نص التفاصيل
+      $description:ar: المصدر والوجهة، والعناصر، والسرعة، والوقت، وعبارة الاكتمال، ونص الشريط السفلي.
+      $_advanced: true
     - summarySize: 23
       $name: Summary text size
       $description: The large transferred / total line, for example 1.2 GB / 4.0 GB.
+      $name:ar: حجم نص الملخّص
+      $description:ar: السطر الكبير للمنقول من الإجمالي، مثل 1.2 GB / 4.0 GB.
+      $_advanced: true
     - percentSize: 26
       $name: Circle percentage size
       $description: The percentage number inside the progress circle.
+      $name:ar: حجم النسبة داخل الدائرة
+      $description:ar: رقم النسبة المئوية داخل دائرة التقدّم.
+      $_advanced: true
     $name: Text
+    $name:ar: النص
+    $_advanced: true
   $name: Customization
+  $name:ar: التخصيص
 */
 // ==/WindhawkModSettings==
 

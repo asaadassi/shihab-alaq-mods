@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              taskbar-start-button-colorizer
 // @name            Start button colorizer
+// @name:ar         تلوين زر ابدأ
 // @description     Recolor the Start button icon on the taskbar with a color preset or with hue, saturation, brightness and opacity effects, and change its size (Windows 11 only)
-// @version         1.1-shihab.1
+// @description:ar  غيّر لون أيقونة زر ابدأ بلون جاهز أو بضبط درجة اللون والتشبع والسطوع والشفافية، وغيّر حجمها (ويندوز 11 فقط)
+// @version         1.1-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -64,6 +66,10 @@ Only Windows 11 is supported.
 /*
 - color: none
   $name: Color
+  $name:ar: اللون
+  $description:ar: >-
+    يلوّن الأيقونة بتغيير درجة ألوانها مع إبقاء تشبعها وسطوعها كما هما. أما لون
+    النظام فيغيّر التشبع أيضاً.
   $description: >-
     Recolors the icon by setting the hue of its colors, keeping their original
     saturation and brightness. The system accent color sets the saturation too.
@@ -78,28 +84,55 @@ Only Windows 11 is supported.
   - blue: Blue
   - purple: Purple
   - pink: Pink
+  $options:ar:
+  - none: الأصلي
+  - accent: لون النظام
+  - red: أحمر
+  - orange: برتقالي
+  - yellow: أصفر
+  - green: أخضر
+  - teal: أخضر مزرق
+  - blue: أزرق
+  - purple: بنفسجي
+  - pink: وردي
 - effects:
   - hue: 0
     $name: Hue shift
+    $name:ar: تدوير الألوان
+    $description:ar: >-
+      يدير ألوان الأيقونة بعدد من الدرجات بين 0 و360، فوق اللون المختار أعلاه.
+    $_advanced: true
     $description: >-
       Rotates the colors of the icon by the given amount of degrees, from 0 to
       360, on top of the color which is selected above.
   - saturation: 100
     $name: Saturation
+    $name:ar: التشبع
+    $description:ar: >-
+      نسبة مئوية من الألوان الأصلية. الصفر يجعل الأيقونة رمادية.
     $description: >-
       In percent, relative to the original colors. Zero makes the icon gray.
   - brightness: 100
     $name: Brightness
+    $name:ar: السطوع
+    $description:ar: >-
+      نسبة مئوية من الألوان الأصلية. الصفر يجعل الأيقونة سوداء، وما فوق 100 يفتّحها
+      حتى الأبيض.
     $description: >-
       In percent, relative to the original colors. Zero makes the icon black,
       and values above 100 make the icon lighter, up to white.
   - opacity: 100
     $name: Opacity
     $description: In percent.
+    $name:ar: الشفافية
+    $description:ar: نسبة الظهور بالمئة (100 تعني ظاهرة تماماً).
   $name: Effects
+  $name:ar: التأثيرات
 - size: 100
   $name: Size
   $description: The size of the icon in percent.
+  $name:ar: الحجم
+  $description:ar: حجم الأيقونة بالمئة.
 */
 // ==/WindhawkModSettings==
 

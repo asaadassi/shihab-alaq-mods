@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              modernize-folder-picker-dialog
 // @name            Modernize Folder Picker Dialog
+// @name:ar         نافذة اختيار مجلد حديثة
 // @description     Replaces the classic "Browse For Folder" dialog
-// @version         1.0.0-shihab.1
+// @description:ar  يستبدل نافذة «استعراض بحثاً عن مجلد» القديمة بنافذة الاختيار الحديثة
+// @version         1.0.0-shihab.2
 // @author          aubymori
 // @github          https://github.com/aubymori
 // @include         *

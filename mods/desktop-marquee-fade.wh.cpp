@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              desktop-marquee-fade
 // @name            Desktop Marquee Fade
+// @name:ar         تلاشي مستطيل التحديد
 // @description     Adds a smooth fade-out animation to the desktop selection rectangle when you release the mouse button.
-// @version         1.0.0-shihab.1
+// @description:ar  يختفي مستطيل التحديد على سطح المكتب بتلاشٍ ناعم حين تترك زر الماوس.
+// @version         1.0.0-shihab.2
 // @author          angel_lov
 // @github          https://github.com/Twilight0Sparkle
 // @include         explorer.exe
@@ -83,30 +85,52 @@ more polished and modern.
 - speed: 100
   $name: Animation Speed (%)
   $description: Animation speed in percent (50-500). Default is 100.
+  $name:ar: سرعة التلاشي (%)
+  $description:ar: سرعة التلاشي بالنسبة المئوية (من 50 إلى 500). القيمة المعتادة 100.
 - duration: 300
   $name: Animation Duration (ms)
   $description: Animation duration in milliseconds (100-2000). Default is 300.
+  $name:ar: مدة التلاشي (ملي ثانية)
+  $description:ar: مدة التلاشي بالملي ثانية (من 100 إلى 2000). القيمة المعتادة 300.
 - initial_alpha: 90
   $name: Manual Initial Opacity
   $description: Starting opacity (1-255). Only used if Auto-calculate Opacity is disabled. Default is 90.
+  $name:ar: درجة الظهور عند البدء
+  $description:ar: درجة ظهور المستطيل عند بدء التلاشي (من 1 إلى 255). تُستعمل فقط إذا كان الضبط التلقائي لدرجة الظهور متوقفاً. القيمة المعتادة 90.
+  $_advanced: true
 - auto_calc_opacity: false
   $name: Auto-calculate Opacity
   $description: Automatically sets starting opacity based on speed and duration settings.
+  $name:ar: ضبط درجة الظهور تلقائياً
+  $description:ar: تُحسب درجة الظهور عند البدء تلقائياً من السرعة والمدة.
+  $_advanced: true
 - accelerate_if_covered: true
   $name: Accelerate if covered
   $description: Speeds up the fade 4x whenever another window is in the foreground.
+  $name:ar: تسريع التلاشي خلف النوافذ
+  $description:ar: يصبح التلاشي أسرع 4 مرات حين تكون نافذة أخرى في المقدمة.
+  $_advanced: true
 - single_instance: false
   $name: Single Instance Only
   $description: If ON, only one fading rectangle can be active at a time.
+  $name:ar: مستطيل واحد في كل مرة
+  $description:ar: عند التشغيل لا يتلاشى إلا مستطيل واحد في الوقت نفسه.
+  $_advanced: true
 - use_custom_color: false
   $name: Use Custom Colors
   $description: Overrides the fade overlay's fill and border colors. The live drag rectangle keeps its normal system color.
+  $name:ar: استعمال ألوان خاصة
+  $description:ar: تلوين المستطيل أثناء التلاشي بالألوان التي تختارها. أما المستطيل أثناء السحب فيبقى بلون النظام المعتاد.
 - custom_fill_color: "8C8C8C"
   $name: Custom Fill Color (HEX)
   $description: Hex fill color for the fade overlay (e.g. 783838).
+  $name:ar: لون التعبئة
+  $description:ar: لون داخل المستطيل أثناء التلاشي، يُكتب بصيغة ست خانات (مثل 783838).
 - custom_border_color: "B4B4B4"
   $name: Custom Border Color (HEX)
   $description: Hex border color for the fade overlay (e.g. FF8F8F).
+  $name:ar: لون الإطار
+  $description:ar: لون إطار المستطيل أثناء التلاشي، يُكتب بصيغة ست خانات (مثل FF8F8F).
 */
 // ==/WindhawkModSettings==
 

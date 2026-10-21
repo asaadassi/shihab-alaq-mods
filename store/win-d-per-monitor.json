@@ -8,6 +8,24 @@
     "ar": "يُخفي Win+D نوافذ الشاشة التي عليها المؤشر فقط، وتبقى الشاشات الأخرى كما هي.",
     "en": "Win+D hides only the windows on the monitor where the cursor is; the other monitors stay as they are."
   },
+  "summary": {
+    "ar": "Win+D يُخفي نوافذ شاشة واحدة فقط",
+    "en": "Win+D clears only the monitor you are on"
+  },
+  "highlights": {
+    "ar": [
+      "يُخفي نوافذ الشاشة التي عليها المؤشر فقط",
+      "الشاشات الأخرى تبقى كما هي دون تغيير",
+      "اضغط Win+D مرة أخرى لتعود النوافذ",
+      "تختار نوافذ تبقى ظاهرة دائماً"
+    ],
+    "en": [
+      "Hides only the windows on the monitor under the cursor",
+      "Your other monitors stay just as they are",
+      "Press Win+D again to bring the windows back",
+      "Choose windows that always stay visible"
+    ]
+  },
   "basedOn": "Windhawk mods: win-d-per-monitor (easyatm)",
   "author": "easyatm",
   "license": "MIT",

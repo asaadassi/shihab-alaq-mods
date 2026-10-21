@@ -13,5 +13,23 @@
   "license": "MIT",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/windows-animations.wh.cpp",
   "group": "window-motion",
-  "order": 0
+  "order": 0,
+  "summary": {
+    "ar": "حركات جميلة لفتح النوافذ وإغلاقها",
+    "en": "Beautiful animations for opening and closing windows"
+  },
+  "highlights": {
+    "ar": [
+      "حركة عند تصغير النوافذ واستعادتها",
+      "مؤثرات لافتة عند إغلاق النوافذ",
+      "حركة ناعمة عند التبديل بـ Alt+Tab",
+      "اختر نمط الحركة وسرعتها"
+    ],
+    "en": [
+      "Animations when windows minimize and restore",
+      "Striking effects when windows close",
+      "Smooth animation when switching with Alt+Tab",
+      "Choose the animation style and speed"
+    ]
+  }
 }

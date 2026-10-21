@@ -8,6 +8,24 @@
     "ar": "شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.",
     "en": "A small live bar at the top of the screen that shows now playing, downloads, the clipboard, the battery and more."
   },
+  "summary": {
+    "ar": "جزيرة حيّة أعلى الشاشة تعرض ما يحدث الآن",
+    "en": "A live island at the top of your screen"
+  },
+  "highlights": {
+    "ar": [
+      "تعرض الأغنية الجارية مع أزرار التشغيل",
+      "تنبّه للتنزيلات والحافظة والبطارية والبلوتوث",
+      "تعرض الساعة والطقس والتقويم",
+      "تختار موضعها وشكلها وحجمها وألوانها"
+    ],
+    "en": [
+      "Shows the playing song with playback buttons",
+      "Alerts for downloads, the clipboard, battery and Bluetooth",
+      "Shows the clock, the weather and a calendar",
+      "Choose its place, shape, size and colours"
+    ]
+  },
   "basedOn": "Windhawk mods: dynamic-island-for-windows (Himanshu)",
   "author": "Himanshu",
   "license": "MIT",

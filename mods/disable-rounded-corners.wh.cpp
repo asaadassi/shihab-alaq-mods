@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              disable-rounded-corners
 // @name            Disable rounded corners in Windows 11
+// @name:ar         زوايا النوافذ الحادة
 // @description     A simple mod to disable window rounded corners in Windows 11
-// @version         1.0.1
+// @description:ar  يلغي الزوايا الدائرية لنوافذ ويندوز 11 فتعود حادة كما في ويندوز 10.
+// @version         1.0.1-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z

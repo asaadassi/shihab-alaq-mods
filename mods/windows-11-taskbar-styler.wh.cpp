@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              windows-11-taskbar-styler
 // @name            Windows 11 Taskbar Styler
+// @name:ar         ثيمات شريط المهام
 // @description     Customize the taskbar with themes contributed by others or create your own
-// @version         1.10-shihab.1
+// @description:ar  غيّر شكل شريط المهام بثيمات جاهزة صمّمها آخرون أو بتصميمك الخاص
+// @version         1.10-shihab.2
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -531,10 +533,14 @@ from the **TranslucentTB** project.
 /*
 - theme: ""
   $name: Theme
+  $name:ar: الثيم
   $description: >-
     Themes are collections of styles. For details about the themes below, or for
     information about submitting your own theme, refer to the relevant section
     in the mod details.
+  $description:ar: >-
+    الثيم مجموعة جاهزة من التنسيقات تغيّر شكل شريط المهام كله. اختر واحداً
+    لتطبيقه، أو "بلا ثيم" لتبقى على تنسيقاتك الخاصة فقط.
   $options:
   - "": None
   - TranslucentTaskbar: TranslucentTaskbar
@@ -593,20 +599,87 @@ from the **TranslucentTB** project.
   - Minecraft_Hotbar: Minecraft Hotbar
   - One_UI_8_5_variant_Dock: One UI 8.5 (Dock)
   - One_UI_8_5_variant_Taskbar: One UI 8.5 (Taskbar)
+  $options:ar:
+  - "": بلا ثيم
+  - TranslucentTaskbar: TranslucentTaskbar
+  - DockLike: DockLike
+  - SimplyTransparent: SimplyTransparent
+  - Squircle: Squircle
+  - Matter: Matter
+  - WinXP: WinXP
+  - WinXP_variant_Zune: WinXP (زون)
+  - Bubbles: Bubbles
+  - RosePine: RosePine
+  - WinVista: WinVista
+  - CleanSlate: CleanSlate
+  - Lucent: Lucent (شريط بلون التمييز)
+  - Lucent_variant_Light: Lucent (شريط فاتح)
+  - SunValley: SunValley
+  - 21996Taskbar: SunValley (القديم)
+  - BottomDensy: BottomDensy
+  - BottomDensy_variant_NoInd: BottomDensy (بلا مؤشر)
+  - TaskbarXII: TaskbarXII
+  - xdark: xdark
+  - Windows7: Windows7
+  - Aeris: Aeris
+  - Plasma: Plasma
+  - WindowGlass: WindowGlass
+  - WindowGlass_variant_Split: WindowGlass (مقسوم)
+  - WindowGlass_variant_FullLength: WindowGlass (بعرض الشاشة)
+  - Surface: Surface
+  - Oversimplified&Accentuated: "Oversimplified&Accentuated"
+  - Luminosity_variant_Dock: Luminosity (رصيف)
+  - Luminosity_variant_Classic: Luminosity (كلاسيكي)
+  - Luminosity_variant_Compact: Luminosity (مضغوط)
+  - LayerMicaUI: LayerMicaUI
+  - Fluid: Fluid
+  - TintedGlass: TintedGlass
+  - TaskbarToStatusbar: TaskbarToStatusbar
+  - UltraWideFriendly: UltraWideFriendly
+  - LiquidGlass2: LiquidGlass (الجديد)
+  - LiquidGlass: LiquidGlass (القديم)
+  - LiquidGlass_variant_Alternate: LiquidGlass (القديم - بديل)
+  - Borderless: Borderless
+  - Command_Center: مركز التحكم (Command Center)
+  - FluentGlass: FluentGlass
+  - OS26_Liquid_Glass_variant_ClearMacDock: OS26 Liquid Glass (رصيف شفاف)
+  - OS26_Liquid_Glass_variant_ClearMacDockCompact: OS26 Liquid Glass (رصيف شفاف مضغوط)
+  - OS26_Liquid_Glass_variant_ClearTaskbar: OS26 Liquid Glass (شريط شفاف)
+  - OS26_Liquid_Glass_variant_DarkMacDock: OS26 Liquid Glass (رصيف داكن)
+  - OS26_Liquid_Glass_variant_DarkMacDockCompact: OS26 Liquid Glass (رصيف داكن مضغوط)
+  - OS26_Liquid_Glass_variant_DarkTaskbar: OS26 Liquid Glass (شريط داكن)
+  - FrostyGlass: FrostyGlass
+  - FrostedAcrylic: FrostedAcrylic
+  - Pills: Pills
+  - Blob: Blob
+  - Minecraft_Hotbar: شريط ماينكرافت (Minecraft Hotbar)
+  - One_UI_8_5_variant_Dock: One UI 8.5 (رصيف)
+  - One_UI_8_5_variant_Taskbar: One UI 8.5 (شريط)
 - styleConstants: [""]
   $name: Style constants
+  $name:ar: قيم تخصيص الثيم
+  $_advanced: true
   $description: >-
     Some themes support style constants for customization, such as colors. Refer
     to the theme page for available constants. For technical details, refer to
     the mod description.
+  $description:ar: >-
+    بعض الثيمات تقبل قيماً تخصّصها، مثل الألوان. تجد القيم المتاحة في صفحة
+    الثيم، والتفاصيل في شرح الإضافة.
 - controlStyles:
   - - target: ""
       $name: Target
+      $name:ar: العنصر المستهدف
     - styles: [""]
       $name: Styles
+      $name:ar: التنسيقات
   $name: Control styles
+  $name:ar: تنسيقات العناصر
+  $_advanced: true
 - themeResourceVariables: [""]
   $name: Resource variables
+  $name:ar: متغيرات الموارد
+  $_advanced: true
   $description: >-
     Use "Key=Value" to override an existing resource with a new value.
 
@@ -615,23 +688,44 @@ from the **TranslucentTB** project.
 
     The ":=" syntax can be used to set a XAML value. For details, refer to the
     mod description.
+  $description:ar: >-
+    اكتب "Key=Value" لاستبدال قيمة مورد موجود بقيمة جديدة.
+
+    واكتب "Key@Dark=Value" أو "Key@Light=Value" لتعريف قيم تتغير مع الوضع الداكن
+    والفاتح، ويُشار إليها في التنسيقات بـ {ThemeResource Key}.
+
+    ويمكن استعمال ":=" لوضع قيمة بصيغة XAML. التفاصيل في شرح الإضافة.
 - clickThroughTaskbar: false
   $name: Click-through taskbar
+  $name:ar: النقر عبر الأجزاء الفارغة من الشريط
   $description: >-
     Make the empty parts of the taskbar click-through. Only the area with the
     taskbar buttons and the system tray stays visible and clickable. Mainly
     useful for dock themes such as DockLike.
+  $description:ar: >-
+    تصبح الأجزاء الفارغة من شريط المهام غير مرئية ويمر النقر من خلالها، ويبقى
+    ظاهراً فقط مكان الأزرار وأيقونات النظام. مفيد خاصة مع ثيمات الرصيف مثل DockLike.
 - xamlDiagnosticsHandling: alert
   $name: XAML diagnostics consumer handling
+  $name:ar: التعامل مع البرامج الأخرى التي تعدّل الواجهة
+  $_advanced: true
   $description: >-
     How to handle other programs that try to use XAML diagnostics. There can
     only be one consumer at a time. Block will prevent other programs from using
     it, which might break them. Allow will let them use it, which might break
     this mod.
+  $description:ar: >-
+    ماذا يحدث حين يحاول برنامج آخر الوصول إلى الواجهة بنفس الطريقة. لا يستطيع
+    ذلك إلا برنامج واحد في كل مرة: المنع قد يعطّل البرنامج الآخر، والسماح قد
+    يعطّل هذه الإضافة.
   $options:
   - alert: Alert (prompt before blocking)
   - block: Block other consumers
   - allow: Allow other consumers
+  $options:ar:
+  - alert: اسألني قبل المنع
+  - block: امنع البرامج الأخرى
+  - allow: اسمح للبرامج الأخرى
 */
 // ==/WindhawkModSettings==
 

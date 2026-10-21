@@ -13,5 +13,23 @@
   "license": "MIT",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/taskbar-dock-animation.wh.cpp",
   "group": "taskbar-look",
-  "order": 4
+  "order": 4,
+  "summary": {
+    "ar": "أيقونات تكبر حين يمر المؤشر",
+    "en": "Icons grow as the cursor passes"
+  },
+  "highlights": {
+    "ar": [
+      "تكبر الأيقونات بنعومة تحت المؤشر كما في ماك",
+      "اختر مقدار التكبير ومدى التأثير",
+      "اختر شكل الحركة أو أوقف الاهتزاز الخفيف",
+      "استثنِ زر ابدأ وأزرار النظام إن أردت"
+    ],
+    "en": [
+      "Icons grow smoothly under the cursor, as on macOS",
+      "Choose how much they grow and how far the effect reaches",
+      "Choose the motion style or turn off the gentle bounce",
+      "Leave out Start and the system buttons if you like"
+    ]
+  }
 }

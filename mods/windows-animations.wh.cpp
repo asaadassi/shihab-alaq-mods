@@ -1,8 +1,10 @@
 // ==WindhawkMod==
 // @id              windows-animations
 // @name            Windows Animations
+// @name:ar         حركات النوافذ
 // @description     Smooth minimize, restore, close, switch animations for windows.
-// @version         1.3.7-shihab.1
+// @description:ar  حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل بينها.
+// @version         1.3.7-shihab.2
 // @author          ReDrag
 // @github          https://github.com/redrag2105
 // @donateUrl       https://ko-fi.com/redrag2105
@@ -153,12 +155,21 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
 - minimize_restore:
   - minimize_animation: true
     $name: Animate minimizing
+    $name:ar: حركة التصغير
+    $description:ar: حركة للنافذة وهي تنزل إلى شريط المهام.
     $description: Animate windows as they minimize to the taskbar.
   - restore_animation: true
     $name: Animate restoring
+    $name:ar: حركة الاستعادة
+    $description:ar: حركة للنافذة وهي تعود من شريط المهام.
     $description: Animate windows as they return from the taskbar.
   - launch_animation: false
     $name: Animate app launches
+    $name:ar: حركة فتح البرامج
+    $description:ar: >-
+      تشغيل حركة الاستعادة حين تُفتح نافذة البرنامج أول مرة. معطلة في البداية،
+      وبعض البرامج تظهر نافذتها دون حركة.
+    $_advanced: true
     $description: >-
       Disabled by default. Enable to use the restore animation when an application window first
       opens. Firefox-family browsers such as Firefox and Waterfox use an alpha-only compatibility
@@ -167,6 +178,10 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       Windows hidden to the tray still become visible normally when reopened.
   - random_effect: false
     $name: Shuffle animation styles
+    $name:ar: تنويع الحركات تلقائياً
+    $description:ar: >-
+      تبديل الحركة في كل مرة بالدور بين كل الأنماط. عند تفعيله يُتجاهل اختيار نمط الحركة.
+    $_advanced: true
     $description: >-
       Use one session-wide shuffled cycle shared by every app. Play every effect once before
       starting a new cycle, and never join consecutive cycles on the same effect. Each restore or
@@ -175,6 +190,17 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       keep the same effect. When enabled, the Animation style setting below is ignored.
   - effect_style: genie
     $name: Animation style
+    $name:ar: نمط الحركة
+    $description:ar: الحركة المستخدمة عند تصغير النوافذ واستعادتها، إلا إذا فُعّل التنويع التلقائي.
+    $options:ar:
+    - genie: المصباح السحري
+    - windows10: ويندوز 10
+    - ink_splash: بقعة حبر
+    - scorch: احتراق من الزاوية
+    - splinter: تشقق من الوسط
+    - mirage: سراب متموج
+    - stipple: تفتح بالنقاط
+    - swell: تكبر وتتلاشى
     $description: >-
       Choose the effect used for minimizing and restoring windows. Ignored while shuffling is
       enabled.
@@ -189,22 +215,37 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
     - swell: Swell — Expand and fade
   - duration_ms: 360
     $name: Duration (ms)
+    $name:ar: مدة الحركة (ملي ثانية)
+    $description:ar: >-
+      طول الحركة من 200 إلى 1400. الرقم الأصغر أسرع. نمط ويندوز 10 له مدة ثابتة.
     $description: >-
       Base animation duration, from 200 to 1400 ms. Non-Genie effects apply a small pacing
       adjustment. Windows 10 style ignores this setting and uses a fixed system-like timing.
   - unhide_taskbar: false
     $name: Reveal the taskbar during Genie
+    $name:ar: إظهار شريط المهام أثناء حركة المصباح
+    $description:ar: >-
+      إذا كان شريط المهام يختفي تلقائياً، يظهر لحظة حتى تنزل النافذة إليه. يعمل مع نمط المصباح السحري فقط.
+    $_advanced: true
     $description: >-
       When taskbar auto-hide is enabled, keep an already visible or hovered taskbar above the
       Genie effect without changing focus. If it is hidden, briefly reveal it and defer the real
       minimize until the animation finishes. Off by default. No effect on other animation styles.
   - unhide_duration_ms: 450
     $name: Taskbar reveal duration (ms)
+    $name:ar: مدة إظهار شريط المهام (ملي ثانية)
+    $description:ar: كم يبقى الشريط ظاهراً قبل أن تكتمل حركة التصغير، من 0 إلى 5000.
+    $_advanced: true
     $description: >-
       How long to keep the taskbar revealed before the deferred Genie minimize commits, from 0
       to 5000 ms.
   - show_desktop_top_window_only: false
     $name: Optimize Show Desktop
+    $name:ar: تسريع «إظهار سطح المكتب»
+    $description:ar: >-
+      عند إظهار سطح المكتب (Win+D أو بثلاثة أصابع على لوحة اللمس) تُترك حركة النوافذ لويندوز نفسه بدل
+      تحريكها واحدة بعد الأخرى. تصغير النوافذ واستعادتها فرادى يبقى بالحركات المختارة.
+    $_advanced: true
     $description: >-
       Disabled keeps the classic behavior and custom-animates eligible windows in sequence during
       Show Desktop. Enable this to bypass the mod's minimize and restore animations for Show
@@ -214,6 +255,10 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       or up to 2 seconds when the mod detects Show Desktop through the Win+D keyboard shortcut.
   - gpu_acceleration: true
     $name: Hybrid GPU acceleration
+    $name:ar: الاستعانة بكرت الشاشة
+    $description:ar: >-
+      استعمال كرت الشاشة لرسم حركة الاستعادة والفتح حين يكون ذلك أسرع. عند تعطيله يُرسم كل شيء بالمعالج.
+    $_advanced: true
     $description: >-
       Use D3D11 with DirectComposition for warmed, compatible restore and launch animations.
       Normal minimize animations intentionally use the optimized CPU renderer because it is
@@ -222,13 +267,21 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       initialization failure, or device loss falls back to CPU. Disable this setting to force
       CPU for the entire group. See the mod README for the full routing details.
   $name: Minimize, restore, and launch
+  $name:ar: التصغير والاستعادة والفتح
+  $description:ar: حركات تصغير النوافذ واستعادتها وفتحها.
   $description: Configure animations for minimizing, restoring, and opening windows.
 - close:
   - close_animation: true
     $name: Animate closing
+    $name:ar: حركة الإغلاق
+    $description:ar: مؤثر لافت حين تُغلق نافذة برنامج.
     $description: Play a cinematic effect when an application window closes.
   - hide_as_close: false
     $name: Animate windows hidden to the tray
+    $name:ar: تحريك النوافذ المخفية إلى جانب الساعة
+    $description:ar: >-
+      بعض البرامج مثل Discord و Steam و Telegram تخفي نافذتها بدل إغلاقها. فعّله لتظهر حركة الإغلاق معها أيضاً.
+    $_advanced: true
     $description: >-
       Disabled by default. Enable to animate apps such as Discord, Steam, and Telegram when they
       hide their window instead of closing it. This can also animate splash screens, such as the
@@ -237,6 +290,10 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       excluded from close animation so it doesn't play a false close effect.
   - random_effect: false
     $name: Shuffle animation styles
+    $name:ar: تنويع الحركات تلقائياً
+    $description:ar: >-
+      تبديل حركة الإغلاق في كل مرة بالدور بين كل الأنماط. عند تفعيله يُتجاهل اختيار نمط الحركة.
+    $_advanced: true
     $description: >-
       Use one session-wide shuffled cycle shared by every app. Play every close effect once before
       starting a new cycle, and never join consecutive cycles on the same effect. Closing and
@@ -244,6 +301,15 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       below is ignored.
   - effect_style: thanos
     $name: Animation style
+    $name:ar: نمط الحركة
+    $description:ar: الحركة المستخدمة عند إغلاق نافذة، إلا إذا فُعّل التنويع التلقائي.
+    $options:ar:
+    - shatter: تحطم إلى مربعات
+    - thanos: تلاشٍ كالغبار
+    - perlin: ذوبان متآكل
+    - glitch: تشويش رقمي
+    - tv_off: إطفاء تلفاز قديم
+    - pixel_melt: سيلان كالطلاء
     $description: >-
       Choose the effect used when closing a window. Ignored while shuffling is enabled.
     $options:
@@ -255,6 +321,10 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
     - pixel_melt: Pixel Melt — Dripping paint
   - duration_ms: 630
     $name: Duration (ms)
+    $name:ar: مدة الحركة (ملي ثانية)
+    $description:ar: >-
+      طول حركة الإغلاق من 50 إلى 5000. ينتظر البرنامج عادة حتى تنتهي الحركة قبل أن يُغلق.
+    $_advanced: true
     $description: >-
       Base close animation duration, from 50 to 5000 ms. Some effects adjust their pacing.
       Usually the closing or hiding app's UI thread waits for completion (only sent messages
@@ -262,12 +332,20 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       window open wait only for the first animation frame; the last window still waits for completion.
   - shatter_block_size: 5
     $name: Dust and shatter block size (px)
+    $name:ar: حجم قطع الغبار والتحطم (بكسل)
+    $description:ar: >-
+      حجم القطع من 1 إلى 100. القطع الصغيرة جداً (من 1 إلى 4) أدق لكنها تُثقل الجهاز على الشاشات الكبيرة.
+    $_advanced: true
     $description: >-
       Particle size, from 1 to 100 px. The 1 px setting uses specialized single-pixel paths on
       both renderers; values from 2 to 4 use dense quad fields and can be especially demanding
       on 4K displays.
   - gpu_acceleration: true
     $name: Hybrid GPU acceleration
+    $name:ar: الاستعانة بكرت الشاشة
+    $description:ar: >-
+      استعمال كرت الشاشة لحركات الإغلاق الثقيلة جداً فقط. عند تعطيله تُرسم كل حركات الإغلاق بالمعالج.
+    $_advanced: true
     $description: >-
       Use D3D11 only for very dense Thanos or Perlin closes: 1 px blocks on windows with at least
       1.5 million source pixels. Other close effects and lighter workloads intentionally use the
@@ -276,21 +354,35 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       hardware, initialization failure, or device loss also use CPU. Disable this setting to
       force CPU for every close. See the mod README for the full routing details.
   $name: Close
+  $name:ar: الإغلاق
+  $description:ar: حركات إغلاق النوافذ أو إخفائها إلى جانب الساعة.
   $description: Configure the effects played when windows close or hide (system tray app).
 - window_switch:
   - switch_animation: true
     $name: Animate window switching
+    $name:ar: حركة التبديل بين النوافذ
+    $description:ar: >-
+      حركة تكبير وظهور تدريجي عند التبديل بين النوافذ بـ Alt+Tab أو بإيماءات لوحة اللمس.
     $description: >-
       Play a scale-and-fade animation when switching windows with Alt+Tab, or through
       confirmed selections in compatible Simple Window Switcher builds, including touchpad gestures.
   - duration_ms: 200
     $name: Duration (ms)
+    $name:ar: مدة الحركة (ملي ثانية)
+    $description:ar: طول حركة التبديل من 50 إلى 1000.
+    $_advanced: true
     $description: Window-switch animation duration, from 50 to 1000 ms.
   $name: Window switch
+  $name:ar: التبديل بين النوافذ
+  $description:ar: الحركة عند اختيار نافذة بـ Alt+Tab.
   $description: Configure the animation used when selecting a window through Alt+Tab.
 - diagnostics:
   - performance_telemetry: false
     $name: Log performance telemetry
+    $name:ar: تسجيل قياسات الأداء
+    $description:ar: >-
+      كتابة ملخص قصير لسرعة كل حركة في سجل البرنامج. فعّله فقط عند تشخيص مشكلة ثم عطّله.
+    $_advanced: true
     $description: >-
       Disabled by default. Write one compact performance summary after each minimize, restore,
       launch, or close animation and enable supporting animation-start, renderer-routing,
@@ -299,6 +391,9 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       written. Enable this only while collecting measurements, then disable it to keep the log
       concise.
   $name: Diagnostics
+  $name:ar: التشخيص
+  $description:ar: قياسات اختيارية لتشخيص مشاكل الأداء.
+  $_advanced: true
   $description: Optional measurements used when diagnosing renderer performance.
 */
 // ==/WindhawkModSettings==

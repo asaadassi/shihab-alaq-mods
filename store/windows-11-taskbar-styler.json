@@ -1,12 +1,30 @@
 {
   "category": "taskbar",
   "name": {
-    "ar": "مُنسِّق شريط مهام ويندوز 11",
-    "en": "Windows 11 taskbar styler"
+    "ar": "ثيمات شريط المهام",
+    "en": "Taskbar themes"
   },
   "description": {
     "ar": "غيّر شكل شريط المهام كلياً بثيمات جاهزة أو بتصميمك أنت: الشفافية والألوان والأحجام والمسافات.",
     "en": "Restyle the whole taskbar with ready themes or your own design: transparency, colours, sizes and spacing."
+  },
+  "summary": {
+    "ar": "ثيمات جاهزة تغيّر شكل شريط المهام كله",
+    "en": "Ready themes that restyle the whole taskbar"
+  },
+  "highlights": {
+    "ar": [
+      "اختر من أكثر من 50 ثيماً جاهزاً بنقرة واحدة",
+      "شريط شفاف أو زجاجي أو على شكل رصيف",
+      "أشكال كلاسيكية مثل ويندوز XP وويندوز 7",
+      "اجعل الأجزاء الفارغة من الشريط شفافة يمر النقر خلالها"
+    ],
+    "en": [
+      "Pick from more than 50 ready themes in one click",
+      "A transparent, glassy or dock-style taskbar",
+      "Classic looks such as Windows XP and Windows 7",
+      "Let clicks pass through the empty parts of the taskbar"
+    ]
   },
   "basedOn": "Windhawk mods: windows-11-taskbar-styler (m417z)",
   "author": "m417z",

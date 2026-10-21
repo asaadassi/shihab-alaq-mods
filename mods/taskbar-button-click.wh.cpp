@@ -2,7 +2,9 @@
 // @id              taskbar-button-click
 // @name            Middle click to close on the taskbar
 // @description     Close programs with a middle click on the taskbar instead of creating a new instance
-// @version         1.0.9
+// @name:ar         إغلاق البرنامج بالزر الأوسط
+// @description:ar  اضغط بزر الماوس الأوسط على زر البرنامج في شريط المهام لإغلاقه، بدل فتح نسخة جديدة منه
+// @version         1.0.9-shihab.1
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -52,20 +54,39 @@ or a similar tool), enable the relevant option in the mod's settings.
   - closeAll: Close all windows
   - closeForeground: Close foreground window
   - none: Do nothing
+  $name:ar: عند الضغط على مجموعة نوافذ
+  $description:ar: >-
+    ماذا يحدث عند الضغط بالزر الأوسط على زر يجمع عدة نوافذ لنفس البرنامج
+  $options:ar:
+  - closeAll: إغلاق كل النوافذ
+  - closeForeground: إغلاق النافذة الظاهرة فقط
+  - none: لا شيء
 - keysToEndTask:
   - Ctrl: true
+    $name:ar: مفتاح Ctrl
   - Alt: false
+    $name:ar: مفتاح Alt
   $name: Keys to end task
   $description: >-
     A combination of keys that can be pressed while middle clicking to
     forcefully end the running task
 
     Note: This option won't have effect on a group of taskbar items
+  $name:ar: مفاتيح الإنهاء الإجباري
+  $description:ar: >-
+    اضغط هذه المفاتيح مع الزر الأوسط لإنهاء البرنامج بالقوة إن لم يستجب
+
+    ملاحظة: لا يعمل هذا مع زر يجمع عدة نوافذ
 - oldTaskbarOnWin11: false
   $name: Customize the old taskbar on Windows 11
   $description: >-
     Enable this option to customize the old taskbar on Windows 11 (if using
     ExplorerPatcher or a similar tool).
+  $name:ar: الشريط القديم في ويندوز 11
+  $description:ar: >-
+    فعّله فقط إن كنت تستخدم شريط المهام القديم على ويندوز 11 عبر برنامج آخر
+    مثل ExplorerPatcher
+  $_advanced: true
 */
 // ==/WindhawkModSettings==
 

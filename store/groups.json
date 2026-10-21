@@ -9,6 +9,11 @@
     "description": {
       "ar": "الثيمات والألوان، وحجم الشريط والأيقونات، وزر ابدأ، وأسماء البرامج، وحركة الأيقونات.",
       "en": "Themes and colours, taskbar and icon size, the Start button, program names and icon motion."
+    },
+    "icon": "E790",
+    "tagline": {
+      "ar": "ألوان وأحجام وحركة",
+      "en": "Colours, sizes and motion"
     }
   },
   {
@@ -21,6 +26,11 @@
     "description": {
       "ar": "اختصارات الماوس على الشريط: الإغلاق بالزر الأوسط، والتنقل والصوت بالعجلة، وسرعة الإخفاء.",
       "en": "Mouse shortcuts on the taskbar: middle click to close, the wheel to switch and for volume, and auto-hide speed."
+    },
+    "icon": "E962",
+    "tagline": {
+      "ar": "اختصارات الماوس",
+      "en": "Mouse shortcuts"
     }
   },
   {
@@ -33,6 +43,11 @@
     "description": {
       "ar": "ساعة شريط المهام بالشكل الذي تريد، والجزيرة التفاعلية أعلى الشاشة.",
       "en": "The taskbar clock as you want it, and the live island at the top of the screen."
+    },
+    "icon": "E823",
+    "tagline": {
+      "ar": "ساعة وطقس وموسيقى",
+      "en": "Clock, weather and music"
     }
   },
   {
@@ -46,7 +61,12 @@
       "ar": "شكل Alt+Tab: مبدّل حديث بمعاينات، أو نوافذ الشاشة التي عليها المؤشر فقط. يعمل خيار واحد في كل مرة.",
       "en": "How Alt+Tab looks: a modern switcher with previews, or only the windows of the monitor under the cursor. One at a time."
     },
-    "exclusive": true
+    "exclusive": true,
+    "icon": "E8AB",
+    "tagline": {
+      "ar": "Alt+Tab بشكل جديد",
+      "en": "A new Alt+Tab"
+    }
   },
   {
     "id": "window-motion",
@@ -58,6 +78,11 @@
     "description": {
       "ar": "حركات فتح النوافذ وإغلاقها وتصغيرها، وتحريكها بانسيابية، وزواياها.",
       "en": "Animations when windows open, close and minimize, smooth moving, and their corners."
+    },
+    "icon": "E7C4",
+    "tagline": {
+      "ar": "نوافذ أنعم حركة",
+      "en": "Smoother windows"
     }
   },
   {
@@ -70,6 +95,11 @@
     "description": {
       "ar": "Win+D لكل شاشة على حدة، وتلاشي مستطيل التحديد.",
       "en": "Win+D for each monitor on its own, and a fading selection rectangle."
+    },
+    "icon": "E7F4",
+    "tagline": {
+      "ar": "لكل شاشة على حدة",
+      "en": "Per monitor"
     }
   },
   {
@@ -82,6 +112,11 @@
     "description": {
       "ar": "أحجام المجلدات، ونافذة النسخ والنقل، ونافذة اختيار المجلد الحديثة.",
       "en": "Folder sizes, the copy and move window, and the modern folder picker."
+    },
+    "icon": "E8B7",
+    "tagline": {
+      "ar": "أحجام المجلدات وأكثر",
+      "en": "Folder sizes and more"
     }
   }
 ]
