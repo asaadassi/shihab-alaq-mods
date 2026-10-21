@@ -15,7 +15,7 @@
 // @description:it-IT Anima le icone della barra delle applicazioni al passaggio del mouse, come su macOS
 // @name:ar           حركة أيقونات شريط المهام
 // @description:ar    تكبر أيقونات شريط المهام حين يمر عليها المؤشر، كما في ماك
-// @version           1.9.2-shihab.3
+// @version           1.9.2-shihab.4
 // @author            Ph0en1x-dev
 // @github            https://github.com/Ph0en1x-dev
 // @include           explorer.exe
@@ -73,15 +73,23 @@ You can experiment with the **radius** value to achieve the best result for your
 
 // ==WindhawkModSettings==
 /*
-- AnimationType: 0
+- AnimationType: "0"
   $name: Animation Curve
+  $options:
+  - "0": Smooth
+  - "1": Linear
+  - "2": Snappy
+  $options:ar:
+  - "0": ناعمة
+  - "1": منتظمة
+  - "2": سريعة
   $name:uk-UA: Крива анімації
   $name:zh-CN: 动画曲线
   $name:ja-JP: アニメーション曲線
   $name:ko-KR: 애니메이션 곡선
   $name:pt-BR: Curva de animação
   $name:it-IT: Curva di animazione
-  $description: Choose the feel of the scaling (0 = Cosine (Smooth), 1 = Linear, 2 = Exponential (Snappy)
+  $description: Choose the feel of the scaling
   $description:uk-UA: Оберіть тип анімації (0 = Косинус (Плавно), 1 = Лінійна, 2 = Експоненціальна (Швидко)
   $description:zh-CN: 选择缩放的动画感觉（0=余弦（平滑），1=线性，2=指数（更灵敏））
   $description:ja-JP: 拡大縮小の動き方を選択（0=コサイン（滑らか）、1=線形、2=指数（キビキビ））
@@ -89,8 +97,8 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:pt-BR: Escolha o tipo de escala (0 = Cosseno (suave), 1 = Linear, 2 = Exponencial (rápido))
   $description:it-IT: Scegli il tipo di scala (0 = Coseno (fluida), 1 = Lineare, 2 = Esponenziale (reattiva))
   $name:ar: شكل الحركة
-  $description:ar: "اختر طريقة التكبير (0 = ناعمة، 1 = منتظمة، 2 = سريعة)"
-- MaxScale: 130
+  $description:ar: طريقة تكبير الأيقونات
+- MaxScale: 120
   $name: Maximum scale (%)
   $name:uk-UA: Максимальний розмір (%)
   $name:zh-CN: 最大缩放（%）
@@ -107,7 +115,7 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:it-IT: "Quanto può ingrandirsi un’icona (es.: 160 = +60%)"
   $name:ar: أقصى تكبير (%)
   $description:ar: "أقصى ما تكبر إليه الأيقونة (مثلاً 160 تعني أكبر بنسبة 60%)"
-- EffectRadius: 100
+- EffectRadius: 80
   $name: Effect radius (px)
   $name:uk-UA: Радіус ефекту (пкс)
   $name:zh-CN: 效果半径（像素）
@@ -124,7 +132,7 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:it-IT: Distanza dal cursore entro cui si applica l’animazione
   $name:ar: مدى التأثير (بكسل)
   $description:ar: المسافة حول المؤشر التي تكبر فيها الأيقونات
-- SpacingFactor: 50
+- SpacingFactor: 150
   $name: Spacing sensitivity (%)
   $name:uk-UA: Чутливість до проміжку (%)
   $name:zh-CN: 间距灵敏度（%）
@@ -142,7 +150,7 @@ You can experiment with the **radius** value to achieve the best result for your
   $name:ar: تباعد الأيقونات المجاورة (%)
   $description:ar: "مقدار ابتعاد الأيقونات المجاورة أثناء الحركة (المعتاد 50%)"
   $_advanced: true
-- BounceDelay: 500
+- BounceDelay: 150
   $name: Bounce start delay (ms)
   $name:uk-UA: Затримка початку "дихання" (мс)
   $name:zh-CN: 弹跳开始延迟（毫秒）
@@ -231,15 +239,25 @@ You can experiment with the **radius** value to achieve the best result for your
   $name:ar: التوافق مع أسماء البرامج
   $description:ar: فعّله إن كان شريط المهام يعرض أسماء النوافذ (أزرار مستطيلة) لتبقى الحركة في الوسط
   $_advanced: true
-- ExcludeSystemButtonsMode: 0
+- ExcludeSystemButtonsMode: "0"
   $name: Exclude system buttons
+  $options:
+  - "0": Animate all
+  - "1": Exclude Start
+  - "2": Exclude Start, Search, Task View and Widgets
+  - "3": Animate apps only
+  $options:ar:
+  - "0": تحريك كل الأزرار
+  - "1": دون زر ابدأ
+  - "2": دون ابدأ والبحث وعرض المهام والأدوات
+  - "3": البرامج فقط
   $name:uk-UA: Ігнорувати системні кнопки
   $name:zh-CN: 排除系统按钮
   $name:ja-JP: システムボタンを除外
   $name:ko-KR: 시스템 버튼 제외
   $name:pt-BR: Excluir botões do sistema
   $name:it-IT: Escludi pulsanti di sistema
-  $description: 0=Animate all, 1=Exclude Start, 2=Exclude Start/Search/TaskView/Widgets, 3=Animate apps only
+  $description: System buttons that are not animated
   $description:uk-UA: 0=Анімація всього, 1=Без анімації Start, 2=Без Start/Search/TaskView/Widgets, 3=Анімація тільки іконок застосунків
   $description:zh-CN: 0=全部动画，1=排除开始，2=排除开始/搜索/任务视图/小组件，3=仅应用图标动画
   $description:ja-JP: 0=すべてアニメ、1=スタート除外、2=スタート/検索/タスクビュー/ウィジェット除外、3=アプリのみ
@@ -247,7 +265,7 @@ You can experiment with the **radius** value to achieve the best result for your
   $description:pt-BR: 0=Animar tudo, 1=Excluir Iniciar, 2=Excluir Iniciar/Pesquisa/Visão de tarefas/Widgets, 3=Somente apps
   $description:it-IT: 0=Anima tutto, 1=Escludi Start, 2=Escludi Start/Ricerca/Task View/Widget, 3=Solo app
   $name:ar: استثناء أزرار النظام
-  $description:ar: "0 = تحريك الكل، 1 = دون زر ابدأ، 2 = دون ابدأ والبحث وعرض المهام والأدوات، 3 = البرامج فقط"
+  $description:ar: أزرار النظام التي لا تتحرك
 - LerpSpeed: 60
   $name: Smoothing (Lerp speed)
   $name:uk-UA: Плавність (швидкість Lerp)
@@ -1380,7 +1398,10 @@ void LoadSettings() {
         rawScale = 220;
     }
 
-    g_settings.animationType = Wh_GetIntSetting(L"AnimationType");
+    // String options ("0".."3"): the settings form shows them by name
+    PCWSTR animationType = Wh_GetStringSetting(L"AnimationType");
+    g_settings.animationType = _wtoi(animationType);
+    Wh_FreeStringSetting(animationType);
     g_settings.maxScale = (double)rawScale / 100.0;
 
     g_settings.effectRadius = Wh_GetIntSetting(L"EffectRadius");
@@ -1398,7 +1419,9 @@ void LoadSettings() {
     g_settings.mirrorAnimation = (bool)Wh_GetIntSetting(L"MirrorForTopTaskbar");
     g_settings.disableVerticalBounce = (bool)Wh_GetIntSetting(L"DisableVerticalBounce");
     g_settings.taskbarLabelsMode = (bool)Wh_GetIntSetting(L"TaskbarLabelsMode");
-    g_settings.excludeSystemButtonsMode = Wh_GetIntSetting(L"ExcludeSystemButtonsMode");
+    PCWSTR excludeMode = Wh_GetStringSetting(L"ExcludeSystemButtonsMode");
+    g_settings.excludeSystemButtonsMode = _wtoi(excludeMode);
+    Wh_FreeStringSetting(excludeMode);
 
     g_settings.lerpSpeed = (double)Wh_GetIntSetting(L"LerpSpeed");
     if (g_settings.lerpSpeed < 0) g_settings.lerpSpeed = 0;

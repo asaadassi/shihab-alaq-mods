@@ -35,7 +35,15 @@ mod format, with its store entry (Arabic and English texts, section, credits) in
 
 Every setting a mod shows has Arabic texts next to the English ones: `$name:ar`, `$description:ar`, and
 `$options:ar` with the same values as `$options`. A setting a home user doesn't need carries `$_advanced: true`;
-the app shows it under "More options". Changing a mod's settings block raises its `@version`.
+the app shows it under "More options". A setting that needs code or a format string (XAML styles, `%date%`
+patterns, window class names, font or program names) carries `$_hidden: true`: the app does not show it but keeps and
+saves its value. A text that holds a colour carries `$_color: true`: the app shows a palette instead of a text box.
+Changing a mod's settings block raises its `@version`.
+
+Pictures of a mod's choices go in its store entry, `optionImages`: `{"<flat setting name>": {"<value>": "<url>"}}`,
+with `"true"` as the value for a switch. Each picture stays in its author's repository at a
+`https://raw.githubusercontent.com/<owner>/<repo>/<commit>/<path>` address pinned to a commit; CI fetches it once and
+puts its SHA-256 and size in the catalog, and the app shows only a picture that matches.
 
 ## Licence
 

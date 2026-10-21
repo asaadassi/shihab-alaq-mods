@@ -31,5 +31,25 @@
   "license": "MIT",
   "source": "https://github.com/ramensoftware/windhawk-mods/blob/main/mods/dynamic-island-for-windows.wh.cpp",
   "group": "clock-island",
-  "order": 1
+  "order": 1,
+  "optionImages": {
+    "Modules.Media": {
+      "true": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/media-v2.png"
+    },
+    "Modules.Weather": {
+      "true": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/weather-v2.png"
+    },
+    "Modules.HardwareMonitorModule": {
+      "true": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/hardware-monitor.png"
+    },
+    "Modules.GameOverlay": {
+      "true": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/gamebar-v2.png"
+    },
+    "Indicators.PrivacyDotsCam": {
+      "true": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/camera-detected-v2.png"
+    },
+    "Indicators.PrivacyDotsMic": {
+      "true": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/mic-detected-v2.png"
+    }
+  }
 }

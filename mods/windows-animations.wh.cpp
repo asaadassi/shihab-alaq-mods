@@ -4,7 +4,7 @@
 // @name:ar         حركات النوافذ
 // @description     Smooth minimize, restore, close, switch animations for windows.
 // @description:ar  حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل بينها.
-// @version         1.3.7-shihab.3
+// @version         1.3.7-shihab.4
 // @author          ReDrag
 // @github          https://github.com/redrag2105
 // @donateUrl       https://ko-fi.com/redrag2105
@@ -299,7 +299,7 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       starting a new cycle, and never join consecutive cycles on the same effect. Closing and
       reopening an app continues the same global cycle. When enabled, the Animation style setting
       below is ignored.
-  - effect_style: thanos
+  - effect_style: perlin
     $name: Animation style
     $name:ar: نمط الحركة
     $description:ar: الحركة المستخدمة عند إغلاق نافذة، إلا إذا فُعّل التنويع التلقائي.
@@ -319,7 +319,7 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
     - glitch: Cyber Glitch — Digital teleport
     - tv_off: Retro TV Off — CRT power-down
     - pixel_melt: Pixel Melt — Dripping paint
-  - duration_ms: 630
+  - duration_ms: 350
     $name: Duration (ms)
     $name:ar: مدة الحركة (ملي ثانية)
     $description:ar: >-
@@ -867,7 +867,7 @@ std::mutex g_SharedStateMutex;
 std::atomic<LONG> g_consumedGeneration{0};
 std::atomic<LONG> g_seenSessionEpoch{0};
 std::atomic<int> g_durationMs{360};
-std::atomic<int> g_closeDurationMs{630};
+std::atomic<int> g_closeDurationMs{350};
 std::atomic<int> g_closeEffectStyle{1};
 std::atomic<int> g_minRestoreEffectStyle{0};
 std::atomic<bool> g_closeShuffleEffect{false};

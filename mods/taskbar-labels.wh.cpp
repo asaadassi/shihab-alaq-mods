@@ -4,7 +4,7 @@
 // @name:ar         أسماء البرامج على شريط المهام
 // @description     Customize text labels and combining for running programs on the taskbar (Windows 11 only)
 // @description:ar  اعرض أسماء البرامج المفتوحة بجانب أيقوناتها على شريط المهام، وتحكّم في دمج أزرارها (ويندوز 11 فقط)
-// @version         1.5.1-shihab.2
+// @version         1.5.1-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -74,7 +74,7 @@ Labels can also be shown or hidden per-program in the settings.
 
 // ==WindhawkModSettings==
 /*
-- mode: labelsWithoutCombining
+- mode: noLabelsWithCombining
   $name: Mode
   $description: >-
     Note: When switching to or from the last two modes, restarting explorer
@@ -127,6 +127,7 @@ Labels can also be shown or hidden per-program in the settings.
   - fullWidth: بعرض الزر كاملاً
   $_advanced: true
 - excludedPrograms: [""]
+  $_hidden: true
   $name: Excluded programs
   $description: >-
     If one of the "Show labels" modes is used, labels won't be shown for these
@@ -181,6 +182,7 @@ Labels can also be shown or hidden per-program in the settings.
   $name: Font size
   $name:ar: حجم الخط
 - fontFamily: ""
+  $_hidden: true
   $name: Font family
   $description: >-
     For a list of fonts that are shipped with Windows 11, refer to the following
@@ -237,6 +239,7 @@ Labels can also be shown or hidden per-program in the settings.
     مخفية على الشريط، وقد لا ينطبق ذلك على كل ما تقدمه هذه الإضافة من خيارات
   $_advanced: true
 - labelForSingleItem: "%name%"
+  $_hidden: true
   $name: Label for a single item
   $description: >-
     The following variables can be used: %name%, %amount%
@@ -250,6 +253,7 @@ Labels can also be shown or hidden per-program in the settings.
     لا أثر له في إصدارات ويندوز الأحدث التي تعرض الأسماء بنفسها
   $_advanced: true
 - labelForMultipleItems: "[%amount%] %name%"
+  $_hidden: true
   $name: Label for multiple items
   $description: >-
     Ignored in newer Windows versions with the built-in taskbar labels

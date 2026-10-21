@@ -4,7 +4,7 @@
 // @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
 // @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
-// @version         1.3.1-shihab.3
+// @version         1.3.1-shihab.4
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe
@@ -334,11 +334,12 @@ We love community contributions! To ensure high-quality updates, please follow t
   $name: Animations & Performance
   $name:ar: الحركة والأداء
 - Themes:
-  - ThemePreset: obsidian
+  - ThemePreset: shihab
     $name: Theme preset
     $description: Select a curated color theme, or choose Custom to use your own hex colors below.
     $options:
-      - obsidian: Obsidian - true black (Default)
+      - shihab: Shihab - plum dark (Default)
+      - obsidian: Obsidian - true black
       - graphite: Graphite - neutral Windows 11 dark
       - slate: Slate - cool blue-grey
       - nord: Nord - the Nord palette
@@ -350,7 +351,8 @@ We love community contributions! To ensure high-quality updates, please follow t
     $name:ar: نمط الألوان
     $description:ar: اختر مجموعة ألوان جاهزة، أو «ألوان مخصصة» لاستعمال ألوانك في الخيارات الإضافية.
     $options:ar:
-      - obsidian: أسود داكن (افتراضي)
+      - shihab: شهاب (افتراضي)
+      - obsidian: أسود داكن
       - graphite: رمادي داكن
       - slate: رمادي مزرق
       - nord: أزرق ثلجي
@@ -436,11 +438,12 @@ We love community contributions! To ensure high-quality updates, please follow t
       - system: لون النظام
       - custom: لون مخصص
   - CustomAccentHex: "#4cc9f0"
+    $_color: true
     $name: Custom accent hex
-    $description: The hex color to use when the accent mode is set to Custom.
+    $description: The color to use when the accent mode is set to Custom.
     $_advanced: true
     $name:ar: لون التمييز المخصص
-    $description:ar: رمز اللون المستعمل حين يكون لون التمييز مخصصاً.
+    $description:ar: اللون المستعمل حين يكون لون التمييز مخصصاً.
   - CalendarAccent: red
     $name: Calendar accent color
     $description: Accent color used in the calendar view for month name, weekends, and today's date highlight.
@@ -460,6 +463,7 @@ We love community contributions! To ensure high-quality updates, please follow t
     $name:ar: دائرة متوهجة خلف الساعة
     $description:ar: يُظهر دائرة متوهجة ناعمة خلف الوقت في عرض الساعة الموسّع. أطفئه لساعة بسيطة بلا توهج.
   - FontFamily: ""
+    $_hidden: true
     $name: Font family
     $description: Custom font family for island text (e.g. Segoe UI, Arial, Aptos, Consolas). Leave empty for system default.
     $_advanced: true
@@ -480,29 +484,33 @@ We love community contributions! To ensure high-quality updates, please follow t
       - auto: تلقائي (من غلاف الأغنية)
       - borderless: بلا إطار
   - ContourBorderHex: "#1E1E22"
+    $_color: true
     $name: Contour border hex color
-    $description: 'Hex color for the island contour stroke. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $description: 'Color of the island contour stroke. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
     $_advanced: true
     $name:ar: لون الإطار
-    $description:ar: رمز لون إطار الجزيرة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
+    $description:ar: لون إطار الجزيرة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   - PillBgColor: "#08080A"
+    $_color: true
     $name: Pill background color
-    $description: 'Hex color for the island background. Accepts 3, 4, 6 or 8 hex digits, so use the 8-digit RRGGBBAA form for a translucent background (for example 0D0D0FB0) while keeping the text and icons opaque. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $description: 'Color of the island background. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
     $_advanced: true
     $name:ar: لون خلفية الجزيرة
-    $description:ar: رمز لون خلفية الجزيرة من 3 أو 4 أو 6 أو 8 خانات. الصيغة ذات 8 خانات تجعل الخلفية شفافة جزئياً مع بقاء النص والأيقونات واضحة (مثل 0D0D0FB0). تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
+    $description:ar: لون خلفية الجزيرة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   - TextPrimaryColor: "#FFFFFF"
+    $_color: true
     $name: Primary text color
-    $description: 'Accessible hex color for titles and main text. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $description: 'Color of titles and main text. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
     $_advanced: true
     $name:ar: لون النص الرئيسي
-    $description:ar: رمز لون العناوين والنص الرئيسي. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
+    $description:ar: لون العناوين والنص الرئيسي. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   - TextSecondaryColor: "#9B9BA5"
+    $_color: true
     $name: Secondary text color
-    $description: 'Accessible hex color for artist names and muted labels. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
+    $description: 'Color of artist names and muted labels. Changing it from the default overrides the selected Theme preset; restore the default to go back to the preset.'
     $_advanced: true
     $name:ar: لون النص الثانوي
-    $description:ar: رمز لون أسماء الفنانين والنصوص الخافتة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
+    $description:ar: لون أسماء الفنانين والنصوص الخافتة. تغييره عن الافتراضي يتقدّم على نمط الألوان، وإرجاعه للافتراضي يعيد النمط.
   $name: Colors & Theming
   $name:ar: الألوان والمظهر
 - Indicators:
@@ -519,11 +527,12 @@ We love community contributions! To ensure high-quality updates, please follow t
     $name:ar: مؤشر الميكروفون (نقطة برتقالية)
     $description:ar: نقطة برتقالية حين يكون الميكروفون قيد الاستعمال. أطفئه إن كانت برامج في الخلفية (مثل Discord أو OBS) تبقيه مفتوحاً دائماً.
   - PrivacyDotsMicHex: "#FF9500"
+    $_color: true
     $name: Microphone dot color
-    $description: Custom hex color for microphone privacy indicator.
+    $description: Color of the microphone privacy indicator.
     $_advanced: true
     $name:ar: لون نقطة الميكروفون
-    $description:ar: رمز لون مؤشر الميكروفون.
+    $description:ar: لون مؤشر الميكروفون.
   - PrivacyDotsCam: true
     $name: Show camera indicator (Green dot)
     $description: Show the green dot when webcam is in use.
@@ -531,11 +540,12 @@ We love community contributions! To ensure high-quality updates, please follow t
     $name:ar: مؤشر الكاميرا (نقطة خضراء)
     $description:ar: نقطة خضراء حين تكون الكاميرا قيد الاستعمال.
   - PrivacyDotsCamHex: "#34C759"
+    $_color: true
     $name: Camera dot color
-    $description: Custom hex color for camera privacy indicator.
+    $description: Color of the camera privacy indicator.
     $_advanced: true
     $name:ar: لون نقطة الكاميرا
-    $description:ar: رمز لون مؤشر الكاميرا.
+    $description:ar: لون مؤشر الكاميرا.
   $name: Privacy Indicators
   $name:ar: مؤشرات الخصوصية
 - Modules:
@@ -640,12 +650,12 @@ We love community contributions! To ensure high-quality updates, please follow t
     $description: Shows the weather on the right side of the pill. Turn off to only show the clock.
     $name:ar: الطقس
     $description:ar: يعرض الطقس في الجهة اليمنى من الجزيرة. أطفئه لعرض الساعة وحدها.
-  - WeatherCity: ""
+  - WeatherCity: "Damascus"
     $name: Weather City (Optional)
-    $description: Enter your city (e.g. London). Leave blank to use auto IP geolocation.
+    $description: Enter your city in English (e.g. Damascus). Leave blank to use auto IP geolocation.
     $_advanced: true
     $name:ar: مدينة الطقس (اختياري)
-    $description:ar: اكتب اسم مدينتك (مثل London). اتركه فارغاً لتحديد الموقع تلقائياً.
+    $description:ar: اكتب اسم مدينتك بالإنجليزية (مثل Damascus). اتركه فارغاً لتحديد الموقع تلقائياً.
   - WeatherFahrenheit: false
     $name: Use Fahrenheit
     $description: Display weather temperature and wind speed in imperial units.
@@ -669,6 +679,7 @@ We love community contributions! To ensure high-quality updates, please follow t
       - zh: 简体中文 (Simplified Chinese)
       - ja: 日本語 (Japanese)
       - ko: 한국어 (Korean)
+      - ar: العربية (Arabic)
     $_advanced: true
     $name:ar: اللغة
     $description:ar: لغة نصوص الجزيرة. «تلقائي» يتبع لغة ويندوز.
@@ -686,6 +697,7 @@ We love community contributions! To ensure high-quality updates, please follow t
       - zh: 简体中文 (الصينية المبسطة)
       - ja: 日本語 (اليابانية)
       - ko: 한국어 (الكورية)
+      - ar: العربية
   - ClockFormat: system
     $name: Clock format
     $description: Choose 12-hour or 24-hour time, or follow your Windows locale setting.
@@ -707,6 +719,7 @@ We love community contributions! To ensure high-quality updates, please follow t
     $name:ar: إظهار الثواني
     $description:ar: يُظهر الثواني في الساعة الموسّعة. يستهلك جهداً إضافياً قليلاً لأن الساعة تُرسم كل ثانية.
   - DateFormat: ""
+    $_hidden: true
     $name: Custom date format
     $description: 'Custom date pattern for the idle dashboard. Leave empty to follow your Windows locale. Supports yyyy (year), MM / M (month), dd / d (day), MMM (short month name), MMMM (full month name), ddd / dddd (weekday). Any other characters are printed as-is, so CJK formats like yyyy年MM月dd日 work.'
     $_advanced: true
@@ -731,6 +744,7 @@ We love community contributions! To ensure high-quality updates, please follow t
     $name:ar: سعة رف الملفات
     $description:ar: من 1 إلى 25. عدد الملفات التي يحفظها الرف قبل أن يُزال أقدمها.
   - MediaExpandBlocklist: ""
+    $_hidden: true
     $name: Never auto-expand for these apps
     $description: 'Comma-separated list of app or site names that should never make the island expand on a track change, while still updating quietly in the collapsed pill. Matched loosely against the media source and title, for example: chrome, tiktok, youtube.'
     $_advanced: true
@@ -1010,6 +1024,9 @@ namespace IdleStripLayout {
     // turning the island into a bar.
     constexpr float kMinWidth = 72.0f;
     constexpr float kMaxWidth = 280.0f;
+    // A page's compact text stays below the width where the collapsed view
+    // starts fading into the expanded one (kExpandThreshold - kCrossfadeRange).
+    constexpr float kCompactMaxWidth = 220.0f;
 
     // Measured widths are rounded up to this so sub-pixel text metrics can't
     // resize the layered window every frame.
@@ -1172,6 +1189,7 @@ enum class ThemePreset {
     Espresso,
     Plum,
     Porcelain,
+    Shihab,
     Custom,
 };
 
@@ -1192,7 +1210,7 @@ struct ThemePalette {
 };
 
 static constexpr ThemePalette kThemePalettes[] = {
-    {L"obsidian",  L"Obsidian (Default)", L"#08080A", L"#FFFFFF", L"#9B9BA5", L"#1E1E22"},
+    {L"obsidian",  L"Obsidian",           L"#08080A", L"#FFFFFF", L"#9B9BA5", L"#1E1E22"},
     {L"graphite",  L"Graphite",           L"#1C1C1E", L"#FFFFFF", L"#A8A8AE", L"#323236"},
     {L"slate",     L"Slate",              L"#111721", L"#E9EEF6", L"#92A2B8", L"#232C3A"},
     {L"nord",      L"Nord",               L"#2E3440", L"#ECEFF4", L"#A7B0C0", L"#3B4252"},
@@ -1200,6 +1218,9 @@ static constexpr ThemePalette kThemePalettes[] = {
     {L"espresso",  L"Espresso",           L"#1A1512", L"#F6EEE7", L"#B7A395", L"#2E2420"},
     {L"plum",      L"Plum",               L"#16111C", L"#F1EAF6", L"#AC9BB9", L"#281F33"},
     {L"porcelain", L"Porcelain (Light)",  L"#F5F6F8", L"#14161A", L"#5B6270", L"#D8DBE1"},
+    // Shihab Alaq: the dark tokens of Shihab.Common (ShihabTheme.xaml: Bg, Text,
+    // Muted, Stroke). Last, so the indexes stored for the others stay the same.
+    {L"shihab",    L"Shihab (Default)",   L"#141117", L"#F5F1F7", L"#A79CAD", L"#352D3B"},
 };
 
 // Custom sits one past the last real palette. Derived, so adding a palette
@@ -1209,7 +1230,10 @@ static constexpr int kCustomThemeIndex = static_cast<int>(ARRAYSIZE(kThemePalett
 // Persisted under a new key. Retiring the original palettes renumbered these
 // integers, and reusing "ColorTheme" would have silently reinterpreted a saved
 // 4 (previously Custom) as the palette that now sits at index 4.
-static constexpr const wchar_t* kThemeValueName = L"ColorThemeV2";
+// V3: adding the Shihab palette moved Custom from 8 to 9 (migrated in LoadSettings).
+static constexpr const wchar_t* kThemeValueName = L"ColorThemeV3";
+static constexpr const wchar_t* kPreviousThemeValueName = L"ColorThemeV2";
+static constexpr int kShihabThemeIndex = kCustomThemeIndex - 1;
 static constexpr const wchar_t* kLegacyThemeValueName = L"ColorTheme";
 
 // Base menu command id for the theme submenu; entries occupy
@@ -1316,7 +1340,7 @@ struct Settings {
     bool w11Style = false;
     bool notchStyle = false;
     // Color customization
-    ThemePreset themePreset = ThemePreset::Obsidian;
+    ThemePreset themePreset = ThemePreset::Shihab;
     D2D1_COLOR_F pillBgColor = D2D1::ColorF(0.031f, 0.031f, 0.039f, 1.0f); // #08080A
     D2D1_COLOR_F textPrimaryColor = D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f); // #FFFFFF
     D2D1_COLOR_F textSecondaryColor = D2D1::ColorF(0.608f, 0.608f, 0.647f, 1.0f); // #9B9BA5
@@ -1707,6 +1731,19 @@ int HardwareMonitorTabIndex(const Settings& settings) {
     return 2 + (settings.weather ? 1 : 0);
 }
 
+// The page the wheel stopped on, as the ids DrawIdleDashboard draws:
+// 3 = the primary page (clock, or media while something plays), 0 = calendar,
+// 1 = weather, 2 = hardware, 4 = file tray. Same order as ActiveTabCount.
+int SelectedTabId(const Settings& settings) {
+    int ids[5] = {3, 0, 0, 0, 0};
+    int count = 1;
+    ids[count++] = 0;
+    if (settings.weather) ids[count++] = 1;
+    if (settings.hardwareMonitorModule) ids[count++] = 2;
+    if (settings.fileTrayModule) ids[count++] = 4;
+    return ids[std::min(NormalizedTabIndex(settings), count - 1)];
+}
+
 int FileTrayTabIndex(const Settings& settings) {
     if (!settings.fileTrayModule) {
         return -1;
@@ -1732,6 +1769,7 @@ enum class UiLanguage {
     ChineseSimplified,
     Japanese,
     Korean,
+    Arabic,
     Count,
 };
 
@@ -1746,6 +1784,7 @@ UiLanguage LanguageFromTag(std::wstring_view tag) {
         {L"ru", UiLanguage::Russian},   {L"tr", UiLanguage::Turkish},
         {L"hi", UiLanguage::Hindi},     {L"zh", UiLanguage::ChineseSimplified},
         {L"ja", UiLanguage::Japanese},  {L"ko", UiLanguage::Korean},
+        {L"ar", UiLanguage::Arabic},
     };
     if (tag.size() < 2) {
         return UiLanguage::English;
@@ -1770,6 +1809,8 @@ UiLanguage DetectSystemLanguage() {
 
 // ── Clock / date presentation (#61) ──────────────────────────────────────────
 
+const wchar_t* IslandLocaleName();
+
 // Formats the time honouring the 12h/24h override and the seconds toggle.
 // Windows' own locale formatting is used unless the user forced a mode, so the
 // default keeps regional conventions (separators, AM/PM placement) intact.
@@ -1779,7 +1820,7 @@ std::wstring FormatIslandTime(const SYSTEMTIME& local, bool followSystem, bool u
 
     if (followSystem) {
         const DWORD flags = showSeconds ? 0 : TIME_NOSECONDS;
-        if (GetTimeFormatEx(LOCALE_NAME_USER_DEFAULT, flags, &local, nullptr, buffer,
+        if (GetTimeFormatEx(IslandLocaleName(), flags, &local, nullptr, buffer,
                             ARRAYSIZE(buffer)) > 0) {
             return buffer;
         }
@@ -1789,7 +1830,7 @@ std::wstring FormatIslandTime(const SYSTEMTIME& local, bool followSystem, bool u
     // Explicit override: build the pattern rather than fighting locale flags.
     const wchar_t* pattern = use24Hour ? (showSeconds ? L"HH:mm:ss" : L"HH:mm")
                                        : (showSeconds ? L"h:mm:ss tt" : L"h:mm tt");
-    if (GetTimeFormatEx(LOCALE_NAME_USER_DEFAULT, 0, &local, pattern, buffer,
+    if (GetTimeFormatEx(IslandLocaleName(), 0, &local, pattern, buffer,
                         ARRAYSIZE(buffer)) > 0) {
         return buffer;
     }
@@ -1804,7 +1845,7 @@ std::wstring FormatIslandDate(const SYSTEMTIME& local, const std::wstring& custo
     wchar_t buffer[128] = {};
 
     if (!customFormat.empty()) {
-        if (GetDateFormatEx(LOCALE_NAME_USER_DEFAULT, 0, &local, customFormat.c_str(), buffer,
+        if (GetDateFormatEx(IslandLocaleName(), 0, &local, customFormat.c_str(), buffer,
                             ARRAYSIZE(buffer), nullptr) > 0) {
             return buffer;
         }
@@ -1812,7 +1853,7 @@ std::wstring FormatIslandDate(const SYSTEMTIME& local, const std::wstring& custo
         // nothing at all.
     }
 
-    if (GetDateFormatEx(LOCALE_NAME_USER_DEFAULT, 0, &local, fallbackPattern, buffer,
+    if (GetDateFormatEx(IslandLocaleName(), 0, &local, fallbackPattern, buffer,
                         ARRAYSIZE(buffer), nullptr) > 0) {
         return buffer;
     }
@@ -1826,38 +1867,121 @@ const wchar_t* Loc(const wchar_t* english) {
         const wchar_t* text[static_cast<size_t>(UiLanguage::Count)];
     };
 
-    // Order: en, fr, es, de, pt, it, ru, tr, hi, zh, ja, ko
+    // Order: en, fr, es, de, pt, it, ru, tr, hi, zh, ja, ko, ar
     static const Row kRows[] = {
-        {L"Media", {nullptr, L"Média", L"Multimedia", L"Medien", L"Mídia", L"Media", L"Медиа", L"Medya", L"मीडिया", L"媒体", L"メディア", L"미디어"}},
-        {L"Calendar", {nullptr, L"Calendrier", L"Calendario", L"Kalender", L"Calendário", L"Calendario", L"Календарь", L"Takvim", L"कैलेंडर", L"日历", L"カレンダー", L"캘린더"}},
-        {L"Weather", {nullptr, L"Météo", L"Tiempo", L"Wetter", L"Tempo", L"Meteo", L"Погода", L"Hava", L"मौसम", L"天气", L"天気", L"날씨"}},
-        {L"Hardware Monitor", {nullptr, L"Moniteur matériel", L"Monitor de hardware", L"Hardware-Monitor", L"Monitor de hardware", L"Monitor hardware", L"Монитор системы", L"Donanım İzleme", L"हार्डवेयर मॉनिटर", L"硬件监视器", L"ハードウェア モニター", L"하드웨어 모니터"}},
-        {L"File Tray", {nullptr, L"Bac à fichiers", L"Bandeja de archivos", L"Dateiablage", L"Bandeja de arquivos", L"Vassoio file", L"Файлы", L"Dosya Tepsisi", L"फ़ाइल ट्रे", L"文件托盘", L"ファイル トレイ", L"파일 트레이"}},
-        {L"Bluetooth", {nullptr, L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"ब्लूटूथ", L"蓝牙", L"Bluetooth", L"블루투스"}},
-        {L"Copied", {nullptr, L"Copié", L"Copiado", L"Kopiert", L"Copiado", L"Copiato", L"Скопировано", L"Kopyalandı", L"कॉपी किया गया", L"已复制", L"コピーしました", L"복사됨"}},
-        {L"Volume", {nullptr, L"Volume", L"Volumen", L"Lautstärke", L"Volume", L"Volume", L"Громкость", L"Ses", L"वॉल्यूम", L"音量", L"音量", L"볼륨"}},
-        {L"Muted", {nullptr, L"Muet", L"Silenciado", L"Stumm", L"Sem som", L"Muto", L"Без звука", L"Sessiz", L"म्यूट", L"已静音", L"ミュート", L"음소거"}},
-        {L"Low Battery", {nullptr, L"Batterie faible", L"Batería baja", L"Akku schwach", L"Bateria fraca", L"Batteria scarica", L"Батарея разряжена", L"Pil Az", L"बैटरी कम", L"电量低", L"バッテリー残量低下", L"배터리 부족"}},
-        {L"Charging", {nullptr, L"En charge", L"Cargando", L"Wird geladen", L"Carregando", L"In carica", L"Зарядка", L"Şarj oluyor", L"चार्ज हो रहा है", L"正在充电", L"充電中", L"충전 중"}},
-        {L"Connected", {nullptr, L"Connecté", L"Conectado", L"Verbunden", L"Conectado", L"Connesso", L"Подключено", L"Bağlandı", L"कनेक्ट किया गया", L"已连接", L"接続済み", L"연결됨"}},
-        {L"Disconnected", {nullptr, L"Déconnecté", L"Desconectado", L"Getrennt", L"Desconectado", L"Disconnesso", L"Отключено", L"Bağlantı kesildi", L"डिस्कनेक्ट किया गया", L"已断开", L"切断されました", L"연결 끊김"}},
-        {L"Caps Lock", {nullptr, L"Verr. Maj", L"Bloq Mayús", L"Feststelltaste", L"Caps Lock", L"Blocco maiuscole", L"Caps Lock", L"Caps Lock", L"कैप्स लॉक", L"大写锁定", L"Caps Lock", L"Caps Lock"}},
-        {L"Num Lock", {nullptr, L"Verr. Num", L"Bloq Num", L"Num-Taste", L"Num Lock", L"Blocco num", L"Num Lock", L"Num Lock", L"नम लॉक", L"数字锁定", L"Num Lock", L"Num Lock"}},
-        {L"On", {nullptr, L"Activé", L"Activado", L"Ein", L"Ligado", L"Attivo", L"Вкл", L"Açık", L"चालू", L"开", L"オン", L"켜짐"}},
-        {L"Off", {nullptr, L"Désactivé", L"Desactivado", L"Aus", L"Desligado", L"Disattivo", L"Выкл", L"Kapalı", L"बंद", L"关", L"オフ", L"꺼짐"}},
-        {L"Do Not Disturb", {nullptr, L"Ne pas déranger", L"No molestar", L"Nicht stören", L"Não perturbe", L"Non disturbare", L"Не беспокоить", L"Rahatsız Etme", L"परेशान न करें", L"专注助手", L"応答不可", L"방해 금지"}},
-        {L"Focus", {nullptr, L"Concentration", L"Concentración", L"Fokus", L"Foco", L"Concentrazione", L"Фокус", L"Odak", L"फ़ोकस", L"专注", L"集中", L"집중"}},
-        {L"Break", {nullptr, L"Pause", L"Descanso", L"Pause", L"Pausa", L"Pausa", L"Перерыв", L"Mola", L"विराम", L"休息", L"休憩", L"휴식"}},
-        {L"Unknown", {nullptr, L"Inconnu", L"Desconocido", L"Unbekannt", L"Desconhecido", L"Sconosciuto", L"Неизвестно", L"Bilinmiyor", L"अज्ञात", L"未知", L"不明", L"알 수 없음"}},
-        {L"Loading...", {nullptr, L"Chargement...", L"Cargando...", L"Wird geladen...", L"Carregando...", L"Caricamento...", L"Загрузка...", L"Yükleniyor...", L"लोड हो रहा है...", L"加载中...", L"読み込み中...", L"불러오는 중..."}},
-        {L"Locating...", {nullptr, L"Localisation...", L"Ubicando...", L"Standort...", L"Localizando...", L"Localizzazione...", L"Определение...", L"Konum...", L"स्थान...", L"定位中...", L"位置情報...", L"위치 확인 중..."}},
-        {L"Wind", {nullptr, L"Vent", L"Viento", L"Wind", L"Vento", L"Vento", L"Ветер", L"Rüzgar", L"हवा", L"风速", L"風", L"바람"}},
-        {L"Feels Like", {nullptr, L"Ressenti", L"Sensación", L"Gefühlt", L"Sensação", L"Percepita", L"Ощущается", L"Hissedilen", L"महसूस", L"体感", L"体感", L"체감"}},
-        {L"Humidity", {nullptr, L"Humidité", L"Humedad", L"Luftfeuchte", L"Umidade", L"Umidità", L"Влажность", L"Nem", L"नमी", L"湿度", L"湿度", L"습도"}},
-        {L"Drag files here", {nullptr, L"Déposez des fichiers ici", L"Arrastra archivos aquí", L"Dateien hierher ziehen", L"Arraste arquivos aqui", L"Trascina i file qui", L"Перетащите файлы сюда", L"Dosyaları buraya sürükleyin", L"फ़ाइलें यहाँ खींचें", L"将文件拖到此处", L"ここにファイルをドラッグ", L"여기에 파일을 끌어다 놓으세요"}},
-        {L"No devices", {nullptr, L"Aucun appareil", L"Sin dispositivos", L"Keine Geräte", L"Nenhum dispositivo", L"Nessun dispositivo", L"Нет устройств", L"Cihaz yok", L"कोई डिवाइस नहीं", L"无设备", L"デバイスなし", L"장치 없음"}},
-        {L"item", {nullptr, L"élément", L"elemento", L"Element", L"item", L"elemento", L"элемент", L"öğe", L"आइटम", L"项", L"項目", L"항목"}},
-        {L"items", {nullptr, L"éléments", L"elementos", L"Elemente", L"itens", L"elementi", L"элементов", L"öğe", L"आइटम", L"项", L"項目", L"항목"}},
+        {L"Media", {nullptr, L"Média", L"Multimedia", L"Medien", L"Mídia", L"Media", L"Медиа", L"Medya", L"मीडिया", L"媒体", L"メディア", L"미디어", L"\u202Bالوسائط\u202C"}},
+        {L"Calendar", {nullptr, L"Calendrier", L"Calendario", L"Kalender", L"Calendário", L"Calendario", L"Календарь", L"Takvim", L"कैलेंडर", L"日历", L"カレンダー", L"캘린더", L"\u202Bالتقويم\u202C"}},
+        {L"Weather", {nullptr, L"Météo", L"Tiempo", L"Wetter", L"Tempo", L"Meteo", L"Погода", L"Hava", L"मौसम", L"天气", L"天気", L"날씨", L"\u202Bالطقس\u202C"}},
+        {L"Hardware Monitor", {nullptr, L"Moniteur matériel", L"Monitor de hardware", L"Hardware-Monitor", L"Monitor de hardware", L"Monitor hardware", L"Монитор системы", L"Donanım İzleme", L"हार्डवेयर मॉनिटर", L"硬件监视器", L"ハードウェア モニター", L"하드웨어 모니터", L"\u202Bأداء الجهاز\u202C"}},
+        {L"File Tray", {nullptr, L"Bac à fichiers", L"Bandeja de archivos", L"Dateiablage", L"Bandeja de arquivos", L"Vassoio file", L"Файлы", L"Dosya Tepsisi", L"फ़ाइल ट्रे", L"文件托盘", L"ファイル トレイ", L"파일 트레이", L"\u202Bرف الملفات\u202C"}},
+        {L"Bluetooth", {nullptr, L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"Bluetooth", L"ब्लूटूथ", L"蓝牙", L"Bluetooth", L"블루투스", L"\u202Bبلوتوث\u202C"}},
+        {L"Copied", {nullptr, L"Copié", L"Copiado", L"Kopiert", L"Copiado", L"Copiato", L"Скопировано", L"Kopyalandı", L"कॉपी किया गया", L"已复制", L"コピーしました", L"복사됨", L"\u202Bنُسخ\u202C"}},
+        {L"Volume", {nullptr, L"Volume", L"Volumen", L"Lautstärke", L"Volume", L"Volume", L"Громкость", L"Ses", L"वॉल्यूम", L"音量", L"音量", L"볼륨", L"\u202Bالصوت\u202C"}},
+        {L"Muted", {nullptr, L"Muet", L"Silenciado", L"Stumm", L"Sem som", L"Muto", L"Без звука", L"Sessiz", L"म्यूट", L"已静音", L"ミュート", L"음소거", L"\u202Bمكتوم\u202C"}},
+        {L"Low Battery", {nullptr, L"Batterie faible", L"Batería baja", L"Akku schwach", L"Bateria fraca", L"Batteria scarica", L"Батарея разряжена", L"Pil Az", L"बैटरी कम", L"电量低", L"バッテリー残量低下", L"배터리 부족", L"\u202Bالبطارية منخفضة\u202C"}},
+        {L"Charging", {nullptr, L"En charge", L"Cargando", L"Wird geladen", L"Carregando", L"In carica", L"Зарядка", L"Şarj oluyor", L"चार्ज हो रहा है", L"正在充电", L"充電中", L"충전 중", L"\u202Bيشحن\u202C"}},
+        {L"Connected", {nullptr, L"Connecté", L"Conectado", L"Verbunden", L"Conectado", L"Connesso", L"Подключено", L"Bağlandı", L"कनेक्ट किया गया", L"已连接", L"接続済み", L"연결됨", L"\u202Bمتصل\u202C"}},
+        {L"Disconnected", {nullptr, L"Déconnecté", L"Desconectado", L"Getrennt", L"Desconectado", L"Disconnesso", L"Отключено", L"Bağlantı kesildi", L"डिस्कनेक्ट किया गया", L"已断开", L"切断されました", L"연결 끊김", L"\u202Bانقطع الاتصال\u202C"}},
+        {L"Caps Lock", {nullptr, L"Verr. Maj", L"Bloq Mayús", L"Feststelltaste", L"Caps Lock", L"Blocco maiuscole", L"Caps Lock", L"Caps Lock", L"कैप्स लॉक", L"大写锁定", L"Caps Lock", L"Caps Lock", L"\u202Bالأحرف الكبيرة\u202C"}},
+        {L"Num Lock", {nullptr, L"Verr. Num", L"Bloq Num", L"Num-Taste", L"Num Lock", L"Blocco num", L"Num Lock", L"Num Lock", L"नम लॉक", L"数字锁定", L"Num Lock", L"Num Lock", L"\u202Bلوحة الأرقام\u202C"}},
+        {L"On", {nullptr, L"Activé", L"Activado", L"Ein", L"Ligado", L"Attivo", L"Вкл", L"Açık", L"चालू", L"开", L"オン", L"켜짐", L"\u202Bمفعّل\u202C"}},
+        {L"Off", {nullptr, L"Désactivé", L"Desactivado", L"Aus", L"Desligado", L"Disattivo", L"Выкл", L"Kapalı", L"बंद", L"关", L"オフ", L"꺼짐", L"\u202Bمعطّل\u202C"}},
+        {L"Do Not Disturb", {nullptr, L"Ne pas déranger", L"No molestar", L"Nicht stören", L"Não perturbe", L"Non disturbare", L"Не беспокоить", L"Rahatsız Etme", L"परेशान न करें", L"专注助手", L"応答不可", L"방해 금지", L"\u202Bعدم الإزعاج\u202C"}},
+        {L"Focus", {nullptr, L"Concentration", L"Concentración", L"Fokus", L"Foco", L"Concentrazione", L"Фокус", L"Odak", L"फ़ोकस", L"专注", L"集中", L"집중", L"\u202Bتركيز\u202C"}},
+        {L"Break", {nullptr, L"Pause", L"Descanso", L"Pause", L"Pausa", L"Pausa", L"Перерыв", L"Mola", L"विराम", L"休息", L"休憩", L"휴식", L"\u202Bاستراحة\u202C"}},
+        {L"Unknown", {nullptr, L"Inconnu", L"Desconocido", L"Unbekannt", L"Desconhecido", L"Sconosciuto", L"Неизвестно", L"Bilinmiyor", L"अज्ञात", L"未知", L"不明", L"알 수 없음", L"\u202Bغير معروف\u202C"}},
+        {L"Loading...", {nullptr, L"Chargement...", L"Cargando...", L"Wird geladen...", L"Carregando...", L"Caricamento...", L"Загрузка...", L"Yükleniyor...", L"लोड हो रहा है...", L"加载中...", L"読み込み中...", L"불러오는 중...", L"\u202Bجارٍ التحميل...\u202C"}},
+        {L"Locating...", {nullptr, L"Localisation...", L"Ubicando...", L"Standort...", L"Localizando...", L"Localizzazione...", L"Определение...", L"Konum...", L"स्थान...", L"定位中...", L"位置情報...", L"위치 확인 중...", L"\u202Bجارٍ تحديد الموقع...\u202C"}},
+        {L"Wind", {nullptr, L"Vent", L"Viento", L"Wind", L"Vento", L"Vento", L"Ветер", L"Rüzgar", L"हवा", L"风速", L"風", L"바람", L"\u202Bالرياح\u202C"}},
+        {L"Feels Like", {nullptr, L"Ressenti", L"Sensación", L"Gefühlt", L"Sensação", L"Percepita", L"Ощущается", L"Hissedilen", L"महसूस", L"体感", L"体感", L"체감", L"\u202Bالإحساس بها\u202C"}},
+        {L"Humidity", {nullptr, L"Humidité", L"Humedad", L"Luftfeuchte", L"Umidade", L"Umidità", L"Влажность", L"Nem", L"नमी", L"湿度", L"湿度", L"습도", L"\u202Bالرطوبة\u202C"}},
+        {L"Drag files here", {nullptr, L"Déposez des fichiers ici", L"Arrastra archivos aquí", L"Dateien hierher ziehen", L"Arraste arquivos aqui", L"Trascina i file qui", L"Перетащите файлы сюда", L"Dosyaları buraya sürükleyin", L"फ़ाइलें यहाँ खींचें", L"将文件拖到此处", L"ここにファイルをドラッグ", L"여기에 파일을 끌어다 놓으세요", L"\u202Bاسحب الملفات إلى هنا\u202C"}},
+        {L"No devices", {nullptr, L"Aucun appareil", L"Sin dispositivos", L"Keine Geräte", L"Nenhum dispositivo", L"Nessun dispositivo", L"Нет устройств", L"Cihaz yok", L"कोई डिवाइस नहीं", L"无设备", L"デバイスなし", L"장치 없음", L"\u202Bلا أجهزة\u202C"}},
+        {L"item", {nullptr, L"élément", L"elemento", L"Element", L"item", L"elemento", L"элемент", L"öğe", L"आइटम", L"项", L"項目", L"항목", L"\u202Bعنصر\u202C"}},
+        {L"items", {nullptr, L"éléments", L"elementos", L"Elemente", L"itens", L"elementi", L"элементов", L"öğe", L"आइटम", L"项", L"項目", L"항목", L"\u202Bعناصر\u202C"}},
+        // Strings only Arabic has so far; the other languages show the English key.
+        {L"Shihab (Default)", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bشهاب (افتراضي)\u202C"}},
+        {L"Shape", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالشكل\u202C"}},
+        {L"Pill", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bحبة\u202C"}},
+        {L"Windows 11", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bويندوز 11\u202C"}},
+        {L"macOS Notch", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bنتوء ماك\u202C"}},
+        {L"Expand", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالتوسيع\u202C"}},
+        {L"On hover", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bعند المرور\u202C"}},
+        {L"On click", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bعند النقر\u202C"}},
+        {L"25 min", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B25 دقيقة\u202C"}},
+        {L"50 min", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B50 دقيقة\u202C"}},
+        {L"5 min break", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bاستراحة 5\u202C"}},
+        {L"Game overlay", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bوضع الألعاب\u202C"}},
+        {L"Show Island", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإظهار الجزيرة\u202C"}},
+        {L"Hide Island", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإخفاء الجزيرة\u202C"}},
+        {L"Dismiss", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإغلاق التنبيه\u202C"}},
+        {L"Start 25 min Focus", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bتركيز 25 دقيقة\u202C"}},
+        {L"Start 50 min Focus", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bتركيز 50 دقيقة\u202C"}},
+        {L"Start 5 min Break", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bاستراحة 5 دقائق\u202C"}},
+        {L"Pause Timer", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإيقاف المؤقّت مؤقتاً\u202C"}},
+        {L"Resume Timer", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bمتابعة المؤقّت\u202C"}},
+        {L"Stop Timer", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإنهاء المؤقّت\u202C"}},
+        {L"Focus Timer", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bمؤقّت التركيز\u202C"}},
+        {L"Break Timer", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bمؤقّت الاستراحة\u202C"}},
+        {L"Focus Complete", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bانتهى وقت التركيز\u202C"}},
+        {L"Break Complete", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bانتهت الاستراحة\u202C"}},
+        {L"Clear", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bمسح\u202C"}},
+        {L"Pin expanded", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bتثبيت الجزيرة موسّعة\u202C"}},
+        {L"Hide game overlay", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإخفاء وضع الألعاب\u202C"}},
+        {L"Show game overlay", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإظهار وضع الألعاب\u202C"}},
+        {L"Use iPhone Pill Style", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bشكل الحبة الدائرية\u202C"}},
+        {L"Use Windows 11 Flyout Style", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bشكل ويندوز 11\u202C"}},
+        {L"macOS Notch (Unavailable at Bottom)", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bنتوء ماك (غير متاح في الأسفل)\u202C"}},
+        {L"Disable macOS Notch Style", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإلغاء شكل نتوء ماك\u202C"}},
+        {L"Use macOS Notch Style", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bشكل نتوء ماك\u202C"}},
+        {L"Expand on Click", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالتوسيع عند النقر\u202C"}},
+        {L"Expand on Hover", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالتوسيع عند مرور الفأرة\u202C"}},
+        {L"Transparency", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالشفافية\u202C"}},
+        {L"Reset transparency", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالشفافية الافتراضية\u202C"}},
+        {L"Theme", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bنمط الألوان\u202C"}},
+        {L"Custom Colors", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bألوان مخصصة\u202C"}},
+        {L"Open Alaq settings", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bفتح إعدادات ألق\u202C"}},
+        {L"Obsidian", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bأسود داكن\u202C"}},
+        {L"Graphite", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bرمادي داكن\u202C"}},
+        {L"Slate", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bرمادي مزرق\u202C"}},
+        {L"Nord", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bأزرق ثلجي\u202C"}},
+        {L"Evergreen", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bأخضر داكن\u202C"}},
+        {L"Espresso", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bبني دافئ\u202C"}},
+        {L"Plum", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bبنفسجي هادئ\u202C"}},
+        {L"Porcelain (Light)", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bفاتح\u202C"}},
+        {L"Notification", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإشعار\u202C"}},
+        {L"New notification", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bإشعار جديد\u202C"}},
+        {L"System audio", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bصوت النظام\u202C"}},
+        {L"Image copied", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bنُسخت صورة\u202C"}},
+        {L"Clipboard", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالحافظة\u202C"}},
+        {L"Camera & microphone in use", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالكاميرا والميكروفون قيد الاستعمال\u202C"}},
+        {L"Camera in use", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالكاميرا قيد الاستعمال\u202C"}},
+        {L"Microphone in use", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالميكروفون قيد الاستعمال\u202C"}},
+        {L" is using camera & microphone", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B يستعمل الكاميرا والميكروفون\u202C"}},
+        {L" using camera & mic", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B يستعملان الكاميرا والميكروفون\u202C"}},
+        {L" is using your camera", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B يستعمل الكاميرا\u202C"}},
+        {L" is using your microphone", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B يستعمل الميكروفون\u202C"}},
+        {L"Device Connected", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bوُصل جهاز\u202C"}},
+        {L"Device Removed", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bفُصل جهاز\u202C"}},
+        {L"USB Device", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bجهاز USB\u202C"}},
+        {L"USB Drive", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bذاكرة USB\u202C"}},
+        {L"COM Device", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bجهاز تسلسلي\u202C"}},
+        {L"Bluetooth Device", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bجهاز بلوتوث\u202C"}},
+        {L"Power Connected", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالشاحن موصول\u202C"}},
+        {L"Battery Alert", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bتنبيه البطارية\u202C"}},
+        {L"Progress", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالتقدّم\u202C"}},
+        {L"left", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bمتبقية\u202C"}},
+        {L"h", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"س"}},
+        {L"m", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"د"}},
+        {L"Local Weather", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالطقس المحلي\u202C"}},
+        {L" km/h", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L" كم/سا"}},
+        {L" mph", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L" ميل/سا"}},
+        {L"CPU", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالمعالج\u202C"}},
+        {L"RAM", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالذاكرة\u202C"}},
+        {L"GPU", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bكرت الشاشة\u202C"}},
+        {L"NET UP", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالرفع\u202C"}},
+        {L"NET DOWN", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالتنزيل\u202C"}},
+        {L"DISK", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالقرص\u202C"}},
     };
 
     const int langIndex = g_uiLanguage.load(std::memory_order_relaxed);
@@ -1873,6 +1997,23 @@ const wchar_t* Loc(const wchar_t* english) {
         }
     }
     return english;
+}
+
+bool IsArabicUi() {
+    return g_uiLanguage.load(std::memory_order_relaxed) == static_cast<int>(UiLanguage::Arabic);
+}
+
+// A text that mixes Arabic with a name or a number ("Zoom يستعمل الكاميرا",
+// "التقدّم 45%") is wrapped in RLE...PDF so it keeps its reading order inside
+// the island's left-to-right layouts.
+std::wstring RtlIfArabic(const std::wstring& text) {
+    return IsArabicUi() ? L"\u202B" + text + L"\u202C" : text;
+}
+
+// Arabic dates use the Syrian locale: Gregorian calendar and the Levantine
+// month names (كانون الثاني، شباط...), whatever the Arabic region of Windows.
+const wchar_t* IslandLocaleName() {
+    return IsArabicUi() ? L"ar-SY" : LOCALE_NAME_USER_DEFAULT;
 }
 
 // ── Media dashboard hit-testing (see the notes next to MediaLayout) ──────────
@@ -2343,6 +2484,13 @@ void ApplyBackdropMaterial(HWND);           // forward declaration; defined afte
 void ApplyBackdropRegion(HWND, int, int);   // forward declaration; defined below PositionOverlayWindow
 void NotifyKeyboardThreadSettingChanged();  // forward declaration; defined with the keyboard hook
 
+// A string kept in the mod's own storage (Wh_SetStringValue); empty when unset.
+std::wstring StoredString(PCWSTR name) {
+    wchar_t buffer[128] = {};
+    Wh_GetStringValue(name, buffer, ARRAYSIZE(buffer));
+    return buffer;
+}
+
 void LoadSettings() {
     Settings next;
 
@@ -2583,9 +2731,11 @@ void LoadSettings() {
     else next.targetMonitor = _wtoi(mon.c_str());
 
     std::wstring shapeStr = GetStringSettingCopy(L"Appearance.ShapeStyle");
-    static std::wstring s_lastConfiguredShape = L"";
-    if (!shapeStr.empty() && shapeStr != s_lastConfiguredShape) {
-        s_lastConfiguredShape = shapeStr;
+    // Shihab Alaq: the last setting seen is kept in the mod's storage, not in
+    // memory. In memory it started empty in every new process, so each start
+    // looked like a settings change and dropped the shape picked in the panel.
+    if (!shapeStr.empty() && shapeStr != StoredString(L"ShapeStyleApplied")) {
+        Wh_SetStringValue(L"ShapeStyleApplied", shapeStr.c_str());
         Wh_SetIntValue(L"W11StyleOverride", -1);
         Wh_SetIntValue(L"NotchStyleOverride", -1);
     }
@@ -2671,6 +2821,13 @@ void LoadSettings() {
     // change it without rewriting the settings file. Migrate the old key across
     // once, since the integers were renumbered when the palettes changed.
     if (Wh_GetIntValue(kThemeValueName, -1) < 0) {
+        const int previous = Wh_GetIntValue(kPreviousThemeValueName, -1);
+        if (previous >= 0) {
+            // V2 had Custom at 8, where the Shihab palette now is
+            Wh_SetIntValue(kThemeValueName, previous >= kShihabThemeIndex ? kCustomThemeIndex : previous);
+        }
+    }
+    if (Wh_GetIntValue(kThemeValueName, -1) < 0) {
         const int legacy = Wh_GetIntValue(kLegacyThemeValueName, -1);
         if (legacy >= 0) {
             int migrated;
@@ -2686,9 +2843,10 @@ void LoadSettings() {
         }
     }
 
-    static std::wstring s_lastConfiguredPreset = L"";
-    if (!themePresetStr.empty() && themePresetStr != s_lastConfiguredPreset) {
-        s_lastConfiguredPreset = themePresetStr;
+    // Kept in the mod's storage for the same reason as ShapeStyleApplied: the
+    // palette picked in the panel survives a restart until the setting changes
+    if (!themePresetStr.empty() && themePresetStr != StoredString(L"ThemePresetApplied")) {
+        Wh_SetStringValue(L"ThemePresetApplied", themePresetStr.c_str());
         const int fromSettings = ThemeIndexFromId(themePresetStr);
         if (fromSettings >= 0) {
             Wh_SetIntValue(kThemeValueName, fromSettings);
@@ -2712,7 +2870,7 @@ void LoadSettings() {
                                                D2D1::ColorF(0.118f, 0.118f, 0.133f, 1.0f));
     } else {
         const int fromSettings = ThemeIndexFromId(themePresetStr);
-        const int presetIdx = (fromSettings >= 0 && fromSettings < kCustomThemeIndex) ? fromSettings : 0;
+        const int presetIdx = (fromSettings >= 0 && fromSettings < kCustomThemeIndex) ? fromSettings : kShihabThemeIndex;
         next.themePreset = static_cast<ThemePreset>(presetIdx);
         applyPreset(next, presetIdx);
     }
@@ -2722,6 +2880,15 @@ void LoadSettings() {
     // a little. The rest of the palettes are opaque unless the user says so.
     if (next.themePreset == ThemePreset::Graphite && localOpacity < 0) {
         next.pillOpacity = 0.88f;
+    }
+
+    // Shihab Alaq: the Shihab palette brings its own accent (Accent in
+    // ShihabTheme.xaml). Taken from the album art, the accent tinted it green
+    // (WhatsApp) or blue (Chrome), and with no art it was the default cyan.
+    // An accent the user picked (system or custom) still wins.
+    if (next.themePreset == ThemePreset::Shihab && next.accentMode == AccentMode::Auto) {
+        next.accentMode = AccentMode::Custom;
+        next.customAccent = ColorFromHex(L"#EF5285", next.customAccent);
     }
 
     next.borderMergedMode = Wh_GetIntSetting(L"Appearance.BorderMergedMode") != 0;
@@ -3721,7 +3888,7 @@ std::wstring FriendlyMediaSourceName(std::wstring_view source) {
     if (dot != std::wstring::npos) {
         text.resize(dot);
     }
-    return text.empty() ? L"Media" : text;
+    return text.empty() ? Loc(L"Media") : text;
 }
 
 std::wstring MediaSourceBadge(std::wstring_view sourceName) {
@@ -4312,7 +4479,7 @@ DWORD WINAPI MediaThreadProc(void*) {
             if (isDifferentTrack) {
                 next.titleChangedAt = NowSeconds();
                 trackJustChanged = true;
-                g_idleTab = 0;
+                // The page stays where the wheel left it (its compact form shows while collapsed)
             }
 
             if (!g_state.media.art.bgra.empty() &&
@@ -4580,7 +4747,7 @@ DWORD WINAPI NotificationThreadProc(void*) {
                             }
 
                             if (snapshot.title.empty()) {
-                                snapshot.title = snapshot.app.empty() ? L"New notification" : snapshot.app;
+                                snapshot.title = snapshot.app.empty() ? Loc(L"New notification") : snapshot.app;
                             }
                             if (!snapshot.body.empty()) {
                                 snapshot.title += L" - " + snapshot.body;
@@ -4975,7 +5142,7 @@ void HandleBluetoothDisconnected(
         }
     }
     if (name.empty()) {
-        name = L"Bluetooth Device";
+        name = Loc(L"Bluetooth Device");
     }
 
     Wh_Log(L"Bluetooth: a device disconnected.");
@@ -5325,6 +5492,11 @@ DWORD WINAPI WeatherThreadProc(void*) {
                 url = L"/" + encodedCity + L"?format=j1";
             }
         }
+        // wttr.in adds a "lang_ar" description next to the English one.
+        const bool arabicWeather = IsArabicUi();
+        if (arabicWeather) {
+            url += L"&lang=ar";
+        }
 
         // The path holds the configured city, so it is not logged.
         Wh_Log(L"Weather: requesting weather from wttr.in.");
@@ -5341,7 +5513,7 @@ DWORD WINAPI WeatherThreadProc(void*) {
             std::wstring windDir = L"";
             std::wstring humidity = L"";
             std::wstring feelsLike = L"";
-            std::wstring cityLabel = L"Local Weather";
+            std::wstring cityLabel = Loc(L"Local Weather");
 
             const char* areaStr = strstr(wRes.c_str(), "\"areaName\":");
             if (areaStr) {
@@ -5395,7 +5567,10 @@ DWORD WINAPI WeatherThreadProc(void*) {
                     sscanf(codeStr, "%d", &code);
                 }
 
-                const char* descStr = strstr(currentStr, "\"weatherDesc\":");
+                const char* descStr = arabicWeather ? strstr(currentStr, "\"lang_ar\":") : nullptr;
+                if (!descStr) {
+                    descStr = strstr(currentStr, "\"weatherDesc\":");
+                }
                 if (descStr) {
                     const char* valStr = strstr(descStr, "\"value\":");
                     if (valStr) {
@@ -5871,7 +6046,7 @@ void UpdateSystemSnapshot(bool includeGpuStats, bool includeNetStats) {
         g_state.volume.active = true;
         g_state.volume.percent = next.volumePercent;
         g_state.volume.muted = next.volumeMuted;
-        g_state.volume.deviceName = L"System audio";
+        g_state.volume.deviceName = Loc(L"System audio");
         g_state.volume.expiresAt = NowSeconds() + 1.8;
         TriggerNudge();
     }
@@ -6411,7 +6586,7 @@ void CaptureClipboard(HWND hwnd) {
     } else {
         BitmapPixels imagePixels;
         if (ReadClipboardImagePixels(hwnd, &imagePixels, kClipboardImageThumbMaxDim)) {
-            clip.text = L"Image copied";
+            clip.text = Loc(L"Image copied");
             clip.image = true;
             clip.active = true;
             clip.imagePreview = std::move(imagePixels);
@@ -6787,89 +6962,72 @@ void DismissTransientState() {
     Wh_SetIntValue(L"ProgressPercent", -1);
 }
 
-void ShowContextMenu(HWND hwnd, POINT screenPoint) {
-    bool timerActive = false;
-    bool timerRunning = false;
-    {
-        std::lock_guard lock(g_stateMutex);
-        timerActive = g_state.timer.active;
-        timerRunning = g_state.timer.running;
-    }
+// ── The right-click panel ───────────────────────────────────────────────────
+// Shihab Alaq: one light panel in place of a long popup menu. Actions stay a
+// list, the shape, the expand mode, the focus timer and the colour theme are
+// single choices, and the transparency is a slider. The colours are the dark
+// tokens of Shihab.Common (ShihabTheme.xaml), the text is Almarai when it is
+// installed (Segoe UI otherwise), and the panel reads right to left in Arabic.
+namespace ShihabLook {
+constexpr COLORREF kPanel = RGB(0x1C, 0x17, 0x20);
+constexpr COLORREF kControl = RGB(0x2C, 0x25, 0x31);
+constexpr COLORREF kHover = RGB(0x37, 0x2F, 0x3D);
+constexpr COLORREF kStroke = RGB(0x35, 0x2D, 0x3B);
+constexpr COLORREF kText = RGB(0xF5, 0xF1, 0xF7);
+constexpr COLORREF kMuted = RGB(0xA7, 0x9C, 0xAD);
+constexpr COLORREF kAccent = RGB(0xEF, 0x52, 0x85);
+constexpr COLORREF kOnAccent = RGB(0xFF, 0xFF, 0xFF);
 
-    HMENU menu = CreatePopupMenu();
-    AppendMenuW(menu, MF_STRING, 40, g_manuallyHidden.load() ? L"Show Island" : L"Hide Island");
-    AppendMenuW(menu, MF_STRING, 1, L"Dismiss");
+D2D1_COLOR_F Color(COLORREF c, float alpha = 1.0f) {
+    return D2D1::ColorF(GetRValue(c) / 255.0f, GetGValue(c) / 255.0f, GetBValue(c) / 255.0f, alpha);
+}
 
-    HMENU timerMenu = CreatePopupMenu();
-    AppendMenuW(timerMenu, MF_STRING, 30, L"Start 25 min Focus");
-    AppendMenuW(timerMenu, MF_STRING, 31, L"Start 50 min Focus");
-    AppendMenuW(timerMenu, MF_STRING, 32, L"Start 5 min Break");
-    if (timerActive) {
-        AppendMenuW(timerMenu, MF_STRING, 33, timerRunning ? L"Pause Timer" : L"Resume Timer");
-        AppendMenuW(timerMenu, MF_STRING, 34, L"Stop Timer");
-    }
-    AppendMenuW(menu, MF_POPUP, reinterpret_cast<UINT_PTR>(timerMenu), L"Focus Timer");
-    if (g_settings.fileTrayModule) {
-        size_t trayCount = 0;
-        {
-            std::lock_guard lock(g_stateMutex);
-            trayCount = g_state.fileTrayItems.size();
-        }
-        std::wstring label = std::wstring(Loc(L"File Tray")) + L": ";
-        if (trayCount == 0) {
-            label += L"—";
-            AppendMenuW(menu, MF_STRING | MF_GRAYED | MF_DISABLED, 41, label.c_str());
-        } else {
-            label += L"Clear " + std::to_wstring(trayCount);
-            AppendMenuW(menu, MF_STRING, 41, label.c_str());
-        }
-    }
-    AppendMenuW(menu, MF_STRING, 2, L"Pin expanded");
-    AppendMenuW(menu, MF_STRING, 3, Wh_GetIntValue(L"GameOverlayPinned", 0) ? L"Hide game overlay" : L"Show game overlay");
-    std::wstring shapeStr = GetStringSettingCopy(L"Appearance.ShapeStyle");
-    const int activeW11 = Wh_GetIntValue(L"W11StyleOverride", -1) >= 0
-                          ? Wh_GetIntValue(L"W11StyleOverride", 0)
-                          : EqualsNoCase(shapeStr, L"w11");
-    AppendMenuW(menu, MF_STRING, 10, activeW11 ? L"Use iPhone Pill Style" : L"Use Windows 11 Flyout Style");
-    const int activeNotch = Wh_GetIntValue(L"NotchStyleOverride", -1) >= 0
-                          ? Wh_GetIntValue(L"NotchStyleOverride", 0)
-                          : EqualsNoCase(shapeStr, L"notch");
-    if (IsBottomPosition(g_settings.position)) {
-        AppendMenuW(menu, MF_STRING | MF_GRAYED | MF_DISABLED, 12, L"macOS Notch (Unavailable at Bottom)");
-    } else {
-        AppendMenuW(menu, MF_STRING, 12, activeNotch ? L"Disable macOS Notch Style" : L"Use macOS Notch Style");
-    }
-    const int activeExpandOnHover = Wh_GetIntValue(L"ExpandOnHoverOverride", -1) >= 0
-                          ? Wh_GetIntValue(L"ExpandOnHoverOverride", 0)
-                          : (Wh_GetIntSetting(L"Behavior.ExpandOnHover") != 0);
-    AppendMenuW(menu, MF_STRING, 11, activeExpandOnHover ? L"Expand on Click" : L"Expand on Hover");
-    AppendMenuW(menu, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(menu, MF_STRING, 4, L"Transparency 100%");
-    AppendMenuW(menu, MF_STRING, 5, L"Transparency 85%");
-    AppendMenuW(menu, MF_STRING, 6, L"Transparency 70%");
-    AppendMenuW(menu, MF_STRING, 7, L"Transparency 55%");
-    AppendMenuW(menu, MF_STRING, 8, L"Reset transparency");
-    AppendMenuW(menu, MF_SEPARATOR, 0, nullptr);
-    // Color theme presets. Built from kThemePalettes and nested in a submenu:
-    // nine palettes listed flat would dominate the root menu.
-    const int activeTheme = Wh_GetIntValue(kThemeValueName, static_cast<int>(g_settings.themePreset));
-    HMENU themeMenu = CreatePopupMenu();
-    for (int i = 0; i < kCustomThemeIndex; ++i) {
-        AppendMenuW(themeMenu, MF_STRING | (activeTheme == i ? MF_CHECKED : 0),
-                    kThemeMenuIdBase + static_cast<UINT>(i), kThemePalettes[i].label);
-    }
-    AppendMenuW(themeMenu, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(themeMenu, MF_STRING | (activeTheme >= kCustomThemeIndex ? MF_CHECKED : 0),
-                kThemeMenuIdBase + static_cast<UINT>(kCustomThemeIndex), L"Custom Colors");
-    AppendMenuW(menu, MF_POPUP, reinterpret_cast<UINT_PTR>(themeMenu), L"Theme");
-    AppendMenuW(menu, MF_SEPARATOR, 0, nullptr);
-    AppendMenuW(menu, MF_STRING, 9, L"Open Windhawk settings");
+// A named CALLBACK: a lambda has the wrong calling convention on 32-bit
+int CALLBACK OnFontFound(const LOGFONTW*, const TEXTMETRICW*, DWORD, LPARAM found) {
+    *reinterpret_cast<bool*>(found) = true;
+    return 0;
+}
 
-    SetForegroundWindow(hwnd);
-    const UINT cmd = TrackPopupMenu(menu, TPM_RETURNCMD | TPM_RIGHTBUTTON,
-                                   screenPoint.x, screenPoint.y, 0, hwnd, nullptr);
-    DestroyMenu(menu);
+bool IsFontInstalled(const wchar_t* face) {
+    HDC dc = GetDC(nullptr);
+    LOGFONTW lf{};
+    lf.lfCharSet = DEFAULT_CHARSET;
+    wcscpy_s(lf.lfFaceName, face);
+    bool found = false;
+    EnumFontFamiliesExW(dc, &lf, OnFontFound, reinterpret_cast<LPARAM>(&found), 0);
+    ReleaseDC(nullptr, dc);
+    return found;
+}
 
+const wchar_t* TextFont() {
+    static const bool almarai = IsFontInstalled(L"Almarai");
+    return almarai ? L"Almarai" : L"Segoe UI";
+}
+
+const wchar_t* IconFont() {
+    static const bool fluent = IsFontInstalled(L"Segoe Fluent Icons");
+    return fluent ? L"Segoe Fluent Icons" : L"Segoe MDL2 Assets";
+}
+
+// A Stroke-coloured border and round corners (Windows 11).
+void StyleWindow(HWND window) {
+    const COLORREF border = kStroke;
+    DwmSetWindowAttribute(window, 34 /* DWMWA_BORDER_COLOR */, &border, sizeof(border));
+    const int corner = 2;  // DWMWCP_ROUND
+    DwmSetWindowAttribute(window, 33 /* DWMWA_WINDOW_CORNER_PREFERENCE */, &corner, sizeof(corner));
+}
+
+// Mixed-direction marks are for the island's left-to-right layouts; the panel
+// reads right to left by itself.
+std::wstring Clean(std::wstring text) {
+    std::erase_if(text, [](wchar_t c) { return c == L'‫' || c == L'‬'; });
+    return text;
+}
+}  // namespace ShihabLook
+
+// What the panel's actions do; the ids are the ones the popup menu used.
+void RunIslandCommand(HWND hwnd, UINT cmd) {
+    (void)hwnd;
     // Theme ids are a contiguous range rather than individual cases, so adding a
     // palette to kThemePalettes needs no change here.
     if (cmd >= kThemeMenuIdBase &&
@@ -7047,6 +7205,634 @@ void ShowContextMenu(HWND hwnd, POINT screenPoint) {
     }
 }
 
+namespace IslandPanel {
+using namespace ShihabLook;
+
+enum class RowKind { Action, Toggle, Choice, Slider, Swatches, Separator };
+
+struct Choice {
+    std::wstring label;
+    int value = 0;
+    bool enabled = true;
+};
+
+struct Row {
+    RowKind kind = RowKind::Action;
+    int id = 0;  // the command of an action or toggle; the group of the others
+    std::wstring label;
+    bool checked = false;
+    bool enabled = true;
+    std::vector<Choice> choices;  // a choice row's options, or a swatch row's palettes
+    int selected = -1;
+    int value = 0;  // the slider's
+    D2D1_RECT_F rect{};
+    std::vector<D2D1_RECT_F> parts;  // segments, swatches, or the slider's track and reset button
+};
+
+constexpr int kShapeGroup = 100;
+constexpr int kExpandGroup = 101;
+constexpr int kTimerGroup = 102;
+constexpr int kOpacityGroup = 103;
+constexpr int kThemeGroup = 104;
+constexpr int kOpacityMin = 35;
+constexpr int kOpacityMax = 100;
+constexpr int kOpacityStep = 5;
+
+// Sizes in DIPs
+constexpr float kWidth = 300.0f;
+constexpr float kPad = 6.0f;
+constexpr float kItemH = 34.0f;
+constexpr float kLabelH = 24.0f;
+constexpr float kControlH = 32.0f;
+constexpr float kSepH = 9.0f;
+constexpr float kSwatch = 18.0f;
+constexpr float kSwatchGap = 8.0f;
+constexpr wchar_t kClassName[] = L"ShihabAlaq.IslandPanel";
+
+HWND g_window = nullptr;
+HWND g_owner = nullptr;
+std::vector<Row> g_rows;
+int g_hoverRow = -1;
+int g_hoverPart = -1;
+bool g_dragging = false;
+bool g_rtl = false;
+float g_height = 0.0f;
+float g_scale = 1.0f;
+ComPtr<ID2D1Factory> g_factory;
+ComPtr<IDWriteFactory> g_dwrite;
+ComPtr<ID2D1HwndRenderTarget> g_target;
+ComPtr<ID2D1SolidColorBrush> g_brush;
+ComPtr<IDWriteTextFormat> g_textFormat, g_smallFormat, g_smallTrailFormat, g_centerFormat, g_iconFormat;
+
+int CurrentShape() {
+    const std::wstring shape = GetStringSettingCopy(L"Appearance.ShapeStyle");
+    const int notch = Wh_GetIntValue(L"NotchStyleOverride", -1) >= 0 ? Wh_GetIntValue(L"NotchStyleOverride", 0)
+                                                                      : EqualsNoCase(shape, L"notch");
+    const int w11 = Wh_GetIntValue(L"W11StyleOverride", -1) >= 0 ? Wh_GetIntValue(L"W11StyleOverride", 0)
+                                                                  : EqualsNoCase(shape, L"w11");
+    return notch ? 2 : (w11 ? 1 : 0);
+}
+
+bool ExpandOnHover() {
+    return Wh_GetIntValue(L"ExpandOnHoverOverride", -1) >= 0 ? Wh_GetIntValue(L"ExpandOnHoverOverride", 0) != 0
+                                                               : Wh_GetIntSetting(L"Behavior.ExpandOnHover") != 0;
+}
+
+int CurrentOpacity() {
+    const int local = Wh_GetIntValue(L"PillOpacityOverride", -1);
+    return ClampInt(local >= 0 ? local : Wh_GetIntSetting(L"Themes.PillOpacity"), kOpacityMin, kOpacityMax);
+}
+
+D2D1_COLOR_F PaletteColor(int index) {
+    if (index < kCustomThemeIndex) {
+        return ColorFromHex(kThemePalettes[index].bg, D2D1::ColorF(0, 0, 0, 1));
+    }
+    return ColorFromHex(GetStringSettingCopy(L"Themes.PillBgColor"), D2D1::ColorF(0.031f, 0.031f, 0.039f, 1.0f));
+}
+
+void BuildRows() {
+    g_rows.clear();
+    bool timerActive = false;
+    bool timerRunning = false;
+    size_t trayCount = 0;
+    {
+        std::lock_guard lock(g_stateMutex);
+        timerActive = g_state.timer.active;
+        timerRunning = g_state.timer.running;
+        trayCount = g_state.fileTrayItems.size();
+    }
+    auto add = [](RowKind kind, int id, std::wstring label) -> Row& {
+        Row row;
+        row.kind = kind;
+        row.id = id;
+        row.label = Clean(std::move(label));
+        g_rows.push_back(std::move(row));
+        return g_rows.back();
+    };
+    auto choice = [](std::wstring label, int value, bool enabled = true) {
+        return Choice{Clean(std::move(label)), value, enabled};
+    };
+
+    add(RowKind::Action, 40, g_manuallyHidden.load() ? Loc(L"Show Island") : Loc(L"Hide Island"));
+    add(RowKind::Action, 1, Loc(L"Dismiss"));
+    if (g_settings.fileTrayModule) {
+        Row& tray = add(RowKind::Action, 41, std::wstring(Loc(L"File Tray")) + L": " +
+                                                 (trayCount ? std::wstring(Loc(L"Clear")) + L" " + std::to_wstring(trayCount)
+                                                            : std::wstring(L"—")));
+        tray.enabled = trayCount > 0;
+    }
+    add(RowKind::Toggle, 2, Loc(L"Pin expanded")).checked = Wh_GetIntValue(L"PinnedExpanded", 0) != 0;
+    add(RowKind::Toggle, 3, Loc(L"Game overlay")).checked = Wh_GetIntValue(L"GameOverlayPinned", 0) != 0;
+    add(RowKind::Separator, 0, L"");
+
+    Row& shape = add(RowKind::Choice, kShapeGroup, Loc(L"Shape"));
+    shape.choices = {choice(Loc(L"Pill"), 0), choice(Loc(L"Windows 11"), 1),
+                     choice(Loc(L"macOS Notch"), 2, !IsBottomPosition(g_settings.position))};
+    shape.selected = CurrentShape();
+
+    Row& expand = add(RowKind::Choice, kExpandGroup, Loc(L"Expand"));
+    expand.choices = {choice(Loc(L"On hover"), 1), choice(Loc(L"On click"), 0)};
+    expand.selected = ExpandOnHover() ? 1 : 0;
+
+    add(RowKind::Slider, kOpacityGroup, Loc(L"Transparency")).value = CurrentOpacity();
+
+    Row& timer = add(RowKind::Choice, kTimerGroup, Loc(L"Focus Timer"));
+    if (timerActive) {
+        timer.choices = {choice(timerRunning ? Loc(L"Pause Timer") : Loc(L"Resume Timer"), 33),
+                         choice(Loc(L"Stop Timer"), 34)};
+    } else {
+        timer.choices = {choice(Loc(L"25 min"), 30), choice(Loc(L"50 min"), 31), choice(Loc(L"5 min break"), 32)};
+    }
+
+    const int activeTheme = Wh_GetIntValue(kThemeValueName, static_cast<int>(g_settings.themePreset));
+    Row& theme = add(RowKind::Swatches, kThemeGroup, L"");
+    for (int i = 0; i <= kCustomThemeIndex; ++i) {
+        theme.choices.push_back(choice(i < kCustomThemeIndex ? Loc(kThemePalettes[i].label) : Loc(L"Custom Colors"), i));
+    }
+    theme.selected = activeTheme;
+    const int named = ClampInt(activeTheme, 0, kCustomThemeIndex);
+    theme.label = Clean(std::wstring(Loc(L"Theme")) + L"  ·  " + theme.choices[named].label);
+
+    add(RowKind::Separator, 0, L"");
+    add(RowKind::Action, 9, Loc(L"Open Alaq settings"));
+}
+
+D2D1_RECT_F Mirror(D2D1_RECT_F r) {
+    return g_rtl ? D2D1::RectF(kWidth - r.right, r.top, kWidth - r.left, r.bottom) : r;
+}
+
+void Layout() {
+    float y = kPad;
+    const float left = kPad;
+    const float right = kWidth - kPad;
+    for (Row& row : g_rows) {
+        row.parts.clear();
+        switch (row.kind) {
+            case RowKind::Action:
+            case RowKind::Toggle:
+                row.rect = D2D1::RectF(left, y, right, y + kItemH);
+                y += kItemH;
+                break;
+            case RowKind::Separator:
+                row.rect = D2D1::RectF(left + 4, y, right - 4, y + kSepH);
+                y += kSepH;
+                break;
+            case RowKind::Choice: {
+                row.rect = D2D1::RectF(left, y, right, y + kLabelH + kControlH);
+                const float boxLeft = left + 8, boxRight = right - 8;
+                const float top = y + kLabelH, bottom = top + kControlH;
+                const float w = (boxRight - boxLeft) / static_cast<float>(row.choices.size());
+                for (size_t i = 0; i < row.choices.size(); ++i) {
+                    row.parts.push_back(D2D1::RectF(boxLeft + w * i + 2, top + 2, boxLeft + w * (i + 1) - 2, bottom - 2));
+                }
+                y += kLabelH + kControlH + 6;
+                break;
+            }
+            case RowKind::Slider: {
+                row.rect = D2D1::RectF(left, y, right, y + kLabelH + kControlH);
+                const float top = y + kLabelH;
+                row.parts.push_back(D2D1::RectF(left + 8, top, right - 8 - 34, top + kControlH));        // track
+                row.parts.push_back(D2D1::RectF(right - 8 - 30, top + 1, right - 8, top + kControlH - 1));  // reset
+                y += kLabelH + kControlH + 6;
+                break;
+            }
+            case RowKind::Swatches: {
+                row.rect = D2D1::RectF(left, y, right, y + kLabelH + kSwatch + 10);
+                float x = left + 12;
+                const float top = y + kLabelH + 4;
+                for (size_t i = 0; i < row.choices.size(); ++i) {
+                    row.parts.push_back(D2D1::RectF(x, top, x + kSwatch, top + kSwatch));
+                    x += kSwatch + kSwatchGap;
+                }
+                y += kLabelH + kSwatch + 14;
+                break;
+            }
+        }
+        row.rect = Mirror(row.rect);
+        for (D2D1_RECT_F& part : row.parts) {
+            part = Mirror(part);
+        }
+    }
+    g_height = y + kPad;
+}
+
+bool Contains(const D2D1_RECT_F& r, D2D1_POINT_2F p) {
+    return p.x >= r.left && p.x < r.right && p.y >= r.top && p.y < r.bottom;
+}
+
+// The row and the part (segment, swatch, track or reset) under a point.
+std::pair<int, int> HitTest(D2D1_POINT_2F p) {
+    for (int i = 0; i < static_cast<int>(g_rows.size()); ++i) {
+        const Row& row = g_rows[i];
+        if (row.kind == RowKind::Separator) continue;
+        for (int j = 0; j < static_cast<int>(row.parts.size()); ++j) {
+            if (Contains(row.parts[j], p)) return {i, j};
+        }
+        if ((row.kind == RowKind::Action || row.kind == RowKind::Toggle) && Contains(row.rect, p)) return {i, -1};
+    }
+    return {-1, -1};
+}
+
+void CreateFormats() {
+    const auto make = [](float size, DWRITE_TEXT_ALIGNMENT align, const wchar_t* font, ComPtr<IDWriteTextFormat>& out) {
+        out.Reset();
+        if (FAILED(g_dwrite->CreateTextFormat(font, nullptr, DWRITE_FONT_WEIGHT_NORMAL, DWRITE_FONT_STYLE_NORMAL,
+                                              DWRITE_FONT_STRETCH_NORMAL, size, L"", &out))) {
+            return;
+        }
+        out->SetReadingDirection(g_rtl ? DWRITE_READING_DIRECTION_RIGHT_TO_LEFT : DWRITE_READING_DIRECTION_LEFT_TO_RIGHT);
+        out->SetTextAlignment(align);
+        out->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+        out->SetWordWrapping(DWRITE_WORD_WRAPPING_NO_WRAP);
+    };
+    make(13.0f, DWRITE_TEXT_ALIGNMENT_LEADING, TextFont(), g_textFormat);
+    make(12.0f, DWRITE_TEXT_ALIGNMENT_LEADING, TextFont(), g_smallFormat);
+    make(12.0f, DWRITE_TEXT_ALIGNMENT_TRAILING, TextFont(), g_smallTrailFormat);
+    make(12.5f, DWRITE_TEXT_ALIGNMENT_CENTER, TextFont(), g_centerFormat);
+    make(13.0f, DWRITE_TEXT_ALIGNMENT_CENTER, IconFont(), g_iconFormat);
+}
+
+void PaintText(const std::wstring& text, IDWriteTextFormat* format, D2D1_RECT_F rect, COLORREF color, float alpha = 1.0f) {
+    if (!format || text.empty()) return;
+    g_brush->SetColor(Color(color, alpha));
+    g_target->DrawTextW(text.c_str(), static_cast<UINT32>(text.size()), format, rect, g_brush.Get(),
+                        D2D1_DRAW_TEXT_OPTIONS_CLIP);
+}
+
+void FillRound(D2D1_RECT_F rect, float radius, D2D1_COLOR_F color) {
+    g_brush->SetColor(color);
+    g_target->FillRoundedRectangle(D2D1::RoundedRect(rect, radius, radius), g_brush.Get());
+}
+
+D2D1_RECT_F Inset(D2D1_RECT_F r, float x, float y = 0.0f) {
+    return D2D1::RectF(r.left + x, r.top + y, r.right - x, r.bottom - y);
+}
+
+// The label line above a choice, slider or swatch row.
+D2D1_RECT_F LabelRect(const Row& row) {
+    return D2D1::RectF(row.rect.left + 12, row.rect.top, row.rect.right - 12, row.rect.top + kLabelH);
+}
+
+void Paint() {
+    if (!g_target) {
+        RECT rc{};
+        GetClientRect(g_window, &rc);
+        if (FAILED(g_factory->CreateHwndRenderTarget(
+                D2D1::RenderTargetProperties(),
+                D2D1::HwndRenderTargetProperties(g_window, D2D1::SizeU(rc.right, rc.bottom)), &g_target))) {
+            return;
+        }
+        g_target->SetDpi(96.0f * g_scale, 96.0f * g_scale);
+        g_target->CreateSolidColorBrush(Color(kText), &g_brush);
+    }
+
+    g_target->BeginDraw();
+    g_target->Clear(Color(kPanel));
+    for (int i = 0; i < static_cast<int>(g_rows.size()); ++i) {
+        const Row& row = g_rows[i];
+        const bool rowHover = i == g_hoverRow;
+        switch (row.kind) {
+            case RowKind::Separator: {
+                const float y = (row.rect.top + row.rect.bottom) * 0.5f;
+                g_brush->SetColor(Color(kStroke));
+                g_target->FillRectangle(D2D1::RectF(row.rect.left + 6, y, row.rect.right - 6, y + 1.0f), g_brush.Get());
+                break;
+            }
+            case RowKind::Action:
+            case RowKind::Toggle: {
+                if (rowHover && row.enabled) FillRound(Inset(row.rect, 0, 1), 8, Color(kHover));
+                const D2D1_RECT_F text = g_rtl ? D2D1::RectF(row.rect.left + 56, row.rect.top, row.rect.right - 12, row.rect.bottom)
+                                               : D2D1::RectF(row.rect.left + 12, row.rect.top, row.rect.right - 56, row.rect.bottom);
+                PaintText(row.label, g_textFormat.Get(), text, row.enabled ? kText : kMuted, row.enabled ? 1.0f : 0.7f);
+                if (row.kind == RowKind::Toggle) {
+                    // A switch at the trailing end: on = Accent with the knob at the end
+                    const float cy = (row.rect.top + row.rect.bottom) * 0.5f;
+                    const float sw = 32.0f, sh = 18.0f;
+                    const float sx = g_rtl ? row.rect.left + 12 : row.rect.right - 12 - sw;
+                    const D2D1_RECT_F track = D2D1::RectF(sx, cy - sh / 2, sx + sw, cy + sh / 2);
+                    FillRound(track, sh / 2, Color(row.checked ? kAccent : kControl));
+                    if (!row.checked) {
+                        g_brush->SetColor(Color(kStroke));
+                        g_target->DrawRoundedRectangle(D2D1::RoundedRect(track, sh / 2, sh / 2), g_brush.Get(), 1.0f);
+                    }
+                    const bool knobAtEnd = row.checked != g_rtl;
+                    const float kx = knobAtEnd ? track.right - sh / 2 : track.left + sh / 2;
+                    g_brush->SetColor(Color(row.checked ? kOnAccent : kMuted));
+                    g_target->FillEllipse(D2D1::Ellipse(D2D1::Point2F(kx, cy), 6.0f, 6.0f), g_brush.Get());
+                }
+                break;
+            }
+            case RowKind::Choice: {
+                PaintText(row.label, g_smallFormat.Get(), LabelRect(row), kMuted);
+                if (row.parts.empty()) break;
+                D2D1_RECT_F box = row.parts.front();
+                for (const D2D1_RECT_F& p : row.parts) {
+                    box.left = std::min(box.left, p.left);
+                    box.right = std::max(box.right, p.right);
+                }
+                FillRound(Inset(box, -2, -2), 9, Color(kControl));
+                for (int j = 0; j < static_cast<int>(row.parts.size()); ++j) {
+                    const Choice& c = row.choices[j];
+                    const bool selected = c.value == row.selected;
+                    const bool hover = rowHover && j == g_hoverPart && c.enabled;
+                    if (selected) FillRound(row.parts[j], 7, Color(kAccent));
+                    else if (hover) FillRound(row.parts[j], 7, Color(kHover));
+                    PaintText(c.label, g_centerFormat.Get(), row.parts[j], selected ? kOnAccent : (c.enabled ? kText : kMuted),
+                             c.enabled ? 1.0f : 0.5f);
+                }
+                break;
+            }
+            case RowKind::Slider: {
+                const D2D1_RECT_F label = LabelRect(row);
+                PaintText(row.label, g_smallFormat.Get(), label, kMuted);
+                PaintText(std::to_wstring(row.value) + L"%", g_smallTrailFormat.Get(), label, kText);
+                const D2D1_RECT_F track = row.parts[0];
+                const float cy = (track.top + track.bottom) * 0.5f;
+                const float x0 = track.left + 9, x1 = track.right - 9;
+                const float frac = static_cast<float>(row.value - kOpacityMin) / (kOpacityMax - kOpacityMin);
+                const float kx = g_rtl ? x1 - frac * (x1 - x0) : x0 + frac * (x1 - x0);
+                FillRound(D2D1::RectF(x0, cy - 2, x1, cy + 2), 2, Color(kControl));
+                FillRound(g_rtl ? D2D1::RectF(kx, cy - 2, x1, cy + 2) : D2D1::RectF(x0, cy - 2, kx, cy + 2), 2, Color(kAccent));
+                const bool knobHover = (rowHover && g_hoverPart == 0) || g_dragging;
+                g_brush->SetColor(Color(kText));
+                g_target->FillEllipse(D2D1::Ellipse(D2D1::Point2F(kx, cy), knobHover ? 9.0f : 8.0f, knobHover ? 9.0f : 8.0f),
+                                      g_brush.Get());
+                // Reset to the setting's value: an icon, the panel has no room for its words
+                if (rowHover && g_hoverPart == 1) FillRound(row.parts[1], 7, Color(kHover));
+                PaintText(L"", g_iconFormat.Get(), row.parts[1], rowHover && g_hoverPart == 1 ? kText : kMuted);
+                break;
+            }
+            case RowKind::Swatches: {
+                PaintText(row.label, g_smallFormat.Get(), LabelRect(row), kMuted);
+                for (int j = 0; j < static_cast<int>(row.parts.size()); ++j) {
+                    const D2D1_RECT_F p = row.parts[j];
+                    const D2D1_POINT_2F c = D2D1::Point2F((p.left + p.right) * 0.5f, (p.top + p.bottom) * 0.5f);
+                    const float r = kSwatch * 0.5f;
+                    g_brush->SetColor(PaletteColor(row.choices[j].value));
+                    g_target->FillEllipse(D2D1::Ellipse(c, r, r), g_brush.Get());
+                    const bool selected = row.choices[j].value == row.selected;
+                    const bool hover = rowHover && j == g_hoverPart;
+                    g_brush->SetColor(Color(selected ? kAccent : (hover ? kText : kStroke), selected || hover ? 1.0f : 0.9f));
+                    g_target->DrawEllipse(D2D1::Ellipse(c, r + (selected ? 2.5f : 0.5f), r + (selected ? 2.5f : 0.5f)),
+                                          g_brush.Get(), selected ? 2.0f : 1.0f);
+                    if (row.choices[j].value == kCustomThemeIndex) {
+                        PaintText(L"", g_iconFormat.Get(), p, kText, 0.85f);  // palette glyph: your own colours
+                    }
+                }
+                break;
+            }
+        }
+    }
+    if (g_target->EndDraw() == D2DERR_RECREATE_TARGET) {
+        g_target.Reset();
+        g_brush.Reset();
+    }
+}
+
+void Close() {
+    if (g_window) {
+        DestroyWindow(g_window);
+    }
+}
+
+void Refresh() {
+    BuildRows();
+    Layout();
+    const int h = static_cast<int>(std::lround(g_height * g_scale));
+    RECT rc{};
+    GetWindowRect(g_window, &rc);
+    if (rc.bottom - rc.top != h) {
+        SetWindowPos(g_window, nullptr, 0, 0, rc.right - rc.left, h, SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
+        if (g_target) g_target->Resize(D2D1::SizeU(rc.right - rc.left, h));
+    }
+    InvalidateRect(g_window, nullptr, FALSE);
+}
+
+D2D1_POINT_2F ToDips(LPARAM lParam) {
+    return D2D1::Point2F(GET_X_LPARAM(lParam) / g_scale, GET_Y_LPARAM(lParam) / g_scale);
+}
+
+void SetOpacityFromX(Row& row, float x) {
+    const D2D1_RECT_F track = row.parts[0];
+    const float x0 = track.left + 9, x1 = track.right - 9;
+    float frac = Clamp((x - x0) / (x1 - x0), 0.0f, 1.0f);
+    if (g_rtl) frac = 1.0f - frac;
+    int value = kOpacityMin + static_cast<int>(std::lround(frac * (kOpacityMax - kOpacityMin) / kOpacityStep)) * kOpacityStep;
+    value = ClampInt(value, kOpacityMin, kOpacityMax);
+    if (value == row.value) return;
+    row.value = value;
+    Wh_SetIntValue(L"PillOpacityOverride", value);
+    LoadSettings();
+    g_layoutDirty = true;
+    InvalidateRect(g_window, nullptr, FALSE);
+}
+
+void ApplyShape(int shape) {
+    if (shape == 2 && IsBottomPosition(g_settings.position)) return;
+    Wh_SetIntValue(L"W11StyleOverride", shape == 1 ? 1 : 0);
+    Wh_SetIntValue(L"NotchStyleOverride", shape == 2 ? 1 : 0);
+    LoadSettings();
+    g_layoutDirty = true;
+    TriggerNudge();
+}
+
+void Click(int rowIndex, int part) {
+    if (rowIndex < 0) return;
+    const Row row = g_rows[rowIndex];
+    const HWND owner = g_owner;
+    switch (row.kind) {
+        case RowKind::Action:
+            if (!row.enabled) return;
+            Close();  // first: an action may open another window
+            RunIslandCommand(owner, row.id);
+            return;
+        case RowKind::Toggle:
+            RunIslandCommand(owner, row.id);
+            Refresh();
+            return;
+        case RowKind::Choice: {
+            if (part < 0 || !row.choices[part].enabled) return;
+            const int value = row.choices[part].value;
+            if (row.id == kShapeGroup) {
+                ApplyShape(value);
+            } else if (row.id == kExpandGroup) {
+                Wh_SetIntValue(L"ExpandOnHoverOverride", value);
+                LoadSettings();
+                g_layoutDirty = true;
+            } else if (row.id == kTimerGroup) {
+                Close();
+                RunIslandCommand(owner, value);
+                return;
+            }
+            Refresh();
+            return;
+        }
+        case RowKind::Slider:
+            if (part == 1) {
+                RunIslandCommand(owner, 8);  // back to the setting's transparency
+                Refresh();
+            }
+            return;
+        case RowKind::Swatches:
+            if (part < 0) return;
+            RunIslandCommand(owner, kThemeMenuIdBase + row.choices[part].value);
+            Refresh();
+            return;
+        case RowKind::Separator:
+            return;
+    }
+}
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    switch (msg) {
+        case WM_PAINT: {
+            PAINTSTRUCT ps;
+            BeginPaint(hwnd, &ps);
+            Paint();
+            EndPaint(hwnd, &ps);
+            return 0;
+        }
+        case WM_ERASEBKGND:
+            return 1;
+        case WM_MOUSEMOVE: {
+            const D2D1_POINT_2F p = ToDips(lParam);
+            if (g_dragging && g_hoverRow >= 0) {
+                SetOpacityFromX(g_rows[g_hoverRow], p.x);
+                return 0;
+            }
+            TRACKMOUSEEVENT tme{sizeof(tme), TME_LEAVE, hwnd, 0};
+            TrackMouseEvent(&tme);
+            const auto [row, part] = HitTest(p);
+            if (row != g_hoverRow || part != g_hoverPart) {
+                g_hoverRow = row;
+                g_hoverPart = part;
+                InvalidateRect(hwnd, nullptr, FALSE);
+            }
+            return 0;
+        }
+        case WM_MOUSELEAVE:
+            if (!g_dragging) {
+                g_hoverRow = g_hoverPart = -1;
+                InvalidateRect(hwnd, nullptr, FALSE);
+            }
+            return 0;
+        case WM_LBUTTONDOWN: {
+            const auto [row, part] = HitTest(ToDips(lParam));
+            if (row >= 0 && g_rows[row].kind == RowKind::Slider && part == 0) {
+                g_dragging = true;
+                g_hoverRow = row;
+                g_hoverPart = 0;
+                SetCapture(hwnd);
+                SetOpacityFromX(g_rows[row], ToDips(lParam).x);
+            }
+            return 0;
+        }
+        case WM_LBUTTONUP: {
+            if (g_dragging) {
+                g_dragging = false;
+                ReleaseCapture();
+                InvalidateRect(hwnd, nullptr, FALSE);
+                return 0;
+            }
+            const auto [row, part] = HitTest(ToDips(lParam));
+            Click(row, part);
+            return 0;
+        }
+        case WM_MOUSEACTIVATE:
+            // Never takes the focus, like the island: activation can't be relied on
+            // to close it, since the island's process isn't the foreground one
+            return MA_NOACTIVATE;
+        case WM_TIMER: {
+            // Closes like a menu: a click anywhere else, or Esc
+            POINT cursor{};
+            GetCursorPos(&cursor);
+            RECT bounds{};
+            GetWindowRect(hwnd, &bounds);
+            const bool pressed = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) || (GetAsyncKeyState(VK_RBUTTON) & 0x8000) ||
+                                 (GetAsyncKeyState(VK_MBUTTON) & 0x8000);
+            if ((pressed && !g_dragging && !PtInRect(&bounds, cursor)) || (GetAsyncKeyState(VK_ESCAPE) & 0x8000)) {
+                Close();
+            }
+            return 0;
+        }
+        case WM_CLOSE:
+            DestroyWindow(hwnd);
+            return 0;
+        case WM_DESTROY:
+            KillTimer(hwnd, 1);
+            g_target.Reset();
+            g_brush.Reset();
+            g_window = nullptr;
+            g_dragging = false;
+            g_hoverRow = g_hoverPart = -1;
+            return 0;
+    }
+    return DefWindowProcW(hwnd, msg, wParam, lParam);
+}
+
+void Show(HWND owner, POINT screenPoint) {
+    Close();
+    if (!g_factory && FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, g_factory.GetAddressOf()))) return;
+    if (!g_dwrite && FAILED(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(IDWriteFactory),
+                                                reinterpret_cast<IUnknown**>(g_dwrite.GetAddressOf())))) return;
+
+    // The class belongs to this mod's DLL, not to the host exe
+    HMODULE module = nullptr;
+    GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                       reinterpret_cast<LPCWSTR>(&Show), &module);
+    static bool registered = false;
+    if (!registered) {
+        WNDCLASSEXW wc{sizeof(wc)};
+        wc.style = CS_DROPSHADOW;
+        wc.lpfnWndProc = WndProc;
+        wc.hInstance = module;
+        wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+        wc.lpszClassName = kClassName;
+        registered = RegisterClassExW(&wc) != 0;
+        if (!registered) {
+            Wh_Log(L"Panel: RegisterClassExW failed (%lu)", GetLastError());
+            return;
+        }
+    }
+
+    g_owner = owner;
+    g_rtl = IsArabicUi();
+    g_scale = GetDpiForWindow(owner) / 96.0f;
+    CreateFormats();
+    BuildRows();
+    Layout();
+
+    const int w = static_cast<int>(std::lround(kWidth * g_scale));
+    const int h = static_cast<int>(std::lround(g_height * g_scale));
+    MONITORINFO mi{sizeof(mi)};
+    GetMonitorInfoW(MonitorFromPoint(screenPoint, MONITOR_DEFAULTTONEAREST), &mi);
+    const RECT work = mi.rcWork;
+    // Below the island (it stays on top of other windows, this one included),
+    // or above it when the island sits at the bottom of the screen
+    RECT island{};
+    GetWindowRect(owner, &island);
+    int x = g_rtl ? screenPoint.x - w : screenPoint.x;
+    int y = std::max<int>(screenPoint.y, island.bottom) + 6;
+    if (y + h > work.bottom) y = std::min<int>(screenPoint.y, island.top) - h - 6;
+    x = std::max<int>(work.left, std::min<int>(x, work.right - w));
+    y = std::max<int>(work.top, std::min<int>(y, work.bottom - h));
+
+    g_window = CreateWindowExW(WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE, kClassName, L"", WS_POPUP, x, y, w, h, owner, nullptr,
+                               module, nullptr);
+    if (!g_window) {
+        Wh_Log(L"Panel: CreateWindowExW failed (%lu)", GetLastError());
+        return;
+    }
+    StyleWindow(g_window);
+    ShowWindow(g_window, SW_SHOWNOACTIVATE);
+    SetTimer(g_window, 1, 30, nullptr);
+}
+}  // namespace IslandPanel
+
+void ShowContextMenu(HWND hwnd, POINT screenPoint) {
+    IslandPanel::Show(hwnd, screenPoint);
+}
+
 // ── Weather iconography ──────────────────────────────────────────────────────
 // The dashboard used colour emoji (☀️ ⛅ 🌡️) rendered with ENABLE_COLOR_FONT,
 // which clashed badly with the island's monochrome, accent-tinted UI and varied
@@ -7104,6 +7890,10 @@ struct MarqueeLayoutCache {
 // island; DrawIdleDashboard uses the per-slot widths to place the clock, divider
 // and weather reading inside it.
 struct IdleStripMetrics {
+    // The page the wheel stopped on, shortened, when it isn't the clock: the
+    // collapsed island keeps showing it once the mouse leaves.
+    std::wstring compactText;
+    float compactWidth = 0.0f;
     float clockWidth = 0.0f;
     float weatherWidth = 0.0f;
     bool hasWeather = false;
@@ -7126,6 +7916,39 @@ std::wstring WidestDigitForm(std::wstring text) {
         }
     }
     return text;
+}
+
+// The collapsed form of a page other than the clock; empty for the clock page.
+std::wstring CompactPageText(const SharedState& state, const Settings& settings, double now) {
+    wchar_t buffer[128] = {};
+    switch (SelectedTabId(settings)) {
+        case 0: {  // calendar: weekday, day and month
+            SYSTEMTIME local = {};
+            GetLocalTime(&local);
+            GetDateFormatEx(IslandLocaleName(), 0, &local,
+                            IsArabicUi() ? L"dddd d MMMM" : L"ddd, MMM d", buffer,
+                            ARRAYSIZE(buffer), nullptr);
+            return RtlIfArabic(buffer);
+        }
+        case 1: {  // weather: condition and temperature
+            if (!(state.weather.hasData && now - state.weather.lastUpdated < 3600.0)) {
+                return Loc(L"Loading...");
+            }
+            // Truncates rather than aborting on a long description from wttr.in
+            _snwprintf_s(buffer, _TRUNCATE, L"%ls %.0f\x00B0", state.weather.weatherDesc.c_str(),
+                       state.weather.temperature);
+            return RtlIfArabic(buffer);
+        }
+        case 2:  // hardware: processor and memory
+            swprintf_s(buffer, L"%ls %d%%  \u00B7  %ls %d%%", Loc(L"CPU"), state.system.cpuPercent,
+                       Loc(L"RAM"), state.system.memoryPercent);
+            return RtlIfArabic(buffer);
+        case 4:  // file tray: how many files
+            swprintf_s(buffer, L"%ls %zu", Loc(L"File Tray"), state.fileTrayItems.size());
+            return RtlIfArabic(buffer);
+        default:
+            return std::wstring();
+    }
 }
 
 class Renderer {
@@ -7314,6 +8137,16 @@ class Renderer {
         IdleStripMetrics metrics;
         IDWriteTextFormat* fmt = idleTextFormat_ ? idleTextFormat_.Get() : smallTextFormat_.Get();
 
+        metrics.compactText = CompactPageText(state, settings, now);
+        if (!metrics.compactText.empty()) {
+            metrics.compactWidth = MeasureTextWidthCached(WidestDigitForm(metrics.compactText), fmt,
+                                                          idleCompactWidthCache_);
+            float total = IdleStripLayout::kPadX * 2.0f + metrics.compactWidth;
+            total = std::ceil(total / IdleStripLayout::kWidthQuantum) * IdleStripLayout::kWidthQuantum;
+            metrics.totalWidth = Clamp(total, IdleStripLayout::kMinWidth, IdleStripLayout::kCompactMaxWidth);
+            return metrics;
+        }
+
         SYSTEMTIME local = {};
         GetLocalTime(&local);
         const std::wstring clock = FormatIslandTime(local, settings.clockFollowSystem,
@@ -7368,6 +8201,7 @@ class Renderer {
         bool valid = false;
     };
     TextWidthCache idleClockWidthCache_;
+    TextWidthCache idleCompactWidthCache_;
     TextWidthCache idleWeatherWidthCache_;
 
     float MeasureTextWidthCached(const std::wstring& text, IDWriteTextFormat* fmt,
@@ -8292,14 +9126,14 @@ class Renderer {
         if (calendarCachedDate_.wYear != local.wYear || calendarCachedDate_.wMonth != local.wMonth ||
             calendarCachedDate_.wDay != local.wDay) {
             wchar_t monthNameBuf[32] = {};
-            GetDateFormatEx(LOCALE_NAME_USER_DEFAULT, 0, &local, L"MMMM", monthNameBuf, ARRAYSIZE(monthNameBuf), nullptr);
+            GetDateFormatEx(IslandLocaleName(), 0, &local, L"MMMM", monthNameBuf, ARRAYSIZE(monthNameBuf), nullptr);
             // No longer uppercased. towupper is per-character and locale-blind:
             // it turns Turkish "i" into "I" rather than "İ", and does nothing at
             // all for CJK month names, so the effect was inconsistent by locale.
             calendarCachedMonthName_ = monthNameBuf;
 
             wchar_t weekdayNameBuf[32] = {};
-            GetDateFormatEx(LOCALE_NAME_USER_DEFAULT, 0, &local, L"dddd", weekdayNameBuf, ARRAYSIZE(weekdayNameBuf), nullptr);
+            GetDateFormatEx(IslandLocaleName(), 0, &local, L"dddd", weekdayNameBuf, ARRAYSIZE(weekdayNameBuf), nullptr);
             calendarCachedWeekdayName_ = weekdayNameBuf;
 
             calendarCachedDate_ = local;
@@ -8357,6 +9191,12 @@ class Renderer {
         const float colW = 28.0f * scale;
         const float headerH = 18.0f * scale;
         const wchar_t* days[] = {L"S", L"M", L"T", L"W", L"T", L"F", L"S"};
+        // Arabic: the week reads right to left (Sunday on the right), the
+        // initials are Arabic and the weekend is Friday and Saturday.
+        const bool arabicGrid = IsArabicUi();
+        const wchar_t* daysAr[] = {L"\u062D", L"\u0646", L"\u062B", L"\u0631", L"\u062E", L"\u062C", L"\u0633"};
+        auto colX = [&](int c) { return gridStart + (arabicGrid ? 6 - c : c) * colW; };
+        auto isWeekend = [&](int c) { return arabicGrid ? (c == 5 || c == 6) : (c == 0 || c == 6); };
 
         const int startDayIdx = GetDayOfWeek(local.wYear, local.wMonth, 1);
         const int monthDays = GetDaysInMonth(local.wYear, local.wMonth);
@@ -8377,9 +9217,9 @@ class Renderer {
         // weekend headers plus today) and made the headers look selected.
         mutedBrush_->SetOpacity(0.55f);
         for (int i = 0; i < 7; ++i) {
-            const D2D1_RECT_F cell = D2D1::RectF(gridStart + i * colW, gridTop,
-                                                 gridStart + (i + 1) * colW, gridTop + headerH);
-            target_->DrawTextW(days[i], 1, gridFmt, cell, mutedBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_NONE);
+            const D2D1_RECT_F cell = D2D1::RectF(colX(i), gridTop,
+                                                 colX(i) + colW, gridTop + headerH);
+            target_->DrawTextW(arabicGrid ? daysAr[i] : days[i], 1, gridFmt, cell, mutedBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_NONE);
         }
 
         // Hairline under the weekday headers.
@@ -8400,8 +9240,8 @@ class Renderer {
         int row = 0;
         int col = startDayIdx;
         for (int d = 1; d <= monthDays; ++d) {
-            const D2D1_RECT_F cell = D2D1::RectF(gridStart + col * colW, datesTop + row * rowH,
-                                                 gridStart + (col + 1) * colW, datesTop + (row + 1) * rowH);
+            const D2D1_RECT_F cell = D2D1::RectF(colX(col), datesTop + row * rowH,
+                                                 colX(col) + colW, datesTop + (row + 1) * rowH);
             const std::wstring dayText = std::to_wstring(d);
 
             if (d == local.wDay) {
@@ -8415,7 +9255,7 @@ class Renderer {
                 textBrush_->SetOpacity(1.0f);
                 target_->DrawTextW(dayText.c_str(), static_cast<UINT32>(dayText.size()), gridFmt,
                                    cell, textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_NONE);
-            } else if (col == 0 || col == 6) {
+            } else if (isWeekend(col)) {
                 // Weekends recede instead of taking the accent, leaving today as
                 // the only accented thing in the grid.
                 mutedBrush_->SetOpacity(0.62f);
@@ -8864,7 +9704,7 @@ class Renderer {
             std::wstring value;
         };
 
-        const std::wstring windUnit = settings.weatherFahrenheit ? L" mph" : L" km/h";
+        const std::wstring windUnit = settings.weatherFahrenheit ? Loc(L" mph") : Loc(L" km/h");
         const Metric metrics[3] = {
             {0, Loc(L"Wind"),
              hasWeather ? state.weather.windSpeed + windUnit + L" " + WindDirToArrow(state.weather.windDir)
@@ -9122,14 +9962,14 @@ class Renderer {
         // Network throughput has no natural ceiling, so those two cards get no
         // load bar rather than a bar against an invented maximum.
         const HwMetric metrics[6] = {
-            {3, L"CPU",      cpuBuf,  Clamp(state.system.cpuPercent / 100.0f, 0.0f, 1.0f)},
-            {6, L"NET UP",   upBuf,   -1.0f},
-            {4, L"RAM",      ramBuf,  ramFraction},
-            {7, L"NET DOWN", downBuf, -1.0f},
-            {5, L"GPU",      gpuBuf,  state.system.gpuPercent >= 0
+            {3, Loc(L"CPU"),      cpuBuf,  Clamp(state.system.cpuPercent / 100.0f, 0.0f, 1.0f)},
+            {6, Loc(L"NET UP"),   upBuf,   -1.0f},
+            {4, Loc(L"RAM"),      ramBuf,  ramFraction},
+            {7, Loc(L"NET DOWN"), downBuf, -1.0f},
+            {5, Loc(L"GPU"),      gpuBuf,  state.system.gpuPercent >= 0
                                           ? Clamp(state.system.gpuPercent / 100.0f, 0.0f, 1.0f)
                                           : -1.0f},
-            {8, L"DISK",     diskBuf, Clamp(diskUsed / 100.0f, 0.0f, 1.0f)},
+            {8, Loc(L"DISK"),     diskBuf, Clamp(diskUsed / 100.0f, 0.0f, 1.0f)},
         };
 
         // 2 x 3 grid of cards. Cards give the grid its structure, so the old
@@ -9251,7 +10091,7 @@ class Renderer {
         // (#61); either way the pair stays optically centred as a unit.
         const std::wstring timeText = FormatIslandTime(local, settings.clockFollowSystem,
                                                        settings.use24HourClock, settings.showSeconds);
-        const std::wstring dateText = FormatIslandDate(local, settings.dateFormat, L"dddd, MMMM d");
+        const std::wstring dateText = RtlIfArabic(FormatIslandDate(local, settings.dateFormat, IsArabicUi() ? L"dddd\u060C d MMMM" : L"dddd, MMMM d"));
 
         IDWriteTextFormat* bigFmt = timeDashboardFormat_ ? timeDashboardFormat_.Get() : hugeTextFormat_.Get();
         IDWriteTextFormat* smallFmt = dateDashboardFormat_ ? dateDashboardFormat_.Get() : boldTextFormat_.Get();
@@ -9295,29 +10135,29 @@ class Renderer {
             if (camActive && micActive) {
                 dotColor = settings.privacyDotsCamHex;
                 if (!state.system.cameraApp.empty() && !state.system.micApp.empty() && state.system.cameraApp == state.system.micApp) {
-                    label = state.system.cameraApp + L" is using camera & microphone";
+                    label = RtlIfArabic(state.system.cameraApp + Loc(L" is using camera & microphone"));
                 } else if (!state.system.cameraApp.empty() && !state.system.micApp.empty()) {
-                    label = state.system.cameraApp + L" & " + state.system.micApp + L" using camera & mic";
+                    label = RtlIfArabic(state.system.cameraApp + L" & " + state.system.micApp + Loc(L" using camera & mic"));
                 } else if (!state.system.cameraApp.empty()) {
-                    label = state.system.cameraApp + L" is using camera & microphone";
+                    label = RtlIfArabic(state.system.cameraApp + Loc(L" is using camera & microphone"));
                 } else if (!state.system.micApp.empty()) {
-                    label = state.system.micApp + L" is using camera & microphone";
+                    label = RtlIfArabic(state.system.micApp + Loc(L" is using camera & microphone"));
                 } else {
-                    label = L"Camera & microphone in use";
+                    label = Loc(L"Camera & microphone in use");
                 }
             } else if (camActive) {
                 dotColor = settings.privacyDotsCamHex;
                 if (!state.system.cameraApp.empty()) {
-                    label = state.system.cameraApp + L" is using your camera";
+                    label = RtlIfArabic(state.system.cameraApp + Loc(L" is using your camera"));
                 } else {
-                    label = L"Camera in use";
+                    label = Loc(L"Camera in use");
                 }
             } else {
                 dotColor = settings.privacyDotsMicHex;
                 if (!state.system.micApp.empty()) {
-                    label = state.system.micApp + L" is using your microphone";
+                    label = RtlIfArabic(state.system.micApp + Loc(L" is using your microphone"));
                 } else {
-                    label = L"Microphone in use";
+                    label = Loc(L"Microphone in use");
                 }
             }
 
@@ -9421,7 +10261,7 @@ class Renderer {
         // clipped smaller as the pill shrank and then vanished outright the
         // instant width crossed the threshold — a pop, not a fade. Blending
         // both views by opacity (with an eased curve) makes it a dissolve.
-        constexpr float kExpandThreshold = 220.0f;
+        constexpr float kExpandThreshold = 270.0f;
         constexpr float kCrossfadeRange = 46.0f;
         auto SmoothFade = [](float t) {
             t = Clamp(t, 0.0f, 1.0f);
@@ -9452,6 +10292,19 @@ class Renderer {
             const IdleStripMetrics idleMetrics = MeasureIdleStrip(state, settings, now);
             IDWriteTextFormat* idleFmt =
                 idleTextFormat_ ? idleTextFormat_.Get() : smallTextFormat_.Get();
+
+            if (!idleMetrics.compactText.empty()) {
+                const DWRITE_TEXT_ALIGNMENT oldAlign = idleFmt->GetTextAlignment();
+                idleFmt->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+                textBrush_->SetOpacity(0.96f);
+                const D2D1_RECT_F compactRect =
+                    D2D1::RectF(rect.left + IdleStripLayout::kPadX * scale, rect.top,
+                                rect.right - IdleStripLayout::kPadX * scale, rect.bottom);
+                target_->DrawTextW(idleMetrics.compactText.c_str(),
+                                   static_cast<UINT32>(idleMetrics.compactText.size()), idleFmt,
+                                   compactRect, textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_CLIP);
+                idleFmt->SetTextAlignment(oldAlign);
+            } else {
 
             // The dot is anchored to the right edge by DrawPrivacyDots, so reserve
             // its lane rather than shrinking the text box out from under the clock.
@@ -9509,6 +10362,7 @@ class Renderer {
                     D2D1::RectF(slotX, rect.top, slotX + idleMetrics.weatherWidth, rect.bottom);
                 target_->DrawTextW(weatherLabel, static_cast<UINT32>(wcslen(weatherLabel)), idleFmt,
                                    wRect, textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_ENABLE_COLOR_FONT);
+            }
             }
             textBrush_->SetOpacity(1.0f);
 
@@ -9569,9 +10423,6 @@ class Renderer {
             }
         }
 
-        if (expandedAlpha <= 0.01f) {
-            g_idleTab = 0;
-        }
 
         if (haveDashMask) target_->PopLayer(); else target_->PopAxisAlignedClip();
     }
@@ -10025,7 +10876,6 @@ class Renderer {
 
         // Collapsed UI
         if (collapsedAlpha > 0.01f && mask && layer) {
-            g_idleTab = 0;
             target_->PushLayer(D2D1::LayerParameters(rect, mask.Get(), D2D1_ANTIALIAS_MODE_PER_PRIMITIVE, D2D1::IdentityMatrix(), collapsedAlpha, nullptr, D2D1_LAYER_OPTIONS_NONE), layer.Get());
 
             const float cy = (rect.top + rect.bottom) * 0.5f;
@@ -10219,9 +11069,17 @@ class Renderer {
                 DrawBitmapPixels(media.sourceIcon, iconRect, mediaSourceIconBitmap_,
                                  mediaSourceIconGeneration_, 0.95f);
             } else {
+                // The letter stands in for the art, so it sits in the middle of
+                // the square; textFormat_ is shared, so its alignment is put back.
+                const DWRITE_TEXT_ALIGNMENT oldAlign = textFormat_->GetTextAlignment();
+                const DWRITE_PARAGRAPH_ALIGNMENT oldParagraph = textFormat_->GetParagraphAlignment();
+                textFormat_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+                textFormat_->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
                 target_->DrawTextW(media.sourceBadge.empty() ? L"\u25b6" : media.sourceBadge.c_str(),
                                    static_cast<UINT32>(media.sourceBadge.empty() ? 1 : media.sourceBadge.size()),
                                    textFormat_.Get(), rect, textBrush_.Get());
+                textFormat_->SetTextAlignment(oldAlign);
+                textFormat_->SetParagraphAlignment(oldParagraph);
             }
         }
 
@@ -10522,8 +11380,8 @@ class Renderer {
         mutedBrush_->SetOpacity(0.48f);
         const std::wstring clipTitle =
             state.clipboard.appName.empty()
-                ? (state.clipboard.image ? std::wstring(L"Image copied") : std::wstring(L"Clipboard"))
-                : state.clipboard.appName + L"  \u00b7  Clipboard";
+                ? (state.clipboard.image ? std::wstring(Loc(L"Image copied")) : std::wstring(Loc(L"Clipboard")))
+                : RtlIfArabic(state.clipboard.appName + L"  \u00b7  " + Loc(L"Clipboard"));
         target_->DrawTextW(clipTitle.c_str(), static_cast<UINT32>(clipTitle.size()),
                            smallTextFormat_.Get(), titleRect, mutedBrush_.Get(),
                            D2D1_DRAW_TEXT_OPTIONS_CLIP);
@@ -10595,8 +11453,10 @@ class Renderer {
             ? D2D1::RectF(tx, cy - 18.0f, rect.right - 14.0f, cy - 2.0f)
             : D2D1::RectF(tx, cy - 16.0f, rect.right - 14.0f, cy - 1.0f);
         mutedBrush_->SetOpacity(0.75f);
-        target_->DrawTextW(state.notification.app.c_str(),
-                           static_cast<UINT32>(state.notification.app.size()),
+        const std::wstring appLabel = state.notification.app == L"Notification"
+            ? std::wstring(Loc(L"Notification")) : state.notification.app;
+        target_->DrawTextW(appLabel.c_str(),
+                           static_cast<UINT32>(appLabel.size()),
                            smallTextFormat_.Get(), appRect, mutedBrush_.Get(),
                            D2D1_DRAW_TEXT_OPTIONS_CLIP);
 
@@ -10604,7 +11464,7 @@ class Renderer {
             ? D2D1::RectF(tx, cy - 2.0f, rect.right - 14.0f, cy + 15.0f)
             : D2D1::RectF(tx, cy - 1.0f, rect.right - 14.0f, cy + 16.0f);
         textBrush_->SetOpacity(0.95f);
-        DrawMarqueeText(state.notification.title.empty() ? L"Notification" : state.notification.title,
+        DrawMarqueeText(state.notification.title.empty() ? Loc(L"Notification") : state.notification.title,
                         titleRect, textFormat_.Get(), textBrush_.Get(), now, 28.0f, marqueeNotificationCache_);
         textBrush_->SetOpacity(0.90f);
 
@@ -10755,8 +11615,8 @@ class Renderer {
         const float tx = badge.right + 14;
         mutedBrush_->SetOpacity(0.50f);
         std::wstring label = state.timer.justFinished
-            ? (state.timer.isBreak ? L"Break Complete" : L"Focus Complete")
-            : (state.timer.isBreak ? L"Break Timer" : L"Focus Timer");
+            ? (state.timer.isBreak ? Loc(L"Break Complete") : Loc(L"Focus Complete"))
+            : (state.timer.isBreak ? Loc(L"Break Timer") : Loc(L"Focus Timer"));
         D2D1_RECT_F labelRect = D2D1::RectF(tx, cy - 16.0f, rect.right - 14.0f, cy - 1.0f);
         target_->DrawTextW(label.c_str(), static_cast<UINT32>(label.size()),
                            smallTextFormat_.Get(), labelRect, mutedBrush_.Get(),
@@ -10881,7 +11741,7 @@ class Renderer {
         const float progress = remaining / ttl;
 
         mutedBrush_->SetOpacity(0.50f);
-        std::wstring label = connected ? L"Device Connected" : L"Device Removed";
+        std::wstring label = connected ? Loc(L"Device Connected") : Loc(L"Device Removed");
         D2D1_RECT_F labelRect = showBar
             ? D2D1::RectF(tx, cy - 18.0f, rect.right - 14.0f, cy - 2.0f)
             : D2D1::RectF(tx, cy - 16.0f, rect.right - 14.0f, cy - 1.0f);
@@ -10891,7 +11751,7 @@ class Renderer {
 
         textBrush_->SetOpacity(0.95f);
         const std::wstring& name = state.device.deviceName.empty()
-            ? (state.device.isBluetoothLike ? std::wstring(L"Bluetooth") : std::wstring(L"USB Device"))
+            ? (state.device.isBluetoothLike ? std::wstring(Loc(L"Bluetooth")) : std::wstring(Loc(L"USB Device")))
             : state.device.deviceName;
         D2D1_RECT_F nameRect = showBar
             ? D2D1::RectF(tx, cy - 2.0f, rect.right - 14.0f, cy + 15.0f)
@@ -11050,7 +11910,7 @@ class Renderer {
 
         textBrush_->SetOpacity(0.95f);
         const std::wstring& name = state.bluetoothDevice.deviceName.empty()
-            ? std::wstring(L"Bluetooth Device")
+            ? std::wstring(Loc(L"Bluetooth Device"))
             : state.bluetoothDevice.deviceName;
         D2D1_RECT_F nameRect = showBar
             ? D2D1::RectF(tx, cy - 2.0f, rightEdge, cy + 15.0f)
@@ -11150,7 +12010,7 @@ class Renderer {
         const float tx = badge.right + 14;
         D2D1_RECT_F labelRect = D2D1::RectF(tx, cy - 16.0f, rect.right - 14.0f, cy - 1.0f);
         mutedBrush_->SetOpacity(0.50f);
-        std::wstring label = state.battery.charging ? L"Power Connected" : L"Battery Alert";
+        std::wstring label = state.battery.charging ? Loc(L"Power Connected") : Loc(L"Battery Alert");
         target_->DrawTextW(label.c_str(), static_cast<UINT32>(label.size()),
                            smallTextFormat_.Get(), labelRect, mutedBrush_.Get(),
                            D2D1_DRAW_TEXT_OPTIONS_CLIP);
@@ -11158,24 +12018,26 @@ class Renderer {
         wchar_t value[128] = {};
         if (state.battery.secondsRemaining != BATTERY_LIFE_UNKNOWN && !state.battery.charging) {
             const DWORD minutes = state.battery.secondsRemaining / 60;
-            swprintf_s(value, ARRAYSIZE(value), L"%d%% \u2022 %luh %02lum left",
-                       state.battery.percent, minutes / 60, minutes % 60);
+            swprintf_s(value, ARRAYSIZE(value), L"%d%% \u2022 %lu%ls %02lu%ls %ls",
+                       state.battery.percent, minutes / 60, Loc(L"h"), minutes % 60, Loc(L"m"), Loc(L"left"));
         } else {
             swprintf_s(value, ARRAYSIZE(value), L"%d%%", state.battery.percent);
         }
 
         D2D1_RECT_F valueRect = D2D1::RectF(tx, cy - 1.0f, rect.right - 14.0f, cy + 16.0f);
         textBrush_->SetOpacity(0.95f);
-        target_->DrawTextW(value, static_cast<UINT32>(wcslen(value)), textFormat_.Get(),
+        const std::wstring valueText = RtlIfArabic(value);
+        target_->DrawTextW(valueText.c_str(), static_cast<UINT32>(valueText.size()), textFormat_.Get(),
                            valueRect, textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_CLIP);
         textBrush_->SetOpacity(0.90f);
     }
 
     void DrawProgress(const SharedState& state, D2D1_RECT_F rect) {
         wchar_t buffer[64] = {};
-        swprintf_s(buffer, L"Progress %d%%", state.progress.percent);
+        swprintf_s(buffer, L"%ls %d%%", Loc(L"Progress"), state.progress.percent);
+        const std::wstring progressText = RtlIfArabic(buffer);
         IDWriteTextFormat* fmt = idleTextFormat_ ? idleTextFormat_.Get() : textFormat_.Get();
-        target_->DrawTextW(buffer, static_cast<UINT32>(wcslen(buffer)), fmt,
+        target_->DrawTextW(progressText.c_str(), static_cast<UINT32>(progressText.size()), fmt,
                            rect,
                            textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_CLIP);
     }
@@ -11392,7 +12254,7 @@ std::vector<IslandKind> ChooseActivities(const SharedState& state, const Setting
          state.timer.active)) {
         activities.push_back(IslandKind::Timer);
     }
-    if (settings.media && state.media.available) {
+    if (settings.media && state.media.available && SelectedTabId(settings) == 3) {
         activities.push_back(IslandKind::Media);
     }
 
@@ -11736,13 +12598,13 @@ LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 if (lParam) {
                     auto* hdr = reinterpret_cast<DEV_BROADCAST_HDR*>(lParam);
                     if (hdr->dbch_devicetype == DBT_DEVTYP_VOLUME) {
-                        devName = L"USB Drive";
+                        devName = Loc(L"USB Drive");
                     } else if (hdr->dbch_devicetype == DBT_DEVTYP_PORT) {
-                        devName = L"COM Device";
+                        devName = Loc(L"COM Device");
                     } else {
                         // Generic/Bluetooth OEM
                         isBt = true;
-                        devName = L"Bluetooth Device";
+                        devName = Loc(L"Bluetooth Device");
                     }
                 }
 
@@ -13313,8 +14175,16 @@ BOOL Wh_ModInit() {
         }
 
         if (GetLastError() == ERROR_ALREADY_EXISTS) {
-            Wh_Log(L"Tool mod already running (%s)", WH_MOD_ID);
-            ExitProcess(1);
+            // Shihab Alaq: on an update or a settings reload the new process
+            // starts while the old one is still closing, and used to give up
+            // here, leaving no island until the engine restarted. Wait for the
+            // old one to let go (it exits, so the mutex is released or
+            // abandoned); a process that is really still running keeps it.
+            const DWORD wait = WaitForSingleObject(g_toolModProcessMutex, 10000);
+            if (wait != WAIT_OBJECT_0 && wait != WAIT_ABANDONED) {
+                Wh_Log(L"Tool mod already running (%s)", WH_MOD_ID);
+                ExitProcess(1);
+            }
         }
 
         if (!WhTool_ModInit()) {

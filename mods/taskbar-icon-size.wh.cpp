@@ -4,7 +4,7 @@
 // @name:ar         حجم شريط المهام وأيقوناته
 // @description     Control the taskbar height and icon size, improve icon quality (Windows 11 only)
 // @description:ar  تحكّم في ارتفاع شريط المهام وحجم أيقوناته، مع أيقونات أوضح (ويندوز 11 فقط)
-// @version         1.3.10-shihab.3
+// @version         1.3.10-shihab.4
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -63,21 +63,21 @@ Also check out the **Taskbar tray icon spacing and grid** mod.
 
 // ==WindhawkModSettings==
 /*
-- TaskbarHeight: 52
+- TaskbarHeight: 50
   $name: Taskbar height
   $name:ar: ارتفاع شريط المهام
   $description:ar: >-
     ارتفاع شريط المهام بالبكسل (الافتراضي في ويندوز 11: 48)
   $description: >-
     The height, in pixels, of the taskbar (Windows 11 default: 48)
-- IconSize: 32
+- IconSize: 26
   $name: Icon size
   $name:ar: حجم الأيقونات
   $description:ar: >-
     حجم الأيقونات على شريط المهام بالبكسل (الافتراضي في ويندوز 11: 24)
   $description: >-
     The size, in pixels, of icons on the taskbar (Windows 11 default: 24)
-- TaskbarButtonWidth: 44
+- TaskbarButtonWidth: 46
   $name: Taskbar button width
   $name:ar: عرض الأزرار
   $description:ar: >-

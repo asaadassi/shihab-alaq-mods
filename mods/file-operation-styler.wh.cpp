@@ -4,7 +4,7 @@
 // @name:ar         تنسيق نافذة النسخ والنقل
 // @description     Portable custom presentation for native Explorer file operations with a skin-safe unified presentation.
 // @description:ar  شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف، مع سمات وألوان تختارها.
-// @version         1.2.0-shihab.3
+// @version         1.2.0-shihab.4
 // @author          digART
 // @github          https://github.com/digart11
 // @license         GPL-3.0
@@ -154,6 +154,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     #! $showIf: {preset: glass}
 
   - glassTint: "#000000"
+    $_color: true
     $name: Blur tint
     $description: Tint color used by Custom Blur.
     $name:ar: لون التمويه
@@ -209,20 +210,23 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     - custom: مخصّص
     #! $showIf: {preset: glass, footerStyle: solid}
   - footerColor: ""
+    $_color: true
     $name: Solid footer custom color
-    $description: Used only when Solid footer color preset is Custom. Enter a hex color such as #1C3346.
+    $description: Used only when Solid footer color preset is Custom.
     $name:ar: لون مخصّص للشريط السفلي
-    $description:ar: "يُستخدم فقط حين يكون لون الشريط السفلي «مخصّص». أدخل رمز لون مثل #1C3346."
+    $description:ar: "يُستخدم فقط حين يكون لون الشريط السفلي «مخصّص»."
     $_advanced: true
     #! $format: colorRgb
     #! $showIf: {preset: glass, footerStyle: solid, footerColorPreset: custom}
   - colors:
     - backgroundOverride: ""
+      $_color: true
       $name: Background
       $name:ar: الخلفية
       $_advanced: true
       #! $format: colorRgb
     - accentOverride: ""
+      $_color: true
       $name: Accent
       #! $format: colorRgb
       $description: Circle, progress bar, graph, and links.
@@ -230,6 +234,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
       $description:ar: الدائرة وشريط التقدّم والرسم البياني والروابط.
       $_advanced: true
     - primaryTextOverride: ""
+      $_color: true
       $name: Main text
       #! $format: colorRgb
       $description: Large numbers and values.
@@ -237,6 +242,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
       $description:ar: الأرقام والقيم الكبيرة.
       $_advanced: true
     - secondaryTextOverride: ""
+      $_color: true
       $name: Secondary text
       #! $format: colorRgb
       $description: Labels and smaller text.
@@ -244,6 +250,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
       $description:ar: التسميات والنصوص الأصغر.
       $_advanced: true
     - inactiveOverride: ""
+      $_color: true
       $name: Track / inactive
       #! $format: colorRgb
       $description: Circle track and progress track.
@@ -251,9 +258,9 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
       $description:ar: مسار الدائرة ومسار شريط التقدّم.
       $_advanced: true
     $name: Colors
-    $description: "Leave blank to use the theme color. Enter a hex color such as #2D8BE0."
+    $description: "Leave on Automatic to use the theme color."
     $name:ar: الألوان
-    $description:ar: "اتركه فارغاً لاستخدام لون السمة. أدخل رمز لون مثل #2D8BE0."
+    $description:ar: "اتركه «تلقائي» لاستخدام لون السمة."
     $_advanced: true
   - style:
     - circleThickness: 7
@@ -299,6 +306,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
       - timesNewRoman: خط Times New Roman
       - consolas: خط Consolas
     - customFont: ""
+      $_hidden: true
       $name: Custom font
       $description: Optional. Enter an installed font name here to use it instead of the selection above.
       $name:ar: خط مخصّص

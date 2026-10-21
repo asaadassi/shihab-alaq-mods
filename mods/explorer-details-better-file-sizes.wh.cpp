@@ -4,7 +4,7 @@
 // @name:ar         أحجام ملفات أوضح في المستكشف
 // @description     Enhances file size display in Explorer details with folder sizes, human-readable units (MB/GB), and optional IEC notation (KiB/MiB)
 // @description:ar  يعرض أحجام المجلدات في عرض التفاصيل، وبوحدات مقروءة مثل MB وGB، مع خيار وحدات مثل KiB وMiB
-// @version         1.6-shihab.3
+// @version         1.6-shihab.4
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -130,7 +130,7 @@ KiB?](https://devblogs.microsoft.com/oldnewthing/20090611-00/?p=17933).
 
 // ==WindhawkModSettings==
 /*
-- calculateFolderSizes: disabled
+- calculateFolderSizes: withShiftKey
   $name: Show folder sizes
   $name:ar: عرض أحجام المجلدات
   $description: >-

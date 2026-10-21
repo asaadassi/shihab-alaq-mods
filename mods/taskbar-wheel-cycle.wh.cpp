@@ -4,7 +4,7 @@
 // @description     Use the mouse wheel and/or keyboard shortcuts to cycle between taskbar buttons
 // @name:ar         التنقل بين البرامج بعجلة الماوس
 // @description:ar  حرّك عجلة الماوس فوق شريط المهام، أو استخدم اختصاراً من لوحة المفاتيح، للتنقل بين البرامج المفتوحة
-// @version         1.1.11-shihab.2
+// @version         1.1.11-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -58,6 +58,7 @@ check out [7+ Taskbar Tweaker](https://tweaker.ramensoftware.com/).
   $description:ar: >-
     أوقفه إن أردت التنقل باختصارات لوحة المفاتيح فقط
 - customScrollRegions: ""
+  $_hidden: true
   $name: Custom scroll regions
   $description: >-
     A comma-separated list of custom regions along the taskbar where scrolling

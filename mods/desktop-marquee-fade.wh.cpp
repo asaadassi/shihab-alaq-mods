@@ -4,7 +4,7 @@
 // @name:ar         تلاشي مستطيل التحديد
 // @description     Adds a smooth fade-out animation to the desktop selection rectangle when you release the mouse button.
 // @description:ar  يختفي مستطيل التحديد على سطح المكتب بتلاشٍ ناعم حين تترك زر الماوس.
-// @version         1.0.0-shihab.3
+// @version         1.0.0-shihab.4
 // @author          angel_lov
 // @github          https://github.com/Twilight0Sparkle
 // @include         explorer.exe
@@ -122,15 +122,17 @@ more polished and modern.
   $name:ar: استعمال ألوان خاصة
   $description:ar: تلوين المستطيل أثناء التلاشي بالألوان التي تختارها. أما المستطيل أثناء السحب فيبقى بلون النظام المعتاد.
 - custom_fill_color: "8C8C8C"
+  $_color: true
   $name: Custom Fill Color (HEX)
-  $description: Hex fill color for the fade overlay (e.g. 783838).
+  $description: Fill color for the fade overlay.
   $name:ar: لون التعبئة
-  $description:ar: لون داخل المستطيل أثناء التلاشي، يُكتب بصيغة ست خانات (مثل 783838).
+  $description:ar: لون داخل المستطيل أثناء التلاشي.
 - custom_border_color: "B4B4B4"
+  $_color: true
   $name: Custom Border Color (HEX)
-  $description: Hex border color for the fade overlay (e.g. FF8F8F).
+  $description: Border color for the fade overlay.
   $name:ar: لون الإطار
-  $description:ar: لون إطار المستطيل أثناء التلاشي، يُكتب بصيغة ست خانات (مثل FF8F8F).
+  $description:ar: لون إطار المستطيل أثناء التلاشي.
 */
 // ==/WindhawkModSettings==
 

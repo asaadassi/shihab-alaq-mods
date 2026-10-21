@@ -8,6 +8,9 @@ the Shihab Alaq engine's import library, and the store is written to the output 
     mods/<id>/<version>.wh.cpp        the source, as built
     mods/<id>/<version>_<arch>.dll    one DLL per architecture folder (32, 64, arm64)
 
+Pictures of a mod's choices (store/<id>.json "optionImages") stay in their authors' repositories: each is fetched
+once here, from an address pinned to a commit, and the catalog carries its SHA-256 and size.
+
 catalog.json is signed afterwards, on the publisher's computer (scripts/Sign-Catalog.ps1): the app uses no
 unsigned catalog.
 
@@ -27,6 +30,8 @@ import shutil
 import struct
 import subprocess
 import sys
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,6 +43,11 @@ TARGETS = {
 }
 
 CATEGORIES = {'taskbar', 'start', 'explorer', 'desktop', 'windows', 'other'}
+
+# A picture of a choice: raw.githubusercontent.com/<owner>/<repo>/<40-hex commit>/<path>, a PNG, JPEG or GIF
+IMAGE_URL = re.compile(r'https://raw\.githubusercontent\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/[0-9a-f]{40}/.+')
+IMAGE_MAX_BYTES = 16 * 1024 * 1024
+IMAGE_MAGIC = (b'\x89PNG\r\n\x1a\n', b'\xff\xd8\xff', b'GIF87a', b'GIF89a')
 
 
 def read_metadata(source: str) -> dict:
@@ -100,6 +110,23 @@ def last_change(path: Path) -> str:
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def option_images(mod_id: str, images: dict) -> dict:
+    """{flat setting name: {value: url}} as {name: {value: {url, sha256, size}}}; a bool's picture is under "true"."""
+    result = {}
+    for name, values in images.items():
+        result[name] = {}
+        for value, url in values.items():
+            url = urllib.parse.quote(url, safe=':/%')
+            if not IMAGE_URL.fullmatch(url):
+                raise SystemExit(f'store/{mod_id}.json: {name}/{value}: not a commit-pinned raw.githubusercontent.com address: {url}')
+            with urllib.request.urlopen(url, timeout=60) as response:
+                data = response.read(IMAGE_MAX_BYTES + 1)
+            if len(data) > IMAGE_MAX_BYTES or not data.startswith(IMAGE_MAGIC):
+                raise SystemExit(f'store/{mod_id}.json: {name}/{value}: not a PNG, JPEG or GIF under 16 MB: {url}')
+            result[name][value] = {'url': url, 'sha256': hashlib.sha256(data).hexdigest(), 'size': len(data)}
+    return result
 
 
 def compile_mod(compiler: Path, engine: Path, meta: dict, source: Path, arch: str, out: Path) -> bool:
@@ -256,6 +283,7 @@ def main() -> int:
             'author': info.get('author', meta.get('author', '')),
             'category': info['category'],
             'preview': info.get('preview'),
+            'optionImages': option_images(mod_id, info.get('optionImages', {})),
             'basedOn': info.get('basedOn'),
             'license': info.get('license', meta.get('license')),
             # Mods that change the same thing; the app warns before both run together

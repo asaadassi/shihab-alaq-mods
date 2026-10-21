@@ -4,7 +4,7 @@
 // @name:ar         مبدّل نوافذ حديث
 // @description     Replaces the boring Windows Alt+Tab with a modern and elegant window switcher.
 // @description:ar  يستبدل قائمة Alt+Tab بمبدّل نوافذ حديث وأنيق فيه معاينة لكل نافذة.
-// @version         1.3.0-shihab.3
+// @version         1.3.0-shihab.4
 // @author          IMiloDev
 // @github          https://github.com/IMiloDev
 // @homepage        https://github.com/IMiloDev/OverhauldedWin
@@ -239,17 +239,19 @@ Some applications may behave differently than standard desktop windows, especial
           $options:ar:
           - "3": 3 بطاقات
           - "5": 5 بطاقات
-        - NormalColor: "#050507"
+        - NormalColor: "#1C1720"
+          $_color: true
           $name: Cards color
           $name:ar: لون البطاقات
-          $description: Base color of the cards that are not selected. Default Hex - #050507. An empty or invalid value uses the default.
-          $description:ar: لون البطاقات غير المختارة. اللون الافتراضي #050507، وإن تُرك فارغاً أو كان غير صحيح يُستعمل الافتراضي.
+          $description: Base color of the cards that are not selected.
+          $description:ar: لون البطاقات غير المختارة.
           $_advanced: true
-        - SelectedColor: "#090A0B"
+        - SelectedColor: "#4B2133"
+          $_color: true
           $name: Selected card color
           $name:ar: لون البطاقة المختارة
-          $description: Base color of the selected card. Default Hex - #090A0B. An empty or invalid value uses the default.
-          $description:ar: لون البطاقة المختارة. اللون الافتراضي #090A0B، وإن تُرك فارغاً أو كان غير صحيح يُستعمل الافتراضي.
+          $description: Base color of the selected card.
+          $description:ar: لون البطاقة المختارة.
           $_advanced: true
         - ExpandSelectedWindow: true
           $name: Expand selected window
@@ -272,11 +274,12 @@ Some applications may behave differently than standard desktop windows, especial
   - "none": بلا خلفية
   - "dwm": شفافة
 - Dwm:
-    - BackgroundColor: "#141A22"
+    - BackgroundColor: "#141117"
+      $_color: true
       $name: Background color
       $name:ar: لون الخلفية
-      $description: Color of the transparent DWM background behind the cards. Default Hex - #141A22. An empty or invalid value uses the default.
-      $description:ar: لون الخلفية الشفافة خلف البطاقات. اللون الافتراضي #141A22، وإن تُرك فارغاً أو كان غير صحيح يُستعمل الافتراضي.
+      $description: Color of the transparent DWM background behind the cards.
+      $description:ar: لون الخلفية الشفافة خلف البطاقات.
       $_advanced: true
     - Opacity: 20
       $name: Opacity
@@ -431,7 +434,7 @@ static bool IsBackgroundSpotlightAllowed()
     return g_baseBackgroundMode == BaseBackgroundMode::Dwm;
 }
 
-static COLORREF g_dwmBackgroundColor = RGB(20, 26, 34);
+static COLORREF g_dwmBackgroundColor = RGB(20, 17, 23);
 static float g_dwmBackgroundOpacity = 0.20f;
 
 // Cursor spotlight over the background only. The cards are rendered later,
@@ -493,8 +496,8 @@ static const int kCounterHeight = 28;
 static const int kCounterTop = 378;
 // Opacidad común de las superficies Black Obsidian; los textos y thumbnails no se alteran.
 static const float kCardSurfaceOpacity = 0.75f;
-static COLORREF g_cardNormalColor = RGB(5, 5, 7);
-static COLORREF g_cardSelectedColor = RGB(9, 10, 11);
+static COLORREF g_cardNormalColor = RGB(28, 23, 32);
+static COLORREF g_cardSelectedColor = RGB(75, 33, 51);
 // Timer del failsafe: solo existe mientras el selector está abierto.
 static const UINT_PTR kActivityTimerId = 77;
 static const UINT_PTR kTabRepeatTimerId = 89;
@@ -598,9 +601,9 @@ static void LoadTaskSwitcherSettings()
         return RGB((rgb >> 16) & 0xff, (rgb >> 8) & 0xff, rgb & 0xff);
     };
 
-    g_cardNormalColor = parseColor(read(L"Appearance.Cards.NormalColor"), RGB(5, 5, 7));
-    g_cardSelectedColor = parseColor(read(L"Appearance.Cards.SelectedColor"), RGB(9, 10, 11));
-    g_dwmBackgroundColor = parseColor(read(L"Dwm.BackgroundColor"), RGB(20, 26, 34));
+    g_cardNormalColor = parseColor(read(L"Appearance.Cards.NormalColor"), RGB(28, 23, 32));
+    g_cardSelectedColor = parseColor(read(L"Appearance.Cards.SelectedColor"), RGB(75, 33, 51));
+    g_dwmBackgroundColor = parseColor(read(L"Dwm.BackgroundColor"), RGB(20, 17, 23));
     g_dwmBackgroundOpacity =
         static_cast<float>(readNumber(L"Dwm.Opacity", 0, 100)) / 100.0f;
 

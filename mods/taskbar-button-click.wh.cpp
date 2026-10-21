@@ -4,7 +4,7 @@
 // @description     Close programs with a middle click on the taskbar instead of creating a new instance
 // @name:ar         إغلاق البرنامج بالزر الأوسط
 // @description:ar  اضغط بزر الماوس الأوسط على زر البرنامج في شريط المهام لإغلاقه، بدل فتح نسخة جديدة منه
-// @version         1.0.9-shihab.2
+// @version         1.0.9-shihab.3
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -45,7 +45,7 @@ or a similar tool), enable the relevant option in the mod's settings.
 
 // ==WindhawkModSettings==
 /*
-- multipleItemsBehavior: closeAll
+- multipleItemsBehavior: closeForeground
   $name: Multiple items behavior
   $description: >-
     You can choose the desired behavior for middle clicking on a group of
@@ -62,7 +62,7 @@ or a similar tool), enable the relevant option in the mod's settings.
   - closeForeground: إغلاق النافذة الظاهرة فقط
   - none: لا شيء
 - keysToEndTask:
-  - Ctrl: true
+  - Ctrl: false
     $name:ar: مفتاح Ctrl
   - Alt: false
     $name:ar: مفتاح Alt

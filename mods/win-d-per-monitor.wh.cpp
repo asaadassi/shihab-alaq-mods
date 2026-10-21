@@ -5,7 +5,7 @@
 // @description     Press Win+D to only manage the windows on the monitor where the mouse is located.
 // @description:zh-CN   按下Win+D时 只最小化/还原鼠标所在显示器的窗口
 // @description:ar  عند الضغط على Win+D تُخفى نوافذ الشاشة التي عليها المؤشر فقط ثم تُعاد، وتبقى الشاشات الأخرى كما هي.
-// @version         1.5.260416-shihab.3
+// @version         1.5.260416-shihab.4
 // @author          easyatm
 // @github          https://github.com/easyatm
 // @include         explorer.exe
@@ -40,6 +40,7 @@
       $description:zh-CN: 要忽略的窗口类名
       $name:ar: اسم صنف النافذة
       $description:ar: الاسم البرمجي لصنف النافذة التي لا تُخفى
+  $_hidden: true
   $name: Custom ignored windows
   $description: Custom list of windows to ignore. Fill at least one field per entry; an empty field matches anything.
   $description:zh-CN: 自定义忽略的窗口列表，每条规则至少填一项，留空的项匹配任意值

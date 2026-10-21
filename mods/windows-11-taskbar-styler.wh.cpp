@@ -4,7 +4,7 @@
 // @name:ar         ثيمات شريط المهام
 // @description     Customize the taskbar with themes contributed by others or create your own
 // @description:ar  غيّر شكل شريط المهام بثيمات جاهزة صمّمها آخرون أو بتصميمك الخاص
-// @version         1.10-shihab.3
+// @version         1.10-shihab.4
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -531,7 +531,7 @@ from the **TranslucentTB** project.
 
 // ==WindhawkModSettings==
 /*
-- theme: ""
+- theme: WindowGlass_variant_Split
   $name: Theme
   $name:ar: الثيم
   $description: >-
@@ -656,6 +656,7 @@ from the **TranslucentTB** project.
   - One_UI_8_5_variant_Dock: One UI 8.5 (رصيف)
   - One_UI_8_5_variant_Taskbar: One UI 8.5 (شريط)
 - styleConstants: [""]
+  $_hidden: true
   $name: Style constants
   $name:ar: قيم تخصيص الثيم
   $_advanced: true
@@ -673,10 +674,12 @@ from the **TranslucentTB** project.
     - styles: [""]
       $name: Styles
       $name:ar: التنسيقات
+  $_hidden: true
   $name: Control styles
   $name:ar: تنسيقات العناصر
   $_advanced: true
 - themeResourceVariables: [""]
+  $_hidden: true
   $name: Resource variables
   $name:ar: متغيرات الموارد
   $_advanced: true
@@ -695,7 +698,7 @@ from the **TranslucentTB** project.
     والفاتح، ويُشار إليها في التنسيقات بـ {ThemeResource Key}.
 
     ويمكن استعمال ":=" لوضع قيمة بصيغة XAML. التفاصيل في شرح الإضافة.
-- clickThroughTaskbar: false
+- clickThroughTaskbar: true
   $name: Click-through taskbar
   $name:ar: النقر عبر الأجزاء الفارغة من الشريط
   $description: >-
@@ -706,6 +709,7 @@ from the **TranslucentTB** project.
     تصبح الأجزاء الفارغة من شريط المهام غير مرئية ويمر النقر من خلالها، ويبقى
     ظاهراً فقط مكان الأزرار وأيقونات النظام. مفيد خاصة مع ثيمات الرصيف مثل DockLike.
 - xamlDiagnosticsHandling: alert
+  $_hidden: true
   $name: XAML diagnostics consumer handling
   $name:ar: التعامل مع البرامج الأخرى التي تعدّل الواجهة
   $_advanced: true
@@ -3717,7 +3721,11 @@ const Theme g_themeWindowGlass_variant_Split = {{
     ThemeTargetStyles{L"Taskbar.TaskbarFrame > Grid#RootGrid", {
         L"Margin=10,2,3,2",
         L"BorderThickness=$BorderThickness",
-        L"CornerRadius=25,5,5,25",
+        // Shihab Alaq: the outer ends are half circles at any taskbar height.
+        // A fixed 25 is more than half of a 36px bar, which drew a stretched,
+        // pointed oval end.
+        L"ActualHeight=>splitFrameHeight",
+        L"CornerRadius={{splitFrameHeight == `` ? 18 : splitFrameHeight / 2}},5,5,{{splitFrameHeight == `` ? 18 : splitFrameHeight / 2}}",
         L"Background:=$Background",
         L"Padding=10,0,0,0"}},
     ThemeTargetStyles{L"Taskbar.TaskbarBackground#BackgroundControl > Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Shapes.Rectangle#BackgroundFill", {
@@ -3737,7 +3745,8 @@ const Theme g_themeWindowGlass_variant_Split = {{
         L"Background:=$Background",
         L"BorderBrush:=$BorderBrush",
         L"BorderThickness=$BorderThickness",
-        L"CornerRadius=5,25,25,5",
+        L"ActualHeight=>splitTrayHeight",
+        L"CornerRadius=5,{{splitTrayHeight == `` ? 18 : splitTrayHeight / 2}},{{splitTrayHeight == `` ? 18 : splitTrayHeight / 2}},5",
         L"Padding=0,0,10,0"}},
     ThemeTargetStyles{L"SystemTray.ChevronIconView", {
         L"Padding=$TrayPadding",

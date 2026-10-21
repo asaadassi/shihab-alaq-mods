@@ -4,7 +4,7 @@
 // @description     Custom date/time format, news feed, weather, performance metrics (upload/download speed, CPU, RAM, GPU, battery), media player info, custom fonts and colors, and more
 // @name:ar         تخصيص ساعة شريط المهام
 // @description:ar  شكل التاريخ والوقت كما تريد، مع الطقس والأخبار وسرعة الإنترنت وأداء الجهاز والبطارية وما يُشغَّل الآن، بخطوط وألوان من اختيارك
-// @version         1.8.1-shihab.3
+// @version         1.8.1-shihab.4
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -156,11 +156,12 @@ styles, such as the font color and size.
 
 // ==WindhawkModSettings==
 /*
-- ShowSeconds: true
+- ShowSeconds: false
   $name: Show seconds
   $name:ar: إظهار الثواني
 - TimeFormat: >-
-    hh':'mm':'ss tt
+    h':'mm tt
+  $_hidden: true
   $name: Time format
   $name:ar: شكل الوقت
   $description: >-
@@ -175,7 +176,8 @@ styles, such as the font color and size.
     https://docs.microsoft.com/en-us/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatex#remarks
   $_advanced: true
 - DateFormat: >-
-    ddd',' MMM dd yyyy
+    d MMMM yyyy
+  $_hidden: true
   $name: Date format
   $name:ar: شكل التاريخ
   $description: >-
@@ -189,7 +191,8 @@ styles, such as the font color and size.
 
     https://docs.microsoft.com/en-us/windows/win32/intl/day--month--year--and-era-format-pictures
   $_advanced: true
-- DateLocale: ""
+- DateLocale: "ar-SY"
+  $_hidden: true
   $name: Date locale
   $name:ar: لغة التاريخ
   $description: >-
@@ -223,6 +226,7 @@ styles, such as the font color and size.
   - custom: أسماء من اختيارك في الخانة التالية
   $_advanced: true
 - WeekdayFormatCustom: Sun, Mon, Tue, Wed, Thu, Fri, Sat
+  $_hidden: true
   $name: Custom week day format
   $name:ar: أسماء الأيام من اختيارك
   $description: >-
@@ -232,7 +236,8 @@ styles, such as the font color and size.
     أسماء الأيام مفصولة بفواصل، من الأحد إلى السبت. تُستعمل حين يكون شكل اسم
     اليوم «أسماء من اختيارك».
   $_advanced: true
-- TopLine: '%date% | %time%'
+- TopLine: '%time%'
+  $_hidden: true
   $name: Top line
   $name:ar: السطر الأول
   $description: >-
@@ -242,7 +247,8 @@ styles, such as the font color and size.
     النص الذي يظهر في السطر الأول. اكتب "-" للنص المعتاد. قائمة الرموز التي
     يمكن استعمالها في تفاصيل الإضافة.
   $_advanced: true
-- BottomLine: '%web1%'
+- BottomLine: '%date%'
+  $_hidden: true
   $name: Bottom line
   $name:ar: السطر الثاني
   $description: >-
@@ -250,7 +256,8 @@ styles, such as the font color and size.
   $description:ar: >-
     يظهر فقط إن كان شريط المهام كبيراً بما يكفي. اكتب "-" للنص المعتاد.
   $_advanced: true
-- MiddleLine: '%weekday%'
+- MiddleLine: ''
+  $_hidden: true
   $name: Middle line (Windows 10 only)
   $name:ar: السطر الأوسط (ويندوز 10 فقط)
   $description: >-
@@ -258,11 +265,13 @@ styles, such as the font color and size.
   $description:ar: >-
     يظهر فقط إن كان شريط المهام كبيراً بما يكفي. اكتب "-" للنص المعتاد.
   $_advanced: true
-- TooltipLine: '%web1_full%'
+- TooltipLine: ''
+  $_hidden: true
   $name: Tooltip extra line
   $name:ar: سطر إضافي عند الوقوف على الساعة
   $_advanced: true
 - TooltipLineMode: append
+  $_hidden: true
   $name: Tooltip line mode
   $name:ar: طريقة إضافة هذا السطر
   $options:
@@ -296,7 +305,7 @@ styles, such as the font color and size.
     اكتب 0 للمسافة المعتادة. الرقم السالب يقرّب السطور من بعضها أكثر.
   $_advanced: true
 - DataCollection:
-  - NetworkMetricsFormat: mbs
+  - NetworkMetricsFormat: mbsDynamic
     $name: Network metrics format
     $name:ar: شكل سرعة الإنترنت
     $description: >-
@@ -389,6 +398,7 @@ styles, such as the font color and size.
     $description:ar: >-
       كل كم ثانية تتحدّث قياسات أداء الجهاز.
   - NetworkAdapterName: ""
+    $_hidden: true
     $name: Network adapter name
     $name:ar: اسم محوّل الشبكة
     $description: >-
@@ -402,6 +412,7 @@ styles, such as the font color and size.
 
       typeperf -qx "Network Interface"
   - GpuAdapterName: ""
+    $_hidden: true
     $name: GPU adapter name
     $name:ar: اسم بطاقة الرسوم
     $description: >-
@@ -421,6 +432,7 @@ styles, such as the font color and size.
   $_advanced: true
 - MediaPlayer:
   - IgnoredPlayers: [""]
+    $_hidden: true
     $name: Ignored media players
     $name:ar: مشغّلات لا تُعرض
     $description: >-
@@ -440,6 +452,7 @@ styles, such as the font color and size.
       أقصى عدد من الأحرف في %media_info%. النص الأطول يُختصر بثلاث نقاط. اكتب 0
       لطول بلا حد.
   - MediaInfoFormat: "%media_artist% - %media_title%"
+    $_hidden: true
     $name: Format when media is playing
     $name:ar: الشكل أثناء التشغيل
     $description: >-
@@ -449,7 +462,7 @@ styles, such as the font color and size.
     $description:ar: >-
       شكل %media_info% أثناء تشغيل مقطع. يمكن أن يحوي أي رموز، مثل
       %media_artist% و%media_title% و%media_album% و%media_status%.
-  - NoMediaText: No media
+  - NoMediaText: لا يُشغَّل شيء
     $name: Format when media is not playing
     $name:ar: النص حين لا يُشغَّل شيء
     $description: >-
@@ -480,7 +493,8 @@ styles, such as the font color and size.
     المدينة أو المكان الذي يُعرض طقسه. اتركه فارغاً لاستعمال موقعك الحالي.
     للتفاصيل راجع توثيق wttr.in.
   $_advanced: true
-- WebContentWeatherFormat: "%c \U0001F321️%t \U0001F32C️%w"
+- WebContentWeatherFormat: "%t"
+  $_hidden: true
   $name: Weather format
   $name:ar: شكل الطقس
   $description: >-
@@ -508,20 +522,20 @@ styles, such as the font color and size.
   - metricMsWind: الوحدات المترية مع سرعة الرياح بالمتر في الثانية
   $_advanced: true
 - WebContentsItems:
-  - - Url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
+  - - Url: ""
       $name: Web content URL
       $name:ar: رابط المحتوى
-    - BlockStart: '<item>'
+    - BlockStart: ''
       $name: Web content block start
       $name:ar: بداية الجزء
       $description: The string in the webpage to start from.
       $description:ar: النص في الصفحة الذي يبدأ البحث منه.
-    - Start: '<title>'
+    - Start: ''
       $name: Web content start
       $name:ar: بداية المحتوى
       $description: The string just before the content.
       $description:ar: النص الذي يأتي قبل المحتوى مباشرة.
-    - End: '</title>'
+    - End: ''
       $name: Web content end
       $name:ar: نهاية المحتوى
       $description: The string just after the content.
@@ -566,6 +580,7 @@ styles, such as the font color and size.
       $name:ar: أقصى طول للمحتوى
       $description: Longer text is truncated with an ellipsis.
       $description:ar: النص الأطول يُختصر بثلاث نقاط.
+  $_hidden: true
   $name: Web content items
   $name:ar: محتوى من الإنترنت
   $description: >-
@@ -575,6 +590,7 @@ styles, such as the font color and size.
     يُستعمل لجلب ما يظهر مكان %web<n>% و%web<n>_full%، حيث <n> رقم العنصر.
   $_advanced: true
 - WebContentsUpdateInterval: 10
+  $_hidden: true
   $name: Web content update interval
   $name:ar: مدة تحديث محتوى الإنترنت
   $description: >-
@@ -582,7 +598,8 @@ styles, such as the font color and size.
   $description:ar: >-
     كل كم دقيقة يتحدّث الطقس ومحتوى الإنترنت.
   $_advanced: true
-- TimeZones: ["Eastern Standard Time"]
+- TimeZones: [""]
+  $_hidden: true
   $name: Time zones
   $name:ar: المناطق الزمنية
   $description: >-
@@ -601,14 +618,11 @@ styles, such as the font color and size.
     $name:ar: إخفاء السطر
     $_advanced: true
   - TextColor: ""
+    $_color: true
     $name: Text color
     $name:ar: لون النص
-    $description: >-
-      Can be a color name (Red, Black, ...) or an RGB/ARGB color code (like
-      #00FF00, #CC00FF00, ...).
-    $description:ar: >-
-      اسم لون بالإنجليزية (Red أو Black...) أو رمز لون مثل #00FF00 أو
-      #CC00FF00.
+    $description: Leave on Automatic for the usual color.
+    $description:ar: اتركه «تلقائي» للون المعتاد.
   - TextAlignment: ""
     $name: Text alignment
     $name:ar: محاذاة النص
@@ -631,6 +645,7 @@ styles, such as the font color and size.
     $description: Set to zero for the default size.
     $description:ar: اكتب 0 للحجم المعتاد.
   - FontFamily: ""
+    $_hidden: true
     $name: Font family
     $name:ar: نوع الخط
     $description: >-
@@ -739,14 +754,11 @@ styles, such as the font color and size.
   - Hidden: false
     $name:ar: إخفاء السطر
   - TextColor: ""
+    $_color: true
     $name: Text color
     $name:ar: لون النص
-    $description: >-
-      Can be a color name (Red, Black, ...) or an RGB/ARGB color code (like
-      #00FF00, #CC00FF00, ...).
-    $description:ar: >-
-      اسم لون بالإنجليزية (Red أو Black...) أو رمز لون مثل #00FF00 أو
-      #CC00FF00.
+    $description: Leave on Automatic for the usual color.
+    $description:ar: اتركه «تلقائي» للون المعتاد.
   - TextAlignment: ""
     $name: Text alignment
     $name:ar: محاذاة النص
@@ -769,6 +781,7 @@ styles, such as the font color and size.
     $description: Set to zero for the default size.
     $description:ar: اكتب 0 للحجم المعتاد.
   - FontFamily: ""
+    $_hidden: true
     $name: Font family
     $name:ar: نوع الخط
     $description: >-
