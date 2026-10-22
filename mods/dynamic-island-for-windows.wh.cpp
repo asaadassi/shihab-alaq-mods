@@ -4,7 +4,7 @@
 // @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
 // @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
-// @version         1.3.1-shihab.4
+// @version         1.3.1-shihab.5
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe
@@ -14177,11 +14177,24 @@ BOOL Wh_ModInit() {
         if (GetLastError() == ERROR_ALREADY_EXISTS) {
             // Shihab Alaq: on an update or a settings reload the new process
             // starts while the old one is still closing, and used to give up
-            // here, leaving no island until the engine restarted. Wait for the
-            // old one to let go (it exits, so the mutex is released or
-            // abandoned); a process that is really still running keeps it.
-            const DWORD wait = WaitForSingleObject(g_toolModProcessMutex, 10000);
-            if (wait != WAIT_OBJECT_0 && wait != WAIT_ABANDONED) {
+            // here, leaving no island until the engine restarted. Wait up to
+            // 10 s for the old one to go. Its ownership can't tell: the thread
+            // that took the mutex ends right after start-up, so the mutex is
+            // abandoned while that process still runs. The mutex's existence
+            // can: it lasts while any process holds a handle to it, so ours is
+            // closed and the name asked for again until no other one holds it.
+            bool alone = false;
+            for (int i = 0; i < 40 && !alone; i++) {
+                CloseHandle(g_toolModProcessMutex);
+                Sleep(250);
+                g_toolModProcessMutex = CreateMutex(nullptr, TRUE, L"windhawk-tool-mod_" WH_MOD_ID);
+                if (!g_toolModProcessMutex) {
+                    Wh_Log(L"CreateMutex failed");
+                    ExitProcess(1);
+                }
+                alone = GetLastError() != ERROR_ALREADY_EXISTS;
+            }
+            if (!alone) {
                 Wh_Log(L"Tool mod already running (%s)", WH_MOD_ID);
                 ExitProcess(1);
             }
