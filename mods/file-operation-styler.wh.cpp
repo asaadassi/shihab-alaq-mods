@@ -4,7 +4,7 @@
 // @name:ar         تنسيق نافذة النسخ والنقل
 // @description     Portable custom presentation for native Explorer file operations with a skin-safe unified presentation.
 // @description:ar  شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف، مع سمات وألوان تختارها.
-// @version         1.2.0-shihab.4
+// @version         1.2.0-shihab.5
 // @author          digART
 // @github          https://github.com/digart11
 // @license         GPL-3.0
@@ -19,6 +19,8 @@
 // - The shared table is never created again after unloading starts, and it is
 //   unmapped under the same lock its writers and readers hold, so a copy
 //   thread can not write into a view that is being unmapped.
+// 1.2.0-shihab.5: a window that opens in More details gets the new look at
+//   once, instead of staying native until the next progress update.
 
 // ==WindhawkModReadme==
 /*
@@ -12031,6 +12033,30 @@ namespace
             Wh_Log(L"MODE[%llu] DEFERRED schedule-skipped "
                    L"reason=owner-resolution-failed",
                    transitionId);
+
+            // Shihab Alaq: a window that opens straight in More details sets
+            // its mode before the circle exists. Apply the presentation now
+            // for the registered owner instead of waiting for the next
+            // progress update, which left the native window showing.
+            ULONG_PTR address = reinterpret_cast<ULONG_PTR>(thisPtr);
+            COperationStatusTile *candidates[] = {
+                thisPtr,
+                address >= kSetTileDisplayModeThisAdjustment
+                    ? reinterpret_cast<COperationStatusTile *>(
+                          address - kSetTileDisplayModeThisAdjustment)
+                    : nullptr,
+            };
+            for (COperationStatusTile *candidate : candidates)
+            {
+                TransferSummaryState registered{};
+                if (SUCCEEDED(result) && candidate &&
+                    !g_unloading.load(std::memory_order_acquire) &&
+                    CopyRegisteredTransferState(candidate, &registered))
+                {
+                    InitializeRegisteredDisplayMode(candidate);
+                    break;
+                }
+            }
         }
         return result;
     }
