@@ -7,8 +7,8 @@
       "en": "Taskbar look"
     },
     "description": {
-      "ar": "الثيمات والألوان، وحجم الشريط والأيقونات، وزر ابدأ، وأسماء البرامج، وحركة الأيقونات.",
-      "en": "Themes and colours, taskbar and icon size, the Start button, program names and icon motion."
+      "ar": "الثيمات والألوان، وحجم الشريط والأيقونات، وحركة الأيقونات.",
+      "en": "Themes and colours, taskbar and icon size, and icon motion."
     },
     "icon": "E790",
     "tagline": {
@@ -24,8 +24,8 @@
       "en": "Taskbar use"
     },
     "description": {
-      "ar": "اختصارات الماوس على الشريط: الإغلاق بالزر الأوسط، والتنقل والصوت بالعجلة، وسرعة الإخفاء.",
-      "en": "Mouse shortcuts on the taskbar: middle click to close, the wheel to switch and for volume, and auto-hide speed."
+      "ar": "اختصارات الماوس على الشريط: التنقل بين البرامج وتغيير الصوت بالعجلة.",
+      "en": "Mouse shortcuts on the taskbar: the wheel to switch programs and change the volume."
     },
     "icon": "E962",
     "tagline": {
@@ -72,12 +72,12 @@
     "id": "window-motion",
     "category": "windows",
     "name": {
-      "ar": "حركة النوافذ وشكلها",
-      "en": "Window motion and shape"
+      "ar": "حركة النوافذ",
+      "en": "Window motion"
     },
     "description": {
-      "ar": "حركات فتح النوافذ وإغلاقها وتصغيرها، وتحريكها بانسيابية، وزواياها.",
-      "en": "Animations when windows open, close and minimize, smooth moving, and their corners."
+      "ar": "حركات فتح النوافذ وإغلاقها وتصغيرها، وتحريكها بانسيابية.",
+      "en": "Animations when windows open, close and minimize, and smooth moving."
     },
     "icon": "E7C4",
     "tagline": {
@@ -93,8 +93,8 @@
       "en": "Desktop"
     },
     "description": {
-      "ar": "Win+D لكل شاشة على حدة، وتلاشي مستطيل التحديد.",
-      "en": "Win+D for each monitor on its own, and a fading selection rectangle."
+      "ar": "Win+D لكل شاشة على حدة.",
+      "en": "Win+D for each monitor on its own."
     },
     "icon": "E7F4",
     "tagline": {
