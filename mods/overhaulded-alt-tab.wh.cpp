@@ -4,7 +4,7 @@
 // @name:ar         مبدّل نوافذ حديث
 // @description     Replaces the boring Windows Alt+Tab with a modern and elegant window switcher.
 // @description:ar  يستبدل قائمة Alt+Tab بمبدّل نوافذ حديث وأنيق فيه معاينة لكل نافذة.
-// @version         1.3.0-shihab.4
+// @version         1.3.0-shihab.5
 // @author          IMiloDev
 // @github          https://github.com/IMiloDev
 // @homepage        https://github.com/IMiloDev/OverhauldedWin
@@ -4083,9 +4083,16 @@ static void StartSelectionExpansion(HWND target, bool targetWasMinimized)
     g_backgroundSpotlightActive = false;
     UiSetInteractive(false);
     g_selectorAnimation = SelectorAnimationState::SelectionExpansion;
+    // A topmost window that covers the whole monitor is a full-screen app to
+    // Windows, focused or not, and Windows turns Do Not Disturb on while it
+    // shows (its "full-screen app" rule). The work area is the whole monitor
+    // when the taskbar auto-hides, so the expansion stops one pixel short of
+    // the bottom edge there; the renderer recalibrates to the client below.
+    const int coverHeight = EqualRect(&work, &monitorInfo.rcMonitor)
+        ? workHeight - 1 : workHeight;
     // El HWND pasa a cubrir el monitor sin activar ni cambiar el orden Z.
     SetWindowPos(g_selector, HWND_TOPMOST, work.left, work.top,
-                 workWidth, workHeight, SWP_NOACTIVATE | SWP_SHOWWINDOW);
+                 workWidth, coverHeight, SWP_NOACTIVATE | SWP_SHOWWINDOW);
     // Recalibrar contra el cliente real después del resize. Así el destino
     // ocupa exactamente todos los píxeles que el renderer puede dibujar, sin
     // desplazamiento lateral por marcos, DPI o coordenadas de monitor.
