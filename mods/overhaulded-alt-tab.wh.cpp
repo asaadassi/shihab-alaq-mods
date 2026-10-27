@@ -20,6 +20,10 @@
 // - The mouse hook only swallows a button-up whose button-down it swallowed,
 //   so a click that started before the switcher opened is never left pressed.
 // - A missing string setting is read as empty instead of crashing.
+// - The chosen window takes the foreground while the switcher still covers
+//   the screen, then the switcher hides. Before, the switcher hid first:
+//   Windows showed the previous window for a moment, and a busy target could
+//   be refused the foreground and stay behind it.
 
 // ==WindhawkModReadme==
 /*
@@ -1167,6 +1171,7 @@ static void DestroySelector();
 static bool InitializePersistentSelector();
 static void HideSelectorForSession();
 static void ActivateWindow(HWND target);
+static bool HandForegroundBeforeHide(HWND target);
 static HWND FocusRestoreTarget();
 static HWND GetNextGroupWindow(AppGroup& group);
 static void StartSlide(int steps);
@@ -4153,12 +4158,14 @@ static void UpdateSelectionExpansion()
         g_selectionExpansionTarget = nullptr;
         g_pendingActivationTarget = nullptr;
         g_selectorAnimation = SelectorAnimationState::None;
+        const bool handedOver = HandForegroundBeforeHide(target);
         g_cleanupInProgress = true;
         DestroySelector();
         g_state = SelectorState::Idle;
         g_cleanupInProgress = false;
         CleanupKeyboardState();
-        ActivateWindow(target);
+        if (!handedOver)
+            ActivateWindow(target);
         return;
     }
     UpdateSelectorSurfaceTransform();
@@ -6336,6 +6343,19 @@ static void ActivateWindow(HWND target)
                            reinterpret_cast<WPARAM>(target), 0);
 }
 
+// UI thread only, while the selector is still shown and holds the
+// foreground: hand the foreground straight to the target. Hiding the selector
+// first lets Windows activate whatever window was under it for a frame, and
+// the request posted to the input thread then comes from a background
+// process, which Windows may refuse. False leaves it to ActivateWindow.
+static bool HandForegroundBeforeHide(HWND target)
+{
+    if (!target || !IsWindow(target) || IsIconic(target))
+        return false;
+    SetForegroundWindow(target);
+    return GetForegroundWindow() == target;
+}
+
 // Esta función solo se ejecuta desde el input thread. Repite la ruta completa
 // de activación porque algunas ventanas elevadas aún están restaurándose cuando
 // termina la expansión del selector.
@@ -6443,12 +6463,14 @@ static void ConfirmSelection()
     {
         // Modo directo: conservar la confirmación y la activación originales,
         // pero sin ejecutar la expansión visual de 240 ms.
+        const bool handedOver = HandForegroundBeforeHide(target);
         g_cleanupInProgress = true;
         DestroySelector();
         g_state = SelectorState::Idle;
         g_cleanupInProgress = false;
         CleanupKeyboardState();
-        ActivateWindow(target);
+        if (!handedOver)
+            ActivateWindow(target);
         return;
     }
     const bool targetWasMinimized = IsIconic(target);

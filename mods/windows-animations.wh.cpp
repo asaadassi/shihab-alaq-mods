@@ -4,7 +4,7 @@
 // @name:ar         حركات النوافذ
 // @description     Smooth minimize, restore, close, switch animations for windows.
 // @description:ar  حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل بينها.
-// @version         1.3.7-shihab.4
+// @version         1.3.7-shihab.5
 // @author          ReDrag
 // @github          https://github.com/redrag2105
 // @donateUrl       https://ko-fi.com/redrag2105
@@ -32,6 +32,12 @@
 // - The Show Desktop restore batch keeps only the windows that operation really
 //   minimized, so a Show Desktop that touched only some windows (for example
 //   per monitor) never restores a window it did not minimize.
+// - Right-to-left windows (Arabic apps) are no longer shown mirrored while
+//   they open, minimize, restore or close.
+// - Shihab's modern Alt+Tab (overhaulded-alt-tab) animates the chosen window
+//   itself, so no switch or restore effect plays on top of it.
+// - Animation threads ask for full processor speed, so opening a program on
+//   battery no longer stutters on a slowed efficiency core.
 
 // The explicit process exclusions above are pre-injection fast paths for
 // unsupported window hosts and known interactive-session helpers. The runtime
@@ -1307,6 +1313,30 @@ static LONG NonZeroTick() {
 static void FlushDwmOrYield() {
     if (FAILED(DwmFlush())) Sleep(1);
 }
+// On battery Windows may run a thread slowly on an efficiency core (EcoQoS),
+// and a window that is just opening still belongs to a background process.
+// Ask full speed for the short life of an animation thread. Windows 10 doesn't
+// know this class and refuses it, which leaves the thread as it was.
+static void RequestFullSpeedForAnimationThread() {
+    THREAD_POWER_THROTTLING_STATE state{};
+    state.Version = THREAD_POWER_THROTTLING_CURRENT_VERSION;
+    state.ControlMask = THREAD_POWER_THROTTLING_EXECUTION_SPEED;
+    state.StateMask = 0;
+    if (!SetThreadInformation(GetCurrentThread(), ThreadPowerThrottling,
+                              &state, sizeof(state)) &&
+        IsDiagnosticLoggingEnabled()) {
+        Wh_Log(L"Full speed request refused error=%lu",
+               static_cast<unsigned long>(GetLastError()));
+    }
+}
+// Shihab's modern Alt+Tab (overhaulded-alt-tab) grows the chosen window's
+// preview to its place itself and keeps its selector shown until that window
+// has the foreground. A switch or restore effect on top made the window vanish
+// and grow a second time.
+static bool IsOverhauledSwitcherShown() {
+    const HWND selector = FindWindowW(L"OverhauldedAltTabSelector", nullptr);
+    return selector && IsWindowVisible(selector);
+}
 static void PulseSharedHeartbeatLocked() {
     if (!g_pSharedState || !g_sharedStateWritable) return;
     InterlockedExchange(&g_pSharedState->heartbeatTick, NonZeroTick());
@@ -1635,6 +1665,24 @@ static HBITMAP CreateDib32(HDC dc, int width, int height, void** bits) {
     bmi.bmiHeader.biBitCount = 32;
     bmi.bmiHeader.biCompression = BI_RGB;
     return CreateDIBSection(dc, &bmi, DIB_RGB_COLORS, bits, nullptr, 0);
+}
+// PrintWindow draws a WS_EX_LAYOUTRTL window (any right-to-left Arabic app)
+// mirrored left to right, while the screen shows it correctly. Flip such a
+// capture back so the animated image matches the real window. A screen-DC
+// BitBlt is already correct and must not come through here.
+static BOOL PrintWindowUnmirrored(HWND hWnd, HDC dc, void* bits, int width,
+                                  int height) {
+    if (!PrintWindow(hWnd, dc, PW_RENDERFULLCONTENT)) return FALSE;
+    if (bits && width > 1 && height > 0 &&
+        (GetWindowLongPtrW(hWnd, GWL_EXSTYLE) & WS_EX_LAYOUTRTL)) {
+        GdiFlush();
+        auto* pixels = static_cast<DWORD*>(bits);
+        for (int y = 0; y < height; ++y) {
+            DWORD* row = pixels + (size_t)y * width;
+            std::reverse(row, row + width);
+        }
+    }
+    return TRUE;
 }
 static bool IsAnimating(HWND hWnd) {
     std::lock_guard<std::mutex> lock(g_StateMutex);
@@ -4903,6 +4951,15 @@ void CALLBACK ExplorerForegroundProc(HWINEVENTHOOK hWinEventHook, DWORD event, H
         }
         return;
     }
+    if (IsOverhauledSwitcherShown()) {
+        // Its selector took the foreground: this Alt+Tab is not the native one.
+        std::lock_guard<std::mutex> lock(g_SharedStateMutex);
+        if (g_pSharedState && g_sharedStateWritable) {
+            InterlockedExchange(&g_pSharedState->lastAltTabTick, 0);
+            InterlockedExchange(&g_pSharedState->altTabSourceWindow, 0);
+        }
+        return;
+    }
     HWND source = g_lastAppForeground.load(std::memory_order_relaxed);
     if (!source || source == hWnd || !IsAltTabSourceCandidate(source)) {
         if (g_altTabSessionPollRunning.load(std::memory_order_relaxed)) {
@@ -5011,6 +5068,7 @@ DWORD WINAPI SwitchingAnimThread(LPVOID lpParam) {
         }
     } guard{hWnd, needsFullExplorerRepair};
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
+    RequestFullSpeedForAnimationThread();
     RECT winRect;
     if (g_unloading.load(std::memory_order_relaxed) || !IsWindow(hWnd) || !IsAppMainWindow(hWnd, true) || !GetWindowRect(hWnd, &winRect)) {
         return 0; 
@@ -5118,7 +5176,8 @@ void CALLBACK ForegroundEventProc(HWINEVENTHOOK, DWORD event, HWND hWnd,
     DWORD windowPid = 0;
     GetWindowThreadProcessId(hWnd, &windowPid);
     if (windowPid != GetCurrentProcessId() || GetForegroundWindow() != hWnd ||
-        IsIconic(hWnd) || !IsAppMainWindow(hWnd, true)) return;
+        IsIconic(hWnd) || !IsAppMainWindow(hWnd, true) ||
+        IsOverhauledSwitcherShown()) return;
     bool swsSelection = false;
     if (!ConsumeAltTabIntentForForeground(hWnd, dwmsEventTime,
                                           &swsSelection)) return;
@@ -10869,6 +10928,7 @@ struct CloseAnimationWorkerCompletion {
 
 DWORD WINAPI MainAnimThread(LPVOID lpParam) {
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
+    RequestFullSpeedForAnimationThread();
     auto* data = (WindowAnimData*)lpParam;
     const HWND animatedWindow = data->hRealWnd;
     const bool closingAnimation = data->isClosing != FALSE;
@@ -11477,7 +11537,8 @@ bool StartAnimation(HWND hWnd, BOOL rising, LONG_PTR originalExStyle, BOOL cloak
             // can't retain pixels from the composed desktop.
             GdiFlush();
             memset(tempBits, 0, (size_t)rawW * rawH * sizeof(DWORD));
-            captured = PrintWindow(hWnd, tempDC, PW_RENDERFULLCONTENT);
+            captured = PrintWindowUnmirrored(hWnd, tempDC, tempBits, rawW,
+                                             rawH);
         }
         if (!captured && !screenCaptureAttempted && allowScreenFallback &&
             IsWindowVisible(hWnd) && !IsIconic(hWnd)) {
@@ -13061,7 +13122,8 @@ static MinimizeKick TryMinimizeAnim(HWND hWnd, NativeMinimizeBarrier* nativeMini
 }
 static bool CanPrepareRestoreAnimation(HWND hWnd) {
     if (!g_restoreAnimation.load(std::memory_order_relaxed) || IsHungAppWindow(hWnd) ||
-        !IsWindowVisible(hWnd) || !ShouldAnimateWindow(hWnd)) {
+        !IsWindowVisible(hWnd) || !ShouldAnimateWindow(hWnd) ||
+        IsOverhauledSwitcherShown()) {
         return false;
     }
     return true;
@@ -13287,7 +13349,8 @@ static bool CaptureLaunchSnapshot(HWND hWnd, ULONG_PTR* snapshotTokenOut) {
             if (hBitmap && bits) {
                 hOldBitmap = static_cast<HBITMAP>(SelectObject(hMemoryDC, hBitmap));
                 if (!hOldBitmap || hOldBitmap == HGDI_ERROR ||
-                    !PrintWindow(hWnd, hMemoryDC, PW_RENDERFULLCONTENT)) {
+                    !PrintWindowUnmirrored(hWnd, hMemoryDC, bits, width,
+                                           height)) {
                     if (hOldBitmap && hOldBitmap != HGDI_ERROR) {
                         SelectObject(hMemoryDC, hOldBitmap);
                     }
@@ -14144,6 +14207,7 @@ BOOL WINAPI CloseWindow_Hook(HWND hWnd) {
     return result;
 }
 DWORD WINAPI LaunchAnimThread(LPVOID lpParam) {
+    RequestFullSpeedForAnimationThread();
     LaunchAnimData* ld = (LaunchAnimData*)lpParam;
     HWND hWnd = ld->hWnd;
     LONG_PTR originalExStyle = ld->originalExStyle;
