@@ -4,7 +4,7 @@
 // @name:ar         مبدّل نوافذ حديث
 // @description     Replaces the boring Windows Alt+Tab with a modern and elegant window switcher.
 // @description:ar  يستبدل قائمة Alt+Tab بمبدّل نوافذ حديث وأنيق فيه معاينة لكل نافذة.
-// @version         1.3.0-shihab.5
+// @version         1.3.0-shihab.6
 // @author          IMiloDev
 // @github          https://github.com/IMiloDev
 // @homepage        https://github.com/IMiloDev/OverhauldedWin
@@ -218,7 +218,7 @@ Some applications may behave differently than standard desktop windows, especial
       - "125": 125%
       - "150": 150%
       $_advanced: true
-    - AnimationStyle: "Linear"
+    - AnimationStyle: "RCT"
       $name: Animation style
       $name:ar: حركة الظهور والإخفاء
       $description: Open and close animation. Linear is standard, Bouncy adds a pronounced bounce, and RCT is a CRT-style collapse and expansion.
@@ -243,14 +243,14 @@ Some applications may behave differently than standard desktop windows, especial
           $options:ar:
           - "3": 3 بطاقات
           - "5": 5 بطاقات
-        - NormalColor: "#1C1720"
+        - NormalColor: "#050507"
           $_color: true
           $name: Cards color
           $name:ar: لون البطاقات
           $description: Base color of the cards that are not selected.
           $description:ar: لون البطاقات غير المختارة.
           $_advanced: true
-        - SelectedColor: "#4B2133"
+        - SelectedColor: "#090A0B"
           $_color: true
           $name: Selected card color
           $name:ar: لون البطاقة المختارة
@@ -278,7 +278,7 @@ Some applications may behave differently than standard desktop windows, especial
   - "none": بلا خلفية
   - "dwm": شفافة
 - Dwm:
-    - BackgroundColor: "#141117"
+    - BackgroundColor: "#141A22"
       $_color: true
       $name: Background color
       $name:ar: لون الخلفية
@@ -308,7 +308,7 @@ Some applications may behave differently than standard desktop windows, especial
       - "pattern": أمواج منقطة
       $_advanced: true
     - PatternWaves:
-        - Shape: "dots"
+        - Shape: "squares"
           $name: Shape
           $name:ar: الشكل
           $description: Pattern shape.

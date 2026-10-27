@@ -4,7 +4,7 @@
 // @name:ar         ثيمات شريط المهام
 // @description     Customize the taskbar with themes contributed by others or create your own
 // @description:ar  غيّر شكل شريط المهام بثيمات جاهزة صمّمها آخرون أو بتصميمك الخاص
-// @version         1.10-shihab.4
+// @version         1.10-shihab.5
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -3727,7 +3727,8 @@ const Theme g_themeWindowGlass_variant_Split = {{
         L"ActualHeight=>splitFrameHeight",
         L"CornerRadius={{splitFrameHeight == `` ? 18 : splitFrameHeight / 2}},5,5,{{splitFrameHeight == `` ? 18 : splitFrameHeight / 2}}",
         L"Background:=$Background",
-        L"Padding=10,0,0,0"}},
+        // Shihab Alaq: room before the first icon and after the last one.
+        L"Padding=15,0,15,0"}},
     ThemeTargetStyles{L"Taskbar.TaskbarBackground#BackgroundControl > Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Shapes.Rectangle#BackgroundFill", {
         L"Visibility=Collapsed"}},
     ThemeTargetStyles{L"Taskbar.TaskbarBackground#BackgroundControl > Windows.UI.Xaml.Controls.Grid > Windows.UI.Xaml.Shapes.Rectangle#BackgroundStroke", {
@@ -3747,7 +3748,7 @@ const Theme g_themeWindowGlass_variant_Split = {{
         L"BorderThickness=$BorderThickness",
         L"ActualHeight=>splitTrayHeight",
         L"CornerRadius=5,{{splitTrayHeight == `` ? 18 : splitTrayHeight / 2}},{{splitTrayHeight == `` ? 18 : splitTrayHeight / 2}},5",
-        L"Padding=0,0,10,0"}},
+        L"Padding=6,0,10,0"}},
     ThemeTargetStyles{L"SystemTray.ChevronIconView", {
         L"Padding=$TrayPadding",
         L"CornerRadius=10",

@@ -4,7 +4,7 @@
 // @name:ar         حركات النوافذ
 // @description     Smooth minimize, restore, close, switch animations for windows.
 // @description:ar  حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل بينها.
-// @version         1.3.7-shihab.5
+// @version         1.3.7-shihab.6
 // @author          ReDrag
 // @github          https://github.com/redrag2105
 // @donateUrl       https://ko-fi.com/redrag2105
@@ -194,7 +194,7 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       animated launch selects the next global effect, and the following minimize reuses it. A
       minimize without an earlier animated restore selects an effect for itself. Rapid reversals
       keep the same effect. When enabled, the Animation style setting below is ignored.
-  - effect_style: genie
+  - effect_style: swell
     $name: Animation style
     $name:ar: نمط الحركة
     $description:ar: الحركة المستخدمة عند تصغير النوافذ واستعادتها، إلا إذا فُعّل التنويع التلقائي.
@@ -305,7 +305,7 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
       starting a new cycle, and never join consecutive cycles on the same effect. Closing and
       reopening an app continues the same global cycle. When enabled, the Animation style setting
       below is ignored.
-  - effect_style: perlin
+  - effect_style: tv_off
     $name: Animation style
     $name:ar: نمط الحركة
     $description:ar: الحركة المستخدمة عند إغلاق نافذة، إلا إذا فُعّل التنويع التلقائي.
@@ -325,7 +325,7 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
     - glitch: Cyber Glitch — Digital teleport
     - tv_off: Retro TV Off — CRT power-down
     - pixel_melt: Pixel Melt — Dripping paint
-  - duration_ms: 350
+  - duration_ms: 630
     $name: Duration (ms)
     $name:ar: مدة الحركة (ملي ثانية)
     $description:ar: >-
@@ -364,7 +364,7 @@ Special thanks to [@Abdullah Masood](https://github.com/Abdullah-Masood-05) for 
   $description:ar: حركات إغلاق النوافذ أو إخفائها إلى جانب الساعة.
   $description: Configure the effects played when windows close or hide (system tray app).
 - window_switch:
-  - switch_animation: true
+  - switch_animation: false
     $name: Animate window switching
     $name:ar: حركة التبديل بين النوافذ
     $description:ar: >-

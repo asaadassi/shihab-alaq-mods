@@ -4,7 +4,7 @@
 // @name:ar         تنسيق نافذة النسخ والنقل
 // @description     Portable custom presentation for native Explorer file operations with a skin-safe unified presentation.
 // @description:ar  شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف، مع سمات وألوان تختارها.
-// @version         1.2.0-shihab.5
+// @version         1.2.0-shihab.6
 // @author          digART
 // @github          https://github.com/digart11
 // @license         GPL-3.0
@@ -21,6 +21,10 @@
 //   thread can not write into a view that is being unmapped.
 // 1.2.0-shihab.5: a window that opens in More details gets the new look at
 //   once, instead of staying native until the next progress update.
+// 1.2.0-shihab.6: a Shihab colour theme, on by default with customization,
+//   so the window is no longer always Blue Dark and its colours can change.
+//   The current-file bar no longer stays empty when a new operation reuses a
+//   finished one's address, and old operation records no longer pile up.
 
 // ==WindhawkModReadme==
 /*
@@ -114,17 +118,18 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
 
 
 - customization:
-  - enabled: false
+  - enabled: true
     $name: Enable customization
     $description: Turn on themes and custom style settings.
     $name:ar: تفعيل التخصيص
     $description:ar: يفعّل السمات وإعدادات الشكل المخصّصة.
-  - preset: blueDark
+  - preset: shihab
     $name: Theme
     $description: Change color theme.
     $name:ar: السمة
     $description:ar: اختر ألوان النافذة.
     $options:
+    - shihab: Shihab
     - blueDark: Blue Dark
     - graphite: Graphite
     - midnight: Midnight
@@ -133,6 +138,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     - system: Windows / System
     - glass: Frosted Glass
     $options:ar:
+    - shihab: شهاب
     - blueDark: أزرق داكن
     - graphite: رمادي فحمي
     - midnight: كحلي ليلي
@@ -194,6 +200,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     $_advanced: true
     $options:
     - theme: Theme default
+    - shihab: Shihab
     - blueDark: Blue Dark
     - graphite: Graphite
     - midnight: Midnight
@@ -203,6 +210,7 @@ File Operation Styler has been tested on Windows 11 24H2 x64. It relies on priva
     - custom: Custom
     $options:ar:
     - theme: لون السمة
+    - shihab: شهاب
     - blueDark: أزرق داكن
     - graphite: رمادي فحمي
     - midnight: كحلي ليلي
@@ -773,6 +781,8 @@ namespace
         unsigned long long currentFileSize = 0;
         unsigned long long currentFileStartBytes = 0;
         bool currentFileValid = false;
+        // The current file was set after the last progress values.
+        bool currentFileSinceProgress = false;
         int sharedSlot = -1;
     };
 
@@ -975,56 +985,86 @@ namespace
         InterlockedIncrement(&slot.sequence);
     }
 
+    void ReleaseSharedProgressSlotLocked(OperationDataBinding const &binding)
+    {
+        if (!g_sharedProgressTable ||
+            !binding.writer ||
+            binding.sharedSlot < 0 ||
+            binding.sharedSlot >= kSharedProgressSlotCount)
+        {
+            return;
+        }
+
+        auto &slot = g_sharedProgressTable->slots[binding.sharedSlot];
+
+        unsigned long long writerKey =
+            reinterpret_cast<unsigned long long>(binding.writer);
+
+        if (static_cast<DWORD>(slot.ownerPid) != GetCurrentProcessId() ||
+            slot.writerKey != writerKey)
+        {
+            return;
+        }
+
+        InterlockedIncrement(&slot.sequence);
+
+        slot.writerKey = 0;
+        slot.completedItems = 0;
+        slot.totalItems = 0;
+        slot.completedBytes = 0;
+        slot.totalBytes = 0;
+        slot.currentFileSize = 0;
+        slot.currentFileStartBytes = 0;
+        slot.currentFileValid = FALSE;
+        slot.updateTick = 0;
+
+        MemoryBarrier();
+        InterlockedIncrement(&slot.sequence);
+
+        // Release ownership only after the slot contents are stable.
+        InterlockedExchange(&slot.ownerPid, 0);
+    }
+
     void ClearOperationDataBindingsLocked()
     {
-        if (g_sharedProgressTable)
+        for (OperationDataBinding const &binding : g_operationDataBindings)
         {
-            DWORD pid = GetCurrentProcessId();
-
-            for (OperationDataBinding const &binding :
-                 g_operationDataBindings)
-            {
-                if (!binding.writer ||
-                    binding.sharedSlot < 0 ||
-                    binding.sharedSlot >= kSharedProgressSlotCount)
-                {
-                    continue;
-                }
-
-                auto &slot =
-                    g_sharedProgressTable->slots[binding.sharedSlot];
-
-                unsigned long long writerKey =
-                    reinterpret_cast<unsigned long long>(
-                        binding.writer);
-
-                if (static_cast<DWORD>(slot.ownerPid) != pid ||
-                    slot.writerKey != writerKey)
-                {
-                    continue;
-                }
-
-                InterlockedIncrement(&slot.sequence);
-
-                slot.writerKey = 0;
-                slot.completedItems = 0;
-                slot.totalItems = 0;
-                slot.completedBytes = 0;
-                slot.totalBytes = 0;
-                slot.currentFileSize = 0;
-                slot.currentFileStartBytes = 0;
-                slot.currentFileValid = FALSE;
-                slot.updateTick = 0;
-
-                MemoryBarrier();
-                InterlockedIncrement(&slot.sequence);
-
-                // Release ownership only after the slot contents are stable.
-                InterlockedExchange(&slot.ownerPid, 0);
-            }
+            ReleaseSharedProgressSlotLocked(binding);
         }
 
         g_operationDataBindings.clear();
+    }
+
+    // Shihab Alaq: bindings were only removed when the mod unloaded, so the
+    // list grew with every operation, and a new operation whose data provider
+    // reused a finished one's address inherited its file baseline (the file
+    // bar stayed empty). Keep only the most recent bindings.
+    constexpr size_t kMaxOperationDataBindings = 32;
+
+    OperationDataBinding &FindOrAddOperationDataBindingLocked(
+        COperationDataProvider *writer)
+    {
+        auto binding = std::find_if(
+            g_operationDataBindings.begin(),
+            g_operationDataBindings.end(),
+            [writer](OperationDataBinding const &entry)
+            { return entry.writer == writer; });
+
+        if (binding != g_operationDataBindings.end())
+        {
+            return *binding;
+        }
+
+        if (g_operationDataBindings.size() >= kMaxOperationDataBindings)
+        {
+            ReleaseSharedProgressSlotLocked(g_operationDataBindings.front());
+            g_operationDataBindings.erase(g_operationDataBindings.begin());
+        }
+
+        OperationDataBinding entry{};
+        entry.writer = writer;
+        g_operationDataBindings.push_back(entry);
+        return g_operationDataBindings.back();
     }
 
     thread_local COperationStatusTile *g_nativeRateOwnerHint = nullptr;
@@ -1125,10 +1165,10 @@ namespace
 
     struct ModSettings
     {
-        bool customizationEnabled = false;
+        bool customizationEnabled = true;
         bool hideSmallControlButtons = false;
         bool hideTitleBarPercentage = false;
-        std::wstring preset = L"blueDark";
+        std::wstring preset = L"shihab";
         ThemePalette theme{};
         bool applyNativeColors = false;
         LayoutConfig layout{};
@@ -1288,7 +1328,24 @@ namespace
         }
 
         ThemePalette theme{};
-        if (preset == L"graphite")
+        if (preset == L"shihab")
+        {
+            // Shihab Alaq: the Shihab.Common theme (Panel, Text, Muted,
+            // Accent, Stroke, Bg, ScrollThumb, Control).
+            theme.background = RGB(28, 23, 32);
+            theme.primaryText = RGB(245, 241, 247);
+            theme.secondaryText = RGB(167, 156, 173);
+            theme.accent = RGB(239, 82, 133);
+            theme.inactive = RGB(53, 45, 59);
+            theme.graphSurface = RGB(20, 17, 23);
+            theme.graphGrid = RGB(74, 64, 80);
+            theme.graphLine = RGB(239, 82, 133);
+            theme.graphFill = RGB(192, 106, 175);
+            theme.actionSurface = RGB(44, 37, 49);
+            theme.actionBorder = RGB(53, 45, 59);
+            theme.actionText = theme.primaryText;
+        }
+        else if (preset == L"graphite")
         {
             // Deliberately monochrome and darker than the Windows/system dark
             // palette so Graphite reads as an intentional skin, not "default".
@@ -1490,7 +1547,7 @@ namespace
             GetStringSettingValue(L"customization.preset");
         if (g_settings.preset.empty())
         {
-            g_settings.preset = L"blueDark";
+            g_settings.preset = L"shihab";
         }
 
         g_settings.theme = MakePresetTheme(g_settings.preset);
@@ -1546,7 +1603,8 @@ namespace
                         L"customization.footerColor"),
                     &g_settings.footerColor);
         }
-        else if (g_settings.footerColorPreset == L"blueDark" ||
+        else if (g_settings.footerColorPreset == L"shihab" ||
+                 g_settings.footerColorPreset == L"blueDark" ||
                  g_settings.footerColorPreset == L"graphite" ||
                  g_settings.footerColorPreset == L"midnight" ||
                  g_settings.footerColorPreset == L"warmDark" ||
@@ -11811,19 +11869,8 @@ namespace
             {
                 std::lock_guard<std::mutex> lock(g_transferSummaryMutex);
 
-                auto binding = std::find_if(
-                    g_operationDataBindings.begin(),
-                    g_operationDataBindings.end(),
-                    [thisPtr](OperationDataBinding const &entry)
-                    { return entry.writer == thisPtr; });
-
-                if (binding == g_operationDataBindings.end())
-                {
-                    OperationDataBinding entry{};
-                    entry.writer = thisPtr;
-                    g_operationDataBindings.push_back(entry);
-                    binding = std::prev(g_operationDataBindings.end());
-                }
+                OperationDataBinding *binding =
+                    &FindOrAddOperationDataBindingLocked(thisPtr);
 
                 unsigned long long baseline = 0;
 
@@ -11845,6 +11892,7 @@ namespace
                 binding->currentFileStartBytes = baseline;
                 binding->currentFileSize = fileSize;
                 binding->currentFileValid = fileSize > 0;
+                binding->currentFileSinceProgress = true;
                 PublishSharedProgress(*binding);
             }
 
@@ -11876,19 +11924,24 @@ namespace
         {
             std::lock_guard<std::mutex> lock(g_transferSummaryMutex);
 
-            auto binding = std::find_if(
-                g_operationDataBindings.begin(),
-                g_operationDataBindings.end(),
-                [thisPtr](OperationDataBinding const &entry)
-                { return entry.writer == thisPtr; });
+            OperationDataBinding *binding =
+                &FindOrAddOperationDataBindingLocked(thisPtr);
 
-            if (binding == g_operationDataBindings.end())
+            // Progress going backwards is a new operation on a reused
+            // address (or a restart after Replace). A file set since the last
+            // values is its first file, which starts at 0; an older one
+            // belongs to the finished operation.
+            if (binding->latestProgressValid &&
+                value4 < binding->latestCompletedBytes)
             {
-                OperationDataBinding entry{};
-                entry.writer = thisPtr;
-                g_operationDataBindings.push_back(entry);
-                binding = std::prev(g_operationDataBindings.end());
+                binding->currentFileStartBytes = 0;
+                if (!binding->currentFileSinceProgress)
+                {
+                    binding->currentFileSize = 0;
+                    binding->currentFileValid = false;
+                }
             }
+            binding->currentFileSinceProgress = false;
 
             binding->latestCompletedItems = value2;
             binding->latestTotalItems = value3;

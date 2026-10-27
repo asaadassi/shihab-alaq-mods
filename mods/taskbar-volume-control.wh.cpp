@@ -4,7 +4,7 @@
 // @description     Control the system volume by scrolling over the taskbar or anywhere with modifier keys
 // @name:ar         التحكم في الصوت من شريط المهام
 // @description:ar  ارفع الصوت أو اخفضه بتحريك عجلة الماوس فوق شريط المهام، أو في أي مكان مع مفتاح تختاره
-// @version         1.3.1-shihab.3
+// @version         1.3.1-shihab.4
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -76,7 +76,7 @@ issue](https://tweaker.userecho.com/topics/826-scroll-on-trackpadtouchpad-doesnt
   - modern: ويندوز 10
   - classic: ويندوز 7
   - none: بلا مؤشر
-- scrollArea: notification_area
+- scrollArea: taskbar
   $name: Scroll area
   $options:
   - taskbar: The taskbar

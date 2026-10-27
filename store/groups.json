@@ -20,17 +20,18 @@
     "id": "taskbar-use",
     "category": "taskbar",
     "name": {
-      "ar": "استخدام شريط المهام",
-      "en": "Taskbar use"
+      "ar": "عجلة الماوس على الشريط",
+      "en": "Mouse wheel on the taskbar"
     },
     "description": {
-      "ar": "اختصارات الماوس على الشريط: التنقل بين البرامج وتغيير الصوت بالعجلة.",
-      "en": "Mouse shortcuts on the taskbar: the wheel to switch programs and change the volume."
+      "ar": "ماذا تفعل عجلة الماوس فوق شريط المهام: التنقل بين البرامج المفتوحة، أو رفع الصوت وخفضه. يعمل خيار واحد في كل مرة.",
+      "en": "What the mouse wheel does over the taskbar: switch between open programs, or turn the volume up and down. One at a time."
     },
+    "exclusive": true,
     "icon": "E962",
     "tagline": {
-      "ar": "اختصارات الماوس",
-      "en": "Mouse shortcuts"
+      "ar": "التنقل أو الصوت",
+      "en": "Switch or volume"
     }
   },
   {
