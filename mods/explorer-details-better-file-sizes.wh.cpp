@@ -4,7 +4,7 @@
 // @name:ar         أحجام ملفات أوضح في المستكشف
 // @description     Enhances file size display in Explorer details with folder sizes, human-readable units (MB/GB), and optional IEC notation (KiB/MiB)
 // @description:ar  يعرض أحجام المجلدات في عرض التفاصيل، وبوحدات مقروءة مثل MB وGB، مع خيار وحدات مثل KiB وMiB
-// @version         1.6-shihab.4
+// @version         1.6-shihab.5
 // @author          m417z
 // @github          https://github.com/m417z
 // @twitter         https://twitter.com/m417z
@@ -44,6 +44,9 @@
 // - Size strings are never read or written past the caller's buffer, and the
 //   propsys size formatting functions are only hooked when they are found.
 // - All hooks are counted, so unloading waits for calls still in progress.
+// 1.6-shihab.5: folder sizes calculated while holding Shift are remembered for
+// a few minutes, so sorting by size later (without Shift) still mixes those
+// folders with files by their real size instead of putting them apart.
 
 // Source code is published under The GNU General Public License v3.0.
 //
@@ -1658,6 +1661,80 @@ thread_local std::map<std::vector<BYTE>, std::optional<ULONGLONG>>
     g_cacheShellFolderSizes;
 thread_local DWORD g_cacheShellFolderLastUsedTickCount;
 
+// Sizes calculated while holding Shift, shared by all threads: the list is
+// filled on one thread and sorted on another, and sorting without Shift must
+// still know them. Keyed by the folder's ID list followed by the child's.
+struct RememberedFolderSize {
+    ULONGLONG size;
+    DWORD tickCount;
+};
+constexpr DWORD kRememberedFolderSizeMs = 5 * 60 * 1000;
+constexpr size_t kRememberedFolderSizesMax = 4096;
+std::mutex g_rememberedFolderSizesMutex;
+std::map<std::vector<BYTE>, RememberedFolderSize> g_rememberedFolderSizes;
+
+std::vector<BYTE> RememberedFolderSizeKey(std::vector<BYTE> folder,
+                                          const ITEMID_CHILD* itemidChild) {
+    auto child = PIDLToVector(itemidChild);
+    folder.insert(folder.end(), child.begin(), child.end());
+    return folder;
+}
+
+void RememberFolderSize(std::vector<BYTE> key, ULONGLONG size) {
+    std::lock_guard<std::mutex> guard(g_rememberedFolderSizesMutex);
+    DWORD now = GetTickCount();
+    if (g_rememberedFolderSizes.size() >= kRememberedFolderSizesMax) {
+        std::erase_if(g_rememberedFolderSizes, [now](const auto& entry) {
+            return now - entry.second.tickCount > kRememberedFolderSizeMs;
+        });
+        if (g_rememberedFolderSizes.size() >= kRememberedFolderSizesMax) {
+            g_rememberedFolderSizes.clear();
+        }
+    }
+    g_rememberedFolderSizes[std::move(key)] = {size, now};
+}
+
+std::optional<ULONGLONG> RememberedFolderSizeOf(
+    const std::vector<BYTE>& key) {
+    std::lock_guard<std::mutex> guard(g_rememberedFolderSizesMutex);
+    auto it = g_rememberedFolderSizes.find(key);
+    if (it == g_rememberedFolderSizes.end()) {
+        return std::nullopt;
+    }
+    if (GetTickCount() - it->second.tickCount > kRememberedFolderSizeMs) {
+        g_rememberedFolderSizes.erase(it);
+        return std::nullopt;
+    }
+    return it->second.size;
+}
+
+std::optional<ULONGLONG> RememberedFolderSizeForItem(
+    void* pCFSFolder,
+    const ITEMID_CHILD* itemidChild) {
+    {
+        std::lock_guard<std::mutex> guard(g_rememberedFolderSizesMutex);
+        if (g_rememberedFolderSizes.empty()) {
+            return std::nullopt;
+        }
+    }
+
+    winrt::com_ptr<IShellFolder2> shellFolder2;
+    HRESULT hr =
+        ((IUnknown*)pCFSFolder)
+            ->QueryInterface(IID_IShellFolder2, shellFolder2.put_void());
+    if (FAILED(hr) || !shellFolder2) {
+        return std::nullopt;
+    }
+
+    auto folder = GetVectorFromIShellFolder(shellFolder2.get());
+    if (folder.empty()) {
+        return std::nullopt;
+    }
+
+    return RememberedFolderSizeOf(
+        RememberedFolderSizeKey(std::move(folder), itemidChild));
+}
+
 constexpr GUID KStorage = {0xB725F130,
                            0x47EF,
                            0x101A,
@@ -1854,6 +1931,13 @@ HRESULT WINAPI CFSFolder__GetSize_Hook(void* pCFSFolder,
 
         case CalculateFolderSizes::withShiftKey:
             if (GetAsyncKeyState(VK_SHIFT) >= 0) {
+                // Without Shift, only a size calculated with Shift a short
+                // while ago, so that sorting matches what the list shows
+                if (auto size =
+                        RememberedFolderSizeForItem(pCFSFolder, itemidChild)) {
+                    propVariant->uhVal.QuadPart = *size;
+                    propVariant->vt = VT_UI8;
+                }
                 return ret;
             }
             break;
@@ -1960,6 +2044,13 @@ HRESULT WINAPI CFSFolder__GetSize_Hook(void* pCFSFolder,
         propVariant->uhVal.QuadPart = *folderSize;
         propVariant->vt = VT_UI8;
         Wh_Log(L"Done: %I64u", propVariant->uhVal.QuadPart);
+
+        if (g_settings.calculateFolderSizes ==
+            CalculateFolderSizes::withShiftKey) {
+            RememberFolderSize(
+                RememberedFolderSizeKey(g_cacheShellFolder, itemidChild),
+                *folderSize);
+        }
     }
 
     return S_OK;
@@ -3254,6 +3345,11 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpReserved) {
 }
 
 void LoadSettings() {
+    {
+        std::lock_guard<std::mutex> guard(g_rememberedFolderSizesMutex);
+        g_rememberedFolderSizes.clear();
+    }
+
     PCWSTR calculateFolderSizes = Wh_GetStringSetting(L"calculateFolderSizes");
     g_settings.calculateFolderSizes = CalculateFolderSizes::disabled;
     if (wcscmp(calculateFolderSizes, L"everything") == 0) {
