@@ -4,7 +4,7 @@
 // @name:ar         نافذة اختيار مجلد حديثة
 // @description     Replaces the classic "Browse For Folder" dialog
 // @description:ar  يستبدل نافذة «استعراض بحثاً عن مجلد» القديمة بنافذة الاختيار الحديثة
-// @version         1.0.0-shihab.3
+// @version         1.0.0-shihab.4
 // @author          aubymori
 // @github          https://github.com/aubymori
 // @include         *
@@ -25,6 +25,10 @@
 //   instead of leaving their buffer unset.
 // - Counts calls in progress and waits for them in Wh_ModUninit, so the mod is
 //   not unloaded while a dialog it opened is still on screen.
+// - Opens where the program asks: most programs choose the start folder from
+//   their callback (BFFM_SETSELECTION on BFFM_INITIALIZED), which the modern
+//   dialog never called, so it always opened on Documents or Desktop.
+// - Hooks SHBrowseForFolderA too, so older ANSI programs get the modern dialog.
 
 // ==WindhawkModReadme==
 /*
@@ -43,7 +47,7 @@ modern styled folder picker dialog, which is easier to navigate.
 */
 // ==/WindhawkModReadme==
 
-#define RETURN_IF_FAILED(hr) if (FAILED(hr)) return SHBrowseForFolderW_orig(lpbi)
+#define RETURN_IF_FAILED(hr) if (FAILED(hr)) return BrowseOutcome::UseOriginal
 
 #define E_CANCELLED (HRESULT)0x800704C7
 
@@ -54,28 +58,127 @@ modern styled folder picker dialog, which is easier to navigate.
 #include <windhawk_utils.h>
 
 #include <atomic>
+#include <string>
 
 std::atomic<int> g_hookCallsInProgress = 0;
 
 using SHBrowseForFolderW_t = decltype(&SHBrowseForFolderW);
 SHBrowseForFolderW_t SHBrowseForFolderW_orig = nullptr;
 
-static PIDLIST_ABSOLUTE ModernBrowseForFolder(LPBROWSEINFOW lpbi)
+using SHBrowseForFolderA_t = decltype(&SHBrowseForFolderA);
+SHBrowseForFolderA_t SHBrowseForFolderA_orig = nullptr;
+
+/* What both the W and the A calls ask for, with the title already wide */
+struct BrowseRequest
 {
+    HWND hwndOwner;
+    PCIDLIST_ABSOLUTE pidlRoot;
+    LPCWSTR lpszTitle;
+    UINT ulFlags;
+    BFFCALLBACK lpfn;
+    LPARAM lParam;
+};
+
+enum class BrowseOutcome { Handled, UseOriginal };
+
+static std::wstring AnsiToWide(LPCSTR text)
+{
+    int length = MultiByteToWideChar(CP_ACP, 0, text, -1, nullptr, 0);
+    if (length <= 0) return {};
+    std::wstring wide(length, L'\0');
+    MultiByteToWideChar(CP_ACP, 0, text, -1, wide.data(), length);
+    wide.resize(length - 1);
+    return wide;
+}
+
+/* Keeps the folder the program selects while its callback runs */
+static LRESULT CALLBACK SelectionWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    auto* selection = reinterpret_cast<winrt::com_ptr<IShellItem>*>(
+        GetWindowLongPtrW(hwnd, GWLP_USERDATA));
+
+    switch (msg)
+    {
+    case BFFM_SETSELECTIONA:
+    case BFFM_SETSELECTIONW:
+    case BFFM_SETEXPANDED:
+    {
+        /* wParam TRUE: a path (ANSI for BFFM_SETSELECTIONA), FALSE: an ID list */
+        winrt::com_ptr<IShellItem> item;
+        if (lParam && !wParam)
+        {
+            SHCreateItemFromIDList(reinterpret_cast<PCIDLIST_ABSOLUTE>(lParam),
+                                   IID_PPV_ARGS(item.put()));
+        }
+        else if (lParam && msg == BFFM_SETSELECTIONA)
+        {
+            std::wstring path = AnsiToWide(reinterpret_cast<LPCSTR>(lParam));
+            SHCreateItemFromParsingName(path.c_str(), nullptr, IID_PPV_ARGS(item.put()));
+        }
+        else if (lParam)
+        {
+            SHCreateItemFromParsingName(reinterpret_cast<LPCWSTR>(lParam), nullptr,
+                                        IID_PPV_ARGS(item.put()));
+        }
+        if (item && selection)
+        {
+            *selection = item;
+        }
+        return TRUE;
+    }
+    /* BFFM_ENABLEOK, BFFM_SETSTATUSTEXT, BFFM_SETOKTEXT have no place in the
+       modern dialog */
+    default:
+        return DefWindowProcW(hwnd, msg, wParam, lParam);
+    }
+}
+
+/* Runs the program's BFFM_INITIALIZED callback against a hidden window and
+   returns the folder it selected, if any */
+static winrt::com_ptr<IShellItem> StartFolderFromCallback(const BrowseRequest& req)
+{
+    winrt::com_ptr<IShellItem> selection;
+    if (!req.lpfn) return selection;
+
+    HWND hwnd = CreateWindowExW(0, L"STATIC", L"", 0, 0, 0, 0, 0, HWND_MESSAGE,
+                                NULL, NULL, NULL);
+    if (!hwnd)
+    {
+        Wh_Log(L"Failed to create the callback window: %u", GetLastError());
+        return selection;
+    }
+    SetWindowLongPtrW(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(&selection));
+    SetWindowLongPtrW(hwnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(SelectionWndProc));
+
+    req.lpfn(hwnd, BFFM_INITIALIZED, 0, req.lParam);
+
+    SetWindowLongPtrW(hwnd, GWLP_USERDATA, 0);
+    DestroyWindow(hwnd);
+    return selection;
+}
+
+/* Shows the modern dialog; UseOriginal when the classic one must be shown.
+   displayName, when given, is a MAX_PATH buffer filled on a choice. */
+static BrowseOutcome ModernBrowseForFolder(const BrowseRequest& req,
+                                           PIDLIST_ABSOLUTE* result,
+                                           LPWSTR displayName)
+{
+    *result = nullptr;
+
     /* The modern dialog needs a single-threaded apartment */
     APTTYPE aptType;
     APTTYPEQUALIFIER aptQualifier;
     if (FAILED(CoGetApartmentType(&aptType, &aptQualifier)) ||
         (aptType != APTTYPE_STA && aptType != APTTYPE_MAINSTA))
     {
-        return SHBrowseForFolderW_orig(lpbi);
+        return BrowseOutcome::UseOriginal;
     }
 
     /* Requests the modern folder picker cannot serve */
-    if (lpbi->ulFlags & (BIF_BROWSEINCLUDEFILES | BIF_BROWSEFORCOMPUTER |
-                         BIF_BROWSEFORPRINTER))
+    if (req.ulFlags & (BIF_BROWSEINCLUDEFILES | BIF_BROWSEFORCOMPUTER |
+                       BIF_BROWSEFORPRINTER))
     {
-        return SHBrowseForFolderW_orig(lpbi);
+        return BrowseOutcome::UseOriginal;
     }
 
     /* Make the dialog */
@@ -90,73 +193,75 @@ static PIDLIST_ABSOLUTE ModernBrowseForFolder(LPBROWSEINFOW lpbi)
     /* Make it pick a folder instead of a file */
     FILEOPENDIALOGOPTIONS options =
         FOS_PICKFOLDERS | FOS_PATHMUSTEXIST | FOS_FILEMUSTEXIST;
-    if (lpbi->ulFlags & BIF_RETURNONLYFSDIRS)
+    if (req.ulFlags & BIF_RETURNONLYFSDIRS)
     {
         options |= FOS_FORCEFILESYSTEM;
     }
     RETURN_IF_FAILED(pDialog->SetOptions(options));
 
-    if (lpbi->lpszTitle && *lpbi->lpszTitle)
+    if (req.lpszTitle && *req.lpszTitle)
     {
-        RETURN_IF_FAILED(pDialog->SetTitle(lpbi->lpszTitle));
+        RETURN_IF_FAILED(pDialog->SetTitle(req.lpszTitle));
     }
 
     /* Tell it where to start */
-    if (lpbi->pidlRoot)
+    if (req.pidlRoot)
     {
         /* We have to convert from PIDLIST_ABSOLUTE -> IShellItem * */
         winrt::com_ptr<IShellItem> pRoot = nullptr;
         RETURN_IF_FAILED(SHCreateItemFromIDList(
-            lpbi->pidlRoot,
+            req.pidlRoot,
             IID_PPV_ARGS(&pRoot)
         ));
         RETURN_IF_FAILED(pDialog->SetFolder(pRoot.get()));
     }
 
-    HRESULT hr = pDialog->Show(lpbi->hwndOwner);
+    /* The folder the program selects in its callback wins over the root, as in
+       the classic dialog. If Show fails below, the classic dialog runs the
+       callback a second time, which it can do. */
+    winrt::com_ptr<IShellItem> pStart = StartFolderFromCallback(req);
+    if (pStart && FAILED(pDialog->SetFolder(pStart.get())))
+    {
+        Wh_Log(L"The program's start folder was refused");
+    }
+
+    HRESULT hr = pDialog->Show(req.hwndOwner);
     if (FAILED(hr))
     {
         /* For whatever reason, the dialog being cancelled counts as a fail */
-        if (hr != E_CANCELLED)
-        {
-            return SHBrowseForFolderW_orig(lpbi);
-        }
-        else
-        {
-            return NULL;
-        }
+        return hr == E_CANCELLED ? BrowseOutcome::Handled : BrowseOutcome::UseOriginal;
     }
 
     /* The user has chosen; from here on, never open a second dialog */
     winrt::com_ptr<IShellItem> pResult = nullptr;
     if (FAILED(pDialog->GetResult(pResult.put())) || !pResult)
     {
-        return NULL;
+        return BrowseOutcome::Handled;
     }
 
-    PIDLIST_ABSOLUTE result = nullptr;
-    if (FAILED(SHGetIDListFromObject(pResult.get(), &result)))
+    if (FAILED(SHGetIDListFromObject(pResult.get(), result)))
     {
-        return NULL;
+        *result = nullptr;
+        return BrowseOutcome::Handled;
     }
 
-    if (lpbi->pszDisplayName)
+    if (displayName)
     {
         LPWSTR pszName = nullptr;
         if (SUCCEEDED(pResult->GetDisplayName(SIGDN_NORMALDISPLAY, &pszName)) &&
             pszName)
         {
             /* Documented as a MAX_PATH buffer; a longer name is cut short */
-            StringCchCopyW(lpbi->pszDisplayName, MAX_PATH, pszName);
+            StringCchCopyW(displayName, MAX_PATH, pszName);
             CoTaskMemFree(pszName);
         }
         else
         {
-            lpbi->pszDisplayName[0] = L'\0';
+            displayName[0] = L'\0';
         }
     }
 
-    return result;
+    return BrowseOutcome::Handled;
 }
 
 PIDLIST_ABSOLUTE WINAPI SHBrowseForFolderW_hook(
@@ -166,7 +271,44 @@ PIDLIST_ABSOLUTE WINAPI SHBrowseForFolderW_hook(
     if (!lpbi) return NULL;
 
     g_hookCallsInProgress++;
-    PIDLIST_ABSOLUTE result = ModernBrowseForFolder(lpbi);
+    BrowseRequest req = { lpbi->hwndOwner, lpbi->pidlRoot, lpbi->lpszTitle,
+                          lpbi->ulFlags, lpbi->lpfn, lpbi->lParam };
+    PIDLIST_ABSOLUTE result = nullptr;
+    if (ModernBrowseForFolder(req, &result, lpbi->pszDisplayName) ==
+        BrowseOutcome::UseOriginal)
+    {
+        result = SHBrowseForFolderW_orig(lpbi);
+    }
+    g_hookCallsInProgress--;
+    return result;
+}
+
+PIDLIST_ABSOLUTE WINAPI SHBrowseForFolderA_hook(
+    LPBROWSEINFOA lpbi
+)
+{
+    if (!lpbi) return NULL;
+
+    g_hookCallsInProgress++;
+    std::wstring title = lpbi->lpszTitle ? AnsiToWide(lpbi->lpszTitle) : std::wstring();
+    BrowseRequest req = { lpbi->hwndOwner, lpbi->pidlRoot, title.c_str(),
+                          lpbi->ulFlags, lpbi->lpfn, lpbi->lParam };
+    PIDLIST_ABSOLUTE result = nullptr;
+    WCHAR displayName[MAX_PATH] = L"";
+    if (ModernBrowseForFolder(req, &result, lpbi->pszDisplayName ? displayName : nullptr) ==
+        BrowseOutcome::UseOriginal)
+    {
+        result = SHBrowseForFolderA_orig(lpbi);
+    }
+    else if (result && lpbi->pszDisplayName)
+    {
+        /* Also a MAX_PATH buffer; a name that doesn't fit is left empty */
+        if (!WideCharToMultiByte(CP_ACP, 0, displayName, -1, lpbi->pszDisplayName,
+                                 MAX_PATH, NULL, NULL))
+        {
+            lpbi->pszDisplayName[0] = '\0';
+        }
+    }
     g_hookCallsInProgress--;
     return result;
 }
@@ -181,6 +323,16 @@ BOOL Wh_ModInit(void)
     {
         Wh_Log(L"Failed to hook SHBrowseForFolderW");
         return FALSE;
+    }
+
+    /* Without it, ANSI programs keep the classic dialog; not a reason to fail */
+    if (!WindhawkUtils::Wh_SetFunctionHookT(
+        SHBrowseForFolderA,
+        SHBrowseForFolderA_hook,
+        &SHBrowseForFolderA_orig
+    ))
+    {
+        Wh_Log(L"Failed to hook SHBrowseForFolderA");
     }
 
     return TRUE;
