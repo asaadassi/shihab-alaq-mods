@@ -1,0 +1,1436 @@
+{
+ "format": 1,
+ "updated": "2026-10-28T08:31:08.208036+00:00",
+ "groups": [
+  {
+   "id": "taskbar-look",
+   "category": "taskbar",
+   "name": {
+    "ar": "شكل شريط المهام",
+    "en": "Taskbar look"
+   },
+   "description": {
+    "ar": "الثيمات والألوان، وحجم الشريط والأيقونات، وحركة الأيقونات.",
+    "en": "Themes and colours, taskbar and icon size, and icon motion."
+   },
+   "icon": "E790",
+   "tagline": {
+    "ar": "ألوان وأحجام وحركة",
+    "en": "Colours, sizes and motion"
+   }
+  },
+  {
+   "id": "taskbar-use",
+   "category": "taskbar",
+   "name": {
+    "ar": "عجلة الماوس على الشريط",
+    "en": "Mouse wheel on the taskbar"
+   },
+   "description": {
+    "ar": "ماذا تفعل عجلة الماوس فوق شريط المهام: التنقل بين البرامج المفتوحة، أو رفع الصوت وخفضه. يعمل خيار واحد في كل مرة.",
+    "en": "What the mouse wheel does over the taskbar: switch between open programs, or turn the volume up and down. One at a time."
+   },
+   "exclusive": true,
+   "icon": "E962",
+   "tagline": {
+    "ar": "التنقل أو الصوت",
+    "en": "Switch or volume"
+   }
+  },
+  {
+   "id": "clock-island",
+   "category": "taskbar",
+   "name": {
+    "ar": "الساعة والجزيرة",
+    "en": "Clock and island"
+   },
+   "description": {
+    "ar": "ساعة شريط المهام بالشكل الذي تريد، والجزيرة التفاعلية أعلى الشاشة.",
+    "en": "The taskbar clock as you want it, and the live island at the top of the screen."
+   },
+   "icon": "E823",
+   "tagline": {
+    "ar": "ساعة وطقس وموسيقى",
+    "en": "Clock, weather and music"
+   }
+  },
+  {
+   "id": "window-switcher",
+   "category": "windows",
+   "name": {
+    "ar": "التبديل بين النوافذ",
+    "en": "Window switcher"
+   },
+   "description": {
+    "ar": "شكل Alt+Tab: مبدّل حديث بمعاينات، أو نوافذ الشاشة التي عليها المؤشر فقط. يعمل خيار واحد في كل مرة.",
+    "en": "How Alt+Tab looks: a modern switcher with previews, or only the windows of the monitor under the cursor. One at a time."
+   },
+   "exclusive": true,
+   "icon": "E8AB",
+   "tagline": {
+    "ar": "Alt+Tab بشكل جديد",
+    "en": "A new Alt+Tab"
+   }
+  },
+  {
+   "id": "window-motion",
+   "category": "windows",
+   "name": {
+    "ar": "حركة النوافذ",
+    "en": "Window motion"
+   },
+   "description": {
+    "ar": "حركات فتح النوافذ وإغلاقها وتصغيرها، وتحريكها بانسيابية.",
+    "en": "Animations when windows open, close and minimize, and smooth moving."
+   },
+   "icon": "E7C4",
+   "tagline": {
+    "ar": "نوافذ أنعم حركة",
+    "en": "Smoother windows"
+   }
+  },
+  {
+   "id": "desktop",
+   "category": "desktop",
+   "name": {
+    "ar": "سطح المكتب",
+    "en": "Desktop"
+   },
+   "description": {
+    "ar": "Win+D لكل شاشة على حدة.",
+    "en": "Win+D for each monitor on its own."
+   },
+   "icon": "E7F4",
+   "tagline": {
+    "ar": "لكل شاشة على حدة",
+    "en": "Per monitor"
+   }
+  },
+  {
+   "id": "explorer",
+   "category": "explorer",
+   "name": {
+    "ar": "المستكشف",
+    "en": "Explorer"
+   },
+   "description": {
+    "ar": "أحجام المجلدات، ونافذة النسخ والنقل، ونافذة اختيار المجلد الحديثة.",
+    "en": "Folder sizes, the copy and move window, and the modern folder picker."
+   },
+   "icon": "E8B7",
+   "tagline": {
+    "ar": "أحجام المجلدات وأكثر",
+    "en": "Folder sizes and more"
+   }
+  }
+ ],
+ "mods": [
+  {
+   "id": "alt-tab-per-monitor",
+   "version": "1.2-shihab.3",
+   "name": {
+    "ar": "Alt+Tab لكل شاشة",
+    "en": "Alt+Tab per monitor"
+   },
+   "description": {
+    "ar": "يعرض Alt+Tab نوافذ الشاشة التي عليها المؤشر فقط، بدل كل النوافذ على الشاشة الرئيسية.",
+    "en": "Alt+Tab shows only the windows on the monitor where the cursor is, instead of all windows on the primary display."
+   },
+   "summary": {
+    "ar": "Alt+Tab يعرض نوافذ الشاشة التي تعمل عليها",
+    "en": "Alt+Tab shows the windows of your monitor"
+   },
+   "highlights": {
+    "ar": [
+     "يعرض نوافذ الشاشة التي عليها المؤشر فقط",
+     "يظهر Alt+Tab على الشاشة التي تعمل عليها",
+     "مفيد لمن يستعمل أكثر من شاشة",
+     "يبقي شكل Alt+Tab المعتاد في ويندوز"
+    ],
+    "en": [
+     "Shows only the windows of the monitor under the cursor",
+     "Alt+Tab appears on the monitor you work on",
+     "Useful with more than one monitor",
+     "Keeps the usual Windows Alt+Tab look"
+    ]
+   },
+   "author": "L3r0y",
+   "category": "windows",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: alt-tab-per-monitor (L3r0y)",
+   "license": "MIT",
+   "conflicts": [
+    "overhaulded-alt-tab"
+   ],
+   "group": "window-switcher",
+   "order": 1,
+   "source": {
+    "path": "mods/alt-tab-per-monitor/1.2-shihab.3.wh.cpp",
+    "sha256": "1bbc56a4f7debd035674808d2fe3f3571e4493a2874f2b444b5d1fcb6a469558",
+    "size": 29150
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/alt-tab-per-monitor/1.2-shihab.3_64.dll",
+     "sha256": "fd6535952015b8fa2c9e9511944e8d785d0ef1aecaed44676c8cce56b6b81f19",
+     "size": 269824
+    },
+    "arm64": {
+     "path": "mods/alt-tab-per-monitor/1.2-shihab.3_arm64.dll",
+     "sha256": "4b96cbe6cd41746ed983b3eceb0cf9bda8c88af6dab6a1785d3ec61cb68fb46e",
+     "size": 262656
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-21T13:32:28+03:00"
+  },
+  {
+   "id": "dynamic-island-for-windows",
+   "version": "1.3.1-shihab.6",
+   "name": {
+    "ar": "الجزيرة التفاعلية",
+    "en": "Dynamic Island"
+   },
+   "description": {
+    "ar": "شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.",
+    "en": "A small live bar at the top of the screen that shows now playing, downloads, the clipboard, the battery and more."
+   },
+   "summary": {
+    "ar": "جزيرة حيّة أعلى الشاشة تعرض ما يحدث الآن",
+    "en": "A live island at the top of your screen"
+   },
+   "highlights": {
+    "ar": [
+     "تعرض الأغنية الجارية مع أزرار التشغيل",
+     "تنبّه للتنزيلات والحافظة والبطارية والبلوتوث",
+     "تعرض الساعة والطقس والتقويم",
+     "تختار موضعها وشكلها وحجمها وألوانها"
+    ],
+    "en": [
+     "Shows the playing song with playback buttons",
+     "Alerts for downloads, the clipboard, battery and Bluetooth",
+     "Shows the clock, the weather and a calendar",
+     "Choose its place, shape, size and colours"
+    ]
+   },
+   "author": "Himanshu",
+   "category": "other",
+   "preview": null,
+   "optionImages": {
+    "Modules.Media": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/media-v2.png",
+      "sha256": "b6069332d8d1eac15d9c3f7889afd80f6f041ec77c4324525ed7000d97d5c901",
+      "size": 179128
+     }
+    },
+    "Modules.Weather": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/weather-v2.png",
+      "sha256": "c032bcd3d120b043ad8e0b231559ff3dbe9bcd7ab5416021780a5033336a6fc3",
+      "size": 171671
+     }
+    },
+    "Modules.HardwareMonitorModule": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/hardware-monitor.png",
+      "sha256": "c134e1e7933f94497186562a10588de49af230d1ec5d6357e87bb8b46e5e4a10",
+      "size": 181640
+     }
+    },
+    "Modules.GameOverlay": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/gamebar-v2.png",
+      "sha256": "fd7a97eaa973160cae83c7c926fb2855c9b7cfc2bf871f75d7234efe77a95e79",
+      "size": 200714
+     }
+    },
+    "Indicators.PrivacyDotsCam": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/camera-detected-v2.png",
+      "sha256": "b071688908790348f9abf9ca1d4b348051b5b68eefb7d394fa77304950ebd662",
+      "size": 195900
+     }
+    },
+    "Indicators.PrivacyDotsMic": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/mic-detected-v2.png",
+      "sha256": "2b773806fbd0045b769eb9d846177f32d7f32478112bda9ffb011340f3abad31",
+      "size": 195876
+     }
+    }
+   },
+   "basedOn": "Windhawk mods: dynamic-island-for-windows (Himanshu)",
+   "license": "MIT",
+   "conflicts": [],
+   "group": "clock-island",
+   "order": 1,
+   "source": {
+    "path": "mods/dynamic-island-for-windows/1.3.1-shihab.6.wh.cpp",
+    "sha256": "d8dc755b39a3a3018b9dc1a4466da84c971058efad78d263d058e85c51209188",
+    "size": 690415
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/dynamic-island-for-windows/1.3.1-shihab.6_32.dll",
+     "sha256": "2e83d3216ba9cbb09c323e6dc4711ebcf0efc70f2d1b12a5b407823b8288c55a",
+     "size": 978944
+    },
+    "64": {
+     "path": "mods/dynamic-island-for-windows/1.3.1-shihab.6_64.dll",
+     "sha256": "7359f95cf6809ac2e12da7489634c2efd0acaef1462488b52430f2e10b1ec23d",
+     "size": 918528
+    },
+    "arm64": {
+     "path": "mods/dynamic-island-for-windows/1.3.1-shihab.6_arm64.dll",
+     "sha256": "67d708b1c46e27dae7bafc874905c66c4edcfd2dc61fd6e4b857dec0893b6e69",
+     "size": 839680
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T11:26:06+03:00"
+  },
+  {
+   "id": "explorer-details-better-file-sizes",
+   "version": "1.6-shihab.5",
+   "name": {
+    "ar": "أحجام ملفات أوضح في المستكشف",
+    "en": "Better file sizes in Explorer"
+   },
+   "description": {
+    "ar": "يعرض أحجام المجلدات في عرض التفاصيل، وبوحدات مقروءة مثل MB وGB.",
+    "en": "Shows folder sizes in the details view, in readable units such as MB and GB."
+   },
+   "summary": {
+    "ar": "أحجام المجلدات ووحدات مقروءة في المستكشف",
+    "en": "Folder sizes and readable units in Explorer"
+   },
+   "highlights": {
+    "ar": [
+     "يعرض حجم كل مجلد في عرض التفاصيل",
+     "يعرض أحجام الملفات بوحدات MB وGB بدل KB",
+     "تختار طريقة حساب أحجام المجلدات أو تفعيلها بمفتاح Shift",
+     "يمكن ترتيب الملفات والمجلدات معاً حسب الحجم"
+    ],
+    "en": [
+     "Shows the size of each folder in the details view",
+     "Shows file sizes in MB and GB instead of KB",
+     "Choose how folder sizes are counted, or only with Shift",
+     "Sort files and folders together by size"
+    ]
+   },
+   "author": "m417z",
+   "category": "explorer",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: explorer-details-better-file-sizes (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [],
+   "group": "explorer",
+   "order": 0,
+   "source": {
+    "path": "mods/explorer-details-better-file-sizes/1.6-shihab.5.wh.cpp",
+    "sha256": "38a5562008257fc2667b65e82d7b23a334343fe79eb15b297e7f887ab447109d",
+    "size": 117087
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/explorer-details-better-file-sizes/1.6-shihab.5_32.dll",
+     "sha256": "f7ab7f677317f5bc927be3fc15d9849ecbe0273f8e595c1858cc0347023a57c9",
+     "size": 462336
+    },
+    "64": {
+     "path": "mods/explorer-details-better-file-sizes/1.6-shihab.5_64.dll",
+     "sha256": "cf16d2a9a635543cd8b83a36115d1d360d80f46e863d06c5ea4c95f17968de4f",
+     "size": 424448
+    },
+    "arm64": {
+     "path": "mods/explorer-details-better-file-sizes/1.6-shihab.5_arm64.dll",
+     "sha256": "ddec0417d2f9d2f88704b7dfaa24831cf9203963f1661e39e1c7bbc413dfbee3",
+     "size": 409600
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:47:52+03:00"
+  },
+  {
+   "id": "file-operation-styler",
+   "version": "1.2.0-shihab.6",
+   "name": {
+    "ar": "تنسيق نافذة النسخ والنقل",
+    "en": "A modern copy and move window"
+   },
+   "description": {
+    "ar": "شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف.",
+    "en": "A newer, clearer look for the copy, move and delete progress window in Explorer."
+   },
+   "summary": {
+    "ar": "نافذة نسخ ونقل أوضح وأجمل",
+    "en": "A clearer, nicer copy and move window"
+   },
+   "highlights": {
+    "ar": [
+     "يعرض تقدّم النسخ والنقل والحذف بدائرة وأرقام واضحة",
+     "يعرض تقدّم الملف الحالي بشريط خاص",
+     "تختار سمة ألوان داكنة أو فاتحة أو زجاجية",
+     "تختار الخط وأحجام النص والألوان كما تحب"
+    ],
+    "en": [
+     "Shows copy, move and delete progress with a clear circle",
+     "Shows the current file progress in its own bar",
+     "Choose a dark, light or frosted glass theme",
+     "Choose the font, text sizes and colours you like"
+    ]
+   },
+   "author": "digART",
+   "category": "explorer",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: file-operation-styler (digART)",
+   "license": "GPL-3.0",
+   "conflicts": [],
+   "group": "explorer",
+   "order": 1,
+   "source": {
+    "path": "mods/file-operation-styler/1.2.0-shihab.6.wh.cpp",
+    "sha256": "b25bed7492f82509f9333709ddaa36ec4f457f9aec4d3869480e68dd4542c87c",
+    "size": 460552
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/file-operation-styler/1.2.0-shihab.6_64.dll",
+     "sha256": "843f426e6b4c4ab50e90430c674dcf991164e945ade9247fde6938e8c7b0ed9c",
+     "size": 536576
+    },
+    "arm64": {
+     "path": "mods/file-operation-styler/1.2.0-shihab.6_arm64.dll",
+     "sha256": "89886f2eb7e549e5cc1eab5e291acdc3ce42d42ba64d69cb8e6a04b234c3825b",
+     "size": 505856
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:25:14+03:00"
+  },
+  {
+   "id": "modernize-folder-picker-dialog",
+   "version": "1.0.0-shihab.4",
+   "name": {
+    "ar": "نافذة اختيار مجلد حديثة",
+    "en": "Modern folder picker"
+   },
+   "description": {
+    "ar": "يستبدل نافذة «استعراض بحثاً عن مجلد» القديمة بنافذة الاختيار الحديثة.",
+    "en": "Replaces the old Browse For Folder dialog with the modern picker."
+   },
+   "summary": {
+    "ar": "نافذة حديثة لاختيار المجلدات",
+    "en": "A modern window for choosing folders"
+   },
+   "highlights": {
+    "ar": [
+     "يستبدل نافذة اختيار المجلد القديمة في البرامج",
+     "تعرض النافذة الحديثة شريط المسار والبحث والتنقل",
+     "يعمل في كل البرامج التي تستخدم النافذة القديمة"
+    ],
+    "en": [
+     "Replaces the old folder picker in your programs",
+     "The modern window has an address bar, search and navigation",
+     "Works in every program that uses the old window"
+    ]
+   },
+   "author": "aubymori",
+   "category": "windows",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: modernize-folder-picker-dialog (aubymori)",
+   "license": "MIT",
+   "conflicts": [],
+   "group": "explorer",
+   "order": 2,
+   "source": {
+    "path": "mods/modernize-folder-picker-dialog/1.0.0-shihab.4.wh.cpp",
+    "sha256": "deb4be9f84166f49d5478a321ba833a0481ea16285cd69a61ef0b78025223796",
+    "size": 11923
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/modernize-folder-picker-dialog/1.0.0-shihab.4_32.dll",
+     "sha256": "744b600a90213a77b8eb2880be734233bcaf761d9e5964a0b2cdc0fd43dda68b",
+     "size": 379392
+    },
+    "64": {
+     "path": "mods/modernize-folder-picker-dialog/1.0.0-shihab.4_64.dll",
+     "sha256": "ad825fd36d056be5db670fb6d51308a1a13459046e2d01dea205ae5a843ddbfb",
+     "size": 345600
+    },
+    "arm64": {
+     "path": "mods/modernize-folder-picker-dialog/1.0.0-shihab.4_arm64.dll",
+     "sha256": "83b601c87fd6418c67e3e81463071f4346b0894f4899afa05abe32cae8f0ab8c",
+     "size": 333824
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:29:31+03:00"
+  },
+  {
+   "id": "overhaulded-alt-tab",
+   "version": "1.3.0-shihab.6",
+   "name": {
+    "ar": "مبدّل نوافذ حديث",
+    "en": "Modern Alt+Tab"
+   },
+   "description": {
+    "ar": "يستبدل Alt+Tab بمبدّل نوافذ حديث، بمعاينات حية وتجميع حسب البرنامج.",
+    "en": "Replaces Alt+Tab with a modern window switcher, with live previews and grouping by program."
+   },
+   "summary": {
+    "ar": "مبدّل نوافذ حديث بمعاينة حية لكل نافذة",
+    "en": "A modern window switcher with live previews"
+   },
+   "highlights": {
+    "ar": [
+     "يستبدل قائمة Alt+Tab بشريط بطاقات أنيق",
+     "معاينة حية لكل نافذة مفتوحة",
+     "اختر الحجم وعدد البطاقات الظاهرة",
+     "اختر حركة الظهور والخلفية خلف البطاقات"
+    ],
+    "en": [
+     "Replaces Alt+Tab with a sleek row of cards",
+     "A live preview of every open window",
+     "Choose the size and how many cards show",
+     "Choose the open animation and the background"
+    ]
+   },
+   "author": "IMiloDev",
+   "category": "windows",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: overhaulded-alt-tab (IMiloDev)",
+   "license": "MIT",
+   "conflicts": [
+    "alt-tab-per-monitor"
+   ],
+   "group": "window-switcher",
+   "order": 0,
+   "source": {
+    "path": "mods/overhaulded-alt-tab/1.3.0-shihab.6.wh.cpp",
+    "sha256": "70a921f752b6b7b4973797574069ac8670623eab62cc9dd0706c02eccc8b5f97",
+    "size": 302656
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/overhaulded-alt-tab/1.3.0-shihab.6_32.dll",
+     "sha256": "1934feab14f094b22a925d2189dce1cdaa29b6c7f624b7c3b9c290b57230685b",
+     "size": 495104
+    },
+    "64": {
+     "path": "mods/overhaulded-alt-tab/1.3.0-shihab.6_64.dll",
+     "sha256": "ad6000273423fd0a359fae9c42f80094cb766f819241718e473f2479216da685",
+     "size": 443904
+    },
+    "arm64": {
+     "path": "mods/overhaulded-alt-tab/1.3.0-shihab.6_arm64.dll",
+     "sha256": "c6f99fe0bb2fd83e74a67b6fc647012620dd0c3c222714a366b382f6cf6452e0",
+     "size": 417280
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:25:14+03:00"
+  },
+  {
+   "id": "slick-window-arrangement",
+   "version": "1.0.2-shihab.3",
+   "name": {
+    "ar": "ترتيب النوافذ بانسيابية",
+    "en": "Slick window arrangement"
+   },
+   "description": {
+    "ar": "تنزلق النوافذ بنعومة حين تحرّكها، وتلتصق بحواف الشاشة والنوافذ الأخرى.",
+    "en": "Windows slide smoothly when you move them, and snap to the screen edges and to other windows."
+   },
+   "summary": {
+    "ar": "نوافذ تنزلق وتلتصق بالحواف",
+    "en": "Windows that slide and snap to edges"
+   },
+   "highlights": {
+    "ar": [
+     "تكمل النافذة انزلاقها بعد إفلاتها",
+     "تلتصق النوافذ بحواف الشاشة وببعضها",
+     "اختر مدة الانزلاق ومسافة الالتصاق"
+    ],
+    "en": [
+     "A window keeps sliding after you let go",
+     "Windows snap to screen edges and each other",
+     "Choose the slide length and snap distance"
+    ]
+   },
+   "author": "m417z",
+   "category": "windows",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: slick-window-arrangement (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [],
+   "group": "window-motion",
+   "order": 1,
+   "source": {
+    "path": "mods/slick-window-arrangement/1.0.2-shihab.3.wh.cpp",
+    "sha256": "9773844e79e01e878fbe9f6f65edbe2f1b480a0458a0ee0175a6b9ea0883ee59",
+    "size": 44080
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/slick-window-arrangement/1.0.2-shihab.3_32.dll",
+     "sha256": "184a96f21ec10dca3f49da8063f966166f68fa0c6bd316398dc62ea2c3c9c2a5",
+     "size": 431616
+    },
+    "64": {
+     "path": "mods/slick-window-arrangement/1.0.2-shihab.3_64.dll",
+     "sha256": "b2478ba6f0386aca0b145e507a3c7b2add4625195352c590e836a24ac892167e",
+     "size": 400896
+    },
+    "arm64": {
+     "path": "mods/slick-window-arrangement/1.0.2-shihab.3_arm64.dll",
+     "sha256": "23c316be3cf190531bf51f6fc716c8fde6e0a037b20057862f75ce55377fa834",
+     "size": 379392
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-21T13:32:28+03:00"
+  },
+  {
+   "id": "taskbar-clock-customization",
+   "version": "1.8.1-shihab.4",
+   "name": {
+    "ar": "تخصيص ساعة شريط المهام",
+    "en": "Taskbar clock customization"
+   },
+   "description": {
+    "ar": "شكل التاريخ والوقت كما تريد، مع إمكانية عرض الطقس والأخبار وسرعة الإنترنت والمعالج والذاكرة والبطارية وما يُشغَّل الآن، بخطوط وألوان من اختيارك.",
+    "en": "Your own date and time format, with optional weather, news, internet speed, CPU, memory, battery and now playing, in the fonts and colours you choose."
+   },
+   "summary": {
+    "ar": "ساعة شريط المهام بالشكل الذي تحبه",
+    "en": "The taskbar clock, the way you like it"
+   },
+   "highlights": {
+    "ar": [
+     "إظهار الثواني في الساعة",
+     "اختيار حجم الخط ولونه لكل سطر",
+     "إخفاء السطر الثاني أو كتابة ما تريد فيه",
+     "عرض الطقس والأخبار وسرعة الإنترنت وأداء الجهاز",
+     "عرض اسم الأغنية أو المقطع الذي يُشغَّل الآن"
+    ],
+    "en": [
+     "Show seconds on the clock",
+     "Choose the font size and colour of each line",
+     "Hide the second line or write what you want in it",
+     "Show weather, news, internet speed and computer performance",
+     "Show the song or video playing now"
+    ]
+   },
+   "author": "m417z",
+   "category": "taskbar",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: taskbar-clock-customization (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [],
+   "group": "clock-island",
+   "order": 0,
+   "source": {
+    "path": "mods/taskbar-clock-customization/1.8.1-shihab.4.wh.cpp",
+    "sha256": "0cf8ab60b8e2157d9f824c8dc7a1352d46b947d587bb88a44be1e2cd1bbcfab7",
+    "size": 247303
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/taskbar-clock-customization/1.8.1-shihab.4_64.dll",
+     "sha256": "42b82c6139edd7993015827b680320cd6052b97d7738a360129eb10bb9432045",
+     "size": 1095680
+    },
+    "arm64": {
+     "path": "mods/taskbar-clock-customization/1.8.1-shihab.4_arm64.dll",
+     "sha256": "6ec130f6dbaed75ec66b0d7efac2bca69ec7f6e0c799e0ed58fa0fb4f378b333",
+     "size": 1063424
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-21T23:11:01+03:00"
+  },
+  {
+   "id": "taskbar-dock-animation",
+   "version": "1.9.2-shihab.4",
+   "name": {
+    "ar": "حركة أيقونات شريط المهام",
+    "en": "Taskbar dock animation"
+   },
+   "description": {
+    "ar": "تكبر أيقونات شريط المهام حين يمر عليها المؤشر، كما في ماك (ويندوز 11 فقط).",
+    "en": "Taskbar icons grow as the cursor passes over them, as on macOS (Windows 11 only)."
+   },
+   "summary": {
+    "ar": "أيقونات تكبر حين يمر المؤشر",
+    "en": "Icons grow as the cursor passes"
+   },
+   "highlights": {
+    "ar": [
+     "تكبر الأيقونات بنعومة تحت المؤشر كما في ماك",
+     "اختر مقدار التكبير ومدى التأثير",
+     "اختر شكل الحركة أو أوقف الاهتزاز الخفيف",
+     "استثنِ زر ابدأ وأزرار النظام إن أردت"
+    ],
+    "en": [
+     "Icons grow smoothly under the cursor, as on macOS",
+     "Choose how much they grow and how far the effect reaches",
+     "Choose the motion style or turn off the gentle bounce",
+     "Leave out Start and the system buttons if you like"
+    ]
+   },
+   "author": "Ph0en1x-dev",
+   "category": "taskbar",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: taskbar-dock-animation (Ph0en1x-dev)",
+   "license": "MIT",
+   "conflicts": [],
+   "group": "taskbar-look",
+   "order": 4,
+   "source": {
+    "path": "mods/taskbar-dock-animation/1.9.2-shihab.4.wh.cpp",
+    "sha256": "7a67a4e495b2f49e3a3578619f74ddf8e7ffbbdc9b9327213c34c42a81e79a62",
+    "size": 69881
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/taskbar-dock-animation/1.9.2-shihab.4_64.dll",
+     "sha256": "e5d7b2168f443ca540a65e32d8dd8ba1836156dcadd52b8aa5a947154d4be4eb",
+     "size": 461824
+    },
+    "arm64": {
+     "path": "mods/taskbar-dock-animation/1.9.2-shihab.4_arm64.dll",
+     "sha256": "b4935376ad9e45acaa2b876bfbd78f17687be6729c45883428edf7cfdba86ee2",
+     "size": 436736
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-21T23:11:01+03:00"
+  },
+  {
+   "id": "taskbar-icon-size",
+   "version": "1.3.10-shihab.5",
+   "name": {
+    "ar": "حجم شريط المهام وأيقوناته",
+    "en": "Taskbar height and icon size"
+   },
+   "description": {
+    "ar": "تحكّم في ارتفاع شريط المهام وحجم أيقوناته، مع أيقونات أوضح (ويندوز 11 فقط).",
+    "en": "Control the taskbar height and icon size, with sharper icons (Windows 11 only)."
+   },
+   "summary": {
+    "ar": "شريط مهام أطول وأيقونات أكبر",
+    "en": "A taller taskbar with bigger icons"
+   },
+   "highlights": {
+    "ar": [
+     "اختر ارتفاع شريط المهام كما تحب",
+     "كبّر الأيقونات أو صغّرها بالحجم الذي تريده",
+     "غيّر عرض أزرار البرامج",
+     "أيقونات أوضح وأنعم عند تكبيرها"
+    ],
+    "en": [
+     "Choose the taskbar height you like",
+     "Make icons bigger or smaller",
+     "Change the width of program buttons",
+     "Sharper icons when they are enlarged"
+    ]
+   },
+   "author": "m417z",
+   "category": "taskbar",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: taskbar-icon-size (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [],
+   "group": "taskbar-look",
+   "order": 1,
+   "source": {
+    "path": "mods/taskbar-icon-size/1.3.10-shihab.5.wh.cpp",
+    "sha256": "4d39e3d0be3ba6adc23a652bb2b540aadfe9b32a3dd2ec0bb8b9841c42ea00ee",
+    "size": 127922
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/taskbar-icon-size/1.3.10-shihab.5_64.dll",
+     "sha256": "c251b04ec497774e839785da9e6dd5c8bdff2562a3808f0402b65001ccd81223",
+     "size": 876544
+    },
+    "arm64": {
+     "path": "mods/taskbar-icon-size/1.3.10-shihab.5_arm64.dll",
+     "sha256": "ee94684ea233d5be7b655d6101a9a9b8efbf36ea2a685a8ac7476ef509161646",
+     "size": 855552
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:25:14+03:00"
+  },
+  {
+   "id": "taskbar-volume-control",
+   "version": "1.3.1-shihab.4",
+   "name": {
+    "ar": "التحكم في الصوت من شريط المهام",
+    "en": "Taskbar volume control"
+   },
+   "description": {
+    "ar": "ارفع الصوت أو اخفضه بتحريك عجلة الماوس فوق شريط المهام، أو في أي مكان مع مفتاح تختاره.",
+    "en": "Turn the volume up or down by scrolling over the taskbar, or anywhere with a key you choose."
+   },
+   "summary": {
+    "ar": "غيّر الصوت بعجلة الماوس فوق الشريط",
+    "en": "Change the volume with the wheel"
+   },
+   "highlights": {
+    "ar": [
+     "حرّك العجلة فوق شريط المهام لرفع الصوت أو خفضه",
+     "اكتم الصوت بالزر الأوسط على أيقونة الصوت",
+     "غيّر الصوت من أي مكان مع مفتاح تختاره",
+     "اختر شكل مؤشر الصوت ومقدار التغيير"
+    ],
+    "en": [
+     "Scroll over the taskbar to turn the volume up or down",
+     "Middle-click the volume icon to mute",
+     "Change the volume anywhere while holding a key you choose",
+     "Choose the volume indicator style and step"
+    ]
+   },
+   "author": "m417z",
+   "category": "taskbar",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: taskbar-volume-control (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [
+    "taskbar-wheel-cycle"
+   ],
+   "group": "taskbar-use",
+   "order": 2,
+   "source": {
+    "path": "mods/taskbar-volume-control/1.3.1-shihab.4.wh.cpp",
+    "sha256": "47faf8d004fcca0498e7727458cfc9248b9ff96bbbd073dca59311b6bc59c759",
+    "size": 85593
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/taskbar-volume-control/1.3.1-shihab.4_32.dll",
+     "sha256": "691b74cf5124ff08822212232e588383fb7022886544cc8ecad2deb3c8b577d4",
+     "size": 332800
+    },
+    "64": {
+     "path": "mods/taskbar-volume-control/1.3.1-shihab.4_64.dll",
+     "sha256": "bd2c38e8d6e236576095bdc1aaaba406213a79b69b9360c337b09a5e7be7223a",
+     "size": 302080
+    },
+    "arm64": {
+     "path": "mods/taskbar-volume-control/1.3.1-shihab.4_arm64.dll",
+     "sha256": "4f31e0a7f13af028a26444b8b6e95e2c250a68cda3af8d244c664b897396fdbe",
+     "size": 293888
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:25:14+03:00"
+  },
+  {
+   "id": "taskbar-wheel-cycle",
+   "version": "1.1.11-shihab.3",
+   "name": {
+    "ar": "التنقل بين البرامج بعجلة الماوس",
+    "en": "Cycle taskbar buttons with the wheel"
+   },
+   "description": {
+    "ar": "حرّك عجلة الماوس فوق شريط المهام، أو استخدم اختصاراً، للتنقل بين البرامج المفتوحة.",
+    "en": "Turn the mouse wheel over the taskbar, or use a shortcut, to move between open programs."
+   },
+   "summary": {
+    "ar": "تنقّل بين البرامج بعجلة الماوس",
+    "en": "Move between programs with the wheel"
+   },
+   "highlights": {
+    "ar": [
+     "حرّك العجلة فوق شريط المهام لتنتقل بين البرامج",
+     "أو استخدم اختصاراً من لوحة المفاتيح",
+     "اختر تخطي النوافذ المصغّرة أو عكس الاتجاه"
+    ],
+    "en": [
+     "Turn the wheel over the taskbar to switch programs",
+     "Or use a keyboard shortcut instead",
+     "Choose to skip minimized windows or reverse the direction"
+    ]
+   },
+   "author": "m417z",
+   "category": "taskbar",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: taskbar-wheel-cycle (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [
+    "taskbar-volume-control"
+   ],
+   "group": "taskbar-use",
+   "order": 1,
+   "source": {
+    "path": "mods/taskbar-wheel-cycle/1.1.11-shihab.3.wh.cpp",
+    "sha256": "768cf9805d16a71cf6824f058b87ba04cc0d09cd75d1f5160f79142a9df5b281",
+    "size": 58902
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/taskbar-wheel-cycle/1.1.11-shihab.3_64.dll",
+     "sha256": "29a618f38cb28f436b06ecc2b5a41e5f962250e07cc0b4e82e135e6146da7823",
+     "size": 386560
+    },
+    "arm64": {
+     "path": "mods/taskbar-wheel-cycle/1.1.11-shihab.3_arm64.dll",
+     "sha256": "8e0c2efe7e8173f249ea08eea8145eda3b163e51d9add34d026c5af2440aab69",
+     "size": 369664
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-21T23:11:01+03:00"
+  },
+  {
+   "id": "win-d-per-monitor",
+   "version": "1.5.260416-shihab.5",
+   "name": {
+    "ar": "Win+D لكل شاشة",
+    "en": "Win+D per monitor"
+   },
+   "description": {
+    "ar": "يُخفي Win+D نوافذ الشاشة التي عليها المؤشر فقط، وتبقى الشاشات الأخرى كما هي.",
+    "en": "Win+D hides only the windows on the monitor where the cursor is; the other monitors stay as they are."
+   },
+   "summary": {
+    "ar": "Win+D يُخفي نوافذ شاشة واحدة فقط",
+    "en": "Win+D clears only the monitor you are on"
+   },
+   "highlights": {
+    "ar": [
+     "يُخفي نوافذ الشاشة التي عليها المؤشر فقط",
+     "الشاشات الأخرى تبقى كما هي دون تغيير",
+     "اضغط Win+D مرة أخرى لتعود النوافذ",
+     "تختار نوافذ تبقى ظاهرة دائماً"
+    ],
+    "en": [
+     "Hides only the windows on the monitor under the cursor",
+     "Your other monitors stay just as they are",
+     "Press Win+D again to bring the windows back",
+     "Choose windows that always stay visible"
+    ]
+   },
+   "author": "easyatm",
+   "category": "desktop",
+   "preview": null,
+   "optionImages": {},
+   "basedOn": "Windhawk mods: win-d-per-monitor (easyatm)",
+   "license": "MIT",
+   "conflicts": [],
+   "group": "desktop",
+   "order": 0,
+   "source": {
+    "path": "mods/win-d-per-monitor/1.5.260416-shihab.5.wh.cpp",
+    "sha256": "674b15201203dd41ad0108f5ec7b9f5e7d30db2fa613ff173ce2b0d6d97f94a0",
+    "size": 29247
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/win-d-per-monitor/1.5.260416-shihab.5_32.dll",
+     "sha256": "b4e0a72c0096766bf4fdbfcaf27936d95df1df3999bdc9f590bd491dc5ea8a19",
+     "size": 1029632
+    },
+    "64": {
+     "path": "mods/win-d-per-monitor/1.5.260416-shihab.5_64.dll",
+     "sha256": "bb16b9c3c60cf3af3fe411215651efed3d259c03c7e868c7c163ca829d7b3019",
+     "size": 980992
+    },
+    "arm64": {
+     "path": "mods/win-d-per-monitor/1.5.260416-shihab.5_arm64.dll",
+     "sha256": "ea45b6583d1b1c3c8ef84f7ed1025ca96fccf68047a2673ff3a899aa2f497213",
+     "size": 942080
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T11:26:06+03:00"
+  },
+  {
+   "id": "windows-11-taskbar-styler",
+   "version": "1.10-shihab.5",
+   "name": {
+    "ar": "ثيمات شريط المهام",
+    "en": "Taskbar themes"
+   },
+   "description": {
+    "ar": "غيّر شكل شريط المهام كلياً بثيمات جاهزة أو بتصميمك أنت: الشفافية والألوان والأحجام والمسافات.",
+    "en": "Restyle the whole taskbar with ready themes or your own design: transparency, colours, sizes and spacing."
+   },
+   "summary": {
+    "ar": "ثيمات جاهزة تغيّر شكل شريط المهام كله",
+    "en": "Ready themes that restyle the whole taskbar"
+   },
+   "highlights": {
+    "ar": [
+     "اختر من أكثر من 50 ثيماً جاهزاً بنقرة واحدة",
+     "شريط شفاف أو زجاجي أو على شكل رصيف",
+     "أشكال كلاسيكية مثل ويندوز XP وويندوز 7",
+     "اجعل الأجزاء الفارغة من الشريط شفافة يمر النقر خلالها"
+    ],
+    "en": [
+     "Pick from more than 50 ready themes in one click",
+     "A transparent, glassy or dock-style taskbar",
+     "Classic looks such as Windows XP and Windows 7",
+     "Let clicks pass through the empty parts of the taskbar"
+    ]
+   },
+   "author": "m417z",
+   "category": "taskbar",
+   "preview": null,
+   "optionImages": {
+    "theme": {
+     "TranslucentTaskbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/TranslucentTaskbar/screenshot.png",
+      "sha256": "e413d85f9790e4c6475aba53ac449e111e73fb01d52315e00e30a1241f8bcfd5",
+      "size": 34052
+     },
+     "DockLike": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/DockLike/screenshot.png",
+      "sha256": "ea69e86420f4ebdc9ec3528171507caa4bc96cb6bc686c77fba90c1b76e1790a",
+      "size": 131818
+     },
+     "SimplyTransparent": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/SimplyTransparent/screenshot.png",
+      "sha256": "65bb9250d8c344e18c2d45bb2047fc48b9313be1f3f60f38dfe44ac752456045",
+      "size": 25670
+     },
+     "Squircle": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Squircle/screenshot.png",
+      "sha256": "09a8ddb2ed729c02f1d8e1df0162c72ac1cc421e627639a533a1236fd431b4cd",
+      "size": 47120
+     },
+     "Matter": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Matter/screenshot.png",
+      "sha256": "412144a945ec2a816b8e802c80f4c00f9627da0e1dcab7471b4d93c00dbd7ed7",
+      "size": 125396
+     },
+     "WinXP": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/WinXP/screenshot.png",
+      "sha256": "76e5dbf1f9696fbb15fb24c33df7372d37fb11fb36e226214b4b1c2e83df17d0",
+      "size": 110670
+     },
+     "WinXP_variant_Zune": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/WinXP/screenshot.png",
+      "sha256": "76e5dbf1f9696fbb15fb24c33df7372d37fb11fb36e226214b4b1c2e83df17d0",
+      "size": 110670
+     },
+     "Bubbles": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Bubbles/screenshot.png",
+      "sha256": "cccc0b619fb7fc4ac35dc207185db34a5bb2eef29636dea16229b631ce457cd1",
+      "size": 63830
+     },
+     "RosePine": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/RosePine/screenshot.png",
+      "sha256": "13816ab13f43e164e5459b52664b63526a569713aaa4ff956c9b850876ce907a",
+      "size": 282078
+     },
+     "WinVista": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/WinVista/screenshot.png",
+      "sha256": "2b3be402c544367cc7f726bcab4d930496eb540d7111f8875920c4a97939e371",
+      "size": 34775
+     },
+     "CleanSlate": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/CleanSlate/screenshot.png",
+      "sha256": "5595d718b29ac4fb31448197d683796d365283c6bad4ccc9e8372aa586b2437f",
+      "size": 464799
+     },
+     "Lucent": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Lucent/screenshot.png",
+      "sha256": "1a059e60c3c6f3604247570afb2fdc01bdf761db5f9c8fb93f057b891ef188c7",
+      "size": 45369
+     },
+     "Lucent_variant_Light": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Lucent/screenshot_light.png",
+      "sha256": "eed4a5be05eb36863531d31aa1a24af8d0b33f1375dc5f0f7226e3a05ea45e45",
+      "size": 42412
+     },
+     "SunValley": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/SunValley/screenshot.png",
+      "sha256": "99e056ee19cc409ecf221043387478b30bcbab6b91059d4aaf5aa2f1f16eefd1",
+      "size": 61562
+     },
+     "21996Taskbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/21996Taskbar/screenshot.png",
+      "sha256": "84191a4bf8af154249e6732af2b0ea79965ee499e771013686d3d6323282d055",
+      "size": 92377
+     },
+     "BottomDensy": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/BottomDensy/screenshot.png",
+      "sha256": "bacb2826dd06ea9168bd55d9d6999d08b7a6650ffe3580bc8b35fc01581a7b86",
+      "size": 27928
+     },
+     "BottomDensy_variant_NoInd": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/BottomDensy/screenshot.png",
+      "sha256": "bacb2826dd06ea9168bd55d9d6999d08b7a6650ffe3580bc8b35fc01581a7b86",
+      "size": 27928
+     },
+     "TaskbarXII": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/TaskbarXII/screenshot.png",
+      "sha256": "93979aee517f9fb3db9998d412fb4d19e2c3b35342ff4aaa5536e89601ddaeb8",
+      "size": 109173
+     },
+     "xdark": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/xdark/screenshot.png",
+      "sha256": "aeeb704ac637eca7d07987479513affa5b602cb8ce62c0b3d7c43eb2fe2418f4",
+      "size": 196573
+     },
+     "Windows7": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Windows7/screenshot.png",
+      "sha256": "585ab7811030c253812906fd09bbc53327eb46609b66df742ba5e6954002d4df",
+      "size": 144798
+     },
+     "Aeris": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Aeris/screenshot.png",
+      "sha256": "141ec8e31a88bc08df116ffeddd6c0ed53f8426e3890ceb42b1f713ec77fad14",
+      "size": 169179
+     },
+     "Plasma": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Plasma/screenshot.png",
+      "sha256": "17b48c606416f65793f9c12eb7955a5ac02a92166ef7f937b5963ab30f5adb42",
+      "size": 33644
+     },
+     "WindowGlass": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/WindowGlass/screenshot.png",
+      "sha256": "793f24d5cb2b7f61bcd305799b2e924f14db243e2cbd0b59cc398290b529a674",
+      "size": 55039
+     },
+     "WindowGlass_variant_Split": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/WindowGlass/screenshot_split.png",
+      "sha256": "f9f28d3594a9d0d1f65b1fc29c50b521156a70ccb28758caa835f2e95cd48f6a",
+      "size": 334634
+     },
+     "WindowGlass_variant_FullLength": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/WindowGlass/screenshot_full.png",
+      "sha256": "5811118788c81dbced423d27eb23b3a119c389b327470afad46196fd342d823f",
+      "size": 232541
+     },
+     "Surface": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Surface/screenshot.png",
+      "sha256": "b93c3cfb81d72b047572063956d7d07253dc4820124784327cee4494787968af",
+      "size": 109095
+     },
+     "Oversimplified&Accentuated": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Oversimplified%26Accentuated/screenshot.png",
+      "sha256": "ccee6f53b3d8b295e4f729aa4d1785d6cb6d3a756d0aae9d8f171f97e10de2a9",
+      "size": 268292
+     },
+     "Luminosity_variant_Dock": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Luminosity/dock.png",
+      "sha256": "c3e5a122c9efc2b12035a69622a20b8d0a4aea82b3f128c1dd335f17697072de",
+      "size": 253222
+     },
+     "Luminosity_variant_Classic": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Luminosity/classic.png",
+      "sha256": "cbc20143d32d5bdac1d8f65bf55b87209a9a640d4c3b199291636e22a99bb4e7",
+      "size": 241648
+     },
+     "Luminosity_variant_Compact": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Luminosity/compact.png",
+      "sha256": "264cd88c18665bc2fe22646d47fae17c15ec8eabfc11142cd3d59266c5f4ad6a",
+      "size": 228625
+     },
+     "LayerMicaUI": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/LayerMicaUI/screenshot.png",
+      "sha256": "10f9ea0d56976b58f07687d866f8566f53c242061179a6f0169f5a215f74aacb",
+      "size": 462221
+     },
+     "Fluid": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Fluid/screenshot.png",
+      "sha256": "369784646b0ee34440c4e931a2637b502cc10c99439b6271c901e2c588a95ad8",
+      "size": 161023
+     },
+     "TintedGlass": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/TintedGlass/screenshot.png",
+      "sha256": "cfb843d2754921984f87faed4baa1e0b987bd69eb2d1b2dd08dff9778396f69f",
+      "size": 88065
+     },
+     "TaskbarToStatusbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/TaskbarToStatusbar/screenshot.png",
+      "sha256": "92a797bc5e00e0046077a036da5bce07a1774fcc1621afab2ec5d50eb7407fe0",
+      "size": 343571
+     },
+     "UltraWideFriendly": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/UltraWideFriendly/screenshot.png",
+      "sha256": "133e5f7dc49810185abdcef8591efc961c314ecc838e01e6c1cdc408cae7a7ee",
+      "size": 118094
+     },
+     "LiquidGlass2": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/LiquidGlass2/screenshot.png",
+      "sha256": "70918c7d1007b5299174ccc906564617552249e37534dd5cfece664a4141b0f6",
+      "size": 484449
+     },
+     "LiquidGlass": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/LiquidGlass/screenshot.png",
+      "sha256": "b5b48de07581a6c733c136906c51e467172945ead3efc86686f98428609c3f2c",
+      "size": 103044
+     },
+     "LiquidGlass_variant_Alternate": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/LiquidGlass/alt-screenshot.png",
+      "sha256": "e3077fd01698431633f4dc77658291440e266f7e9058604e925605558894a003",
+      "size": 62195
+     },
+     "Borderless": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Borderless/screenshot.png",
+      "sha256": "c5c03743618e82e2ca60afda31e74f52297e3149063f7b9aa8acca6f11bdb46a",
+      "size": 36219
+     },
+     "Command_Center": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Command%20Center/screenshot.png",
+      "sha256": "aabceb50766d2142710aa54d9a0074937965ec81ce4292fecf2c600c3f817510",
+      "size": 58220
+     },
+     "FluentGlass": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/FluentGlass/screenshot.png",
+      "sha256": "740986f277be89505dc14d1c9fa754a96f6427072e1a216dbbde1a4188405ad7",
+      "size": 81526
+     },
+     "OS26_Liquid_Glass_variant_ClearMacDock": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/OS26%20Liquid%20Glass/screenshot-dock.png",
+      "sha256": "fea22e88b981bd9e60673f57cb0fce11d23f4073dff925f190f0bf72a28d2787",
+      "size": 544156
+     },
+     "OS26_Liquid_Glass_variant_ClearMacDockCompact": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/OS26%20Liquid%20Glass/screenshot-dock-1.png",
+      "sha256": "eeda205f653e863a57cf1ff11ce5dd94b39079c4528961a46f7cdc096c612c02",
+      "size": 215769
+     },
+     "OS26_Liquid_Glass_variant_ClearTaskbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/OS26%20Liquid%20Glass/screenshot-clear-taskbar.png",
+      "sha256": "6c1f3f6e5fca092c8cb31ae2c89cafd1336a9a7c47761cec162a86f5a3d46ace",
+      "size": 146817
+     },
+     "OS26_Liquid_Glass_variant_DarkMacDock": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/OS26%20Liquid%20Glass/screenshot-dock-dark.png",
+      "sha256": "2b72737b907ee1349a29a2535dafc2e8ad785f688d3ab2d284750b34a5007bdd",
+      "size": 519070
+     },
+     "OS26_Liquid_Glass_variant_DarkMacDockCompact": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/OS26%20Liquid%20Glass/screenshot-dock-dark-1.png",
+      "sha256": "de010ce705c24e180bf20931c120245258a66fcc7ca742b885d0697e1b7f65c8",
+      "size": 280587
+     },
+     "OS26_Liquid_Glass_variant_DarkTaskbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/OS26%20Liquid%20Glass/screenshot-dark-taskbar.png",
+      "sha256": "45091a284988ec9e96dd18d222e775a8a2aa55a648a5709b251efb8dc7f51c5f",
+      "size": 109749
+     },
+     "FrostyGlass": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/FrostyGlass/screenshot.png",
+      "sha256": "9adbadfd461b04691a4a4794ab5ed210f4be3129d0238674317b44c7646e14d5",
+      "size": 841967
+     },
+     "FrostedAcrylic": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/FrostedAcrylic/screenshot.png",
+      "sha256": "fa1548bb3d085752576a0ad410e31da75a3ba085e13f4f5d388d5554a7ec1307",
+      "size": 111163
+     },
+     "Pills": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Pills/screenshot.png",
+      "sha256": "8ba4d842f689da507aaa971cb2cf3b4563462c96a0c5279c22767b2544a6974d",
+      "size": 116476
+     },
+     "Blob": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Blob/screenshot.png",
+      "sha256": "51ab8f53ba17afcb23287edd66bd1fff66db7c26ab0adbd2fc7cb52f307c9807",
+      "size": 27546
+     },
+     "Minecraft_Hotbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/Minecraft%20Hotbar/screenshot.png",
+      "sha256": "9d04ba5d4d9458e67f740f3dc0b92ae30018f0f7f295b3f355b08e7e9134d8ce",
+      "size": 356653
+     },
+     "One_UI_8_5_variant_Dock": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/One%20UI%208.5/screenshot-dock.png",
+      "sha256": "dade3bb4cdb4a2833fd2b8cfa1ed244abf8097e19c89c9affaec566b67509f3b",
+      "size": 319587
+     },
+     "One_UI_8_5_variant_Taskbar": {
+      "url": "https://raw.githubusercontent.com/ramensoftware/windows-11-taskbar-styling-guide/98d39de4e7d72cdcd12873f66c1ce8b0e6e1a977/Themes/One%20UI%208.5/screenshot-taskbar.png",
+      "sha256": "e6e9f33963f7b4a027068bfe002bc3679e8ec9939a6882b96b1b4888a1c8775c",
+      "size": 398155
+     }
+    }
+   },
+   "basedOn": "Windhawk mods: windows-11-taskbar-styler (m417z)",
+   "license": "GPL-3.0",
+   "conflicts": [],
+   "group": "taskbar-look",
+   "order": 0,
+   "source": {
+    "path": "mods/windows-11-taskbar-styler/1.10-shihab.5.wh.cpp",
+    "sha256": "954f4123dd62fbe8e40d7467927ca3700bb6e63b4d4af83826055e6c1112220b",
+    "size": 1157742
+   },
+   "binaries": {
+    "64": {
+     "path": "mods/windows-11-taskbar-styler/1.10-shihab.5_64.dll",
+     "sha256": "58eee28ba20fd6ff05f0b4f7b895b99bd418ce626ae9a4bd4d9313e4015f40d7",
+     "size": 2852864
+    },
+    "arm64": {
+     "path": "mods/windows-11-taskbar-styler/1.10-shihab.5_arm64.dll",
+     "sha256": "76302f302027a4bbe080e6aff0bbbcefa5b276e476d8c4c76d1bebec64d25cf9",
+     "size": 2697216
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:25:14+03:00"
+  },
+  {
+   "id": "windows-animations",
+   "version": "1.3.7-shihab.6",
+   "name": {
+    "ar": "حركات النوافذ",
+    "en": "Window animations"
+   },
+   "description": {
+    "ar": "حركات ناعمة للنوافذ عند التصغير والاستعادة والإغلاق والتبديل.",
+    "en": "Smooth animations for windows when they minimize, restore, close and switch."
+   },
+   "summary": {
+    "ar": "حركات جميلة لفتح النوافذ وإغلاقها",
+    "en": "Beautiful animations for opening and closing windows"
+   },
+   "highlights": {
+    "ar": [
+     "حركة عند تصغير النوافذ واستعادتها",
+     "مؤثرات لافتة عند إغلاق النوافذ",
+     "حركة ناعمة عند التبديل بـ Alt+Tab",
+     "اختر نمط الحركة وسرعتها"
+    ],
+    "en": [
+     "Animations when windows minimize and restore",
+     "Striking effects when windows close",
+     "Smooth animation when switching with Alt+Tab",
+     "Choose the animation style and speed"
+    ]
+   },
+   "author": "ReDrag",
+   "category": "windows",
+   "preview": null,
+   "optionImages": {
+    "minimize_restore.effect_style": {
+     "genie": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/a7e46c466c7b88552d5d92cad113b652fbd3f10e/genie_preview.gif",
+      "sha256": "bf6294232f1c2828764321e0977335ecefaa6820098efb52f60cbd23d95b5991",
+      "size": 8191707
+     },
+     "ink_splash": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/ff3a17e818f2d08e43ee4f79059b4ccb3c663cb0/ink_splash.gif",
+      "sha256": "6e4c721ee47b2a3375cb5855c0a7985e37ecb9779d3d510af4abde4781f7dbba",
+      "size": 4115216
+     },
+     "scorch": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/scorch.gif",
+      "sha256": "6423960f7ef4a387147c24e14d6aad434daeea37aebd61e44b65233bf6b23f49",
+      "size": 3121267
+     },
+     "splinter": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/splinter.gif",
+      "sha256": "d7b9a3bc132364c293032475224477af709b43e3e28de10d1971d149eaf42497",
+      "size": 2856436
+     },
+     "mirage": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/mirage.gif",
+      "sha256": "3687d12e16a953d78aa4f5c9fb6959fd86b2fdb9f551a784893743b10e4bfab4",
+      "size": 6242300
+     },
+     "stipple": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/stipple.gif",
+      "sha256": "35309e9839c6220fadd9425a2cf5222f8141053e102f87961d5c68b5a9091730",
+      "size": 2736207
+     },
+     "swell": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/swell.gif",
+      "sha256": "7c58198703128e065144a883a4479ae61ce2df89560abdd39b4a3b470c7d9173",
+      "size": 7755254
+     }
+    },
+    "close.effect_style": {
+     "shatter": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/a7e46c466c7b88552d5d92cad113b652fbd3f10e/shatter_close.gif",
+      "sha256": "b99e8c273861b018f24894c9aebc8ba6e7576a5f60c97bda2f97aa1d5c7e209f",
+      "size": 13667441
+     },
+     "thanos": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/0e0508083d6c3108b2b3da8c5f0140f01cd21e37/close_preview.gif",
+      "sha256": "d04853b1a9c44ce72c1de38a5251dac149fd9d284d31695bfd1c17c4d6d8f835",
+      "size": 13042122
+     },
+     "perlin": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/a7e46c466c7b88552d5d92cad113b652fbd3f10e/perlin_close.gif",
+      "sha256": "9a3fd275b63a29a6dc60d27b2884cdd6582f93eae151d0b6f8ef553bdb28dd17",
+      "size": 3003547
+     },
+     "glitch": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/cyber_glitch.gif",
+      "sha256": "93db98e7a2e6d177c88e9da1301951662d5fe93ce743793192a4cf4adb646a7a",
+      "size": 7350394
+     },
+     "tv_off": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/tv_retro.gif",
+      "sha256": "d1f70f5970124919282509753445ded9a3a01831e57db6546637abbf7b2cee9b",
+      "size": 1857062
+     },
+     "pixel_melt": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/b96dea88ab53f4b781e472d3683f645f4e368f8e/pixel_melt.gif",
+      "sha256": "8c7b97fb7aaed3431aac1ff40b0ab877c4e935772c030698949ffe95061724f0",
+      "size": 4516933
+     }
+    },
+    "window_switch.switch_animation": {
+     "true": {
+      "url": "https://raw.githubusercontent.com/redrag2105/windhawk-windows-animations-preview/ba4e9efd647c954eb619ec2181d5435a80af7b15/switch_after.gif",
+      "sha256": "c68d354efc5b87c0a221f0b659e6440d95d7f732be2bc37f9c3a71bb03762d9c",
+      "size": 1781033
+     }
+    }
+   },
+   "basedOn": "Windhawk mods: windows-animations (ReDrag)",
+   "license": "MIT",
+   "conflicts": [],
+   "group": "window-motion",
+   "order": 0,
+   "source": {
+    "path": "mods/windows-animations/1.3.7-shihab.6.wh.cpp",
+    "sha256": "c41f2eb278afb951f1cbbc5987b7be34e361c674372bf7b696b6aaeb37b8f05d",
+    "size": 661438
+   },
+   "binaries": {
+    "32": {
+     "path": "mods/windows-animations/1.3.7-shihab.6_32.dll",
+     "sha256": "1db6efb31c736ffdc5a824576c1b82ae0ea3d07cf4c49b57c9ffbd1094b47494",
+     "size": 759808
+    },
+    "64": {
+     "path": "mods/windows-animations/1.3.7-shihab.6_64.dll",
+     "sha256": "15275db3676b35a72e63be261e2fb4e1c41e23fb16f709b265d652a809f5332e",
+     "size": 713216
+    },
+    "arm64": {
+     "path": "mods/windows-animations/1.3.7-shihab.6_arm64.dll",
+     "sha256": "aa61ba840c4471420ce61c9f6667545a3ac2dc407dad0a0b6fe4d404a2a62d2f",
+     "size": 656384
+    }
+   },
+   "minEngine": "1.7.3-shihab.2",
+   "updated": "2026-10-28T02:25:14+03:00"
+  }
+ ]
+}
