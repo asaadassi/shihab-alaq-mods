@@ -4,11 +4,11 @@
 // @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
 // @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
-// @version         1.3.1-shihab.5
+// @version         1.3.1-shihab.6
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe
-// @compilerOptions -lole32 -loleaut32 -lshcore -ld2d1 -ldwrite -ldwmapi -lgdi32 -luser32 -lshell32 -lruntimeobject -lwindowscodecs -lavrt -lsetupapi -lwinhttp -lpdh -lwinmm
+// @compilerOptions -lole32 -loleaut32 -lshcore -ld2d1 -ldwrite -ldwmapi -lgdi32 -luser32 -lshell32 -lruntimeobject -lwindowscodecs -lavrt -lsetupapi -lwinhttp -lpdh -lwinmm -liphlpapi
 // @license         MIT
 // ==/WindhawkMod==
 
@@ -28,6 +28,14 @@
 // - The "Open settings" menu item opens ShihabAlaq.exe beside the host, or
 //   windhawk.exe under Windhawk, and launches nothing when neither is there.
 // - The hide/show hot key is unregistered when the window is destroyed.
+// - The island can be hidden for 15 minutes, an hour or three hours from its
+//   options panel, and comes back by itself.
+// - Download, upload and ping have their own Network card, apart from the
+//   Hardware Monitor; the ping is an ICMP echo to 1.1.1.1, sent once a second
+//   only while that card is on screen.
+// - The Do Not Disturb card shows only a change that lasts: one Windows makes
+//   for a full-screen app or game (its automatic rules), and a change undone
+//   within a moment, show nothing.
 
 // ==WindhawkModReadme==
 /*
@@ -50,7 +58,8 @@ The Dynamic Island intelligently expands to display context-aware dashboards. Yo
 | **Media Player** | Shows live album art, track details, audio waveforms, and full playback controls. | ![Media](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/media-v2.png) |
 | **Calendar** | A monthly grid that always fits its rows, with today marked in the accent colour. | ![Calendar](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/calendar.png) |
 | **Weather** | Real-time weather stats powered by wttr.in, including wind speed, humidity, and "feels like" temperature. | ![Weather](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/weather-v2.png) |
-| **Hardware Monitor** | CPU, RAM, GPU, disk and live network throughput, with load bars that turn amber past 75% and red past 90%. | ![Hardware Monitor](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/hardware-monitor.png) |
+| **Hardware Monitor** | CPU, RAM, GPU and disk, with load bars that turn amber past 75% and red past 90%. | ![Hardware Monitor](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/hardware-monitor.png) |
+| **Network** | Live download and upload throughput, and the ping to 1.1.1.1. | |
 | **Game Overlay** | Real-time FPS, CPU, GPU, RAM and disk, sized to whichever metrics you enable. | ![Gamebar](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/gamebar-v2.png) |
 | **Idle View** | A minimal dashboard with your battery status, digital clock, and sleek pagination dots. | ![Idle](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/idle-v2.png) |
 | **Camera Privacy** | Shows a green dot when an app is actively using your webcam. | ![Camera](https://raw.githubusercontent.com/devcode90/Dynamic-Island-for-Windows/793cf954d51aa9748c39d544187fab6e25ecd0fb/previews/camera-detected-v2.png) |
@@ -129,7 +138,7 @@ We love community contributions! To ensure high-quality updates, please follow t
       - bottom-center: أسفل الوسط
       - bottom-left: أسفل اليسار
       - bottom-right: أسفل اليمين
-  - TargetMonitor: primary
+  - TargetMonitor: follow
     $name: Target Monitor
     $description: Select the screen to display the island. If a display isn't found, it safely falls back to the Primary Monitor.(Extra Displays are given even if they don't exist because windhawk settings are static)
     $options:
@@ -194,7 +203,7 @@ We love community contributions! To ensure high-quality updates, please follow t
       - default: افتراضي (حبة دائرية)
       - w11: ويندوز 11 (مربع بزوايا مستديرة)
       - notch: نتوء ماك (ملتصق بالحافة العليا)
-  - SizeScale: '1.0'
+  - SizeScale: '0.8'
     $name: Size scale
     $description: Makes the entire island and its contents larger or smaller.
     $options:
@@ -555,7 +564,7 @@ We love community contributions! To ensure high-quality updates, please follow t
     $_advanced: true
     $name:ar: الموسيقى والفيديو
     $description:ar: يعرض غلاف الأغنية واسمها وأزرار التشغيل حين تعمل الموسيقى.
-  - MediaAutoExpand: false
+  - MediaAutoExpand: true
     $name: Auto-expand on track change
     $description: Automatically expand the island when a new song or video starts playing. If disabled, album art updates smoothly in the collapsed pill without unprompted expansion.
     $_advanced: true
@@ -629,17 +638,23 @@ We love community contributions! To ensure high-quality updates, please follow t
     $description:ar: لا تُظهر الجزيرة تنبيهات الإشعارات حين يكون «عدم الإزعاج» مفعّلاً في ويندوز.
   - HardwareMonitorModule: true
     $name: Include Hardware Monitor in scroll loop
-    $description: Add CPU, GPU, RAM, FPS and Network stats card to mouse-wheel scroll loop.
+    $description: Add the CPU, GPU, RAM and disk card to mouse-wheel scroll loop.
     $_advanced: true
     $name:ar: بطاقة أداء الجهاز
-    $description:ar: يضيف بطاقة المعالج وكرت الشاشة والذاكرة والإطارات والشبكة إلى البطاقات التي تتنقل بينها بعجلة الفأرة.
+    $description:ar: يضيف بطاقة المعالج وكرت الشاشة والذاكرة والقرص إلى البطاقات التي تتنقل بينها بعجلة الفأرة.
+  - NetworkMonitorModule: true
+    $name: Include Network card in scroll loop
+    $description: Add a card with the live download and upload speed and the ping (an ICMP echo to 1.1.1.1, sent only while the card is on screen).
+    $_advanced: true
+    $name:ar: بطاقة الشبكة
+    $description:ar: يضيف بطاقة سرعة التنزيل والرفع الحالية وزمن الاستجابة (Ping)، ويُقاس الأخير بإرسال نبضة إلى 1.1.1.1 ما دامت البطاقة ظاهرة فقط.
   - GameOverlay: false
     $name: Enable game overlay mode
     $description: Replaces the clock with live stats like FPS, CPU, and RAM usage.
     $_advanced: true
     $name:ar: وضع الألعاب
     $description:ar: يعرض بدل الساعة أرقاماً حية مثل الإطارات في الثانية واستهلاك المعالج والذاكرة.
-  - ShowMetricText: false
+  - ShowMetricText: true
     $name: Show labels in metric chips
     $description: Adds text labels (like "CPU") inside the game overlay bars.
     $_advanced: true
@@ -857,6 +872,8 @@ We love community contributions! To ensure high-quality updates, please follow t
 #include <winhttp.h>
 #include <pdh.h>
 #include <pdhmsg.h>
+#include <iphlpapi.h>
+#include <icmpapi.h>
 
 #include <algorithm>
 #include <array>
@@ -1353,6 +1370,7 @@ struct Settings {
     D2D1_COLOR_F micDotColor = D2D1::ColorF(1.0f, 0.584f, 0.0f, 1.0f); // #FF9500
     D2D1_COLOR_F camDotColor = D2D1::ColorF(0.204f, 0.780f, 0.349f, 1.0f); // #34C759
     bool hardwareMonitorModule = true;
+    bool networkMonitorModule = true;
     bool doNotDisturbIndicator = true;
     bool notificationRespectDnD = true;
 
@@ -1513,6 +1531,7 @@ struct SystemSnapshot {
     int gpuPercent = -1;
     float netUpMbps = 0.0f;
     float netDownMbps = 0.0f;
+    int pingMs = -1;  // -1 until an echo comes back, and after one that doesn't
     bool charging = false;
     bool micActive = false;      // orange dot: microphone in use
     bool cameraActive = false;   // green dot: camera in use
@@ -1652,6 +1671,7 @@ std::atomic<float> g_scrubDragFraction = 0.0f;   // live 0..1 drag position whil
 std::atomic<double> g_lastLiveSeekTime = 0.0;    // throttle gate for live seeks while dragging
 std::atomic<bool> g_audioCaptureNeeded = false;  // gates the WASAPI loopback thread
 std::atomic<bool> g_manuallyHidden = false;      // user-toggled hide, via menu or hotkey
+std::atomic<double> g_hiddenUntil = 0.0;          // NowSeconds() a timed hide ends at; 0 = until shown
 UINT g_registeredHotkeyModifiers = 0;            // modifiers currently registered with the OS
 UINT g_registeredHotkeyVk = 0;                   // vk currently registered with the OS
 bool g_hotkeyRegistered = false;
@@ -1709,6 +1729,7 @@ int ActiveTabCount(const Settings& settings) {
     int count = 2;  // primary (media or clock) + calendar
     if (settings.weather) ++count;
     if (settings.hardwareMonitorModule) ++count;
+    if (settings.networkMonitorModule) ++count;
     if (settings.fileTrayModule) ++count;
     return count;
 }
@@ -1719,7 +1740,7 @@ int NormalizedTabIndex(const Settings& settings) {
     return ((raw % total) + total) % total;
 }
 
-// Tab order is always: primary, calendar, weather?, hardware?, file tray?
+// Tab order is always: primary, calendar, weather?, hardware?, network?, file tray?
 // The expensive GPU / network counters are only sampled while the hardware card
 // is actually on screen, so that check needs the card's real index rather than
 // assuming it is the last tab -- which stopped being true once the File Tray
@@ -1731,15 +1752,23 @@ int HardwareMonitorTabIndex(const Settings& settings) {
     return 2 + (settings.weather ? 1 : 0);
 }
 
+int NetworkTabIndex(const Settings& settings) {
+    if (!settings.networkMonitorModule) {
+        return -1;
+    }
+    return 2 + (settings.weather ? 1 : 0) + (settings.hardwareMonitorModule ? 1 : 0);
+}
+
 // The page the wheel stopped on, as the ids DrawIdleDashboard draws:
 // 3 = the primary page (clock, or media while something plays), 0 = calendar,
-// 1 = weather, 2 = hardware, 4 = file tray. Same order as ActiveTabCount.
+// 1 = weather, 2 = hardware, 5 = network, 4 = file tray. Same order as ActiveTabCount.
 int SelectedTabId(const Settings& settings) {
-    int ids[5] = {3, 0, 0, 0, 0};
+    int ids[6] = {3, 0, 0, 0, 0, 0};
     int count = 1;
     ids[count++] = 0;
     if (settings.weather) ids[count++] = 1;
     if (settings.hardwareMonitorModule) ids[count++] = 2;
+    if (settings.networkMonitorModule) ids[count++] = 5;
     if (settings.fileTrayModule) ids[count++] = 4;
     return ids[std::min(NormalizedTabIndex(settings), count - 1)];
 }
@@ -1748,7 +1777,8 @@ int FileTrayTabIndex(const Settings& settings) {
     if (!settings.fileTrayModule) {
         return -1;
     }
-    return 2 + (settings.weather ? 1 : 0) + (settings.hardwareMonitorModule ? 1 : 0);
+    return 2 + (settings.weather ? 1 : 0) + (settings.hardwareMonitorModule ? 1 : 0) +
+           (settings.networkMonitorModule ? 1 : 0);
 }
 
 // ── Localization (#35) ───────────────────────────────────────────────────────
@@ -1982,6 +2012,12 @@ const wchar_t* Loc(const wchar_t* english) {
         {L"NET UP", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالرفع\u202C"}},
         {L"NET DOWN", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالتنزيل\u202C"}},
         {L"DISK", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالقرص\u202C"}},
+        {L"Network", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bالشبكة\u202C"}},
+        {L"Ping", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bزمن الاستجابة\u202C"}},
+        {L"15 min", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B15 دقيقة\u202C"}},
+        {L"1 hour", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bساعة\u202C"}},
+        {L"3 hours", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202B3 ساعات\u202C"}},
+        {L"Until shown", {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, L"\u202Bبلا مدة\u202C"}},
     };
 
     const int langIndex = g_uiLanguage.load(std::memory_order_relaxed);
@@ -2894,6 +2930,7 @@ void LoadSettings() {
     next.borderMergedMode = Wh_GetIntSetting(L"Appearance.BorderMergedMode") != 0;
     next.autoHideFullscreen = Wh_GetIntSetting(L"Behavior.AutoHideFullscreen") != 0;
     next.hardwareMonitorModule = Wh_GetIntSetting(L"Modules.HardwareMonitorModule") != 0;
+    next.networkMonitorModule = Wh_GetIntSetting(L"Modules.NetworkMonitorModule") != 0;
     const std::wstring borderModeStr = GetStringSettingCopy(L"Themes.ContourBorderMode");
     if (EqualsNoCase(borderModeStr, L"borderless")) {
         next.contourBorderMode = ContourBorderMode::Borderless;
@@ -4548,6 +4585,51 @@ typedef NTSTATUS(NTAPI* PFN_NtQueryWnfStateData)(
 
 constexpr ULONG64 kWnfQuietHoursActiveProfileChanged = 0xD83063EA3BF1C75ULL;
 
+// Windows turns Do Not Disturb on by itself while an app or game is full screen
+// (Settings > System > Notifications > "Turn on do not disturb automatically")
+// and off again when it leaves, and a short full-screen moment switches it on
+// and off within a fraction of a second. None of that is the user's doing, so
+// the card waits until a change has lasted kDndSettleMs, then stays silent for
+// a switch-on made while something is full screen and for the switch-off that
+// ends it.
+constexpr DWORD kDndSettleMs = 1500;
+PTP_TIMER g_dndSettleTimer = nullptr;
+std::mutex g_dndTimerMutex;
+std::atomic<bool> g_dndShownActive = false;  // the state last reported, or found at start
+std::atomic<bool> g_dndAutoOn = false;       // the present "on" came with a full-screen app
+
+bool FullscreenNotificationState() {
+    QUERY_USER_NOTIFICATION_STATE state = QUNS_ACCEPTS_NOTIFICATIONS;
+    if (FAILED(SHQueryUserNotificationState(&state))) {
+        return false;
+    }
+    return state == QUNS_BUSY || state == QUNS_RUNNING_D3D_FULL_SCREEN || state == QUNS_PRESENTATION_MODE;
+}
+
+VOID CALLBACK DndSettledCallback(PTP_CALLBACK_INSTANCE, PVOID, PTP_TIMER) {
+    const bool active = g_isDnDActive.load();
+    if (active == g_dndShownActive.exchange(active)) {
+        return;  // undone before it settled, or no change at all
+    }
+    bool automatic = false;
+    if (active) {
+        automatic = FullscreenNotificationState();
+        g_dndAutoOn = automatic;
+    } else {
+        automatic = g_dndAutoOn.exchange(false);
+    }
+    if (automatic || !g_settings.doNotDisturbIndicator) {
+        return;
+    }
+    {
+        std::lock_guard lock(g_stateMutex);
+        g_state.doNotDisturb.active = true;
+        g_state.doNotDisturb.enabled = active;
+        g_state.doNotDisturb.expiresAt = NowSeconds() + 3.0;
+    }
+    TriggerNudge();
+}
+
 NTSTATUS NTAPI WnfDndCallback(
     ULONG64 stateName,
     ULONG changeStamp,
@@ -4561,22 +4643,15 @@ NTSTATUS NTAPI WnfDndCallback(
     if (buffer && bufferSize >= sizeof(int)) {
         val = *reinterpret_cast<const int*>(buffer);
     }
-    const bool active = (val != 0);
-    static std::atomic<bool> s_firstWnf = true;
-    if (s_firstWnf.exchange(false)) {
-        g_isDnDActive.store(active);
-        return 0;
-    }
-
-    const bool prev = g_isDnDActive.exchange(active);
-    if (prev != active && g_settings.doNotDisturbIndicator) {
-        {
-            std::lock_guard lock(g_stateMutex);
-            g_state.doNotDisturb.active = true;
-            g_state.doNotDisturb.enabled = active;
-            g_state.doNotDisturb.expiresAt = NowSeconds() + 3.0;
-        }
-        TriggerNudge();
+    g_isDnDActive.store(val != 0);
+    // Every change, including the current state some systems send right after
+    // subscribing, only restarts the settle timer; the card is decided there.
+    std::lock_guard lock(g_dndTimerMutex);
+    if (g_dndSettleTimer) {
+        ULARGE_INTEGER due = {};
+        due.QuadPart = static_cast<ULONGLONG>(-static_cast<LONGLONG>(kDndSettleMs) * 10000);
+        FILETIME dueTime = {due.LowPart, due.HighPart};
+        SetThreadpoolTimer(g_dndSettleTimer, &dueTime, 0, 0);
     }
     return 0;
 }
@@ -4596,6 +4671,12 @@ void SubscribeDndNotification() {
             g_isDnDActive.store(val != 0);
         }
     }
+    g_dndShownActive = g_isDnDActive.load();
+    g_dndAutoOn = g_dndShownActive.load() && FullscreenNotificationState();
+    {
+        std::lock_guard lock(g_dndTimerMutex);
+        g_dndSettleTimer = CreateThreadpoolTimer(DndSettledCallback, nullptr, nullptr);
+    }
 
     auto pfnSubscribe = reinterpret_cast<PFN_RtlSubscribeWnfStateChangeNotification>(
         GetProcAddress(hNtdll, "RtlSubscribeWnfStateChangeNotification"));
@@ -4606,9 +4687,8 @@ void SubscribeDndNotification() {
 }
 
 void UnsubscribeDndNotification() {
-    if (!g_wnfDndSubscription) return;
     HMODULE hNtdll = GetModuleHandleW(L"ntdll.dll");
-    if (hNtdll) {
+    if (g_wnfDndSubscription && hNtdll) {
         auto pfnUnsubscribe = reinterpret_cast<PFN_RtlUnsubscribeWnfStateChangeNotification>(
             GetProcAddress(hNtdll, "RtlUnsubscribeWnfStateChangeNotification"));
         if (pfnUnsubscribe) {
@@ -4616,6 +4696,19 @@ void UnsubscribeDndNotification() {
         }
     }
     g_wnfDndSubscription = nullptr;
+    // Taken under the lock the WNF callback arms it with, so a callback still
+    // running after the unsubscribe can't reach a closed timer.
+    PTP_TIMER timer = nullptr;
+    {
+        std::lock_guard lock(g_dndTimerMutex);
+        timer = g_dndSettleTimer;
+        g_dndSettleTimer = nullptr;
+    }
+    if (timer) {
+        SetThreadpoolTimer(timer, nullptr, 0, 0);
+        WaitForThreadpoolTimerCallbacks(timer, TRUE);
+        CloseThreadpoolTimer(timer);
+    }
 }
 
 #if DYNAMIC_ISLAND_HAS_USER_NOTIFICATION_LISTENER
@@ -5936,6 +6029,45 @@ static void GetNetworkUsage(float& outUpMbps, float& outDownMbps) {
     outDownMbps = static_cast<float>(getSum(g_netDownCounter) * 8.0 / 1000000.0);
 }
 
+// Ping for the Network card. IcmpSendEcho blocks for up to the timeout, so it
+// runs on its own thread, and only while the render loop says the card is on
+// screen (g_pingWanted); otherwise the thread sends nothing. The reading goes
+// through g_pingMs rather than g_state, whose system snapshot has one writer.
+constexpr IPAddr kPingAddress = 0x01010101;  // 1.1.1.1, the same in either byte order
+constexpr DWORD kPingTimeoutMs = 1000;
+std::atomic<bool> g_pingWanted = false;
+std::atomic<int> g_pingMs = -1;
+HANDLE g_pingThread = nullptr;
+
+DWORD WINAPI PingThreadProc(void*) {
+    HANDLE icmp = IcmpCreateFile();
+    if (icmp == INVALID_HANDLE_VALUE) {
+        Wh_Log(L"Ping: IcmpCreateFile failed (%u); the Network card shows no ping.", GetLastError());
+        return 0;
+    }
+    char payload[8] = "alaq";
+    // Room for one reply, its data, an ICMP error and the IO_STATUS_BLOCK the
+    // documentation asks for.
+    BYTE reply[sizeof(ICMP_ECHO_REPLY) + sizeof(payload) + 8 + 2 * sizeof(void*) + 16] = {};
+    while (WaitForSingleObject(g_stopEvent, 1000) == WAIT_TIMEOUT) {
+        if (!g_pingWanted.load(std::memory_order_relaxed)) {
+            g_pingMs.store(-1, std::memory_order_relaxed);  // no stale figure when the card comes back
+            continue;
+        }
+        int ms = -1;
+        if (IcmpSendEcho(icmp, kPingAddress, payload, sizeof(payload), nullptr, reply, sizeof(reply),
+                         kPingTimeoutMs) > 0) {
+            const auto* echo = reinterpret_cast<const ICMP_ECHO_REPLY*>(reply);
+            if (echo->Status == IP_SUCCESS) {
+                ms = static_cast<int>(echo->RoundTripTime);
+            }
+        }
+        g_pingMs.store(ms, std::memory_order_relaxed);
+    }
+    IcmpCloseHandle(icmp);
+    return 0;
+}
+
 void UpdateSystemSnapshot(bool includeGpuStats, bool includeNetStats) {
     SystemSnapshot next;
     {
@@ -5954,6 +6086,7 @@ void UpdateSystemSnapshot(bool includeGpuStats, bool includeNetStats) {
     }
     if (includeNetStats) {
         GetNetworkUsage(next.netUpMbps, next.netDownMbps);
+        next.pingMs = g_pingMs.load(std::memory_order_relaxed);
     }
 
     MEMORYSTATUSEX memory = {};
@@ -7183,11 +7316,25 @@ void RunIslandCommand(HWND hwnd, UINT cmd) {
             // right-clicked), so in practice this toggles hidden -> the
             // hotkey is the only way back. That's intentional; see readme.
             const bool nowHidden = !g_manuallyHidden.load();
+            g_hiddenUntil = 0.0;
             g_manuallyHidden = nowHidden;
             Wh_SetIntValue(L"ManuallyHidden", nowHidden ? 1 : 0);
             if (nowHidden) {
                 g_hotkeyUnhideUntil.store(0.0);
             }
+            g_layoutDirty = true;
+            break;
+        }
+        case 42:
+        case 43:
+        case 44: {
+            // A timed hide. Not saved: after a restart the island is simply
+            // shown, which is where the timer would have left it anyway.
+            const double minutes = cmd == 42 ? 15.0 : (cmd == 43 ? 60.0 : 180.0);
+            g_hiddenUntil = NowSeconds() + minutes * 60.0;
+            g_manuallyHidden = true;
+            Wh_SetIntValue(L"ManuallyHidden", 0);
+            g_hotkeyUnhideUntil.store(0.0);
             g_layoutDirty = true;
             break;
         }
@@ -7234,6 +7381,7 @@ constexpr int kExpandGroup = 101;
 constexpr int kTimerGroup = 102;
 constexpr int kOpacityGroup = 103;
 constexpr int kThemeGroup = 104;
+constexpr int kHideGroup = 105;
 constexpr int kOpacityMin = 35;
 constexpr int kOpacityMax = 100;
 constexpr int kOpacityStep = 5;
@@ -7313,7 +7461,10 @@ void BuildRows() {
         return Choice{Clean(std::move(label)), value, enabled};
     };
 
-    add(RowKind::Action, 40, g_manuallyHidden.load() ? Loc(L"Show Island") : Loc(L"Hide Island"));
+    // The panel opens only on a shown island, so this row only ever hides it.
+    Row& hide = add(RowKind::Choice, kHideGroup, Loc(L"Hide Island"));
+    hide.choices = {choice(Loc(L"15 min"), 42), choice(Loc(L"1 hour"), 43), choice(Loc(L"3 hours"), 44),
+                    choice(Loc(L"Until shown"), 40)};
     add(RowKind::Action, 1, Loc(L"Dismiss"));
     if (g_settings.fileTrayModule) {
         Row& tray = add(RowKind::Action, 41, std::wstring(Loc(L"File Tray")) + L": " +
@@ -7659,7 +7810,7 @@ void Click(int rowIndex, int part) {
                 Wh_SetIntValue(L"ExpandOnHoverOverride", value);
                 LoadSettings();
                 g_layoutDirty = true;
-            } else if (row.id == kTimerGroup) {
+            } else if (row.id == kTimerGroup || row.id == kHideGroup) {
                 Close();
                 RunIslandCommand(owner, value);
                 return;
@@ -7943,6 +8094,10 @@ std::wstring CompactPageText(const SharedState& state, const Settings& settings,
             swprintf_s(buffer, L"%ls %d%%  \u00B7  %ls %d%%", Loc(L"CPU"), state.system.cpuPercent,
                        Loc(L"RAM"), state.system.memoryPercent);
             return RtlIfArabic(buffer);
+        case 5:  // network: download and upload
+            swprintf_s(buffer, L"↓ %.1f  ·  ↑ %.1f Mbps", state.system.netDownMbps,
+                       state.system.netUpMbps);
+            return buffer;
         case 4:  // file tray: how many files
             swprintf_s(buffer, L"%ls %zu", Loc(L"File Tray"), state.fileTrayItems.size());
             return RtlIfArabic(buffer);
@@ -9918,24 +10073,17 @@ class Renderer {
         return material_.accent;
     }
 
+    struct HwMetric {
+        int glyph;
+        const wchar_t* label;
+        const wchar_t* value;
+        float fraction;  // negative means "no meaningful 0-100 scale"
+    };
+
     void DrawHardwareMonitorDashboard(const SharedState& state, D2D1_RECT_F rect, const Settings& settings, float scale) {
         (void)settings;
 
-        const float padX = 24.0f * scale;
-
-        // Header, left aligned to match the File Tray and weather dashboards.
-        textBrush_->SetOpacity(0.96f);
-        const wchar_t* hwTitle = Loc(L"Hardware Monitor");
-        if (boldTextFormat_) {
-            boldTextFormat_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
-            target_->DrawTextW(hwTitle, static_cast<UINT32>(wcslen(hwTitle)), boldTextFormat_.Get(),
-                               D2D1::RectF(rect.left + padX, rect.top + 16.0f * scale,
-                                           rect.right - padX, rect.top + 32.0f * scale),
-                               textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_NONE);
-            boldTextFormat_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-        }
-
-        wchar_t cpuBuf[32], ramBuf[40], gpuBuf[32], upBuf[32], downBuf[32], diskBuf[32];
+        wchar_t cpuBuf[32], ramBuf[40], gpuBuf[32], diskBuf[32];
         swprintf_s(cpuBuf, L"%d%%", state.system.cpuPercent);
         swprintf_s(ramBuf, L"%.1f / %.1f GB", state.system.memoryUsedGB, state.system.memoryTotalGB);
         if (state.system.gpuPercent >= 0) {
@@ -9943,8 +10091,6 @@ class Renderer {
         } else {
             wcscpy_s(gpuBuf, L"--");
         }
-        swprintf_s(upBuf, L"%.1f Mbps", state.system.netUpMbps);
-        swprintf_s(downBuf, L"%.1f Mbps", state.system.netDownMbps);
         const int diskUsed = 100 - state.system.diskFreePercent;
         swprintf_s(diskBuf, L"%d%%", diskUsed);
 
@@ -9952,42 +10098,72 @@ class Renderer {
             ? Clamp(state.system.memoryUsedGB / state.system.memoryTotalGB, 0.0f, 1.0f)
             : -1.0f;
 
-        struct HwMetric {
-            int glyph;
-            const wchar_t* label;
-            const wchar_t* value;
-            float fraction;  // negative means "no meaningful 0-100 scale"
-        };
-
-        // Network throughput has no natural ceiling, so those two cards get no
-        // load bar rather than a bar against an invented maximum.
-        const HwMetric metrics[6] = {
+        const HwMetric metrics[4] = {
             {3, Loc(L"CPU"),      cpuBuf,  Clamp(state.system.cpuPercent / 100.0f, 0.0f, 1.0f)},
-            {6, Loc(L"NET UP"),   upBuf,   -1.0f},
             {4, Loc(L"RAM"),      ramBuf,  ramFraction},
-            {7, Loc(L"NET DOWN"), downBuf, -1.0f},
             {5, Loc(L"GPU"),      gpuBuf,  state.system.gpuPercent >= 0
                                           ? Clamp(state.system.gpuPercent / 100.0f, 0.0f, 1.0f)
                                           : -1.0f},
             {8, Loc(L"DISK"),     diskBuf, Clamp(diskUsed / 100.0f, 0.0f, 1.0f)},
         };
+        DrawMetricGrid(Loc(L"Hardware Monitor"), metrics, 4, rect, scale);
+    }
 
-        // 2 x 3 grid of cards. Cards give the grid its structure, so the old
-        // full-height centre divider is gone.
+    // Throughput and ping have no natural ceiling, so these cards get no load
+    // bar rather than a bar against an invented maximum.
+    void DrawNetworkDashboard(const SharedState& state, D2D1_RECT_F rect, float scale) {
+        wchar_t downBuf[32], upBuf[32], pingBuf[32];
+        swprintf_s(downBuf, L"%.1f Mbps", state.system.netDownMbps);
+        swprintf_s(upBuf, L"%.1f Mbps", state.system.netUpMbps);
+        if (state.system.pingMs >= 0) {
+            swprintf_s(pingBuf, L"%d ms", state.system.pingMs);
+        } else {
+            wcscpy_s(pingBuf, L"--");
+        }
+        const HwMetric metrics[3] = {
+            {7, Loc(L"NET DOWN"), downBuf, -1.0f},
+            {6, Loc(L"NET UP"),   upBuf,   -1.0f},
+            {9, Loc(L"Ping"),     pingBuf, -1.0f},
+        };
+        DrawMetricGrid(Loc(L"Network"), metrics, 3, rect, scale);
+    }
+
+    // A titled grid of metric cards, two to a row; an odd last card takes the
+    // whole row. The grid sits centred in the band the original three rows used.
+    void DrawMetricGrid(const wchar_t* title, const HwMetric* metrics, int count, D2D1_RECT_F rect, float scale) {
+        const float padX = 24.0f * scale;
+
+        // Header, left aligned to match the File Tray and weather dashboards.
+        textBrush_->SetOpacity(0.96f);
+        if (boldTextFormat_) {
+            boldTextFormat_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+            target_->DrawTextW(title, static_cast<UINT32>(wcslen(title)), boldTextFormat_.Get(),
+                               D2D1::RectF(rect.left + padX, rect.top + 16.0f * scale,
+                                           rect.right - padX, rect.top + 32.0f * scale),
+                               textBrush_.Get(), D2D1_DRAW_TEXT_OPTIONS_NONE);
+            boldTextFormat_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+        }
+
+        // Cards give the grid its structure, so the old full-height centre
+        // divider is gone.
         const float colGap = 9.0f * scale;
         const float colW = (rect.right - rect.left - padX * 2.0f - colGap) * 0.5f;
         const float rowH = 38.0f * scale;
         const float rowGap = 6.0f * scale;
-        const float gridTop = rect.top + 38.0f * scale;
+        const int rows = (count + 1) / 2;
+        const float gridH = static_cast<float>(rows) * rowH + static_cast<float>(rows - 1) * rowGap;
+        const float gridTop = rect.top + 38.0f * scale + std::max(0.0f, (3.0f * rowH + 2.0f * rowGap - gridH) * 0.5f);
 
-        for (int i = 0; i < 6; ++i) {
+        for (int i = 0; i < count; ++i) {
             const HwMetric& m = metrics[i];
             const int col = i % 2;
             const int row = i / 2;
+            const bool fullRow = (i == count - 1) && (count % 2 == 1);
 
             const float cardLeft = rect.left + padX + static_cast<float>(col) * (colW + colGap);
             const float cardTop = gridTop + static_cast<float>(row) * (rowH + rowGap);
-            const D2D1_RECT_F card = D2D1::RectF(cardLeft, cardTop, cardLeft + colW, cardTop + rowH);
+            const float cardRight = fullRow ? rect.right - padX : cardLeft + colW;
+            const D2D1_RECT_F card = D2D1::RectF(cardLeft, cardTop, cardRight, cardTop + rowH);
 
             DrawCard(card, 9.0f * scale);
 
@@ -10385,6 +10561,7 @@ class Renderer {
             activeTabs.push_back(0); // Calendar
             if (settings.weather) activeTabs.push_back(1);
             if (settings.hardwareMonitorModule) activeTabs.push_back(2);
+            if (settings.networkMonitorModule) activeTabs.push_back(5);
             if (settings.fileTrayModule) activeTabs.push_back(4);
 
             int maxTabs = static_cast<int>(activeTabs.size());
@@ -10396,6 +10573,7 @@ class Renderer {
             else if (activeTabId == 0) DrawCalendarDashboard(state, rect, settings, now, scale, local);
             else if (activeTabId == 1) DrawWeatherDashboard(state, rect, settings, now, scale, hasWeather, wIcon, wText);
             else if (activeTabId == 2) DrawHardwareMonitorDashboard(state, rect, settings, scale);
+            else if (activeTabId == 5) DrawNetworkDashboard(state, rect, scale);
             else if (activeTabId == 4) DrawFileTrayDashboard(state, rect, settings, scale);
 
             // Pagination dots (Vertical on the right edge)
@@ -10669,6 +10847,7 @@ class Renderer {
             activeTabs.push_back(1); // Calendar
             if (settings.weather) activeTabs.push_back(2);
             if (settings.hardwareMonitorModule) activeTabs.push_back(3);
+            if (settings.networkMonitorModule) activeTabs.push_back(5);
             if (settings.fileTrayModule) activeTabs.push_back(4);
 
             // Same settings object as the list above, so the index can't be
@@ -10846,6 +11025,8 @@ class Renderer {
                 DrawWeatherDashboard(state, rect, settings, now, 1.0f, hasWeather, wIcon, wText);
             } else if (activeTabId == 3) {
                 DrawHardwareMonitorDashboard(state, rect, settings, 1.0f);
+            } else if (activeTabId == 5) {
+                DrawNetworkDashboard(state, rect, 1.0f);
             } else if (activeTabId == 4) {
                 DrawFileTrayDashboard(state, rect, settings, 1.0f);
             }
@@ -13005,6 +13186,7 @@ LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         case WM_HOTKEY: {
             if (wParam == ID_HIDE_SHOW_HOTKEY) {
+                g_hiddenUntil = 0.0;  // the hot key's hide or show replaces a timed hide
                 if (g_isFullscreen.load(std::memory_order_relaxed)) {
                     g_fullscreenOverrideVisible = !g_fullscreenOverrideVisible.load();
                     g_autoHiddenParked = false;
@@ -13215,6 +13397,12 @@ DWORD WINAPI RenderThreadProc(void*) {
 
         bool justUnhidden = false;
 
+        const double hiddenUntil = g_hiddenUntil.load();
+        if (g_manuallyHidden.load() && hiddenUntil > 0.0 && NowSeconds() >= hiddenUntil) {
+            g_hiddenUntil = 0.0;
+            g_manuallyHidden = false;  // the timed hide is over; shown below as after any unhide
+        }
+
         if (g_manuallyHidden.load()) {
             // Manual hide always takes precedence over — and invalidates —
             // any auto-park bookkeeping, since the window's shown/hidden
@@ -13230,6 +13418,7 @@ DWORD WINAPI RenderThreadProc(void*) {
                 // lingering render/animation work this frame.
                 ShowWindow(hwnd, SW_HIDE);
                 g_audioCaptureNeeded.store(false, std::memory_order_relaxed);
+                g_pingWanted.store(false, std::memory_order_relaxed);
                 wasManuallyHidden = true;
             }
             previousFrame = std::chrono::steady_clock::now();
@@ -13238,7 +13427,13 @@ DWORD WINAPI RenderThreadProc(void*) {
             // clipboard update, etc.) wakes this thread while hidden. Nothing
             // is being paced, so give the system timer resolution back.
             setHighResTimer(false);
-            MsgWaitForMultipleObjects(1, &g_stopEvent, FALSE, INFINITE, QS_ALLINPUT);
+            // A timed hide wakes once, when it ends; any other stays asleep.
+            DWORD wait = INFINITE;
+            const double until = g_hiddenUntil.load();
+            if (until > 0.0) {
+                wait = static_cast<DWORD>(std::clamp((until - NowSeconds()) * 1000.0, 0.0, 86400000.0)) + 1;
+            }
+            MsgWaitForMultipleObjects(1, &g_stopEvent, FALSE, wait, QS_ALLINPUT);
             nextFrameTarget = std::chrono::steady_clock::now();
             continue;
         }
@@ -13260,6 +13455,7 @@ DWORD WINAPI RenderThreadProc(void*) {
                 g_autoHiddenParked = false;
             } else {
                 previousFrame = std::chrono::steady_clock::now();
+                g_pingWanted.store(false, std::memory_order_relaxed);
                 // Auto-parked, so nothing is animating; same reasoning as above.
                 setHighResTimer(false);
                 if (parkedForFullscreen) {
@@ -13517,14 +13713,23 @@ DWORD WINAPI RenderThreadProc(void*) {
         // change in those numbers is worth repainting for.
         const int metricTabIdx = NormalizedTabIndex(g_settings);
         const bool onHardwareMonitorTab = (metricTabIdx == HardwareMonitorTabIndex(g_settings));
-        const bool hwMonitorVisible = (primary.kind == IslandKind::Idle || primary.kind == IslandKind::Media) &&
-            !isFullscreen && !gameMetricsPresent && (pinned || isHoverExpanded) && onHardwareMonitorTab;
+        const bool onNetworkTab = (metricTabIdx == NetworkTabIndex(g_settings));
+        const bool dashboardShown = (primary.kind == IslandKind::Idle || primary.kind == IslandKind::Media) &&
+            !isFullscreen && !gameMetricsPresent && (pinned || isHoverExpanded);
+        const bool hwMonitorVisible = dashboardShown && onHardwareMonitorTab;
+        const bool networkVisible = dashboardShown && onNetworkTab;
+        // The collapsed pill keeps the page it was left on, and on the Network
+        // page that form shows the two speeds (CompactPageText).
+        const bool networkCompactShown = onNetworkTab && primary.kind == IslandKind::Idle &&
+            !isFullscreen && !gameMetricsPresent;
         const bool gameOverlayVisible = gameMetricsPresent && !isFullscreen;
-        const bool systemMetricsVisible = hwMonitorVisible || gameOverlayVisible;
+        const bool systemMetricsVisible = hwMonitorVisible || networkVisible || networkCompactShown ||
+            gameOverlayVisible;
+        g_pingWanted.store(networkVisible, std::memory_order_relaxed);
 
         if (now >= nextSystemPoll) {
             const bool needGpuStats = gameOverlayVisible || hwMonitorVisible;
-            const bool needNetStats = hwMonitorVisible;  // net is only ever drawn in the HW dashboard
+            const bool needNetStats = networkVisible || networkCompactShown;  // only the Network page draws them
 
             UpdateSystemSnapshot(needGpuStats, needNetStats);
             nextSystemPoll = now + 1.0;
@@ -13817,6 +14022,9 @@ DWORD WINAPI RenderThreadProc(void*) {
         static int prevCpu = -1;
         static int prevRam = -1;
         static int prevDisk = -1;
+        static float prevNetUp = -1.0f;
+        static float prevNetDown = -1.0f;
+        static int prevPing = -2;
         static int prevVol = -1;
         static bool prevMuted = false;
         static int prevBat = -1;
@@ -13833,7 +14041,10 @@ DWORD WINAPI RenderThreadProc(void*) {
         const bool systemMetricsChanged =
             systemMetricsVisible && (snapshot.system.cpuPercent != prevCpu ||
                                      snapshot.system.memoryPercent != prevRam ||
-                                     snapshot.system.diskFreePercent != prevDisk);
+                                     snapshot.system.diskFreePercent != prevDisk ||
+                                     snapshot.system.netUpMbps != prevNetUp ||
+                                     snapshot.system.netDownMbps != prevNetDown ||
+                                     snapshot.system.pingMs != prevPing);
 
         if (snapshot.media.artGeneration != prevArtGen ||
             snapshot.media.sourceIconGeneration != prevSrcIconGen ||
@@ -13861,6 +14072,9 @@ DWORD WINAPI RenderThreadProc(void*) {
             prevCpu = snapshot.system.cpuPercent;
             prevRam = snapshot.system.memoryPercent;
             prevDisk = snapshot.system.diskFreePercent;
+            prevNetUp = snapshot.system.netUpMbps;
+            prevNetDown = snapshot.system.netDownMbps;
+            prevPing = snapshot.system.pingMs;
             prevVol = snapshot.system.volumePercent;
             prevMuted = snapshot.system.volumeMuted;
             prevBat = snapshot.battery.percent;
@@ -14025,6 +14239,7 @@ bool StartThreads() {
     g_notificationThread = CreateThread(nullptr, 0, NotificationThreadProc, nullptr, 0, nullptr);
 #endif
     g_bluetoothThread = CreateThread(nullptr, 0, BluetoothThreadProc, nullptr, 0, nullptr);
+    g_pingThread = CreateThread(nullptr, 0, PingThreadProc, nullptr, 0, nullptr);
     SubscribeDndNotification();
 
     return true;
@@ -14042,7 +14257,7 @@ void StopThreads() {
         SetEvent(g_stopEvent);
     }
 
-    HANDLE handles[] = {g_renderThread, g_mediaThread, g_audioThread, g_weatherThread, g_notificationThread, g_keyboardThread, g_mouseThread, g_bluetoothThread};
+    HANDLE handles[] = {g_renderThread, g_mediaThread, g_audioThread, g_weatherThread, g_notificationThread, g_keyboardThread, g_mouseThread, g_bluetoothThread, g_pingThread};
     for (HANDLE handle : handles) {
         if (handle) {
             WaitForSingleObject(handle, 3000);
@@ -14060,6 +14275,7 @@ void StopThreads() {
     g_mouseThread = nullptr;
     g_mouseThreadId = 0;
     g_bluetoothThread = nullptr;
+    g_pingThread = nullptr;
 
     if (g_stopEvent) {
         CloseHandle(g_stopEvent);

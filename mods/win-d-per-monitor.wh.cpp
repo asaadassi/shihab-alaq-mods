@@ -5,7 +5,7 @@
 // @description     Press Win+D to only manage the windows on the monitor where the mouse is located.
 // @description:zh-CN   按下Win+D时 只最小化/还原鼠标所在显示器的窗口
 // @description:ar  عند الضغط على Win+D تُخفى نوافذ الشاشة التي عليها المؤشر فقط ثم تُعاد، وتبقى الشاشات الأخرى كما هي.
-// @version         1.5.260416-shihab.4
+// @version         1.5.260416-shihab.5
 // @author          easyatm
 // @github          https://github.com/easyatm
 // @include         explorer.exe
@@ -120,11 +120,18 @@ Fixes:
 //   titles in ignore rules no longer collapse to "???" and match each other.
 // - Minimum window size is clamped; area is computed without int overflow.
 // - Wh_ModUninit shows popups this mod hid whose owner is still open.
+// - Win+D toggles as Windows' own: the press after a hide brings the windows back,
+//   unless the user has since brought one up and is using it. It used to decide
+//   from what was on screen, so an app that minimizes late, or a desktop widget
+//   that shows itself again (TickTick's), turned the next press into another hide
+//   that dropped the list, and the hidden windows never came back. Windows still
+//   minimized from the last hide stay on the list through a new hide.
 
 #include <dwmapi.h>
 #include <errhandlingapi.h>
 #include <format>
 #include <list>
+#include <algorithm>
 #include <atomic>
 #include <map>
 #include <mutex>
@@ -332,6 +339,23 @@ class WindShowDesktop
         return hLastWnd != nullptr;
     }
 
+    // The foreground window is one of this monitor's own (not an owned popup, and
+    // not a topmost window without a title bar such as a toast): the user brought
+    // it up after the last hide, or opened it since.
+    static bool userBroughtWindowUp(const std::vector<WndInfo> &onMonitor)
+    {
+        HWND hFore = GetForegroundWindow();
+        for (const auto &w : onMonitor)
+        {
+            if (w.wnd != hFore || w.ownerWnd || IsIconic(hFore))
+                continue;
+            const LONG_PTR exStyle = GetWindowLongPtrW(hFore, GWL_EXSTYLE);
+            const LONG_PTR style = GetWindowLongPtrW(hFore, GWL_STYLE);
+            return !((exStyle & WS_EX_TOPMOST) && !(style & WS_CAPTION));
+        }
+        return false;
+    }
+
     // 获取窗口类名
     static std::string getWindowClassName(HWND hwnd)
     {
@@ -520,6 +544,17 @@ public:
         auto vecCur = enumMonitorWnd(hDesktop, hMonitor);
         auto &listWnd = mapWnd[monitorName];
 
+        // Win+D toggles as Windows' own does: the press after a hide brings the hidden
+        // windows back, whatever is on screen at that moment. Deciding from what is
+        // visible failed: an app that minimizes late still looks shown, and a widget
+        // that shows itself again (TickTick's) never goes, so the next press hid again
+        // and dropped the list. Only a window the user brought up and is using makes
+        // the next press hide again.
+        const bool hiddenBefore = std::any_of(listWnd.begin(), listWnd.end(),
+                                              [](const WndInfo &w) { return isSameWindow(w); });
+        if (hiddenBefore && !userBroughtWindowUp(vecCur))
+            vecCur.clear();
+
         log("Found {} windows to process on current monitor", vecCur.size());
 
         // 允许设置前台窗口，避免窗口在任务栏闪烁
@@ -529,10 +564,12 @@ public:
         {
             log("Minimizing windows on current monitor");
 
+            // Windows still minimized from the last hide stay on the list, so the next
+            // press brings them back too; the ones the user restored are hidden anew below.
             for (auto it = listWnd.begin(); it != listWnd.end();)
             {
                 auto curIt = it++;
-                if (!curIt->ownerWnd)
+                if (!curIt->ownerWnd && !(isSameWindow(*curIt) && IsIconic(curIt->wnd)))
                     listWnd.erase(curIt);
             }
 
@@ -540,6 +577,8 @@ public:
             {
                 if (!IsWindowVisible(rc.wnd) || IsIconic(rc.wnd))
                     continue;
+                const bool listed = std::any_of(listWnd.begin(), listWnd.end(),
+                                                [&](const WndInfo &w) { return w.wnd == rc.wnd && w.pid == rc.pid; });
 
                 if (rc.ownerWnd)
                 {
@@ -555,7 +594,8 @@ public:
                     controlWindow(rc.wnd, false);
                 }
 
-                listWnd.emplace_back(std::move(rc));
+                if (!listed)
+                    listWnd.emplace_back(std::move(rc));
             }
 
             activeWnd(hDesktop);
