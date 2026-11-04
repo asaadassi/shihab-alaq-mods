@@ -4,7 +4,7 @@
 // @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
 // @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
-// @version         1.3.1-shihab.6
+// @version         1.3.1-shihab.7
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe
@@ -36,6 +36,8 @@
 // - The Do Not Disturb card shows only a change that lasts: one Windows makes
 //   for a full-screen app or game (its automatic rules), and a change undone
 //   within a moment, show nothing.
+// - The "auto" language follows the language of Shihab Alaq, and the Windows
+//   display language only outside it.
 
 // ==WindhawkModReadme==
 /*
@@ -76,7 +78,7 @@ The Dynamic Island intelligently expands to display context-aware dashboards. Yo
 - **Clean Flat Material:** Surfaces are built from soft downward depth shading, a drop shadow, and an accent wash tinted live from your album art. No rim lighting, no glass highlights, no outlined cards — nothing traces a bright line along an edge.
 - **Real Blur & Acrylic Backdrop:** Optionally paint genuine Windows blur or frosted acrylic behind the island so your desktop shows through it, exactly like the system's own surfaces.
 - **Translucent Backgrounds:** Hex colors accept an alpha channel (`#RRGGBBAA`), so you can make the island see-through while keeping text and icons perfectly crisp.
-- **Your Language:** The island's own labels follow your Windows display language across 12 languages, or you can pick one explicitly.
+- **Your Language:** The island's own labels follow the language of Shihab Alaq (your Windows display language outside it) across 12 languages, or you can pick one explicitly.
 - **File Tray:** Drag any file onto the island to park it on a shelf, then click to open it. Files are only referenced, never copied or moved.
 - **Typography & Clock Control:** Scale all island text independently of the island's size, choose 12- or 24-hour time, show seconds, and set a custom date pattern — including CJK forms like `yyyy年MM月dd日`.
 
@@ -679,9 +681,9 @@ We love community contributions! To ensure high-quality updates, please follow t
     $description:ar: يعرض الحرارة وسرعة الرياح بالوحدات الأمريكية.
   - Language: auto
     $name: Language
-    $description: Language for the island's own text labels. Auto follows your Windows display language.
+    $description: Language for the island's own text labels. Auto follows the language of Shihab Alaq, or your Windows display language outside it.
     $options:
-      - auto: Auto (Follow Windows)
+      - auto: Auto (Follow the app)
       - en: English
       - fr: Français (French)
       - es: Español (Spanish)
@@ -697,9 +699,9 @@ We love community contributions! To ensure high-quality updates, please follow t
       - ar: العربية (Arabic)
     $_advanced: true
     $name:ar: اللغة
-    $description:ar: لغة نصوص الجزيرة. «تلقائي» يتبع لغة ويندوز.
+    $description:ar: لغة نصوص الجزيرة. «تلقائي» يتبع لغة ألق.
     $options:ar:
-      - auto: تلقائي (حسب ويندوز)
+      - auto: تلقائي (حسب البرنامج)
       - en: English (الإنجليزية)
       - fr: Français (الفرنسية)
       - es: Español (الإسبانية)
@@ -1828,8 +1830,24 @@ UiLanguage LanguageFromTag(std::wstring_view tag) {
     return UiLanguage::English;
 }
 
-// Resolves the "auto" language setting from the user's Windows UI language.
+// Resolves the "auto" language setting: the language of Shihab Alaq when the
+// island runs under it (Settings\Language, "ar" or "en", written by the app),
+// otherwise the user's Windows UI language. The engine is a 32-bit process, so
+// the key is read from the 64-bit view the app writes to.
 UiLanguage DetectSystemLanguage() {
+    HKEY key = nullptr;
+    if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"SOFTWARE\\ShihabAlaq\\Settings", 0,
+                      KEY_QUERY_VALUE | KEY_WOW64_64KEY, &key) == ERROR_SUCCESS) {
+        wchar_t tag[16] = {};
+        DWORD type = 0;
+        DWORD size = sizeof(tag) - sizeof(wchar_t);
+        const LSTATUS status = RegQueryValueExW(key, L"Language", nullptr, &type,
+                                                reinterpret_cast<BYTE*>(tag), &size);
+        RegCloseKey(key);
+        if (status == ERROR_SUCCESS && type == REG_SZ && tag[0] != L'\0') {
+            return LanguageFromTag(tag);
+        }
+    }
     wchar_t name[LOCALE_NAME_MAX_LENGTH] = {};
     if (GetUserDefaultLocaleName(name, ARRAYSIZE(name)) > 0) {
         return LanguageFromTag(name);
