@@ -4,7 +4,7 @@
 // @name:ar         الجزيرة التفاعلية
 // @description     A living, breathing pill overlay inspired by iPhone's Dynamic Island. Reacts to media, downloads, clipboard, battery, and more.
 // @description:ar  شريط صغير حيّ أعلى الشاشة يعرض ما يُشغَّل الآن والتنزيلات والحافظة والبطارية وغيرها.
-// @version         1.3.1-shihab.7
+// @version         1.3.1-shihab.9
 // @author          Himanshu
 // @github          https://github.com/devcode90
 // @include         windhawk.exe
@@ -2490,6 +2490,51 @@ float GetPrimaryMonitorDpiScale() {
     return static_cast<float>(dpiX) / 96.0f;
 }
 
+// The pin, the game overlay pin and the opacity override live in the mod's own
+// storage (the registry), and the frame loop, the renderer and the mouse thread
+// read them on every pass: dozens of registry reads a second while idle. Only
+// this mod writes them, so each is read once and then kept here; every write
+// goes through SetLocalInt.
+std::mutex g_localIntsMutex;
+std::unordered_map<std::wstring, int> g_localInts;
+
+int LocalInt(PCWSTR name, int defaultValue) {
+    std::lock_guard lock(g_localIntsMutex);
+    const auto it = g_localInts.find(name);
+    if (it != g_localInts.end()) {
+        return it->second;
+    }
+    const int value = Wh_GetIntValue(name, defaultValue);
+    g_localInts.emplace(name, value);
+    return value;
+}
+
+void SetLocalInt(PCWSTR name, int value) {
+    Wh_SetIntValue(name, value);
+    std::lock_guard lock(g_localIntsMutex);
+    g_localInts[name] = value;
+}
+
+int GetMonitorRefreshRate(HWND hwnd);
+
+// EnumDisplaySettings asks the display driver and is slow, and the frame loop
+// asked it on every pass (about 60 times a second while idle). The rate is kept
+// per monitor and asked again every 2 s, which still follows a refresh rate
+// change such as a laptop lowering it on battery. Frame loop thread only.
+int CachedMonitorRefreshRate(HWND hwnd) {
+    static HMONITOR lastMonitor = nullptr;
+    static int lastRate = 0;
+    static ULONGLONG nextCheck = 0;
+    const HMONITOR monitor = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
+    const ULONGLONG now = GetTickCount64();
+    if (lastRate <= 0 || monitor != lastMonitor || now >= nextCheck) {
+        lastRate = GetMonitorRefreshRate(hwnd);
+        lastMonitor = monitor;
+        nextCheck = now + 2000;
+    }
+    return lastRate;
+}
+
 int GetMonitorRefreshRate(HWND hwnd) {
     HMONITOR monitor = nullptr;
     if (hwnd) {
@@ -2759,7 +2804,7 @@ void LoadSettings() {
     next.gameOverlayCompact = Wh_GetIntSetting(L"Modules.GameOverlayCompact") != 0;
     next.tintOpacity = Clamp(Wh_GetIntSetting(L"Themes.TintIntensity") / 100.0f, 0.0f, 1.0f);
     const int settingOpacity = Wh_GetIntSetting(L"Themes.PillOpacity");
-    const int localOpacity = Wh_GetIntValue(L"PillOpacityOverride", -1);
+    const int localOpacity = LocalInt(L"PillOpacityOverride", -1);
     next.pillOpacity = Clamp((localOpacity >= 0 ? localOpacity : settingOpacity) / 100.0f,
                              0.35f, 1.0f);
     next.gameOverlay = Wh_GetIntSetting(L"Modules.GameOverlay") != 0;
@@ -3005,7 +3050,7 @@ void LoadSettings() {
     next.micDotColor = next.privacyDotsMicHex;
     next.camDotColor = next.privacyDotsCamHex;
 
-    Wh_SetIntValue(L"PinnedExpanded", 0);
+    SetLocalInt(L"PinnedExpanded", 0);
 
     // Compare-then-publish under one lock so the change flags describe exactly
     // the transition we are about to commit. Two LoadSettings() calls can run
@@ -4730,11 +4775,87 @@ void UnsubscribeDndNotification() {
 }
 
 #if DYNAMIC_ISLAND_HAS_USER_NOTIFICATION_LISTENER
+// Reading the notification center is expensive: with 40 notifications there, one
+// GetNotificationsAsync took about 100ms of processor time, and polling it every
+// second held a core near 10% on an idle desktop (measured 2026-11-18).
+//
+// Windows raises this WNF state by one each time a toast is published. Found by
+// showing test toasts on Windows 11 build 26300: it rose by exactly one per toast
+// and stayed still otherwise. So the notification center is read when it changes,
+// shortly after, and otherwise only every kToastFallbackPollMs in case a change
+// is ever missed. Undocumented like the Do Not Disturb state above: if it can't
+// be subscribed, the old one-second poll is used.
+constexpr ULONG64 kWnfToastPublished = 0x0D83063EA3BD0035ULL;
+constexpr DWORD kToastFallbackPollMs = 30000;
+constexpr DWORD kToastSettleMs = 250;  // the toast reaches the list just after the state changes
+std::atomic<HANDLE> g_toastEvent = nullptr;
+void* g_wnfToastSubscription = nullptr;
+
+NTSTATUS NTAPI WnfToastCallback(ULONG64 stateName, ULONG, void*, void*, const void*, ULONG) {
+    const HANDLE event = g_toastEvent.load();
+    if (stateName == kWnfToastPublished && event) {
+        SetEvent(event);
+    }
+    return 0;
+}
+
+void SubscribeToastNotification() {
+    HMODULE hNtdll = GetModuleHandleW(L"ntdll.dll");
+    auto pfnSubscribe = hNtdll ? reinterpret_cast<PFN_RtlSubscribeWnfStateChangeNotification>(
+                                     GetProcAddress(hNtdll, "RtlSubscribeWnfStateChangeNotification"))
+                               : nullptr;
+    if (!pfnSubscribe) {
+        return;
+    }
+    const HANDLE event = CreateEventW(nullptr, FALSE, FALSE, nullptr);
+    if (!event) {
+        return;
+    }
+    g_toastEvent = event;
+    if (pfnSubscribe(&g_wnfToastSubscription, kWnfToastPublished, 0, WnfToastCallback, nullptr, nullptr, 0, 0) != 0) {
+        Wh_Log(L"Toast WNF subscription failed; polling the notification center every second");
+        g_wnfToastSubscription = nullptr;
+        g_toastEvent = nullptr;
+        CloseHandle(event);
+    }
+}
+
+void UnsubscribeToastNotification() {
+    const HANDLE event = g_toastEvent.exchange(nullptr);
+    HMODULE hNtdll = GetModuleHandleW(L"ntdll.dll");
+    if (g_wnfToastSubscription && hNtdll) {
+        auto pfnUnsubscribe = reinterpret_cast<PFN_RtlUnsubscribeWnfStateChangeNotification>(
+            GetProcAddress(hNtdll, "RtlUnsubscribeWnfStateChangeNotification"));
+        if (pfnUnsubscribe) {
+            pfnUnsubscribe(g_wnfToastSubscription);
+        }
+    }
+    g_wnfToastSubscription = nullptr;
+    if (event) {
+        CloseHandle(event);
+    }
+}
+
+// Until the next toast (plus a moment for it to reach the list), the fallback
+// poll or the stop event.
+void WaitForNextToast() {
+    const HANDLE event = g_toastEvent.load();
+    if (!event) {
+        WaitForSingleObject(g_stopEvent, 1000);
+        return;
+    }
+    HANDLE handles[2] = {g_stopEvent, event};
+    if (WaitForMultipleObjects(2, handles, FALSE, kToastFallbackPollMs) == WAIT_OBJECT_0 + 1) {
+        WaitForSingleObject(g_stopEvent, kToastSettleMs);
+    }
+}
+
 DWORD WINAPI NotificationThreadProc(void*) {
     winrt::init_apartment(winrt::apartment_type::multi_threaded);
 
     using winrt::Windows::UI::Notifications::KnownNotificationBindings;
     using winrt::Windows::UI::Notifications::NotificationKinds;
+    using winrt::Windows::UI::Notifications::UserNotification;
     using winrt::Windows::UI::Notifications::Management::UserNotificationListener;
     using winrt::Windows::UI::Notifications::Management::UserNotificationListenerAccessStatus;
 
@@ -4765,6 +4886,8 @@ DWORD WINAPI NotificationThreadProc(void*) {
             WaitForSingleObject(g_stopEvent, waitTime);
         }
     }
+
+    SubscribeToastNotification();
 
     while (WaitForSingleObject(g_stopEvent, 0) == WAIT_TIMEOUT) {
         try {
@@ -4797,23 +4920,40 @@ DWORD WINAPI NotificationThreadProc(void*) {
             while (WaitForSingleObject(g_stopEvent, 0) == WAIT_TIMEOUT) {
                 try {
                     auto notifications = listener.GetNotificationsAsync(NotificationKinds::Toast).get();
-                    std::set<uint32_t> currentIds;
 
-                    for (uint32_t i = 0; i < notifications.Size(); ++i) {
-                        currentIds.insert(notifications.GetAt(i).Id());
+                    // Every call on these objects crosses to the system thread
+                    // that owns them, through window messages. Size() in both
+                    // loop conditions plus GetAt() and Id() per item were about
+                    // 200 crossings a second with 40 notifications in the
+                    // notification center: about 10% of a core, growing as they
+                    // pile up. The list now comes in one GetMany call, its size
+                    // is read once and each Id() once.
+                    const uint32_t count = notifications.Size();
+                    std::vector<UserNotification> items(count, nullptr);
+                    if (count > 0) {
+                        notifications.GetMany(0, items);
                     }
+                    std::vector<uint32_t> itemIds;
+                    itemIds.reserve(count);
+                    for (const auto& item : items) {
+                        itemIds.push_back(item ? item.Id() : 0);
+                    }
+                    std::set<uint32_t> currentIds(itemIds.begin(), itemIds.end());
 
                     if (firstPoll) {
                         seenIds = std::move(currentIds);
                         firstPoll = false;
-                        WaitForSingleObject(g_stopEvent, 1000);
+                        WaitForNextToast();
                         continue;
                     }
 
-                    for (uint32_t i = 0; i < notifications.Size(); ++i) {
+                    for (uint32_t i = 0; i < count; ++i) {
                         try {
-                            auto userNotification = notifications.GetAt(i);
-                            const uint32_t id = userNotification.Id();
+                            if (!items[i]) {
+                                continue;
+                            }
+                            const auto& userNotification = items[i];
+                            const uint32_t id = itemIds[i];
 
                             if (seenIds.count(id)) {
                                 continue;
@@ -4829,10 +4969,23 @@ DWORD WINAPI NotificationThreadProc(void*) {
                             NotificationSnapshot snapshot;
                             snapshot.active = true;
                             snapshot.expiresAt = NowSeconds() + 4.0;
-                            auto appInfo = userNotification.AppInfo();
-                            auto displayInfo = appInfo.DisplayInfo();
-                            snapshot.app = displayInfo.DisplayName().c_str();
+                            // The sending app's name and logo are extras. For a
+                            // desktop app that isn't packaged (PowerShell here,
+                            // build 26300) DisplayInfo() throws E_NOTIMPL, and as
+                            // that used to skip the whole notification, those
+                            // apps' notifications never showed. Now it shows
+                            // without them.
+                            winrt::Windows::ApplicationModel::AppDisplayInfo displayInfo{nullptr};
                             try {
+                                displayInfo = userNotification.AppInfo().DisplayInfo();
+                                snapshot.app = displayInfo.DisplayName().c_str();
+                            } catch (...) {
+                                displayInfo = nullptr;
+                            }
+                            try {
+                                if (!displayInfo) {
+                                    throw winrt::hresult_error(E_NOTIMPL);
+                                }
                                 auto logo = displayInfo.GetLogo({32.0f, 32.0f});
                                 std::vector<uint8_t> logoBytes = ReadWinRtStreamBytes(logo);
                                 if (!logoBytes.empty()) {
@@ -4903,7 +5056,7 @@ DWORD WINAPI NotificationThreadProc(void*) {
                     break;
                 }
 
-                WaitForSingleObject(g_stopEvent, 1000);
+                WaitForNextToast();
             }
         } catch (const winrt::hresult_error& ex) {
             if (!accessLogged) {
@@ -4920,6 +5073,7 @@ DWORD WINAPI NotificationThreadProc(void*) {
         }
     }
 
+    UnsubscribeToastNotification();
     winrt::uninit_apartment();
     return 0;
 }
@@ -7196,29 +7350,29 @@ void RunIslandCommand(HWND hwnd, UINT cmd) {
             TriggerNudge();
             break;
         case 2:
-            Wh_SetIntValue(L"PinnedExpanded", Wh_GetIntValue(L"PinnedExpanded", 0) ? 0 : 1);
+            SetLocalInt(L"PinnedExpanded", LocalInt(L"PinnedExpanded", 0) ? 0 : 1);
             break;
         case 3:
-            Wh_SetIntValue(L"GameOverlayPinned", Wh_GetIntValue(L"GameOverlayPinned", 0) ? 0 : 1);
+            SetLocalInt(L"GameOverlayPinned", LocalInt(L"GameOverlayPinned", 0) ? 0 : 1);
             break;
         case 4:
-            Wh_SetIntValue(L"PillOpacityOverride", 100);
+            SetLocalInt(L"PillOpacityOverride", 100);
             LoadSettings();
             break;
         case 5:
-            Wh_SetIntValue(L"PillOpacityOverride", 85);
+            SetLocalInt(L"PillOpacityOverride", 85);
             LoadSettings();
             break;
         case 6:
-            Wh_SetIntValue(L"PillOpacityOverride", 70);
+            SetLocalInt(L"PillOpacityOverride", 70);
             LoadSettings();
             break;
         case 7:
-            Wh_SetIntValue(L"PillOpacityOverride", 55);
+            SetLocalInt(L"PillOpacityOverride", 55);
             LoadSettings();
             break;
         case 8:
-            Wh_SetIntValue(L"PillOpacityOverride", -1);
+            SetLocalInt(L"PillOpacityOverride", -1);
             LoadSettings();
             break;
         case 9: {
@@ -7445,7 +7599,7 @@ bool ExpandOnHover() {
 }
 
 int CurrentOpacity() {
-    const int local = Wh_GetIntValue(L"PillOpacityOverride", -1);
+    const int local = LocalInt(L"PillOpacityOverride", -1);
     return ClampInt(local >= 0 ? local : Wh_GetIntSetting(L"Themes.PillOpacity"), kOpacityMin, kOpacityMax);
 }
 
@@ -7490,8 +7644,8 @@ void BuildRows() {
                                                             : std::wstring(L"—")));
         tray.enabled = trayCount > 0;
     }
-    add(RowKind::Toggle, 2, Loc(L"Pin expanded")).checked = Wh_GetIntValue(L"PinnedExpanded", 0) != 0;
-    add(RowKind::Toggle, 3, Loc(L"Game overlay")).checked = Wh_GetIntValue(L"GameOverlayPinned", 0) != 0;
+    add(RowKind::Toggle, 2, Loc(L"Pin expanded")).checked = LocalInt(L"PinnedExpanded", 0) != 0;
+    add(RowKind::Toggle, 3, Loc(L"Game overlay")).checked = LocalInt(L"GameOverlayPinned", 0) != 0;
     add(RowKind::Separator, 0, L"");
 
     Row& shape = add(RowKind::Choice, kShapeGroup, Loc(L"Shape"));
@@ -7790,7 +7944,7 @@ void SetOpacityFromX(Row& row, float x) {
     value = ClampInt(value, kOpacityMin, kOpacityMax);
     if (value == row.value) return;
     row.value = value;
-    Wh_SetIntValue(L"PillOpacityOverride", value);
+    SetLocalInt(L"PillOpacityOverride", value);
     LoadSettings();
     g_layoutDirty = true;
     InvalidateRect(g_window, nullptr, FALSE);
@@ -8189,7 +8343,7 @@ class Renderer {
         settingsOpacity_ = settings.pillOpacity;
 
         const bool gameMetricsPresent = primary.kind == IslandKind::Idle &&
-            (settings.gameOverlay || Wh_GetIntValue(L"GameOverlayPinned", 0) != 0);
+            (settings.gameOverlay || LocalInt(L"GameOverlayPinned", 0) != 0);
         const float hoverScale = (settings.expandOnHover && ((hover && !gameMetricsPresent) || pinned)) ? 1.025f : 1.0f;
         const float scale = hoverScale;
 
@@ -10404,7 +10558,7 @@ class Renderer {
 
     void DrawIdleDashboard(const SharedState& state, D2D1_RECT_F rect, const Settings& settings,
                            double now) {
-        if (settings.gameOverlay || Wh_GetIntValue(L"GameOverlayPinned", 0) != 0) {
+        if (settings.gameOverlay || LocalInt(L"GameOverlayPinned", 0) != 0) {
             DrawGameOverlay(state, rect, 1.0f);
             return;
         }
@@ -13092,9 +13246,9 @@ LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 }
                 const bool gameMetricsPresent =
                     !kinds.empty() && kinds[0] == IslandKind::Idle &&
-                    (g_settings.gameOverlay || Wh_GetIntValue(L"GameOverlayPinned", 0) != 0);
+                    (g_settings.gameOverlay || LocalInt(L"GameOverlayPinned", 0) != 0);
 
-                bool expanded = Wh_GetIntValue(L"PinnedExpanded", 0) != 0 || g_clickExpanded.load();
+                bool expanded = LocalInt(L"PinnedExpanded", 0) != 0 || g_clickExpanded.load();
                 if (!gameMetricsPresent && !g_settings.expandOnHover && !expanded) {
                     g_clickExpanded = true;
                     g_layoutDirty = true;
@@ -13174,7 +13328,7 @@ LRESULT CALLBACK OverlayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             return 0;
 
         case WM_LBUTTONDBLCLK:
-            Wh_SetIntValue(L"PinnedExpanded", Wh_GetIntValue(L"PinnedExpanded", 0) ? 0 : 1);
+            SetLocalInt(L"PinnedExpanded", LocalInt(L"PinnedExpanded", 0) ? 0 : 1);
             return 0;
 
         case WM_MOUSEWHEEL: {
@@ -13589,7 +13743,7 @@ DWORD WINAPI RenderThreadProc(void*) {
             secondary = ActivityForKind(kinds[1], g_settings, snapshot);
         }
 
-        const bool pinned = Wh_GetIntValue(L"PinnedExpanded", 0) != 0;
+        const bool pinned = LocalInt(L"PinnedExpanded", 0) != 0;
 
         if (primary.kind != previousPrimary) {
             if (primary.kind != IslandKind::Idle) {
@@ -13668,7 +13822,7 @@ DWORD WINAPI RenderThreadProc(void*) {
 
         bool isHoverExpanded = g_settings.expandOnHover ? hover : (hover && g_clickExpanded.load());
         const bool gameMetricsPresent = primary.kind == IslandKind::Idle &&
-            (g_settings.gameOverlay || Wh_GetIntValue(L"GameOverlayPinned", 0) != 0);
+            (g_settings.gameOverlay || LocalInt(L"GameOverlayPinned", 0) != 0);
         if (gameMetricsPresent) {
             isHoverExpanded = false;
         }
@@ -13769,7 +13923,7 @@ DWORD WINAPI RenderThreadProc(void*) {
             }
         }
         if (!isFullscreen && primary.kind == IslandKind::Idle &&
-            (g_settings.gameOverlay || Wh_GetIntValue(L"GameOverlayPinned", 0) != 0)) {
+            (g_settings.gameOverlay || LocalInt(L"GameOverlayPinned", 0) != 0)) {
             // Width follows the metrics actually enabled (#25) so switching some
             // off shrinks the strip instead of leaving empty space, and compact
             // mode narrows it enough to sit neatly in the taskbar area. Both the
@@ -14113,7 +14267,7 @@ DWORD WINAPI RenderThreadProc(void*) {
             Settings renderSettings = GetSettingsCopy();
             if (ctrlHoverCT) {
                 renderSettings.pillOpacity = Clamp(renderSettings.pillOpacity * 0.35f, 0.15f, 0.45f);
-            } else if (renderSettings.themePreset == ThemePreset::Graphite && Wh_GetIntValue(L"PillOpacityOverride", -1) < 0) {
+            } else if (renderSettings.themePreset == ThemePreset::Graphite && LocalInt(L"PillOpacityOverride", -1) < 0) {
                 const bool isExpanded = isHoverExpanded || pinned || isTransientAlert || (widthSpring.value > 260.0f);
                 renderSettings.pillOpacity = isExpanded ? 0.98f : 0.88f;
             }
@@ -14143,7 +14297,7 @@ DWORD WINAPI RenderThreadProc(void*) {
 
         int targetFps = g_settings.targetFps;
         if (targetFps <= 0) {
-            targetFps = GetMonitorRefreshRate(hwnd);
+            targetFps = CachedMonitorRefreshRate(hwnd);
         }
         targetFps = ClampInt(targetFps, 30, 1000);
         double targetFrameMs = 1000.0 / static_cast<double>(targetFps);
@@ -14189,10 +14343,27 @@ DWORD WINAPI RenderThreadProc(void*) {
         setHighResTimer(lastAnimatingAt >= 0.0 && now - lastAnimatingAt < kHighResTimerHoldSec);
 
         if (!needsRender) {
-            // Nothing changed on screen, so poll at ~60Hz rather than the target
-            // frame rate. Accuracy does not matter here -- this is a poll interval,
-            // not frame pacing -- so it runs at whatever resolution is in effect.
-            WaitForSingleObject(g_stopEvent, 16);
+            // Nothing changed on screen, so this is a poll interval, not frame
+            // pacing. It used to be a flat 16ms (about 60 passes a second, each
+            // copying the shared state and laying out the island), which kept the
+            // processor awake on an idle desktop and cost battery.
+            //
+            // The ~60Hz poll is only needed where it is felt: the cursor near the
+            // island (hover is polled, as the window is click-through), a hovered
+            // or pinned panel, a running timer or a seconds clock. Otherwise the
+            // pass waits up to 100ms. Events from the other threads (volume, caps
+            // lock, clipboard, settings) are posted to this thread, and the wait
+            // now also ends on a message, so they show at once instead of on the
+            // next poll.
+            RECT nearRect = (widthSpring.value > 1.0f && heightSpring.value > 1.0f)
+                                ? windowRect
+                                : GetIslandDockRect();
+            InflateRect(&nearRect, 160, 160);
+            const bool cursorNear = PtInRect(&nearRect, cursor) != FALSE;
+            const bool timerTicking = snapshot.timer.active && snapshot.timer.running;
+            const bool quickPoll = hover || cursorNear || isHoverExpanded || pinned ||
+                                   springsAnimating || timerTicking || g_settings.showSeconds;
+            MsgWaitForMultipleObjects(1, &g_stopEvent, FALSE, quickPoll ? 16 : 100, QS_ALLINPUT);
             nextFrameTarget = std::chrono::steady_clock::now();
         } else {
             // When animating, achieve ultra-smooth target refresh rate (e.g. 144Hz, 240Hz, 360Hz+).

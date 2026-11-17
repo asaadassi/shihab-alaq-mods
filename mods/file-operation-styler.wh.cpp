@@ -4,7 +4,7 @@
 // @name:ar         تنسيق نافذة النسخ والنقل
 // @description     Portable custom presentation for native Explorer file operations with a skin-safe unified presentation.
 // @description:ar  شكل أحدث وأوضح لنافذة تقدّم النسخ والنقل والحذف في المستكشف، مع سمات وألوان تختارها.
-// @version         1.2.0-shihab.6
+// @version         1.2.0-shihab.7
 // @author          digART
 // @github          https://github.com/digart11
 // @license         GPL-3.0
@@ -12441,7 +12441,10 @@ namespace
                 {LR"(private: double __cdecl COperationStatusTileRateCalculator::_CalculateRate(unsigned __int64,unsigned __int64,unsigned __int64,unsigned __int64,unsigned __int64,unsigned __int64,unsigned __int64,double *))"},
                 &targets->calculateRate,
                 nullptr,
-                false,
+                // Optional: newer shell32 builds (10.0.26100.9949, build 26300)
+                // replaced it with _CalculateCore. Without it the speed comes
+                // from the mod's own measured rate, so the skin still loads.
+                true,
             },
         };
 
@@ -12454,7 +12457,7 @@ namespace
             !targets->writeProgressValues ||
             !targets->refreshDisplayProgress ||
             !targets->updateRemainingItemsAndSize || !targets->updateSummary ||
-            !targets->setTileDisplayMode || !targets->calculateRate)
+            !targets->setTileDisplayMode)
         {
             Wh_Log(L"Skin setup failed: unable to resolve exact "
                    L"file-operation symbols CreateTile=%p ProgressProp=%p "
@@ -12579,10 +12582,14 @@ namespace
             return false;
         }
 
-        if (!WindhawkUtils::SetFunctionHook(
-                targets.calculateRate,
-                COperationStatusTileRateCalculator_CalculateRate_Hook,
-                &COperationStatusTileRateCalculator_CalculateRate_Original))
+        if (!targets.calculateRate)
+        {
+            Wh_Log(L"Native rate symbol not found; using the measured rate");
+        }
+        else if (!WindhawkUtils::SetFunctionHook(
+                     targets.calculateRate,
+                     COperationStatusTileRateCalculator_CalculateRate_Hook,
+                     &COperationStatusTileRateCalculator_CalculateRate_Original))
         {
             Wh_Log(L"Skin setup failed: unable to hook native rate update");
             return false;
